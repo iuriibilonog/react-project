@@ -1,25 +1,96 @@
 @import '../../../utils/variables.css';
 
-.listItem{
+.listItem {
+    display: flex;
+    align-items: center;
+
     color: var(--font-secondary);
     font-size: 12px;
     line-height: 1.17;
+    background-color: burlywood;
 
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
-.changeFlow{
+
+.changeFlow {
     display: flex;
+    justify-content: space-between;
 }
 
-.amount{
+.category {
+    display: flex;
+    justify-content: center;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.amount {
+    flex-grow: 1;
     font-weight: bold;
     color: var(--font-tertiary);
 }
 
+
 @media screen and (max-width: 320px) {
+    .listItem {
+        /* padding: 10px; */
+        border-bottom: 1px solid var(--bg-secondary);
+    }
+
     .description {
         font-weight: 700;
     }
-    .changeFlow{
-        flex-direction: column;
+
+    .changeFlow {
+        flex-direction: column-reverse;
+        background-color: brown;
+        width: fit-content;
+        margin-right: 20px;
     }
+
+    .date,
+    .category {
+        font-size: 8px;
+    }
+
+    .category {
+        align-self: end;
+    }
+
+    .amount {
+        margin-right: 20px;
+    }
+
+    .flex {
+        margin-left: auto;
+    }
+
+    .amount {
+        flex-grow:1;
+    }
+}
+
+
+
+@media screen and (min-width: 320px) {
+
+    .listItem div,
+    .listItem span {
+        width: 33.3%;
+    }
+}
+
+@media screen and (min-width: 321px) {
+    .listItem {
+        border-left: 2px solid var(--bg-secondary);
+        border-right: 2px solid var(--bg-secondary);
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
 }

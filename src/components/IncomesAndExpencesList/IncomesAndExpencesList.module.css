@@ -7,6 +7,30 @@
     font-size: 12px;
     font-weight: 700;
 }
+.list{
+    margin-left: auto;
+    margin-right: auto;
+}
+.header {
+    display: flex;
+
+
+    background-color: var(--bg-secondary);
+    border-top-left-radius: 20px;
+    border-top-right-radius:20px;
+
+     padding-top: 15px;
+     padding-bottom: 15px;
+
+     background: yellow;
+
+}
+.date, .description, .category {
+    flex-grow: 1;
+}
+.amount {
+    flex-grow: 2;
+}
 
 /* --width-mobile: 320px;
 --width-tablet: 768px;
@@ -14,12 +38,25 @@
 
 @media screen and (max-width: 320px) {
     .list{
-        width:282px;
+        max-width:282px;
         background-color: lightcoral;
     }
     .header{
         display: none;
         visibility: hidden;
     }
+    
+}
+@media screen and (min-width: 321px) {
+    .list {
+        max-width: 760px;
+    }
+    .header {
+        background: green;
+    }
+    .header span {
+        margin-left: 20px;
+    }
+    
     
 }

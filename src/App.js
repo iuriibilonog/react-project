@@ -12,7 +12,7 @@ function App() {
 
       <header className="App-header"></header>
       <IncomesAndExpencesList />
-      <HomePage />
+      {/* <HomePage /> */}
       <ExpencesPage />
       <IncomesPage />
       <ReportsPage />
