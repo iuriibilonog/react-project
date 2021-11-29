@@ -1,0 +1,25 @@
+@import '../../../utils/variables.css';
+
+.listItem{
+    color: var(--font-secondary);
+    font-size: 12px;
+    line-height: 1.17;
+
+}
+.changeFlow{
+    display: flex;
+}
+
+.amount{
+    font-weight: bold;
+    color: var(--font-tertiary);
+}
+
+@media screen and (max-width: 320px) {
+    .description {
+        font-weight: 700;
+    }
+    .changeFlow{
+        flex-direction: column;
+    }
+}
