@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
+import UnifiedModal from '../../shared/UnifiedModal';
 
 const Balance = (
   {
@@ -24,9 +25,8 @@ const Balance = (
   const [timerId, setTimerId] = useState(null);
   const [isReminderShown, setIsReminderShown] = useState(false);
 
-  /*  */
-
-  /*  */
+  const [isModalShown, setIsModalShown] = useState(false);
+  const [isBalanceConfirmed, setIsBalanceConfirmed] = useState(false);
 
   const zeroReminding = () => {
     const timerId = setTimeout(() => {
@@ -54,8 +54,9 @@ const Balance = (
 
   const submitBalanceHandler = event => {
     event.preventDefault();
+    setIsModalShown(true);
     const balanceDigit = initBalance.slice(0, initBalance.length - 4).trim();
-    if (Number(balanceDigit)) {
+    if (Number(balanceDigit) && isBalanceConfirmed) {
       /* Send it to STATE */
       console.log('Output Balance :', balanceDigit);
       setIsReminderShown('false');
@@ -120,6 +121,12 @@ const Balance = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [balanceState]);
 
+  const responseHandling = resp => {
+    setIsModalShown(false);
+    setIsBalanceConfirmed(resp);
+    console.log(resp);
+  };
+
   return (
     <div className={s.wrapper}>
       <span className={s.title}>Баланс:</span>
@@ -129,6 +136,8 @@ const Balance = (
           {balanceState === 'set' ? confirmBtnMarkup(false) : confirmBtnMarkup(true)}
         </div>
       </form>
+      {isModalShown && <UnifiedModal title={'Вы хотите выйти ?'} response={responseHandling} />}
+
       {isReminderShown === true && (
         <div className={s.reminding}>
           <p>Привет! Для начала работы внеси текущий баланс своего счета!</p>
