@@ -3,7 +3,7 @@ import { register, login } from './auth-operations';
 
 const initialState = {
   user: { name: '', email: '', password: '' },
-  token: null,
+  token: '',
   isLoggedIn: false,
 };
 
@@ -17,7 +17,7 @@ const authSlice = createSlice({
     },
     [login.fulfilled](state, action) {
       state.user = action.payload;
-      state.token = action.payload.token;
+      state.token = action.payload.accessToken;
       state.isLoggedIn = true;
     },
   },
