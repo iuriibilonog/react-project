@@ -6,7 +6,7 @@ export const register = createAsyncThunk('auth/register', async credentials => {
     console.log(credentials);
     const { data } = await AddUser(credentials);
     console.log(data);
-    token.set(data.token);
+    // token.set(data.token);
     return data;
   } catch (error) {
     alert(error.message);
