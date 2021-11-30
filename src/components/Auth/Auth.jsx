@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { register } from '../../redux/auth/auth-operations';
+import { register, login } from '../../redux/auth/auth-operations';
 import s from './Auth.module.css';
 
 
@@ -51,7 +51,7 @@ const Authorization = () => {
       
     }
     else if(isLoginType){
-      dispatch(register({email, password }))
+      dispatch(login({email, password }))
       console.log('Сабмит формы Логин')
       
     }
