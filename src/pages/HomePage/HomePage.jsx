@@ -1,5 +1,5 @@
 import Authorization from '../../components/Auth';
-import NavBar from '../../components/NavBar/NavBar';
+import NavBar from '../../components/NavBar';
 
 const HomePage = () => {
   return (
