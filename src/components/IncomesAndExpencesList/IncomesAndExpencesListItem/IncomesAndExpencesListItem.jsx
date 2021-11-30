@@ -1,21 +1,24 @@
 import s from './IncomesAndExpencesListItem.module.css';
+import sprite from '../../../img/sprite.svg';
 
-
-const IncomesAndExpencesListItem = () => {
+const IncomesAndExpencesListItem = ({ itemProps: { date, desc, categ, amount } }) => {
+  // console.log(date)
   return (
     <>
       <li className={s.listItem}>
         <div className={s.changeFlow}>
-          <span className={s.date}>05.09.2019</span>
-          <span className={s.description}>Метро</span>
+          <span className={s.date}>{date}</span>
+          <span className={s.description}>{desc}</span>
         </div>
-        <span className={s.category}>Транспорт</span>
+        <span className={s.category}>{categ}</span>
         <div className={s.flex}>
-          <span className={s.amount}>- 30.00 грн.</span>
-          <span className={s.delete}>
-            <svg className={s.deleteIcon}>
-                <use href="../../../img/sprite.svg"></use>
-            </svg>
+          <span className={s.amount}>- {parseFloat(amount).toFixed(2)}</span>
+          <span>
+            <button type="button" className={s.delete} onDelete={()=> {}}>
+              <svg className={s.deleteIcon}>
+                <use href={sprite + '#icon-del'}></use>
+              </svg>
+            </button>
           </span>
         </div>
       </li>
