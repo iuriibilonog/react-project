@@ -1,0 +1,112 @@
+@import '../../utils/variables.css';
+
+.wrapper {
+  padding: 5px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--bg-secondary);
+}
+.title {
+  display: block;
+  font-weight: 500;
+  color: var(--font-secondary);
+  font-family: Roboto, sans-serif;
+}
+
+.balance {
+  display: inline-block;
+  height: 44px;
+  width: 125px;
+  padding: 6px 12px;
+  background-color: var(--bg-secondary);
+  border: 2px white solid;
+  border-right: none;
+  border-radius: 16px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: Roboto, sans-serif;
+  text-align: right;
+}
+
+.balance:focus {
+  border-color: var(--accent-bright);
+}
+
+.confirmBtn {
+  padding: 6px 12px;
+  height: 44px;
+  width: 125px;
+  text-transform: uppercase;
+  background-color: var(--bg-secondary);
+  border: 2px white solid;
+  border-radius: 16px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+  cursor: pointer;
+}
+
+.confirmBtn:hover,
+.confirmBtn:focus {
+  color: var(--accent-bright);
+  border: 2px var(--accent-bright) solid;
+}
+
+.confirmBtn_disabled {
+  composes: confirmBtn;
+}
+
+.confirmBtn_disabled:hover,
+.confirmBtn_disabled:focus {
+  color: #c0c0c0;
+  border: 2px white solid;
+  cursor: initial;
+}
+
+@media screen and (min-width: 768px) {
+  .balance {
+    margin-right: 15px;
+    border-radius: 16px;
+    border: 2px white solid;
+  }
+  .title {
+    margin-right: 21px;
+  }
+  .confirmBtn {
+    border-radius: 16px;
+  }
+
+  .wrapper {
+    flex-direction: row;
+  }
+
+  .reminding {
+    max-width: 292px;
+  }
+}
+
+.reminding {
+  display: block;
+  max-width: 282px;
+  max-height: 152px;
+  padding: 30px;
+  position: absolute;
+  top: 100%;
+  border: 1px orange solid;
+  color: white;
+  font-size: 14px;
+  background: linear-gradient(117.84deg, #1d346a 2.84%, #031634 67.28%);
+  border-radius: 30px;
+}
+
+.remindingSubMessage {
+  margin-top: 20px;
+  font-size: 12px;
+}
