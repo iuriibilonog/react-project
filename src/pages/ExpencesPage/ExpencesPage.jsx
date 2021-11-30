@@ -1,8 +1,12 @@
+import Summary from '../../components/Summary/Summary';
 import Balance from '../../components/Balance';
+
 const ExpencesPage = () => {
   return (
     <>
-      <Balance />
+      <Summary />
+    <Balance />
+
     </>
   );
 };

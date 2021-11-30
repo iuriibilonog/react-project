@@ -58,6 +58,7 @@ const Authorization = () => {
   }
 
   return (
+
     <div className={s.auth}>
       <div className={s.authWrapper}>
         <p className={s.authText}>Вы можете авторизоваться с помощью Google Account:</p>
@@ -133,5 +134,6 @@ const Authorization = () => {
 };
 
 export default Authorization;
+
 
 
