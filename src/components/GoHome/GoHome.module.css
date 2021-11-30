@@ -1,0 +1,21 @@
+.btn {
+  width: 174px;
+  height: 24px;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.17;
+  color: rgba(82, 85, 95, 0.7);
+  border: none;
+}
+.svgBtn {
+  margin-right: 15px;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.17;
+  color: rgba(82, 85, 95, 0.7);
+  border: none;
+}

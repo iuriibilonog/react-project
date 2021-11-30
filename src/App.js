@@ -4,6 +4,7 @@ import ExpencesPage from "./pages/ExpencesPage";
 import IncomesPage from "./pages/IncomesPage";
 import ReportsPage from "./pages/ReportsPage";
 
+
 function App() {
   return (
     <div className="App">
