@@ -14,16 +14,17 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-
 const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['token'],
 };
 
+const authPersistReducer = persistReducer(authPersistConfig, authReduser);
+
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(authPersistConfig, authReduser),
+    auth: authPersistReducer,
     transactions: combinedTransactionsReducer,
     isSystemStarted: isSystemStartedReducer,
   },
@@ -35,6 +36,5 @@ export const store = configureStore({
       },
     }),
 });
-
 
 export const persistor = persistStore(store);

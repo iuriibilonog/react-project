@@ -13,7 +13,8 @@ export const register = createAsyncThunk('auth/register', async credentials => {
 export const login = createAsyncThunk('auth/login', async credentials => {
   try {
     const { data } = await LoginUser(credentials);
-    token.set(data.token);
+
+    token.set(data.accessToken);
     return data;
   } catch (error) {
     alert(error.message);
