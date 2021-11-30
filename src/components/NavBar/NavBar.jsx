@@ -10,10 +10,13 @@ import s from './NavBar.module.css';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import { StyledBadge } from './StyledBadge';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut } from '../../redux/auth/auth-operations';
+
 
 const NavBar = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
   return (
     <>
       <AppBar position="static" sx={{ background: 'white', boxShadow: 'none' }}>
@@ -72,10 +75,11 @@ const NavBar = () => {
                     fontSize: '12px',
                   }}
                   className={s.visibility}
+                  onClick={() => dispatch(logOut())}
                 >
                   Выйти
                 </Typography>
-                <img className={s.logoutIcon} src={logout} />
+                <img className={s.logoutIcon} src={logout} onClick={() => dispatch(logOut())}/>
               </div>
             )}
           </Toolbar>
