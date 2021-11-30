@@ -1,0 +1,30 @@
+.goToReport {
+  display: flex;
+  width: 154px;
+  height: 24px;
+  align-items: center;
+  margin: 0 auto;
+}
+.title {
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.04em;
+}
+.link {
+  display: flex;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.04em;
+  color: #52555f;
+  cursor: pointer;
+}
+@media screen and (min-width: 768px) {
+  .goToReport {
+    margin-left: 90px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .goToReport {
+    margin-left: 205px;
+  }
+}
