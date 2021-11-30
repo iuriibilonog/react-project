@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
+import authReduser from './auth/auth-slice';
 import storage from 'redux-persist/lib/storage';
 import { combinedTransactionsReducer, isSystemStartedReducer } from './reducers';
+
 import {
   persistReducer,
   persistStore,
@@ -12,9 +14,16 @@ import {
   REGISTER,
 } from 'redux-persist';
 
+
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
+
 export const store = configureStore({
   reducer: {
-    auth: null,
+    auth: persistReducer(authPersistConfig, authReduser),
     transactions: combinedTransactionsReducer,
     isSystemStarted: isSystemStartedReducer,
   },
@@ -26,5 +35,6 @@ export const store = configureStore({
       },
     }),
 });
+
 
 export const persistor = persistStore(store);
