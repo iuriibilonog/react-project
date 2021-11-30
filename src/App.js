@@ -1,8 +1,8 @@
-import "./App.css";
-import HomePage from "./pages/HomePage";
-import ExpencesPage from "./pages/ExpencesPage";
-import IncomesPage from "./pages/IncomesPage";
-import ReportsPage from "./pages/ReportsPage";
+import './App.css';
+import HomePage from './pages/HomePage';
+import ExpencesPage from './pages/ExpencesPage';
+import IncomesPage from './pages/IncomesPage';
+import ReportsPage from './pages/ReportsPage';
 
 function App() {
   return (
