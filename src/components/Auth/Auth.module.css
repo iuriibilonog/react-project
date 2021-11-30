@@ -1,0 +1,104 @@
+.auth {
+  width: 436px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: #ffffff;
+  box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
+  border-radius: 30px;
+}
+
+.authWrapper {
+  margin: 0 auto;
+  width: 265px;
+}
+
+.authText {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.04em;
+
+  color: #52555f;
+  margin-bottom: 20px;
+}
+
+.googleBtn {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+.inputTitle {
+  display: block;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.04em;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.authInput {
+  width: 265px;
+  background: #f6f7fb;
+  border-radius: 30px;
+  padding-top: 17px;
+  padding-bottom: 17px;
+  padding-left: 20px;
+  border: none;
+}
+
+.authInput::placeholder {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+
+  color: #a6abb9;
+}
+
+.authInput:hover,
+.authInput:focus {
+  outline: 2px solid #ff751d;
+}
+
+.inputsWrapper input:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.inputsWrapper {
+  margin-bottom: 40px;
+}
+
+.authBtn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+  width: 125px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 16px;
+  border: none;
+  background: #f5f6fb;
+  font-family: Roboto;
+  filter: drop-shadow(1px 3px 5px rgba(82, 85, 95, 0.15));
+  cursor: pointer;
+}
+
+.authBtn:nth-child(1) {
+  margin-right: 15px;
+}
+
+.authBtn.authBtnActive {
+  color: white;
+  background: #ff751d;
+  filter: drop-shadow(1px 3px 5px rgba(255, 107, 8, 0.35));
+}
