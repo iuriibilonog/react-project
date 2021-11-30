@@ -1,28 +1,40 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// import storage from "redux-persist/lib/storage";
-// import {
-//   persistReducer,
-//   persistStore,
-//   FLUSH,
-//   REHYDRATE,
-//   PAUSE,
-//   PERSIST,
-//   PURGE,
-//   REGISTER,
-// } from "redux-persist";
+import { configureStore } from '@reduxjs/toolkit';
+import authReduser from './auth/auth-slice';
+import storage from 'redux-persist/lib/storage';
+import { combinedTransactionsReducer, isSystemStartedReducer } from './reducers';
 
-// export const store = configureStore({
-//   reducer: {
-//     auth: null,
-//     transactions: null,
-//   },
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware({
-//       serializableCheck: {
-//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//       },
-//     }),
-// });
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
 
-// export const persistor = persistStore(store);
+const authPersistReducer = persistReducer(authPersistConfig, authReduser);
+
+export const store = configureStore({
+  reducer: {
+    auth: authPersistReducer,
+    transactions: combinedTransactionsReducer,
+    isSystemStarted: isSystemStartedReducer,
+  },
+
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
+
+export const persistor = persistStore(store);
