@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AddUser, token, LoginUser } from '../../services/api';
+import { AddUser, token, LoginUser, LogOutUser } from '../../services/api';
 
 export const register = createAsyncThunk('auth/register', async credentials => {
   try {
@@ -16,6 +16,16 @@ export const login = createAsyncThunk('auth/login', async credentials => {
 
     token.set(data.accessToken);
     return data;
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+export const logOut = createAsyncThunk('auth/logout', async () => {
+  try {
+    await LogOutUser();
+
+    token.unset();
   } catch (error) {
     alert(error.message);
   }
