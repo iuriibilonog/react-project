@@ -4,7 +4,7 @@ import ExpencesPage from './pages/ExpencesPage';
 import IncomesPage from './pages/IncomesPage';
 import ReportsPage from './pages/ReportsPage';
 
-
+import NavBar from './components/NavBar/NavBar';
 function App() {
   return (
     <div className="App">
