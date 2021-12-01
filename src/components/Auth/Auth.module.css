@@ -24,10 +24,28 @@
   margin-bottom: 20px;
 }
 
+.socialBtnsWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
 .googleBtn {
   display: block;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   margin-bottom: 40px;
+  width: 122px;
+  background: #f6f7fb;
+  border-radius: 26px;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  color: #000000;
+  cursor: pointer;
 }
 
 .inputTitle {
@@ -102,3 +120,7 @@
   background: #ff751d;
   filter: drop-shadow(1px 3px 5px rgba(255, 107, 8, 0.35));
 }
+
+/* input:required:invalid {
+  outline: 2px dashed red;
+} */
