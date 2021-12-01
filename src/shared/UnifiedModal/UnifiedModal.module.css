@@ -4,8 +4,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  left: 80%;
+  left: 50%;
   top: -50%;
+  transform: translateX(-150px);
+  /* transform: translateY(-97px); */
   width: 300px;
   height: 194px;
   background-color: var(--bg-primary);

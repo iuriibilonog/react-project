@@ -7,13 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
 import UnifiedModal from '../../shared/UnifiedModal';
 
-const Balance = (
-  {
-    //balance = 0 /* newBalance */,
-    //isSystemStarted = false,
-    /* pushIsSystemStartedMarkerToState, pushBalanceToState*/
-  },
-) => {
+const Balance = () => {
   const balance = useSelector(state => state.transactions.balance);
   const isSystemStarted = useSelector(state => state.isSystemStarted);
   const dispatch = useDispatch();
@@ -31,7 +25,7 @@ const Balance = (
   const zeroReminding = () => {
     const timerId = setTimeout(() => {
       setIsReminderShown(true);
-    }, 2000);
+    }, 4000);
     setTimerId(timerId);
   };
 
@@ -52,17 +46,29 @@ const Balance = (
     setInitBalance(event.target.value.trim());
   };
 
+  const finalInitializing = balanceDigit => {
+    setIsReminderShown('false');
+    setBalanceState('set');
+    pushIsSystemStartedMarkerToState(true);
+    pushBalanceToState(balanceDigit);
+  };
+
   const submitBalanceHandler = event => {
     event.preventDefault();
+    /// ????
     setIsModalShown(true);
+    /// ????
+
+    // async () => {
+    //   const result = await Confirm('Сonfirmation text',
+    //     'Сonfirmation title');
+    // }
+
     const balanceDigit = initBalance.slice(0, initBalance.length - 4).trim();
-    if (Number(balanceDigit) && isBalanceConfirmed) {
+    if (Number(balanceDigit) /*  && isBalanceConfirmed */) {
       /* Send it to STATE */
       console.log('Output Balance :', balanceDigit);
-      setIsReminderShown('false');
-      setBalanceState('set');
-      pushIsSystemStartedMarkerToState(true);
-      pushBalanceToState(balanceDigit);
+      finalInitializing(balanceDigit);
       /********************/
     } else {
       console.log('Wrong balance!');
@@ -125,25 +131,32 @@ const Balance = (
     setIsModalShown(false);
     setIsBalanceConfirmed(resp);
     console.log(resp);
+    return resp;
   };
 
   return (
     <div className={s.wrapper}>
       <span className={s.title}>Баланс:</span>
-      <form onSubmit={submitBalanceHandler}>
+      <form
+        // onSubmit={async event => {
+        //   event.preventDefault();
+        //   setIsModalShown(true);
+        //   const result = await responseHandling();
+        //   if (result) {
+        onSubmit={submitBalanceHandler}
+      >
         <div>
           {balanceState === 'set' ? inputMarkup(false) : inputMarkup(true)}
           {balanceState === 'set' ? confirmBtnMarkup(false) : confirmBtnMarkup(true)}
         </div>
       </form>
-      {isModalShown && <UnifiedModal title={'Вы хотите выйти ?'} response={responseHandling} />}
-
       {isReminderShown === true && (
         <div className={s.reminding}>
           <p>Привет! Для начала работы внеси текущий баланс своего счета!</p>
           <p className={s.remindingSubMessage}>Ты не можешь тратить деньги пока их у тебя нет! </p>
         </div>
       )}
+      {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
     </div>
   );
 };
