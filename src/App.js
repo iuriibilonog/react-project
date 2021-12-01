@@ -12,9 +12,9 @@ function App() {
       <header className="App-header"></header>
       
       <HomePage />
-      <ExpencesPage />
+      {/* <ExpencesPage />
       <IncomesPage />
-      <ReportsPage />
+      <ReportsPage /> */}
     </div>
   );
 }

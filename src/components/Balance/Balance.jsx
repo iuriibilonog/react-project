@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
+import GoToReport from '../GoToReport/GoToReport';
+import Container from '../Container';
 
 const Balance = (
   {
@@ -121,6 +123,7 @@ const Balance = (
   }, [balanceState]);
 
   return (
+    <Container>
     <div className={s.wrapper}>
       <span className={s.title}>Баланс:</span>
       <form onSubmit={submitBalanceHandler}>
@@ -136,6 +139,7 @@ const Balance = (
         </div>
       )}
     </div>
+    </Container>
   );
 };
 
