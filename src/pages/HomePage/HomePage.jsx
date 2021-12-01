@@ -16,12 +16,13 @@ const HomePage = () => {
             <img className={s.imgText} src={imgTitle} alt="Kapusta" />
             <h1 className={s.fontText}>SMART FINANSE</h1>
           </div>
+          
         </div>
         <div className={s.secondarySection}>
-          <div className={s.bcgImageBottom}>
-            <Authorization />
+            <Authorization/>
+            <div className={s.bcgImageBottom}>
+            </div>
           </div>
-        </div>
       </div>
     </>
   );

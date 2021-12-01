@@ -1,0 +1,76 @@
+@import '../../utils/variables.css';
+
+/* .groupingDiv {
+  background-color: rosybrown;
+}
+
+.date {
+  background-color: yellowgreen;
+}
+
+.description {
+  background-color: aquamarine;
+}
+
+.category {
+  background-color: royalblue;
+}
+
+.amount {
+  background-color: saddlebrown;
+} */
+
+.header {
+  display: none;
+  visibility: hidden;
+}
+.list {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.groupingDiv {
+  display: flex;
+  justify-content: space-between;
+}
+.description {
+  text-align: end;
+}
+.category {
+  text-align: center;
+}
+.transactionsList {
+  max-height: 346px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .header {
+    display: flex;
+    visibility: visible;
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    background-color: var(--bg-secondary);
+    color: var(--font-primary);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  .header > div,
+  .header > span {
+    width: 33.3%;
+  }
+  .list {
+    max-width: 760px;
+  }
+}
+
+
+

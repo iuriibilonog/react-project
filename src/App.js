@@ -1,6 +1,6 @@
 import './App.css';
 import HomePage from './pages/HomePage';
-import ExpencesPage from './pages/ExpencesPage';
+import ExpensesPage from './pages/ExpensesPage';
 import IncomesPage from './pages/IncomesPage';
 import ReportsPage from './pages/ReportsPage';
 
@@ -9,11 +9,14 @@ import FormAddCategory from './components/FormAddCategory';
 function App() {
   return (
     <div className="App">
-      {/* <HomePage /> */}
       <FormAddCategory />
-      {/* <ExpencesPage />
+
+      <header className="App-header"></header>
+
+      <HomePage />
+
       <IncomesPage />
-      <ReportsPage /> */}
+      <ReportsPage />
     </div>
   );
 }

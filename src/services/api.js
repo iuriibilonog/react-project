@@ -11,7 +11,7 @@ export const token = {
   },
 };
 
-export const AddUser = async user => {
-  return axios.post('/auth/register', user);
-};
+export const AddUser = async user => axios.post('/auth/register', user);
+
 export const LoginUser = async user => axios.post('/auth/login', user);
+export const LogOutUser = async () => axios.post('/auth/logout');
