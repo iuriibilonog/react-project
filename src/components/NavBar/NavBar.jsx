@@ -64,6 +64,7 @@ const NavBar = () => {
                   }}
                   className={s.visibility}
                 />
+                <div onClick={() => dispatch(logOut())}>
                 <Typography
                   variant="text"
                   sx={{
@@ -75,11 +76,12 @@ const NavBar = () => {
                     fontSize: '12px',
                   }}
                   className={s.visibility}
-                  onClick={() => dispatch(logOut())}
+                  
                 >
                   Выйти
                 </Typography>
-                <img className={s.logoutIcon} src={logout} onClick={() => dispatch(logOut())}/>
+                <img className={s.logoutIcon} src={logout} />
+                </div>
               </div>
             )}
           </Toolbar>

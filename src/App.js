@@ -1,9 +1,13 @@
+import { checkCurrentUser } from './redux/auth/auth-operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import './App.css';
 import HomePage from './pages/HomePage';
-import ExpencesPage from './pages/ExpencesPage';
+import ExpensesPage from './pages/ExpensesPage';
 import IncomesPage from './pages/IncomesPage';
 import ReportsPage from './pages/ReportsPage';
 import NavBar from './components/NavBar/NavBar';
+
 import s from './App.module.css';
 
 function App() {
@@ -31,6 +35,18 @@ function App() {
     document.body.style.setProperty('--hero-back', 'rgba(29, 255, 48, 0.3)');
     document.body.style.setProperty('--hero-shadow', 'rgba(26, 117, 37, 0.25)');
   };
+
+
+
+function App() {
+  const dispatch = useDispatch();
+  const sid = useSelector(state => state.auth.sid);
+
+  useEffect(() => {
+    dispatch(checkCurrentUser());
+  }, [dispatch]);
+
+
   return (
     <div className="App">
       <header className="App-header"></header>
