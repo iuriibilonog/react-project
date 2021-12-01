@@ -5,13 +5,15 @@ import IncomesPage from './pages/IncomesPage';
 import ReportsPage from './pages/ReportsPage';
 
 import NavBar from './components/NavBar/NavBar';
+import FormAddCategory from './components/FormAddCategory';
 function App() {
   return (
     <div className="App">
-      <HomePage />
-      <ExpencesPage />
+      {/* <HomePage /> */}
+      <FormAddCategory />
+      {/* <ExpencesPage />
       <IncomesPage />
-      <ReportsPage />
+      <ReportsPage /> */}
     </div>
   );
 }

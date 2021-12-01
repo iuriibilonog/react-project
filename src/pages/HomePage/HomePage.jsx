@@ -3,6 +3,7 @@ import NavBar from '../../components/NavBar';
 import s from './HomePage.module.css';
 import imgTitle from '../../img/title.svg';
 import Authorization from '../../components/Auth/Auth';
+import FormAddCategory from '../../components/FormAddCategory';
 
 const HomePage = () => {
   return (
