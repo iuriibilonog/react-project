@@ -5,8 +5,15 @@ import CustomScroll from 'react-custom-scroll';
 import './customScroll.css';
 
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+
+import {getIncomeTransactions, addIncomeTransaction} from '../../redux/transactions-operations'
 
 const IncomesAndExpencesList = () => {
+
+  const dispatch = useDispatch()
+
   // useEffect(() => {
   //   // запрос за данными
   // })
@@ -21,8 +28,12 @@ const IncomesAndExpencesList = () => {
   ]);
   console.log(transactions);
 
+  let transaction =  { date: "2020-12-31", description: 'Lorem Ipsum', category: "З/П", amount: 120.5 }
+
   return (
     <>
+      <button type="button" onClick={()=>{ dispatch(getIncomeTransactions())}}>GET INCOMES TRANSACTIONS</button>
+      <button type="button" onClick={()=>{ dispatch(addIncomeTransaction(transaction))}}>ADD INCOME TRANSACTION</button>
       <div className={s.list}>
         <header className={s.header}>
           <div className={s.groupingDiv}>
