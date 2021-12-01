@@ -10,7 +10,6 @@ import NavBar from './components/NavBar/NavBar';
 
 import s from './App.module.css';
 
-function App() {
   const changeTheme = () => {
     document.body.style.setProperty('--accent-bright', 'red');
 
@@ -54,7 +53,7 @@ function App() {
         MAGIC
       </button>
       <HomePage />
-      <ExpencesPage />
+      <ExpensesPage />
       <IncomesPage />
       <ReportsPage />
     </div>
