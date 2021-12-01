@@ -7,7 +7,7 @@ export const addIncomeTransaction = createAsyncThunk(
     try {
       const { data } = await axios.post('/transaction/income', transaction);
       // returns newBalance and new transaction
- 
+    console.log(data)
       return data.transaction;
     } catch (error) {
       alert(error.message);
@@ -25,6 +25,30 @@ export const getIncomeTransactions = createAsyncThunk('transactions/getIncomes',
       alert(error.message);
     }
 })
+
+export const addExpenseTransaction = createAsyncThunk(
+  'transactions/addExpense',
+  async transaction => {
+    try {
+      const { data } = await axios.post('/transaction/expense', transaction);
+      // returns newBalance and new transaction
+      return data.transaction;
+    } catch (error) {
+      alert(error.message);
+    }
+  },
+);
+
+export const getExpensesTransactions = createAsyncThunk('transactions/getExpenses', async () => {
+  try {
+    const { data } = await axios.get('/transaction/expense');
+    console.log(data.expenses);
+    // we receive expenses and monthly stats - I use only incomes so far
+    return data.expenses;
+  } catch (error) {
+    alert(error.message);
+  }
+});
 
 export const deleteTransaction = createAsyncThunk('transactions/deleteTransaction', async transactionId => {
   try {

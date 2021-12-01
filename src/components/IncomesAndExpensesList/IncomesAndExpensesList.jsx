@@ -1,5 +1,5 @@
-import s from './IncomesAndExpencesList.module.css';
-import IncomesAndExpencesListItem from './IncomesAndExpencesListItem';
+import s from './IncomesAndExpensesList.module.css';
+import IncomesAndExpensesListItem from './IncomesAndExpensesListItem';
 
 import CustomScroll from 'react-custom-scroll';
 import './customScroll.css';
@@ -11,7 +11,8 @@ import {getIncomes} from '../../redux/transactions-selectors'
 
 import {getIncomeTransactions, addIncomeTransaction} from '../../redux/transactions-operations'
 
-const IncomesAndExpencesList = () => {
+const IncomesAndExpensesList = ({ props }) => {
+  console.log("props" + props)
 
   const dispatch = useDispatch()
 
@@ -24,13 +25,13 @@ const IncomesAndExpencesList = () => {
   // }, [dispatch])
   
 
-  let transaction =  { date: "2020-12-31", description: 'Lorem Ipsum', category: "З/П", amount: 120.5 }
+  // let transaction =  { date: "2020-12-31", description: 'Lorem Ipsum', category: "З/П", amount: 120.5 }
 
   return (
     <>
      
-      <button type="button" onClick={()=>{ dispatch(getIncomeTransactions())}}>GET INCOMES TRANSACTIONS</button>
-      <button type="button" onClick={() => { dispatch(addIncomeTransaction(transaction)) }}>ADD INCOME TRANSACTION</button>
+      {/* <button type="button" onClick={()=>{ dispatch(getIncomeTransactions())}}>GET INCOMES TRANSACTIONS</button>
+      <button type="button" onClick={() => { dispatch(addIncomeTransaction(transaction)) }}>ADD INCOME TRANSACTION</button> */}
       
       <div className={s.list}>
         <header className={s.header}>
@@ -43,8 +44,8 @@ const IncomesAndExpencesList = () => {
         </header>
         <CustomScroll className="rcs-inner-handle">
           <ul className={s.transactionsList}>
-            {incomes && incomes.map(item => (
-              <IncomesAndExpencesListItem itemProps={item} />
+            {props.length && props.map(item => (
+              <IncomesAndExpensesListItem itemProps={item} />
             ))}
           </ul>
         </CustomScroll>
@@ -53,4 +54,4 @@ const IncomesAndExpencesList = () => {
   );
 };
 
-export default IncomesAndExpencesList;
+export default IncomesAndExpensesList;

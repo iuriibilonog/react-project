@@ -1,9 +1,9 @@
-import s from './IncomesAndExpencesListItem.module.css';
+import s from './IncomesAndExpensesListItem.module.css';
 import sprite from '../../../img/sprite.svg';
 import { deleteTransaction } from '../../../redux/transactions-operations'
 import { useDispatch, useSelector } from 'react-redux';
 
-const IncomesAndExpencesListItem = ({ itemProps: { date, description, category, amount, _id } }) => {
+const IncomesAndExpensesListItem = ({ itemProps: { date, description, category, amount, _id } }) => {
   // console.log(id)
 const dispatch = useDispatch()
 
@@ -30,4 +30,4 @@ const dispatch = useDispatch()
   );
 };
 
-export default IncomesAndExpencesListItem;
+export default IncomesAndExpensesListItem;
