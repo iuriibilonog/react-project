@@ -13,9 +13,13 @@
   --accent-bright: #ff751d;
   --accent-bleak: #ffdac0;
   --accent-bleak-logo: rgba(251, 124, 47, 0.2);
-
   --modal-color-first: #1d346a;
   --modal-color-second: #031634;
 
   --dropdown-text: #c7ccdc;
+  --box-shadow: rgba(90, 105, 88, 0.4);
+  --hero-primary: #ff751d;
+  --hero-back: rgba(255, 116, 29, 0.3);
+  --hero-shadow: rgba(107, 81, 24, 0.25);
+  /* =================================== */
 }
