@@ -1,6 +1,6 @@
 import './App.css';
 import HomePage from './pages/HomePage';
-import ExpencesPage from './pages/ExpencesPage';
+import ExpensesPage from './pages/ExpensesPage';
 import IncomesPage from './pages/IncomesPage';
 import ReportsPage from './pages/ReportsPage';
 
@@ -12,7 +12,7 @@ function App() {
       <header className="App-header"></header>
       
       <HomePage />
-      {/* <ExpencesPage />
+      {/* <ExpensesPage />
       <IncomesPage />
       <ReportsPage /> */}
     </div>
