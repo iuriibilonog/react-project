@@ -15,3 +15,6 @@ export const AddUser = async user => axios.post('/auth/register', user);
 
 export const LoginUser = async user => axios.post('/auth/login', user);
 export const LogOutUser = async () => axios.post('/auth/logout');
+export const CheckUser = async id => axios.post('/auth/refresh', id);
+export const LoginUserFromGoogle = async () => axios.get('/auth/google');
+export const GetUserAfterRefresh = async () => axios.get('/user');
