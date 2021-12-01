@@ -6,7 +6,7 @@ import {
   setIsSystemStarted,
 } from '../redux/actions';
 // new
-import { addIncomeTransaction, getIncomeTransactions } from './transactions-operations';
+import { addIncomeTransaction, getIncomeTransactions, deleteTransaction } from './transactions-operations';
 // new
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
@@ -22,6 +22,8 @@ const expensesReducer = createReducer(0, {
 const incomesReducer = createReducer(0, {
   [getIncomeTransactions.fulfilled]: (_, action) => action.payload,
   [addIncomeTransaction.fulfilled]: (state, action) => [...state, action.payload],
+  [deleteTransaction.fulfilled]: (state, action) =>
+    [...state].filter(item => item._id != action.payload),
 });
 
 const transactionsReducer = combineReducers({
