@@ -7,9 +7,15 @@ import Authorization from '../../components/Auth/Auth';
 import { useState } from 'react';
 
 import FormAddCategory from '../../components/FormAddCategory';
+import { isUserLoggedIn } from '../../redux/selectors'
+import { useSelector } from 'react-redux';
 
 
 const HomePage = () => {
+
+
+  const isLoggedIn = useSelector(isUserLoggedIn)
+  console.log(isLoggedIn)
 
   const [socialImg, setSocialImg] = useState('');
   const [socialName, setSocialName] = useState('');
@@ -42,8 +48,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className={s.secondarySection}>
-
-          <Authorization getDataFromSocial={getDataFromSocial} getTypeOfAuth={ getTypeOfAuth}/>
+          {!isLoggedIn && <Authorization getDataFromSocial={getDataFromSocial} getTypeOfAuth={getTypeOfAuth} />}
             <div className={s.bcgImageBottom}>
             </div>
           </div>
