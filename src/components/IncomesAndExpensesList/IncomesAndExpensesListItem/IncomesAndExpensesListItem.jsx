@@ -1,11 +1,13 @@
 import s from './IncomesAndExpensesListItem.module.css';
 import sprite from '../../../img/sprite.svg';
-import { deleteTransaction } from '../../../redux/transactions-operations'
-import { useDispatch, useSelector } from 'react-redux';
 
-const IncomesAndExpensesListItem = ({ itemProps: { date, description, category, amount, _id } }) => {
-  // console.log(id)
-const dispatch = useDispatch()
+const IncomesAndExpensesListItem = ({
+  itemProps: { date, description, category, amount, _id },
+  modalHandler, transactionsType, operationSign
+}) => {
+  const showModal = id => {
+    modalHandler(id);
+  };
 
   return (
     <>
@@ -16,9 +18,9 @@ const dispatch = useDispatch()
         </div>
         <span className={s.category}>{category}</span>
         <div className={s.flex}>
-          <span className={s.amount}>- {parseFloat(amount).toFixed(2)}</span>
+          <span className={transactionsType}>{operationSign}{parseFloat(amount).toFixed(2)}</span>
           <span>
-            <button type="button" className={s.delete} onClick={()=> dispatch(deleteTransaction(_id))}>
+            <button type="button" className={s.delete} onClick={() => showModal(_id)}>
               <svg className={s.deleteIcon}>
                 <use href={sprite + '#icon-del'}></use>
               </svg>
@@ -31,3 +33,9 @@ const dispatch = useDispatch()
 };
 
 export default IncomesAndExpensesListItem;
+
+
+/* вопросы */
+/* 1) динамический класс с модулем? */
+/* 2) позиционирование модалки? */
+/* 3) пробрасывать класс и знак минуса в пропсах или сделать иначе? */

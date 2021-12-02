@@ -4,11 +4,12 @@
   --width-desktop: 1280px;
 
   --bg-primary: white;
-  --bg-secondary: #f5f6fb;
+  --bg-secondary: #f2f5fc; /* #f5f6fb */
 
   --font-primary: black;
   --font-secondary: #52555f;
-  --font-tertiary: #e7192e;
+  --font-expenses: #e7192e;
+  --font-incomes:#407946;
 
   --accent-bright: #ff751d;
   --accent-bleak: #ffdac0;
