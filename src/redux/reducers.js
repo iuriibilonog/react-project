@@ -57,19 +57,13 @@ const getExpenseCategories = createReducer([], {
   [getExpensesCategories.fulfilled]: (_, action) => action.payload,
 });
 
-const setExpensesByCategory = createReducer(
-  {},
-  {
-    [setIncomesByCategories]: (state, action) => [...state, action.payload],
-  },
-);
+const setIncomesByCategory = createReducer([], {
+  [setIncomesByCategories]: (state, action) => [...state, action.payload],
+});
 
-const setIncomesByCategory = createReducer(
-  {},
-  {
-    [setExpensesByCategories]: (state, action) => [...state, action.payload],
-  },
-);
+const setExpensesByCategory = createReducer([], {
+  [setExpensesByCategories]: (state, action) => [...state, action.payload],
+});
 
 const transactionsReducer = combineReducers({
   incomes: incomesReducer,
