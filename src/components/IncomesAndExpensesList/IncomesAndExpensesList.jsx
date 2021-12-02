@@ -6,33 +6,31 @@ import './customScroll.css';
 
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {getIncomes} from '../../redux/transactions-selectors'
+import { getIncomes } from '../../redux/transactions-selectors';
 
-
-import {getIncomeTransactions, addIncomeTransaction} from '../../redux/transactions-operations'
+import { getIncomeTransactions, addIncomeTransaction } from '../../redux/transactions-operations';
+import FormAddCategory from '../FormAddCategory';
 
 const IncomesAndExpensesList = ({ props }) => {
-  console.log("props" + props)
+  console.log('props' + props);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  let incomes = useSelector(getIncomes)
-  console.log(incomes)
-  
+  let incomes = useSelector(getIncomes);
+  console.log(incomes);
+
   // будет работать при рерауте
   // useEffect(() => {
   //   dispatch(getIncomeTransactions())
   // }, [dispatch])
-  
 
   // let transaction =  { date: "2020-12-31", description: 'Lorem Ipsum', category: "З/П", amount: 120.5 }
 
   return (
     <>
-     
       {/* <button type="button" onClick={()=>{ dispatch(getIncomeTransactions())}}>GET INCOMES TRANSACTIONS</button>
       <button type="button" onClick={() => { dispatch(addIncomeTransaction(transaction)) }}>ADD INCOME TRANSACTION</button> */}
-      
+      <FormAddCategory />
       <div className={s.list}>
         <header className={s.header}>
           <div className={s.groupingDiv}>
@@ -44,9 +42,7 @@ const IncomesAndExpensesList = ({ props }) => {
         </header>
         <CustomScroll className="rcs-inner-handle">
           <ul className={s.transactionsList}>
-            {props.length && props.map(item => (
-              <IncomesAndExpensesListItem itemProps={item} />
-            ))}
+            {props.length && props.map(item => <IncomesAndExpensesListItem itemProps={item} />)}
           </ul>
         </CustomScroll>
       </div>

@@ -11,23 +11,21 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { InputAdornment } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import FilledInput from '@mui/material/FilledInput';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import FormHelperText from '@mui/material/FormHelperText';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import calculator from '../../img/calculator.svg';
-import Stack from '@mui/material/Stack';
-import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
-import { styled } from '@mui/system';
 import s from './FormAddCategory.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 import ruLocale from 'date-fns/locale/ru';
-// import AdapterJalali from '@date-io/date-fns-jalali';
-import { compareAsc, format } from 'date-fns';
+import { format } from 'date-fns';
 import DatePicker from '@mui/lab/DatePicker';
 import expenceJson from '../../data/expenselcon.json';
+import incomesJson from '../../data/incomeIcon.json';
+import NavigationBetweenCategoryes from './NavigationBetweenCategoryes';
+import { useLocation, useRouteMatch } from 'react-router';
+import { addExpenseTransaction, addIncomeTransaction } from '../../redux/transactions-operations';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import '../../utils/variables.css';
 const month2 = new Date().getMonth() + 1;
 const month = new Date().toLocaleString('ru', {
   month: 'long',
@@ -37,62 +35,51 @@ const month = new Date().toLocaleString('ru', {
 // console.log(`${date}-${month2}-${year}`);
 
 const FormAddCategory = () => {
-  const [value, setValue] = React.useState(format(new Date(), 'MM-dd-yyyy'));
+  const [value, setValue] = React.useState(new Date());
   const ariaLabel = { 'aria-label': 'description' };
-  const [age, setAge] = React.useState('');
-  const [text, setText] = React.useState('');
-  const [values, setValues] = React.useState('');
-  console.log(value);
-  //=> '2014-02-11'
+  const [category, setCategory] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [amount, setAmount] = React.useState('');
+
   const handleInputChange = event => {
-    setAge(event.target.value);
+    setCategory(event.target.value);
   };
+  const newDate = () => {
+    console.log(value);
+    const newDateValue = format(value, 'yyyy-MM-dd');
+    console.log(newDateValue);
+    return newDateValue;
+  };
+  const date = newDate();
+
+  const dispatch = useDispatch();
 
   const handleChange = event => {
-    setValues(event.target.value);
+    setAmount(event.target.value);
   };
 
-  const CustomButtonRoot = styled('span')`
-    background-color: #007fff;
-    padding: 15px 20px;
-    border-radius: 5px;
-    color: #fff;
-    font-weight: 600;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    transition: all 200ms ease;
-    cursor: pointer;
-    box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
-    border: none;
-
-    &:hover {
-      background-color: #0059b2;
-    }
-
-    &.${buttonUnstyledClasses.active} {
-      background-color: #004386;
-    }
-
-    &.${buttonUnstyledClasses.focusVisible} {
-      box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
-      outline: none;
-    }
-  `;
-
-  function CustomButton(props) {
-    return <ButtonUnstyled {...props} component={CustomButtonRoot} />;
-  }
-
+  let isSpend = '';
+  const { pathname } = useLocation();
+  pathname === '/spend' ? (isSpend = true) : (isSpend = false);
+  console.log(
+    'Date ' + date,
+    'description ' + description,
+    'category ' + category,
+    'amount ' + amount,
+  );
   const handleFormSubmit = e => {
     e.preventDefault();
-    console.log(value);
+    newDate();
+    isSpend
+      ? dispatch(addExpenseTransaction({ date, description, category, amount }))
+      : dispatch(addIncomeTransaction({ date, description, category, amount }));
   };
   const handleTextChange = event => {
-    setText(event.target.value);
+    setDescription(event.target.value);
   };
   const useStyles = makeStyles(theme => ({
     textInpt: {
-      border: '2px solid black',
+      //   border: '2px solid black',
       borderRadius: '30px',
       width: '289px',
       //   height: '30px',
@@ -100,10 +87,43 @@ const FormAddCategory = () => {
     },
   }));
   const css = useStyles();
+  let data = '';
+  let categoryName = '';
+  let textInputName = '';
+  isSpend ? (data = expenceJson) : (data = incomesJson);
+  isSpend ? (categoryName = 'Категория товара') : (categoryName = 'Категория дохода');
+  isSpend ? (textInputName = 'Описание товара') : (textInputName = 'Описание дохода');
+  // const [date, setDate] = useState(new Date());
+  const classes = useStyles();
   return (
-    <Container>
+    <>
+      <NavigationBetweenCategoryes />
       <form onSubmit={handleFormSubmit}>
         <div className={s.containerForm}>
+          {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DesktopDatePicker
+              label="Custom input"
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+              value={value}
+              onChange={newValue => {
+                setDate(newValue);
+              }}
+              renderInput={({ inputRef, inputProps, InputProps }) => (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <input ref={inputRef} {...inputProps} className={classes.picker} />
+                  {InputProps?.endAdornment}
+                </Box>
+              )}
+            />
+          </LocalizationProvider> */}
           <LocalizationProvider
             dateAdapter={AdapterDateFns}
             locale={ruLocale}
@@ -117,15 +137,17 @@ const FormAddCategory = () => {
               size="small"
               value={value}
               onChange={newValue => setValue(newValue)}
-              renderInput={params => <TextField {...params} />}
+              renderInput={params => <TextField {...params} size="small" />}
+              format="YYYY-MM-DD"
             />
           </LocalizationProvider>
           <TextField
+            // style={{ color: var(--font-tertiary) }}
             className={css.textInpt}
             id="outlined"
             fullWidth
             //   id={s.inputStyle}
-            label="Описание товара"
+            label={textInputName}
             name="textInput"
             // variant="standard"
             onChange={handleTextChange}
@@ -136,17 +158,17 @@ const FormAddCategory = () => {
 
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Категория товара</InputLabel>
+              <InputLabel id="demo-simple-select-label">{categoryName}</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={age}
-                label="Категория товара"
+                value={category}
+                label={categoryName}
                 onChange={handleInputChange}
                 name="select"
                 size="small"
               >
-                {expenceJson.map(item => {
+                {data.map(item => {
                   return (
                     <MenuItem key={item.id} value={item.label}>
                       {item.label}
@@ -160,7 +182,7 @@ const FormAddCategory = () => {
             <OutlinedInput
               size="small"
               id="outlined-adornment-weight"
-              value={values}
+              value={amount}
               onChange={handleChange}
               placeholder="0.00"
               type="number"
@@ -184,7 +206,7 @@ const FormAddCategory = () => {
         </button>
         {/* </Stack> */}
       </form>
-    </Container>
+    </>
   );
 };
 

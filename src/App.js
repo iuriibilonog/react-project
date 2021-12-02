@@ -9,12 +9,8 @@ import FormAddCategory from './components/FormAddCategory';
 function App() {
   return (
     <div className="App">
-      <FormAddCategory />
-
       <header className="App-header"></header>
-
       <HomePage />
-
       <IncomesPage />
       <ReportsPage />
     </div>
