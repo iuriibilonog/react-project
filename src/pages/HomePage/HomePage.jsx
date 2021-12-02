@@ -3,11 +3,13 @@ import NavBar from '../../components/NavBar';
 import s from './HomePage.module.css';
 import imgTitle from '../../img/title.svg';
 import Authorization from '../../components/Auth/Auth';
+import FormAddCategory from '../../components/FormAddCategory';
 
 const HomePage = () => {
   return (
     <>
       <NavBar />
+
       <div className={s.container}>
         <div className={s.mainSection}>
           <div className={s.bcgImage}></div>
@@ -15,13 +17,11 @@ const HomePage = () => {
             <img className={s.imgText} src={imgTitle} alt="Kapusta" />
             <h1 className={s.fontText}>SMART FINANSE</h1>
           </div>
-          
         </div>
         <div className={s.secondarySection}>
-            <Authorization/>
-            <div className={s.bcgImageBottom}>
-            </div>
-          </div>
+          <Authorization />
+          <div className={s.bcgImageBottom}></div>
+        </div>
       </div>
     </>
   );

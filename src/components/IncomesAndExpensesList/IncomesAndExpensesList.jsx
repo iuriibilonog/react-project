@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import UnifiedModal from '../../shared/UnifiedModal';
 
 import { deleteTransaction } from '../../redux/transactions-operations';
-
+import FormAddCategory from '../FormAddCategory';
 const IncomesAndExpensesList = ({ props, transactionsType, operationSign = '' }) => {
   const [isModalShown, setIsModalShown] = useState(false);
   const [itemId, setItemId] = useState(null);
@@ -29,9 +29,10 @@ const IncomesAndExpensesList = ({ props, transactionsType, operationSign = '' })
     }
     setItemId(null);
   };
-
+  console.log(operationSign);
   return (
     <>
+      <FormAddCategory />
       {props.length > 0 && (
         <div className={s.list}>
           <header className={s.header}>
