@@ -10,6 +10,7 @@ import NavBar from './components/NavBar/NavBar';
 import SwitchTheme from './shared/SwitchTheme/SwitchTheme';
 import s from './App.module.css';
 
+
 function App() {
   const dispatch = useDispatch();
   const sid = useSelector(state => state.auth.sid);
