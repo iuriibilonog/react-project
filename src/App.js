@@ -13,6 +13,16 @@ import s from './App.module.css';
 
 import { useLocation } from 'react-router';
 
+
+// new
+import { Switch, Redirect } from 'react-router';
+import { Suspense } from 'react';
+
+import PublicRoute from './components/Routes/PublicRoute';
+import PrivateRoute from './components/Routes/PrivateRoute';
+// new
+
+
 function App() {
   const dispatch = useDispatch();
   const sid = useSelector(state => state.auth.sid);
@@ -34,10 +44,20 @@ function App() {
       <Chart />
       <SwitchTheme />
       <header className="App-header"></header>
-      <HomePage />
-      {isSpend && <ExpensesPage />}
-      {!isSpend && <IncomesPage />}
-      <ReportsPage />
+      <Suspense fallback={<h1>LOADING...</h1>}>
+        <Switch>
+          <PublicRoute path="/authorization" restricted exact>
+            <HomePage/>
+          </PublicRoute>
+
+          <PrivateRoute path="/home">
+            <HomePage />
+            {/* {isSpend && <ExpensesPage />}
+          {!isSpend && <IncomesPage />} */}
+            <ReportsPage />
+          </PrivateRoute>
+        </Switch>
+      </Suspense>
     </div>
   );
 }
