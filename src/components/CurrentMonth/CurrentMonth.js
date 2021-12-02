@@ -6,30 +6,35 @@ const CurrentMonth = () => {
   const [curMonth, setCurMon] = useState(new Date().getMonth() + 1);
   const [year, setYear] = useState(new Date().getFullYear());
 
+  // console.log(curMonth);
+  // console.log(year);
   //   const monthLit = curMonth.toLocaleString('ru', {
   //     month: 'long',
   //   });
   //   const yearLit = year.toLocaleString('ru', {
   //     year: 'numeric',
   //   });
-
+  // const date = new Date(this.year, this.month + 1);
+  // this.setState({ date });
   const handlePrevMonth = () => {
-    setCurMon(prev => {
+    setCurMon(curMonth => {
       if (curMonth === 1) {
-        setYear(year => year - 1);
-        setCurMon(1);
+        console.log(year);
+        setYear(year => (year -= 1));
+
+        setCurMon(12);
       }
-      return prev - 1;
+      return (curMonth -= 1);
     });
     console.log(curMonth);
   };
   const handleNextMonth = () => {
-    setCurMon(prev => {
+    setCurMon(curMonth => {
       if (curMonth === 12) {
-        setYear(year => year + 1);
+        setYear(year => (year += 1));
         setCurMon(1);
       }
-      return prev + 1;
+      return (curMonth += 1);
     });
     console.log(curMonth);
   };
@@ -42,7 +47,7 @@ const CurrentMonth = () => {
           <use href={sprite + '#icon-arrowLeft'}></use>
         </svg>
         <span className={s.currentMonthText}>
-          {curMonth} {year}
+          {curMonth} / {year}
         </span>
         <svg onClick={handleNextMonth} width="10" height="10">
           <use href={sprite + '#icon-arrowRight'}></use>
