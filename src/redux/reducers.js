@@ -14,19 +14,19 @@ import { createReducer } from '@reduxjs/toolkit';
 const balanceReducer = createReducer(0, {
   [setBalance]: (_, action) => action.payload,
 });
-// бьёт ошибку если стейт пустой, нельзя распылить
+
 const expensesReducer = createReducer([], {
   [getExpensesTransactions.fulfilled]: (_, action) => action.payload,
   [addExpenseTransaction.fulfilled]: (state, action) => [...state, action.payload],
   [deleteTransaction.fulfilled]: (state, action) =>
-    [...state].filter(item => item._id != action.payload),
+    [...state].filter(item => item._id !== action.payload),
 });
 
 const incomesReducer = createReducer([], {
   [getIncomeTransactions.fulfilled]: (_, action) => action.payload,
   [addIncomeTransaction.fulfilled]: (state, action) => [...state, action.payload],
   [deleteTransaction.fulfilled]: (state, action) =>
-    [...state].filter(item => item._id != action.payload),
+    [...state].filter(item => item._id !== action.payload),
 });
 
 const transactionsReducer = combineReducers({

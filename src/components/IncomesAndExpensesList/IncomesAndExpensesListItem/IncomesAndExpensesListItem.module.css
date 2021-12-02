@@ -58,10 +58,14 @@
   font-size: 8px;
 }
 
-.amount {
+.expenses {
   /* flex-grow: 1; */
   font-weight: bold;
-  color: var(--font-tertiary);
+  color: var(--font-expenses);
+}
+.incomes {
+  font-weight: bold;
+  color:var(--font-incomes);
 }
 
 .delete {

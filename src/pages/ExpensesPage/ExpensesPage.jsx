@@ -24,7 +24,7 @@ const ExpensesPage = () => {
       <button type="button" onClick={() => { dispatch(addExpenseTransaction(transaction)) }}>ADD EXPENSE TRANSACTION</button>
       <Summary />
       <Balance />
-      <IncomesAndExpensesList props={expenses}/>
+      <IncomesAndExpensesList props={expenses} transactionsType={'expenses'} operationSign={'-'}/>
     </>
   );
 };

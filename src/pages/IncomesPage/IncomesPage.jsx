@@ -23,7 +23,7 @@ const IncomesPage = () => {
       <button type="button" onClick={()=>{ dispatch(getIncomeTransactions())}}>GET INCOMES TRANSACTIONS</button>
       <button type="button" onClick={() => { dispatch(addIncomeTransaction(transaction)) }}>ADD INCOME TRANSACTION</button>
       
-      <IncomesAndExpensesList props={incomes}/>
+      <IncomesAndExpensesList props={incomes} transactionsType={'incomes'}/>
     </>
   )
 }
