@@ -68,6 +68,6 @@
 
 .authBtn.authBtnActive {
   color: white;
-  background-color: var(--hero-primary);
-  filter: drop-shadow(1px 3px 5px rgba(255, 107, 8, 0.35));
+  background-color: var(--accent-bright);
+  filter: drop-shadow(1px 3px 5px var(--box-shadow));
 }
