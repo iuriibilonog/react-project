@@ -14,6 +14,7 @@ const initialState = {
   sid: '',
   isLoggedIn: false,
   isCheckingUser: false,
+  socialAuth: false,
 };
 
 const authSlice = createSlice({
@@ -21,14 +22,16 @@ const authSlice = createSlice({
   initialState,
   extraReducers: {
     [register.fulfilled](state, action) {
-      state.user = action.payload;
+      state.user = action.payload.data;
       state.isLoggedIn = true;
+      state.socialAuth = action.payload.socialAuth;
     },
     [login.fulfilled](state, action) {
-      state.user = action.payload;
-      state.token = action.payload.accessToken;
+      state.user = action.payload.data;
+      state.token = action.payload.data.accessToken;
       state.isLoggedIn = true;
-      state.sid = action.payload.sid;
+      state.sid = action.payload.data.sid;
+      state.socialAuth = action.payload.socialAuth;
     },
 
     [logOut.fulfilled](state, _) {
@@ -44,7 +47,6 @@ const authSlice = createSlice({
     [checkCurrentUser.fulfilled](state, action) {
       state.isLoggedIn = true;
       state.isCheckingUser = false;
-      console.log(action.payload);
       state.user.sid = action?.payload?.newSid;
       state.sid = action?.payload?.newSid;
       state.token = action?.payload?.newAccessToken;
@@ -54,13 +56,6 @@ const authSlice = createSlice({
       state.isCheckingUser = false;
     },
 
-    [loginFromGoogle.fulfilled](state, action) {
-      // state.user = action?.payload;
-      // state.token = action?.payload?.accessToken;
-      // console.log(action.payload);
-      // state.isLoggedIn = true;
-      // state.sid = action?.payload?.sid;
-    },
     [getUser.fulfilled](state, action) {
       console.log(action.payload);
       state.user = action?.payload?.data;
