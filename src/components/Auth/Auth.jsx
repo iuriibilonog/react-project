@@ -1,13 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Parser from 'html-react-parser';
 import { register, login, loginFromGoogle, getUser } from '../../redux/auth/auth-operations';
 import { FacebookAuth } from './SocialAuth';
 import s from './Auth.module.css';
+import { useLocation } from 'react-router';
+import google from '../../img/google.svg'
 
 
 
-const Authorization = () => {
+const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
+  
+  const location = useLocation();
+  
+  const urlParams = new URLSearchParams(location.search);
+  const accessToken = urlParams.get('accessToken');
+  const refreshToken = urlParams.get('refreshToken');
+  const sid = urlParams.get('sid');
+  console.log(accessToken)
+  console.log(refreshToken)
+  console.log(sid)
+
+  useEffect(() => {
+    if (location?.search)
+      dispatch(getUser({accessToken, refreshToken, sid}))
+  }, [])
 
   const dispatch = useDispatch();
 
@@ -59,6 +76,7 @@ const Authorization = () => {
     if (!isLoginType) {
       dispatch(register({ email, password }))
       console.log('Сабмит формы Регистрация')
+      getTypeOfAuth(false)
       setEmail('');
       setPassword('');
       
@@ -67,16 +85,17 @@ const Authorization = () => {
     else if(isLoginType){
       dispatch(login({email, password }))
       console.log('Сабмит формы Логин')
+      getTypeOfAuth(false)
       setEmail('');
       setPassword('');
     }
   }
 
-  const handleAuthFromSocial = (authEmailFromSocial, authPasswordFromSocial, authImgFromSocial) => {
+  const handleAuthFromSocial = (authEmailFromSocial, authPasswordFromSocial, authImgFromSocial, authNameFromSocial) => {
   
     const img = authImgFromSocial;
     const email = authEmailFromSocial;
-    
+    const name = authNameFromSocial;
     const password = authPasswordFromSocial;
     console.log(img);
     console.log(email);
@@ -89,8 +108,9 @@ const Authorization = () => {
     } else if (isLoginType) {
       dispatch(login({ email, password }));
       
-      
     }
+    getDataFromSocial({ img, name })
+    getTypeOfAuth(true)
   }
 
 
@@ -103,33 +123,16 @@ const Authorization = () => {
       <div className={s.authWrapper}>
         <p className={s.authText}>Вы можете авторизоваться с помощью Google Account:</p>
         <div className={s.socialBtnsWrapper}>
-        <button className={s.googleBtn} type="button" onClick={() => dispatch(loginFromGoogle(handerGoogleAuth))}>
-          Google
-          </button>
-          {/* <a href="https://kapusta-backend.goit.global/auth/google" onClick={() =>dispatch(getUser())}>Google</a> */}
-        <FacebookAuth onSubmit={handleAuthFromSocial}/>
+          <a className={s.googleBtn} href="https://kapusta-backend.goit.global/auth/google">
+            <img className={s.googleIcon} src={google} alt="Google" />
+            Google</a>
+        {/* <FacebookAuth onSubmit={handleAuthFromSocial}/> */}
         </div>
           <p className={s.authText}>
           Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись:
         </p>
         <form className={s.authForm} onSubmit={handleOnSubmit}>
           <div className={s.inputsWrapper}>
-            {/* {!isLoginType && <>
-            <label htmlFor="authName" className={s.inputTitle}>
-              {' '}
-              Имя:
-            </label>
-            <input
-              className={s.authInput}
-              type="text"
-              name="name"
-              value={name}
-              id="authName"
-                placeholder="Имя"
-                
-              onChange={handleOnChange}
-            />
-            </>} */}
              
             <label htmlFor="authMail" className={s.inputTitle}>
               {' '}
