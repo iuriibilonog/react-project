@@ -4,16 +4,33 @@ import s from './HomePage.module.css';
 import imgTitle from '../../img/title.svg';
 import Authorization from '../../components/Auth/Auth';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import FormAddCategory from '../../components/FormAddCategory';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getIncomesCategories } from '../../redux/transactions-operations';
+import { getExpensesCategories } from '../../redux/transactions-operations';
 
 const HomePage = () => {
 
   const [socialImg, setSocialImg] = useState('');
   const [socialName, setSocialName] = useState('');
   const [isAuthFromSocial, setIsAuthFromSocial] = useState(false);
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('ok')
+    console.log('before-->', isLoggedIn);
+    if (isLoggedIn) {
+      dispatch(getIncomesCategories())
+      dispatch(getExpensesCategories())
+    }
+    
+    console.log('after-->', isLoggedIn);
+   
+   console.log('ok2')
+  }, [isLoggedIn])
 
   
   const getDataFromSocial = ({ img, name}) => {

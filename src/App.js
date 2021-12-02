@@ -8,10 +8,10 @@ import IncomesPage from './pages/IncomesPage';
 import ReportsPage from './pages/ReportsPage';
 import NavBar from './components/NavBar/NavBar';
 import SwitchTheme from './shared/SwitchTheme/SwitchTheme';
+import Chart from './components/Chart';
 import s from './App.module.css';
 
 import { useLocation } from 'react-router';
-
 
 function App() {
   const dispatch = useDispatch();
@@ -19,13 +19,11 @@ function App() {
   const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
-
     if (token !== '') {
       dispatch(checkCurrentUser());
     }
     return;
   }, []);
-
 
   const { pathname } = useLocation();
   let isSpend = '';
@@ -33,6 +31,7 @@ function App() {
 
   return (
     <div className="App">
+      <Chart />
       <SwitchTheme />
       <header className="App-header"></header>
       <HomePage />

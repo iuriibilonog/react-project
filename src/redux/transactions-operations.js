@@ -42,7 +42,7 @@ export const addExpenseTransaction = createAsyncThunk(
 export const getExpensesTransactions = createAsyncThunk('transactions/getExpenses', async () => {
   try {
     const { data } = await axios.get('/transaction/expense');
-    
+
     // we receive expenses and monthly stats - I use only incomes so far
     return data;
   } catch (error) {
@@ -56,6 +56,34 @@ export const deleteTransaction = createAsyncThunk(
     try {
       axios.delete(`/transaction/${transactionId}`);
       return transactionId;
+    } catch (error) {
+      alert(error.message);
+    }
+  },
+);
+
+export const getIncomesCategories = createAsyncThunk(
+  'transactions/getIncomesCategories',
+  async () => {
+    try {
+      const { data } = await axios.get('/transaction/income-categories');
+      // we receive incomes and monthly stats - I use only incomes so far
+
+      return data;
+    } catch (error) {
+      alert(error.message);
+    }
+  },
+);
+
+export const getExpensesCategories = createAsyncThunk(
+  'transactions/getExpensesCategories',
+  async () => {
+    try {
+      const { data } = await axios.get('/transaction/expense-categories');
+      // we receive incomes and monthly stats - I use only incomes so far
+
+      return data;
     } catch (error) {
       alert(error.message);
     }
