@@ -42,7 +42,7 @@ export const addExpenseTransaction = createAsyncThunk(
 export const getExpensesTransactions = createAsyncThunk('transactions/getExpenses', async () => {
   try {
     const { data } = await axios.get('/transaction/expense');
-    console.log(data.expenses);
+    
     // we receive expenses and monthly stats - I use only incomes so far
     return data;
   } catch (error) {

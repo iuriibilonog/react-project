@@ -18,7 +18,6 @@ const ExpensesPage = () => {
 
   let expenses = useSelector(getExpenses);
   // болванка, удалить в процессе
-
   let transaction = {
     date: '2020-12-31',
     description: 'Lorem Ipsum',

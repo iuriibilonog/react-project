@@ -4,10 +4,15 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
 import UnifiedModal from '../../shared/UnifiedModal';
-
+import { getBalance, getIsSystemInitialised } from '../../redux/selectors';
+import { getIncomes, getExpenses } from '../../redux/transactions-selectors';
 const Balance = () => {
-  const balance = useSelector(state => state.transactions.balance);
-  const isSystemStarted = useSelector(state => state.isSystemStarted);
+  const balance = useSelector(getBalance);
+  const isSystemStarted = useSelector(getIsSystemInitialised);
+
+  const expenses = useSelector(getExpenses).length;
+  const incomes = useSelector(getIncomes).length;
+
   const dispatch = useDispatch();
   const pushIsSystemStartedMarkerToState = marker => dispatch(actions.setIsSystemStarted(marker));
   const pushBalanceToState = newBalance => dispatch(actions.setBalance(newBalance));
@@ -39,7 +44,7 @@ const Balance = () => {
   };
 
   useEffect(() => {
-    if (isSystemStarted) {
+    if (isSystemStarted || expenses || incomes) {
       setBalanceState('set');
     } else if (balanceState === 'unset') {
       zeroReminding();

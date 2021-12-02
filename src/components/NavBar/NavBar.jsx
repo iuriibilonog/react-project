@@ -14,8 +14,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../redux/auth/auth-operations';
 
 
-const NavBar = () => {
+
+
+
+
+const NavBar = ({socialName, socialImg, isAuthFromSocial }) => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const socialAuth = useSelector(state => state.auth.socialAuth);
   const dispatch = useDispatch();
   return (
     <>
@@ -38,7 +43,7 @@ const NavBar = () => {
                     variant="dot"
                     sx={{ mr: 2 }}
                   >
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                    <Avatar alt="Remy Sharp" src={isAuthFromSocial && socialAuth ? socialImg: "/static/images/avatar/1.jpg"} />
                   </StyledBadge>
                 </Stack>
                 <Typography
@@ -51,7 +56,7 @@ const NavBar = () => {
                   }}
                   className={s.visibility}
                 >
-                  User Name
+                  {isAuthFromSocial && socialAuth ? socialName : 'UserName'}
                 </Typography>
                 <Divider
                   orientation="vertical"
