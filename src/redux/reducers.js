@@ -23,27 +23,25 @@ const balanceReducer = createReducer(0, {
 
 const expensesReducer = createReducer([], {
   [getExpensesTransactions.fulfilled]: (_, action) => action.payload.expenses,
-  [addExpenseTransaction.fulfilled]: (state, action) => [...state, action.payload.expenses],
+  [addExpenseTransaction.fulfilled]: (state, action) => [...state, action.payload.transaction],
   [deleteTransaction.fulfilled]: (state, action) =>
     [...state].filter(item => item._id !== action.payload),
 });
 
 const incomesReducer = createReducer([], {
   [getIncomeTransactions.fulfilled]: (_, action) => action.payload.incomes,
-  [addIncomeTransaction.fulfilled]: (state, action) => [...state, action.payload.incomes],
+  [addIncomeTransaction.fulfilled]: (state, action) => [...state, action.payload.transaction],
   [deleteTransaction.fulfilled]: (state, action) =>
     [...state].filter(item => item._id !== action.payload),
 });
 
 const getMonthReducer = createReducer([], {
   [getIncomeTransactions.fulfilled]: (_, action) => action.payload.monthsStats,
-
   [getExpensesTransactions.fulfilled]: (_, action) => action.payload.monthsStats,
 });
 
 const getNewBalanceReducer = createReducer([], {
   [addIncomeTransaction.fulfilled]: (_, action) => action.payload.newBalance,
-
   [addExpenseTransaction.fulfilled]: (_, action) => action.payload.newBalance,
 });
 
