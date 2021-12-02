@@ -5,7 +5,8 @@ import { register, login, loginFromGoogle, getUser } from '../../redux/auth/auth
 import { FacebookAuth } from './SocialAuth';
 import s from './Auth.module.css';
 import { useLocation } from 'react-router';
-import google from '../../img/google.svg'
+import google from '../../img/google.svg';
+
 
 
 
@@ -22,7 +23,9 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
   useEffect(() => {
     if (!location?.search) return
       
-     dispatch(getUser({ accessToken, refreshToken, sid })) 
+    dispatch(getUser({ accessToken, refreshToken, sid }))
+    
+    
     
   }, [])
 
