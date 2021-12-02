@@ -13,12 +13,11 @@ const ExpensesPage = () => {
   const dispatch = useDispatch();
   //  будет работать при рерауте
   // useEffect(() => {
-  //   dispatch(getExpensesTransactions())
-  // }, [dispatch])
+  //   dispatch(getExpensesTransactions());
+  // }, [dispatch]);
 
   let expenses = useSelector(getExpenses);
   // болванка, удалить в процессе
-
   let transaction = {
     date: '2020-12-31',
     description: 'Lorem Ipsum',
