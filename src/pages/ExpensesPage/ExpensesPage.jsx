@@ -13,8 +13,8 @@ const ExpensesPage = () => {
   const dispatch = useDispatch();
   //  будет работать при рерауте
   // useEffect(() => {
-  //   dispatch(getExpensesTransactions())
-  // }, [dispatch])
+  //   dispatch(getExpensesTransactions());
+  // }, [dispatch]);
 
   let expenses = useSelector(getExpenses);
   // болванка, удалить в процессе
