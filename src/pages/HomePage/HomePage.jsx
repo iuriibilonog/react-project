@@ -37,6 +37,7 @@ const HomePage = () => {
         <div className={s.mainSection}>
           <div className={s.bcgImage}></div>
           <div className={s.text}>
+          
             <img className={s.imgText} src={imgTitle} alt="Kapusta" />
             <h1 className={s.fontText}>SMART FINANSE</h1>
           </div>
