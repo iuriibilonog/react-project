@@ -7,9 +7,11 @@ import { getIncomeTransactions, addIncomeTransaction } from '../../redux/transac
 const IncomesPage = () => {
   const dispatch = useDispatch();
   //  будет работать при рерауте
+
   // useEffect(() => {
-  //   dispatch(getIncomeTransactions())
-  // }, [dispatch])
+  //   dispatch(getIncomeTransactions());
+  // }, [dispatch]);
+
 
   let incomes = useSelector(getIncomes);
   console.log('incomes', incomes);

@@ -20,7 +20,7 @@ import { format } from 'date-fns';
 import DatePicker from '@mui/lab/DatePicker';
 import expenceJson from '../../data/expenselcon.json';
 import incomesJson from '../../data/incomeIcon.json';
-import NavigationBetweenCategoryes from './NavigationBetweenCategoryes';
+import NavigationBetweenCategoryes from './NavigationBetweenCategoryes/NavigationBetweenCategoryes';
 import { useLocation, useRouteMatch } from 'react-router';
 import { addExpenseTransaction, addIncomeTransaction } from '../../redux/transactions-operations';
 import { useDispatch } from 'react-redux';
@@ -36,7 +36,6 @@ const month = new Date().toLocaleString('ru', {
 
 const FormAddCategory = () => {
   const [value, setValue] = React.useState(new Date());
-  const ariaLabel = { 'aria-label': 'description' };
   const [category, setCategory] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [amount, setAmount] = React.useState('');
@@ -45,9 +44,7 @@ const FormAddCategory = () => {
     setCategory(event.target.value);
   };
   const newDate = () => {
-    console.log(value);
     const newDateValue = format(value, 'yyyy-MM-dd');
-    console.log(newDateValue);
     return newDateValue;
   };
   const date = newDate();
@@ -55,7 +52,11 @@ const FormAddCategory = () => {
   const dispatch = useDispatch();
 
   const handleChange = event => {
-    setAmount(event.target.value);
+    event.target.value === '' || event.target.value === '-'
+      ? setAmount('')
+      : parseInt(event.target.value) <= 1000000 &&
+        parseInt(event.target.value) !== 0 &&
+        setAmount(parseInt(event.target.value));
   };
 
   let isSpend = '';
@@ -93,12 +94,17 @@ const FormAddCategory = () => {
   isSpend ? (data = expenceJson) : (data = incomesJson);
   isSpend ? (categoryName = 'Категория товара') : (categoryName = 'Категория дохода');
   isSpend ? (textInputName = 'Описание товара') : (textInputName = 'Описание дохода');
-  // const [date, setDate] = useState(new Date());
+  const reset = () => {
+    setValue(new Date());
+    setCategory('');
+    setDescription('');
+    setAmount('');
+  };
   const classes = useStyles();
   return (
     <>
       <NavigationBetweenCategoryes />
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} className={s.formContainer}>
         <div className={s.containerForm}>
           {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
@@ -146,6 +152,8 @@ const FormAddCategory = () => {
             className={css.textInpt}
             id="outlined"
             fullWidth
+            required
+            value={description}
             //   id={s.inputStyle}
             label={textInputName}
             name="textInput" //пусте поле не допускати
@@ -167,6 +175,7 @@ const FormAddCategory = () => {
                 onChange={handleInputChange}
                 name="select"
                 size="small"
+                required
               >
                 {data.map(item => {
                   return (
@@ -179,18 +188,21 @@ const FormAddCategory = () => {
             </FormControl>
           </Box>
           <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-            <OutlinedInput
+            <TextField
               size="small"
               id="outlined-adornment-weight"
               value={amount}
               onChange={handleChange}
-              placeholder="0.00"
-              type="number" //0 не можна
+              placeholder="0"
+              required
+              // min="0"
+              // type="number" //0 не можна
               endAdornment={
                 <InputAdornment position="end">
                   <img src={calculator} />
                 </InputAdornment>
               }
+              // inputProps={{ pattern: '^[1-9][0-9]{0,6}$' }}
             />
           </FormControl>
         </div>
@@ -201,7 +213,7 @@ const FormAddCategory = () => {
         <button className={s.authBtn + ' ' + s.authBtnActive} type="submit">
           ввод
         </button>
-        <button className={s.authBtn} type="button">
+        <button className={s.authBtn} type="button" onClick={reset}>
           Очистить
         </button>
         {/* </Stack> */}
