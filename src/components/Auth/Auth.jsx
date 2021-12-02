@@ -1,13 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Parser from 'html-react-parser';
 import { register, login, loginFromGoogle, getUser } from '../../redux/auth/auth-operations';
 import { FacebookAuth } from './SocialAuth';
 import s from './Auth.module.css';
+import { useLocation } from 'react-router';
+import google from '../../img/google.svg'
 
 
 
-const Authorization = () => {
+const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
+  
+  const location = useLocation();
+  
+  const urlParams = new URLSearchParams(location.search);
+  const accessToken = urlParams.get('accessToken');
+  const refreshToken = urlParams.get('refreshToken');
+  const sid = urlParams.get('sid');
+  
+
+  useEffect(() => {
+    if (!location?.search) return
+      
+     dispatch(getUser({ accessToken, refreshToken, sid })) 
+    
+  }, [])
 
   const dispatch = useDispatch();
 
@@ -15,16 +32,13 @@ const Authorization = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginType, setIsLoginType] = useState(true);
-  const [markUp, setMarkUp] = useState('');
+  const [socialAuth, setSocialAuth] = useState(false)
+
   
   
 
 
-  const handerGoogleAuth = (data) => {
-    setMarkUp(data)
   
-    
-  }
 
 
   const handleOnChange = e => {
@@ -57,40 +71,47 @@ const Authorization = () => {
 
     e.preventDefault();
     if (!isLoginType) {
-      dispatch(register({ email, password }))
+      setSocialAuth(false)
+      dispatch(register({ email, password, socialAuth }))
       console.log('Сабмит формы Регистрация')
+      getTypeOfAuth(false)
       setEmail('');
       setPassword('');
       
       
     }
-    else if(isLoginType){
-      dispatch(login({email, password }))
+    else if (isLoginType) {
+      setSocialAuth(false)
+      dispatch(login({email, password, socialAuth }))
       console.log('Сабмит формы Логин')
+      getTypeOfAuth(false)
       setEmail('');
       setPassword('');
     }
   }
 
-  const handleAuthFromSocial = (authEmailFromSocial, authPasswordFromSocial, authImgFromSocial) => {
+  const handleAuthFromSocial = (authEmailFromSocial, authPasswordFromSocial, authImgFromSocial, authNameFromSocial) => {
   
     const img = authImgFromSocial;
     const email = authEmailFromSocial;
-    
+    const name = authNameFromSocial;
     const password = authPasswordFromSocial;
     console.log(img);
     console.log(email);
     console.log(password);
     
     if (!isLoginType) {
-      dispatch(register({ email, password }));
+      setSocialAuth(true)
+      dispatch(register({ email, password, socialAuth }));
       
       
     } else if (isLoginType) {
-      dispatch(login({ email, password }));
-      
+      setSocialAuth(true)
+      dispatch(login({ email, password, socialAuth }));
       
     }
+    getDataFromSocial({ img, name })
+    getTypeOfAuth(true)
   }
 
 
@@ -103,33 +124,16 @@ const Authorization = () => {
       <div className={s.authWrapper}>
         <p className={s.authText}>Вы можете авторизоваться с помощью Google Account:</p>
         <div className={s.socialBtnsWrapper}>
-        <button className={s.googleBtn} type="button" onClick={() => dispatch(loginFromGoogle(handerGoogleAuth))}>
-          Google
-          </button>
-          {/* <a href="https://kapusta-backend.goit.global/auth/google" onClick={() =>dispatch(getUser())}>Google</a> */}
-        <FacebookAuth onSubmit={handleAuthFromSocial}/>
+          <a className={s.googleBtn} href="https://kapusta-backend.goit.global/auth/google">
+            <img className={s.googleIcon} src={google} alt="Google" />
+            Google</a>
+        {/* <FacebookAuth onSubmit={handleAuthFromSocial}/> */}
         </div>
           <p className={s.authText}>
           Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись:
         </p>
         <form className={s.authForm} onSubmit={handleOnSubmit}>
           <div className={s.inputsWrapper}>
-            {/* {!isLoginType && <>
-            <label htmlFor="authName" className={s.inputTitle}>
-              {' '}
-              Имя:
-            </label>
-            <input
-              className={s.authInput}
-              type="text"
-              name="name"
-              value={name}
-              id="authName"
-                placeholder="Имя"
-                
-              onChange={handleOnChange}
-            />
-            </>} */}
              
             <label htmlFor="authMail" className={s.inputTitle}>
               {' '}
@@ -141,9 +145,11 @@ const Authorization = () => {
               name="email"
               value={email}
               id="authMail"
+              minLength="10"
+              maxLength="63"
               placeholder="your@email.com"
               title="Введите данные в формате: somemail@email.com / somemail@email.com.vn"
-              pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+              pattern="^([a-zA-Z0-9_\-\.]{2,})@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
               required
               onChange={handleOnChange}
             />
@@ -158,6 +164,8 @@ const Authorization = () => {
               value={password}
               id="authPassword"
               minLength='2'
+              // pattern="/^[a-z0-9]+/"
+              title='Пароль должен состоять из цифр и латинских букв'
               required
               onChange={handleOnChange}
             />
@@ -176,7 +184,7 @@ const Authorization = () => {
         </form>
         
       </div>
-      <div className="content">{Parser(markUp)}</div>
+      
     </div>
   );
 };

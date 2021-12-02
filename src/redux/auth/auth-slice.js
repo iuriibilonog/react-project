@@ -14,6 +14,7 @@ const initialState = {
   sid: '',
   isLoggedIn: false,
   isCheckingUser: false,
+  socialAuth: false,
 };
 
 const authSlice = createSlice({
@@ -21,19 +22,21 @@ const authSlice = createSlice({
   initialState,
   extraReducers: {
     [register.fulfilled](state, action) {
-      state.user = action.payload;
+      state.user = action.payload.data;
       state.isLoggedIn = true;
+      state.socialAuth = action.payload.socialAuth;
     },
     [login.fulfilled](state, action) {
-      state.user = action.payload;
-      state.token = action.payload.accessToken;
+      state.user = action.payload.data;
+      state.token = action.payload.data.accessToken;
       state.isLoggedIn = true;
-      state.sid = action.payload.sid;
+      state.sid = action.payload.data.sid;
+      state.socialAuth = action.payload.socialAuth;
     },
 
     [logOut.fulfilled](state, _) {
       state.user = { name: '', email: '', password: '' };
-      state.token = null;
+      state.token = '';
       state.isLoggedIn = false;
     },
 
@@ -44,24 +47,22 @@ const authSlice = createSlice({
     [checkCurrentUser.fulfilled](state, action) {
       state.isLoggedIn = true;
       state.isCheckingUser = false;
-      console.log(action.payload);
+      state.user.sid = action?.payload?.newSid;
       state.sid = action?.payload?.newSid;
       state.token = action?.payload?.newAccessToken;
+      state.user.token = action?.payload?.newAccessToken;
     },
     [checkCurrentUser.rejected](state) {
       state.isCheckingUser = false;
     },
 
-    [loginFromGoogle.fulfilled](state, action) {
-      // state.user = action?.payload;
-      // state.token = action?.payload?.accessToken;
-      // state.isLoggedIn = true;
-      // state.sid = action?.payload?.sid;
-    },
     [getUser.fulfilled](state, action) {
-      state.user = action?.payload;
+      console.log(action.payload);
+      state.user = action?.payload?.data;
       state.isLoggedIn = true;
       state.sid = action?.payload?.sid;
+      state.user.refreshToken = action?.payload?.refreshToken;
+      state.token = action.payload.accessToken;
     },
   },
 });
