@@ -12,6 +12,13 @@ import s from './App.module.css';
 
 import { useLocation } from 'react-router';
 
+// new
+import { Switch, Redirect } from 'react-router';
+import { Suspense } from 'react';
+
+import PublicRoute from './components/Routes/PublicRoute';
+import PrivateRoute from './components/Routes/PrivateRoute';
+// new
 
 function App() {
   const dispatch = useDispatch();
@@ -19,13 +26,11 @@ function App() {
   const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
-
     if (token !== '') {
       dispatch(checkCurrentUser());
     }
     return;
   }, []);
-
 
   const { pathname } = useLocation();
   let isSpend = '';
@@ -35,10 +40,20 @@ function App() {
     <div className="App">
       <SwitchTheme />
       <header className="App-header"></header>
-      <HomePage />
-      {isSpend && <ExpensesPage />}
-      {!isSpend && <IncomesPage />}
-      <ReportsPage />
+      <Suspense fallback={<h1>LOADING...</h1>}>
+        <Switch>
+          <PublicRoute path="/authorization" restricted exact>
+            <HomePage/>
+          </PublicRoute>
+
+          <PrivateRoute path="/home">
+            <HomePage />
+            {/* {isSpend && <ExpensesPage />}
+          {!isSpend && <IncomesPage />} */}
+            <ReportsPage />
+          </PrivateRoute>
+        </Switch>
+      </Suspense>
     </div>
   );
 }
