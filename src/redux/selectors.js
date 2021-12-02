@@ -2,3 +2,5 @@
 
 export const getBalance = state => state.transactions.balance;
 export const getIsSystemInitialised = state => state.isSystemStarted;
+
+export const getMonthStats = state => state.transactions.transactions.getMonth;
