@@ -70,7 +70,7 @@
     top: 425px;
     left: 35px;
     z-index: 101;
-    background-color: var(--hero-primary);
+    background-color: var(--hero-bottom-back);
     -webkit-mask-image: url('../../img/kapusta-mob.svg');
     mask-image: url('../../img/kapusta-mob.svg');
   }
@@ -118,7 +118,7 @@
     height: 142px;
     top: 56%;
     left: 13%;
-    background-color: var(--accent-bright);
+    background-color: var(--hero-bottom-back);
     -webkit-mask-image: url('../../img/bcgImageBottom.svg');
     mask-image: url('../../img/bcgImageBottom.svg');
   }

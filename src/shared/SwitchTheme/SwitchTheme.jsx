@@ -25,7 +25,7 @@ function greenTheme() {
   document.body.style.setProperty('--dropdown-text', '#c7dcc8');
   //document.body.style.setProperty('--box-shadow', 'rgba(90, 105, 88, 0.4)');
 
-  document.body.style.setProperty('--hero-primary', '#499034');
+  document.body.style.setProperty('--hero-bottom-back', '#499034');
   document.body.style.setProperty('--hero-back', 'rgba(29, 255, 48, 0.3)');
   document.body.style.setProperty('--hero-shadow', 'rgba(26, 117, 37, 0.25)');
 }
@@ -48,7 +48,7 @@ function orangeTheme() {
   document.body.style.setProperty('--dropdown-text', '#c7ccdc');
   //document.body.style.setProperty('--box-shadow', 'rgba(90, 105, 88, 0.4)');
 
-  document.body.style.setProperty('--hero-primary', '#ff751d');
+  document.body.style.setProperty('--hero-bottom-back', '#ff751d');
   document.body.style.setProperty('--hero-back', 'rgba(255, 116, 29, 0.3)');
   document.body.style.setProperty('--hero-shadow', 'rgba(107, 81, 24, 0.25)');
 }
