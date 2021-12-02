@@ -9,6 +9,7 @@ import ReportsPage from './pages/ReportsPage';
 import NavBar from './components/NavBar/NavBar';
 import SwitchTheme from './shared/SwitchTheme/SwitchTheme';
 import s from './App.module.css';
+import { useLocation } from 'react-router';
 
 function App() {
   const dispatch = useDispatch();
@@ -17,14 +18,16 @@ function App() {
   useEffect(() => {
     dispatch(checkCurrentUser());
   }, [dispatch]);
-
+  const { pathname } = useLocation();
+  let isSpend = '';
+  pathname === '/spend' ? (isSpend = true) : (isSpend = false);
   return (
     <div className="App">
       <SwitchTheme />
       <header className="App-header"></header>
       <HomePage />
-      <ExpensesPage />
-      <IncomesPage />
+      {isSpend && <ExpensesPage />}
+      {!isSpend && <IncomesPage />}
       <ReportsPage />
     </div>
   );

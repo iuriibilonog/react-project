@@ -148,7 +148,7 @@ const FormAddCategory = () => {
             fullWidth
             //   id={s.inputStyle}
             label={textInputName}
-            name="textInput"
+            name="textInput" //пусте поле не допускати
             // variant="standard"
             onChange={handleTextChange}
             size="small"
@@ -185,7 +185,7 @@ const FormAddCategory = () => {
               value={amount}
               onChange={handleChange}
               placeholder="0.00"
-              type="number"
+              type="number" //0 не можна
               endAdornment={
                 <InputAdornment position="end">
                   <img src={calculator} />
