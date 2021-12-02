@@ -33,7 +33,7 @@ const authSlice = createSlice({
 
     [logOut.fulfilled](state, _) {
       state.user = { name: '', email: '', password: '' };
-      state.token = null;
+      state.token = '';
       state.isLoggedIn = false;
     },
 
@@ -45,8 +45,10 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.isCheckingUser = false;
       console.log(action.payload);
+      state.user.sid = action?.payload?.newSid;
       state.sid = action?.payload?.newSid;
       state.token = action?.payload?.newAccessToken;
+      state.user.token = action?.payload?.newAccessToken;
     },
     [checkCurrentUser.rejected](state) {
       state.isCheckingUser = false;
@@ -55,13 +57,17 @@ const authSlice = createSlice({
     [loginFromGoogle.fulfilled](state, action) {
       // state.user = action?.payload;
       // state.token = action?.payload?.accessToken;
+      // console.log(action.payload);
       // state.isLoggedIn = true;
       // state.sid = action?.payload?.sid;
     },
     [getUser.fulfilled](state, action) {
-      state.user = action?.payload;
+      console.log(action.payload);
+      state.user = action?.payload?.data;
       state.isLoggedIn = true;
       state.sid = action?.payload?.sid;
+      state.user.refreshToken = action?.payload?.refreshToken;
+      state.token = action.payload.accessToken;
     },
   },
 });

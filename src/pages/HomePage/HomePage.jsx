@@ -3,12 +3,35 @@ import NavBar from '../../components/NavBar';
 import s from './HomePage.module.css';
 import imgTitle from '../../img/title.svg';
 import Authorization from '../../components/Auth/Auth';
+
+import { useState } from 'react';
+
 import FormAddCategory from '../../components/FormAddCategory';
 
+
 const HomePage = () => {
+
+  const [socialImg, setSocialImg] = useState('');
+  const [socialName, setSocialName] = useState('');
+  const [isAuthFromSocial, setIsAuthFromSocial] = useState(false);
+
+  
+  const getDataFromSocial = ({ img, name}) => {
+    setSocialImg(img);
+    setSocialName(name);
+  }
+
+  const getTypeOfAuth = (bool) => {
+    setIsAuthFromSocial(bool)
+  }
+
+  
+
+
   return (
     <>
-      <NavBar />
+
+      <NavBar socialName={socialName} socialImg={socialImg} isAuthFromSocial={isAuthFromSocial}/>
 
       <div className={s.container}>
         <div className={s.mainSection}>
@@ -19,9 +42,13 @@ const HomePage = () => {
           </div>
         </div>
         <div className={s.secondarySection}>
-          <Authorization />
-          <div className={s.bcgImageBottom}></div>
-        </div>
+
+          <Authorization getDataFromSocial={getDataFromSocial} getTypeOfAuth={ getTypeOfAuth}/>
+            <div className={s.bcgImageBottom}>
+            </div>
+          </div>
+
+         
       </div>
     </>
   );
