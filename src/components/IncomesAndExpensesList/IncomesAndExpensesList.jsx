@@ -4,48 +4,60 @@ import IncomesAndExpensesListItem from './IncomesAndExpensesListItem';
 import CustomScroll from 'react-custom-scroll';
 import './customScroll.css';
 
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getIncomes } from '../../redux/transactions-selectors';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import UnifiedModal from '../../shared/UnifiedModal';
 
-import { getIncomeTransactions, addIncomeTransaction } from '../../redux/transactions-operations';
-import FormAddCategory from '../FormAddCategory';
+import { deleteTransaction } from '../../redux/transactions-operations';
 
-const IncomesAndExpensesList = ({ props }) => {
-  console.log('props' + props);
+const IncomesAndExpensesList = ({ props, transactionsType, operationSign = '' }) => {
+  const [isModalShown, setIsModalShown] = useState(false);
+  const [itemId, setItemId] = useState(null);
 
   const dispatch = useDispatch();
 
-  let incomes = useSelector(getIncomes);
-  console.log(incomes);
+  const modalHandler = id => {
+    setIsModalShown(true);
+    setItemId(id);
+  };
 
-  // будет работать при рерауте
-  // useEffect(() => {
-  //   dispatch(getIncomeTransactions())
-  // }, [dispatch])
+  const responseHandling = response => {
+    setIsModalShown(false);
 
-  // let transaction =  { date: "2020-12-31", description: 'Lorem Ipsum', category: "З/П", amount: 120.5 }
+    if (response) {
+      dispatch(deleteTransaction(itemId));
+    }
+    setItemId(null);
+  };
 
   return (
     <>
-      {/* <button type="button" onClick={()=>{ dispatch(getIncomeTransactions())}}>GET INCOMES TRANSACTIONS</button>
-      <button type="button" onClick={() => { dispatch(addIncomeTransaction(transaction)) }}>ADD INCOME TRANSACTION</button> */}
-      <FormAddCategory />
-      <div className={s.list}>
-        <header className={s.header}>
-          <div className={s.groupingDiv}>
-            <span className={s.date}>Дата</span>
-            <span className={s.description}>Описание</span>
-          </div>
-          <span className={s.category}>Категория</span>
-          <span className={s.amount}>Сумма</span>
-        </header>
-        <CustomScroll className="rcs-inner-handle">
-          <ul className={s.transactionsList}>
-            {props.length && props.map(item => <IncomesAndExpensesListItem itemProps={item} />)}
-          </ul>
-        </CustomScroll>
-      </div>
+      {props.length > 0 && (
+        <div className={s.list}>
+          <header className={s.header}>
+            <div className={s.groupingDiv}>
+              <span className={s.date}>Дата</span>
+              <span className={s.description}>Описание</span>
+            </div>
+            <span className={s.category}>Категория</span>
+            <span className={s.amount}>Сумма</span>
+          </header>
+          <CustomScroll className="rcs-inner-handle">
+            <ul className={s.transactionsList}>
+              {props.map(item => (
+                <IncomesAndExpensesListItem
+                  key={item.id}
+                  itemProps={item}
+                  modalHandler={modalHandler}
+                  transactionsType={transactionsType}
+                  operationSign={operationSign}
+                />
+              ))}
+            </ul>
+          </CustomScroll>
+          {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
+        </div>
+      )}
     </>
   );
 };

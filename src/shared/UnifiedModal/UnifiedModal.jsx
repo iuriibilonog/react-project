@@ -6,7 +6,7 @@ const UnifiedModal = ({ title = 'Вы уверены?', response }) => {
   };
 
   const closeBtnHandler = e => {
-    console.log('closed');
+    response(false);
   };
 
   return (

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { register, login } from '../../redux/auth/auth-operations';
+import Parser from 'html-react-parser';
+import { register, login, loginFromGoogle, getUser } from '../../redux/auth/auth-operations';
+import { FacebookAuth } from './SocialAuth';
 import s from './Auth.module.css';
 
 
@@ -13,6 +15,16 @@ const Authorization = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginType, setIsLoginType] = useState(true);
+  const [markUp, setMarkUp] = useState('');
+  
+  
+
+
+  const handerGoogleAuth = (data) => {
+    setMarkUp(data)
+  
+    
+  }
 
 
   const handleOnChange = e => {
@@ -47,30 +59,62 @@ const Authorization = () => {
     if (!isLoginType) {
       dispatch(register({ email, password }))
       console.log('Сабмит формы Регистрация')
+      setEmail('');
+      setPassword('');
       
       
     }
     else if(isLoginType){
       dispatch(login({email, password }))
       console.log('Сабмит формы Логин')
+      setEmail('');
+      setPassword('');
+    }
+  }
+
+  const handleAuthFromSocial = (authEmailFromSocial, authPasswordFromSocial, authImgFromSocial) => {
+  
+    const img = authImgFromSocial;
+    const email = authEmailFromSocial;
+    
+    const password = authPasswordFromSocial;
+    console.log(img);
+    console.log(email);
+    console.log(password);
+    
+    if (!isLoginType) {
+      dispatch(register({ email, password }));
+      
+      
+    } else if (isLoginType) {
+      dispatch(login({ email, password }));
+      
       
     }
   }
+
+
+
+
 
   return (
 
     <div className={s.auth}>
       <div className={s.authWrapper}>
         <p className={s.authText}>Вы можете авторизоваться с помощью Google Account:</p>
-        <button className={s.googleBtn} type="button">
+        <div className={s.socialBtnsWrapper}>
+        <button className={s.googleBtn} type="button" onClick={() => dispatch(loginFromGoogle(handerGoogleAuth))}>
           Google
-        </button>
-        <p className={s.authText}>
+          </button>
+          {/* <a href="https://kapusta-backend.goit.global/auth/google" onClick={() =>dispatch(getUser())}>Google</a> */}
+        <FacebookAuth onSubmit={handleAuthFromSocial}/>
+        </div>
+          <p className={s.authText}>
           Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись:
         </p>
         <form className={s.authForm} onSubmit={handleOnSubmit}>
           <div className={s.inputsWrapper}>
-            {!isLoginType && <>
+            {/* {!isLoginType && <>
             <label htmlFor="authName" className={s.inputTitle}>
               {' '}
               Имя:
@@ -85,7 +129,7 @@ const Authorization = () => {
                 
               onChange={handleOnChange}
             />
-            </>}
+            </>} */}
              
             <label htmlFor="authMail" className={s.inputTitle}>
               {' '}
@@ -93,11 +137,13 @@ const Authorization = () => {
             </label>
             <input
               className={s.authInput}
-              type="text"
+              type="email"
               name="email"
               value={email}
               id="authMail"
               placeholder="your@email.com"
+              title="Введите данные в формате: somemail@email.com / somemail@email.com.vn"
+              pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
               required
               onChange={handleOnChange}
             />
@@ -111,6 +157,7 @@ const Authorization = () => {
               name="password"
               value={password}
               id="authPassword"
+              minLength='2'
               required
               onChange={handleOnChange}
             />
@@ -129,6 +176,7 @@ const Authorization = () => {
         </form>
         
       </div>
+      <div className="content">{Parser(markUp)}</div>
     </div>
   );
 };

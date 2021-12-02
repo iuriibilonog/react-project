@@ -29,4 +29,13 @@ a {
   text-decoration: none;
 }
 
+.expenses {
+  font-weight: bold;
+  color: var(--font-expenses);
+}
+
+.incomes {
+  font-weight: bold;
+  color: var(--font-incomes);
+}
 

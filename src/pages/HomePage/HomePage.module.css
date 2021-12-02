@@ -12,7 +12,7 @@
   overflow: hidden;
   height: 286px;
   border-radius: 0 0 0 120px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px var(--hero-shadow);
 }
 
 .secondarySection {
@@ -24,6 +24,7 @@
   display: flex;
   flex-direction: column;
   padding-top: 86px;
+  fill: var(--accent-bright);
 }
 .imgText {
   width: 183px;
@@ -39,7 +40,7 @@
   line-height: 1.15;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--font-secondary);
+  color: var(--accent-bright);
 }
 
 @media screen and (min-width: 320px) {
@@ -52,7 +53,10 @@
   .bcgImage {
     position: absolute;
     z-index: 2;
-    background-image: url('../../img/kapusta-mob.svg');
+    background-color: var(--hero-back);
+    -webkit-mask-image: url('../../img/kapusta-mob.svg');
+    mask-image: url('../../img/kapusta-mob.svg');
+
     width: 83px;
     height: 89px;
     top: 15%;
@@ -66,12 +70,13 @@
     top: 425px;
     left: 35px;
     z-index: 101;
-    background-image: url('../../img/kapusta-mob.svg');
+    background-color: var(--hero-primary);
+    -webkit-mask-image: url('../../img/kapusta-mob.svg');
+    mask-image: url('../../img/kapusta-mob.svg');
   }
 }
 
 @media screen and (min-width: 768px) {
-  
   .logoImg {
     margin-left: 26px;
   }
@@ -91,7 +96,9 @@
     height: 232px;
     top: 28px;
     left: 10px;
-    background-image: url('../../img/bcgImage.svg');
+    background-color: var(--hero-back);
+    -webkit-mask-image: url('../../img/bcgImage.svg');
+    mask-image: url('../../img/bcgImage.svg');
   }
   .text {
     z-index: 3;
@@ -111,7 +118,9 @@
     height: 142px;
     top: 56%;
     left: 13%;
-    background-image: url('../../img/bcgImageBottom.svg');
+    background-color: var(--accent-bright);
+    -webkit-mask-image: url('../../img/bcgImageBottom.svg');
+    mask-image: url('../../img/bcgImageBottom.svg');
   }
 }
 @media screen and (min-width: 1280px) {
@@ -125,7 +134,9 @@
     height: 232px;
     top: 28px;
     left: 10px;
-    background-image: url('../../img/bcgImage.svg');
+    background-color: var(--hero-back);
+    -webkit-mask-image: url('../../img/bcgImage.svg');
+    mask-image: url('../../img/bcgImage.svg');
   }
   .imgText {
     width: 377px;

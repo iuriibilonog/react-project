@@ -59,14 +59,20 @@
   border: 2px var(--accent-bright) solid;
 }
 
+.confirmBtn:active {
+  border-color: var(--accent-bright);
+  background-color: var(--accent-bright);
+  color: var(--bg-primary);
+}
+
 .confirmBtn_disabled {
   composes: confirmBtn;
 }
 
 .confirmBtn_disabled:hover,
 .confirmBtn_disabled:focus {
-  color: #c0c0c0;
-  border: 2px white solid;
+  color: var(--font-secondary);
+  border: 2px var(--bg-primary) solid;
   cursor: initial;
 }
 
@@ -74,7 +80,7 @@
   .balance {
     margin-right: 15px;
     border-radius: 16px;
-    border: 2px white solid;
+    border: 2px var(--bg-primary) solid;
   }
   .title {
     margin-right: 21px;
@@ -99,10 +105,14 @@
   padding: 30px;
   position: absolute;
   top: 100%;
-  border: 1px orange solid;
+  border: 1px var(--accent-bright);
   color: white;
   font-size: 14px;
-  background: linear-gradient(117.84deg, #1d346a 2.84%, #031634 67.28%);
+  background: linear-gradient(
+    117.84deg,
+    var(--modal-color-first) 2.84%,
+    var(--modal-color-second) 67.28%
+  );
   border-radius: 30px;
 }
 
