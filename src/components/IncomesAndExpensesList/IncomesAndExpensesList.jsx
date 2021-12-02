@@ -11,8 +11,6 @@ import UnifiedModal from '../../shared/UnifiedModal';
 import { deleteTransaction } from '../../redux/transactions-operations';
 
 const IncomesAndExpensesList = ({ props, transactionsType, operationSign = '' }) => {
-  console.log(transactionsType);
-  console.log('props', props);
   const [isModalShown, setIsModalShown] = useState(false);
   const [itemId, setItemId] = useState(null);
 
@@ -34,7 +32,7 @@ const IncomesAndExpensesList = ({ props, transactionsType, operationSign = '' })
 
   return (
     <>
-      {/* {props.length > 0 && (
+      {props.length > 0 && (
         <div className={s.list}>
           <header className={s.header}>
             <div className={s.groupingDiv}>
@@ -60,7 +58,6 @@ const IncomesAndExpensesList = ({ props, transactionsType, operationSign = '' })
           {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
         </div>
       )}
-      */}
     </>
   );
 };
