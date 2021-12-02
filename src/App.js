@@ -10,22 +10,34 @@ import NavBar from './components/NavBar/NavBar';
 import SwitchTheme from './shared/SwitchTheme/SwitchTheme';
 import s from './App.module.css';
 
+import { useLocation } from 'react-router';
+
 
 function App() {
   const dispatch = useDispatch();
   const sid = useSelector(state => state.auth.sid);
+  const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
-    dispatch(checkCurrentUser());
-  }, [dispatch]);
+
+    if (token !== '') {
+      dispatch(checkCurrentUser());
+    }
+    return;
+  }, []);
+
+
+  const { pathname } = useLocation();
+  let isSpend = '';
+  pathname === '/spend' ? (isSpend = true) : (isSpend = false);
 
   return (
     <div className="App">
       <SwitchTheme />
       <header className="App-header"></header>
       <HomePage />
-      <ExpensesPage />
-      <IncomesPage />
+      {isSpend && <ExpensesPage />}
+      {!isSpend && <IncomesPage />}
       <ReportsPage />
     </div>
   );

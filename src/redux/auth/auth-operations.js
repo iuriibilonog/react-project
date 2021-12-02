@@ -72,7 +72,7 @@ export const loginFromGoogle = createAsyncThunk(
   async (handerGoogleAuth, ThunkAPI) => {
     try {
       const { data } = await LoginUserFromGoogle();
-
+      console.log(data);
       handerGoogleAuth(data);
     } catch (error) {
       alert(error.message);
@@ -80,16 +80,16 @@ export const loginFromGoogle = createAsyncThunk(
   },
 );
 
-export const getUser = createAsyncThunk('auth/getUser', async (_, ThunkAPI) => {
-  try {
-    const state = ThunkAPI.getState();
-
-    const { data } = await GetUserAfterRefresh();
-    const getUserToken = state.auth.token;
-
-    token.set(getUserToken);
-    return data;
-  } catch (error) {
-    alert(error.message);
-  }
-});
+export const getUser = createAsyncThunk(
+  'auth/getUser',
+  async ({ accessToken, refreshToken, sid }) => {
+    try {
+      token.set(accessToken);
+      const { data } = await GetUserAfterRefresh();
+      console.log(data);
+      return { data, refreshToken, sid, accessToken };
+    } catch (error) {
+      alert(error.message);
+    }
+  },
+);

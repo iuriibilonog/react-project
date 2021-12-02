@@ -8,13 +8,14 @@ export const FacebookAuth = ({onSubmit}) => {
   
   const responseFacebook = (response) => {
   console.log(response)
-    const { email, id} = response;
+    const { email, id, name} = response;
     const { url } = response.picture.data;
   console.log(id);
   console.log(email);
   console.log(url);
+  console.log(name);
   
-  onSubmit(email, id, url)
+  onSubmit(email, id, url, name)
 }
 
   return (

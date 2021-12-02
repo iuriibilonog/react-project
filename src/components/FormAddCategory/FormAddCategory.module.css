@@ -1,0 +1,42 @@
+.containerForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#inputStyle {
+  width: 289px;
+  padding-left: 10px;
+  padding-top: 10px;
+  height: 40px;
+  border: 2px solid blue;
+  border-top-left-radius: 16px;
+  outline: none;
+  background: chocolate;
+}
+.authBtn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+  width: 125px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 16px;
+  border: none;
+  background: #f5f6fb;
+  font-family: Roboto;
+  filter: drop-shadow(1px 3px 5px rgba(82, 85, 95, 0.15));
+  cursor: pointer;
+}
+
+.authBtn:nth-child(1) {
+  margin-right: 15px;
+}
+
+.authBtn.authBtnActive {
+  color: white;
+  background: #ff751d;
+  filter: drop-shadow(1px 3px 5px rgba(255, 107, 8, 0.35));
+}
