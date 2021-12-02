@@ -17,13 +17,13 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
   const accessToken = urlParams.get('accessToken');
   const refreshToken = urlParams.get('refreshToken');
   const sid = urlParams.get('sid');
-  console.log(accessToken)
-  console.log(refreshToken)
-  console.log(sid)
+  
 
   useEffect(() => {
-    if (location?.search)
-      dispatch(getUser({accessToken, refreshToken, sid}))
+    if (!location?.search) return
+      
+     dispatch(getUser({ accessToken, refreshToken, sid })) 
+    
   }, [])
 
   const dispatch = useDispatch();
@@ -32,16 +32,13 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginType, setIsLoginType] = useState(true);
-  const [markUp, setMarkUp] = useState('');
+  const [socialAuth, setSocialAuth] = useState(false)
+
   
   
 
 
-  const handerGoogleAuth = (data) => {
-    setMarkUp(data)
   
-    
-  }
 
 
   const handleOnChange = e => {
@@ -74,7 +71,8 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
 
     e.preventDefault();
     if (!isLoginType) {
-      dispatch(register({ email, password }))
+      setSocialAuth(false)
+      dispatch(register({ email, password, socialAuth }))
       console.log('Сабмит формы Регистрация')
       getTypeOfAuth(false)
       setEmail('');
@@ -82,8 +80,9 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
       
       
     }
-    else if(isLoginType){
-      dispatch(login({email, password }))
+    else if (isLoginType) {
+      setSocialAuth(false)
+      dispatch(login({email, password, socialAuth }))
       console.log('Сабмит формы Логин')
       getTypeOfAuth(false)
       setEmail('');
@@ -102,11 +101,13 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
     console.log(password);
     
     if (!isLoginType) {
-      dispatch(register({ email, password }));
+      setSocialAuth(true)
+      dispatch(register({ email, password, socialAuth }));
       
       
     } else if (isLoginType) {
-      dispatch(login({ email, password }));
+      setSocialAuth(true)
+      dispatch(login({ email, password, socialAuth }));
       
     }
     getDataFromSocial({ img, name })
@@ -144,9 +145,11 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
               name="email"
               value={email}
               id="authMail"
+              minLength="10"
+              maxLength="63"
               placeholder="your@email.com"
               title="Введите данные в формате: somemail@email.com / somemail@email.com.vn"
-              pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+              pattern="^([a-zA-Z0-9_\-\.]{2,})@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
               required
               onChange={handleOnChange}
             />
@@ -161,6 +164,8 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
               value={password}
               id="authPassword"
               minLength='2'
+              // pattern="/^[a-z0-9]+/"
+              title='Пароль должен состоять из цифр и латинских букв'
               required
               onChange={handleOnChange}
             />
@@ -179,7 +184,7 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
         </form>
         
       </div>
-      <div className="content">{Parser(markUp)}</div>
+      
     </div>
   );
 };

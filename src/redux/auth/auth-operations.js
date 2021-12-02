@@ -10,20 +10,23 @@ import {
   GetUserAfterRefresh,
 } from '../../services/api';
 
-export const register = createAsyncThunk('auth/register', async credentials => {
-  try {
-    const { data } = await AddUser(credentials);
-    return data;
-  } catch (error) {
-    alert(error.message);
-  }
-});
+export const register = createAsyncThunk(
+  'auth/register',
+  async ({ email, password, socialAuth }) => {
+    try {
+      const { data } = await AddUser({ email, password });
+      return { data, socialAuth };
+    } catch (error) {
+      alert(error.message);
+    }
+  },
+);
 
-export const login = createAsyncThunk('auth/login', async credentials => {
+export const login = createAsyncThunk('auth/login', async ({ email, password, socialAuth }) => {
   try {
-    const { data } = await LoginUser(credentials);
+    const { data } = await LoginUser({ email, password });
     token.set(data.accessToken);
-    return data;
+    return { data, socialAuth };
   } catch (error) {
     alert(error.message);
   }
@@ -38,7 +41,7 @@ export const logOut = createAsyncThunk('auth/logout', async () => {
 
     token.unset();
   } catch (error) {
-    alert(error.message);
+    console.log(error.message);
   }
 });
 
