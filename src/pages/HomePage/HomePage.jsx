@@ -11,9 +11,9 @@ import FormAddCategory from '../../components/FormAddCategory';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIncomesCategories } from '../../redux/transactions-operations';
 import { getExpensesCategories } from '../../redux/transactions-operations';
-
+import { getIncomeTransactions} from '../../redux/transactions-operations';
 import { isUserLoggedIn } from '../../redux/selectors'
-import { useSelector } from 'react-redux';
+
 
 
 
@@ -26,7 +26,7 @@ const HomePage = () => {
   const [socialImg, setSocialImg] = useState('');
   const [socialName, setSocialName] = useState('');
   const [isAuthFromSocial, setIsAuthFromSocial] = useState(false);
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,6 +35,7 @@ const HomePage = () => {
     if (isLoggedIn) {
       dispatch(getIncomesCategories())
       dispatch(getExpensesCategories())
+       dispatch(getIncomeTransactions());
     }
     
     console.log('after-->', isLoggedIn);
