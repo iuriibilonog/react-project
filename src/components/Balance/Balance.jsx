@@ -6,6 +6,7 @@ import * as actions from '../../redux/actions';
 import UnifiedModal from '../../shared/UnifiedModal';
 import { getBalance, getIsSystemInitialised } from '../../redux/selectors';
 import { getIncomes, getExpenses } from '../../redux/transactions-selectors';
+import GoToReport from '../GoToReport';
 const Balance = () => {
   const balance = useSelector(getBalance);
   const isSystemStarted = useSelector(getIsSystemInitialised);
@@ -145,6 +146,7 @@ const Balance = () => {
           {balanceState === 'set' ? confirmBtnMarkup(false) : confirmBtnMarkup(true)}
         </div>
       </form>
+      <GoToReport/>
       {isReminderShown === true && (
         <div className={s.reminding}>
           <p>Привет! Для начала работы внеси текущий баланс своего счета!</p>
@@ -153,6 +155,7 @@ const Balance = () => {
       )}
       {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
     </div>
+    
   );
 };
 

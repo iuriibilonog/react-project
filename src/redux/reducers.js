@@ -33,7 +33,7 @@ const expensesReducer = createReducer([], {
 });
 
 const incomesReducer = createReducer([], {
-  [getIncomeTransactions.fulfilled]: (_, action) => action.payload.incomes,
+  [getIncomeTransactions.fulfilled]: (_, action) => action?.payload?.incomes,
   [addIncomeTransaction.fulfilled]: (state, action) => [...state, action.payload.transaction],
   [deleteTransaction.fulfilled]: (state, action) =>
     [...state].filter(item => item._id !== action.payload),
