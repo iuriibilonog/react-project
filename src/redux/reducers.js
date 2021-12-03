@@ -16,7 +16,11 @@ import {
   addExpenseTransaction,
   getExpensesCategories,
   getIncomesCategories,
+
+  updateBalance,
+
   getDataMonth,
+
 } from './transactions-operations';
 // new
 import { combineReducers } from 'redux';
@@ -24,6 +28,7 @@ import { createReducer } from '@reduxjs/toolkit';
 
 const balanceReducer = createReducer(0, {
   [setBalance]: (_, action) => action.payload,
+  [updateBalance.fulfilled]: (_, action) => action.payload,
 });
 
 const expensesReducer = createReducer([], {

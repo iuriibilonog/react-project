@@ -102,6 +102,15 @@ export const getExpensesCategories = createAsyncThunk(
   },
 );
 
+
+export const updateBalance = createAsyncThunk('transactions/updateBalance', async balance => {
+  try {
+    const { data } = await axios.patch('/user/balance', balance);
+    console.log('!!!!!!!!!!!!!', data);
+    return data.newBalance;
+  } catch (error) {
+    alert(error.message);
+
 export const getDataMonth = createAsyncThunk('transactions/getDataMonth', async credentials => {
   console.log(credentials);
   try {
@@ -110,5 +119,6 @@ export const getDataMonth = createAsyncThunk('transactions/getDataMonth', async 
     return data;
   } catch (error) {
     console.log(error.message);
+
   }
 });

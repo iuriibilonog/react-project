@@ -4,11 +4,15 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
 import UnifiedModal from '../../shared/UnifiedModal';
-import { getBalance, getIsSystemInitialised } from '../../redux/selectors';
+import { getBalance, getUserBalance, getIsSystemInitialised } from '../../redux/selectors';
 import { getIncomes, getExpenses } from '../../redux/transactions-selectors';
 import GoToReport from '../GoToReport';
+import { updateBalance } from '../../redux/transactions-operations';
 const Balance = () => {
-  const balance = useSelector(getBalance);
+  //const strangeConst = 15.777777699999433;
+  const initbalance = useSelector(getBalance);
+  const userBalanceFromAuth = useSelector(getUserBalance);
+  //const userBalance = useSelector(state => state.auth.user.userData.balance);
   const isSystemStarted = useSelector(getIsSystemInitialised);
 
   const expenses = useSelector(getExpenses).length;
@@ -18,7 +22,8 @@ const Balance = () => {
   const pushIsSystemStartedMarkerToState = marker => dispatch(actions.setIsSystemStarted(marker));
   const pushBalanceToState = newBalance => dispatch(actions.setBalance(newBalance));
 
-  const [initBalance, setInitBalance] = useState(balance + ' UAH');
+  const [initBalance, setInitBalance] = useState(Math.round(initbalance) + ' UAH'); //was balance in useState
+
   const [balanceState, setBalanceState] = useState('unset');
   const [timerId, setTimerId] = useState(null);
   const [isReminderShown, setIsReminderShown] = useState(false);
@@ -46,6 +51,8 @@ const Balance = () => {
 
   useEffect(() => {
     if (isSystemStarted || expenses || incomes) {
+      pushBalanceToState(userBalanceFromAuth); //  - to state only
+      setInitBalance(userBalanceFromAuth);
       setBalanceState('set');
     } else if (balanceState === 'unset') {
       zeroReminding();
@@ -59,6 +66,11 @@ const Balance = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [balanceState]);
+
+  useEffect(() => {
+    setInitBalance(userBalanceFromAuth);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userBalanceFromAuth]);
 
   const responseHandling = response => {
     setIsModalShown(false);
@@ -77,7 +89,7 @@ const Balance = () => {
       sendDataToState(Number(balanceDigit));
     } else {
       console.log('Wrong balance!');
-      setInitBalance('00.00 UAH');
+      setInitBalance('0 UAH');
     }
   };
 
@@ -89,7 +101,12 @@ const Balance = () => {
   const sendDataToState = balanceDigit => {
     /* Send marker and balance to STATE */
     pushIsSystemStartedMarkerToState(true);
-    pushBalanceToState(balanceDigit);
+    //pushBalanceToState(userBalanceFromAuth); //  - to state only
+    dispatch(
+      updateBalance({
+        newBalance: balanceDigit,
+      }),
+    );
   };
 
   const submitBalanceHandler = event => {
@@ -98,7 +115,7 @@ const Balance = () => {
   };
 
   const clickBalanceHandler = event => {
-    if (event.target.value === '00.00 UAH' || event.target.value === '0 UAH') {
+    if (event.target.value === '0 UAH') {
       setInitBalance('');
     } else if (event.target.value.slice(event.target.value.length - 3) === 'UAH')
       setInitBalance(event.target.value.slice(0, event.target.value.length - 4));
@@ -106,7 +123,7 @@ const Balance = () => {
 
   const looseFocusBalanceHandler = event => {
     if (event.target.value === '') {
-      setInitBalance('00.00 UAH');
+      setInitBalance('0 UAH');
     } else setInitBalance(prev => prev + ' UAH');
   };
 
@@ -146,7 +163,7 @@ const Balance = () => {
           {balanceState === 'set' ? confirmBtnMarkup(false) : confirmBtnMarkup(true)}
         </div>
       </form>
-      <GoToReport/>
+      <GoToReport />
       {isReminderShown === true && (
         <div className={s.reminding}>
           <p>Привет! Для начала работы внеси текущий баланс своего счета!</p>
@@ -155,7 +172,6 @@ const Balance = () => {
       )}
       {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
     </div>
-    
   );
 };
 

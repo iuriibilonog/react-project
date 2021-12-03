@@ -30,8 +30,6 @@ const ExpensesPage = () => {
   return (
     <>
       <NavigationBetweenCategories />
-      <Balance />
-
       <FormAddCategory />
       <button
         type="button"

@@ -7,6 +7,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  flex-wrap: nowrap;
   background-color: var(--bg-secondary);
 }
 .title {
@@ -99,6 +100,7 @@
 }
 
 .reminding {
+  z-index: 200;
   display: block;
   max-width: 282px;
   max-height: 152px;
