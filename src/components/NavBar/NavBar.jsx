@@ -23,14 +23,14 @@ const NavBar = ({socialName, socialImg, isAuthFromSocial }) => {
   const socialAuth = useSelector(state => state.auth.socialAuth);
   const loginName = useSelector(state => state.auth.user?.userData?.email)
 
-  console.log(loginName.length)
+  // console.log(loginName.length)
   const dispatch = useDispatch();
 
-  const loginFromEmail = () => {
-    for (let i = 0; i <= loginName.length; i++) {
+  // const loginFromEmail = () => {
+  //   for (let i = 0; i <= loginName.length; i++) {
       
-    }
-  }
+  //   }
+  // }
   return (
     <>
       <AppBar position="static" sx={{ background: 'white', boxShadow: 'none' }}>
