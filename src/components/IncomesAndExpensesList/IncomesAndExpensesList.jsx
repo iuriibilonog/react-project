@@ -1,20 +1,17 @@
 import s from './IncomesAndExpensesList.module.css';
-import IncomesAndExpensesListItem from './IncomesAndExpensesListItem';
-
-import CustomScroll from 'react-custom-scroll';
 import './customScroll.css';
-
+import CustomScroll from 'react-custom-scroll';
+import IncomesAndExpensesListItem from './IncomesAndExpensesListItem';
+import UnifiedModal from '../../shared/UnifiedModal';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import UnifiedModal from '../../shared/UnifiedModal';
-
 import { deleteTransaction } from '../../redux/transactions-operations';
-import FormAddCategory from '../FormAddCategory';
-const IncomesAndExpensesList = ({ props, transactionsType, operationSign = '' }) => {
+
+const IncomesAndExpensesList = ({ transactions, transactionsType, operationSign }) => {
+  const dispatch = useDispatch();
+
   const [isModalShown, setIsModalShown] = useState(false);
   const [itemId, setItemId] = useState(null);
-
-  const dispatch = useDispatch();
 
   const modalHandler = id => {
     setIsModalShown(true);
@@ -29,10 +26,10 @@ const IncomesAndExpensesList = ({ props, transactionsType, operationSign = '' })
     }
     setItemId(null);
   };
-  console.log(operationSign);
+  
   return (
     <>
-      {props.length > 0 && (
+      {transactions.length > 0 && (
         <div className={s.list}>
           <header className={s.header}>
             <div className={s.groupingDiv}>
@@ -44,15 +41,16 @@ const IncomesAndExpensesList = ({ props, transactionsType, operationSign = '' })
           </header>
           <CustomScroll className="rcs-inner-handle">
             <ul className={s.transactionsList}>
-              {props.map(item => (
-                <IncomesAndExpensesListItem
-                  key={item.id}
-                  itemProps={item}
-                  modalHandler={modalHandler}
-                  transactionsType={transactionsType}
-                  operationSign={operationSign}
-                />
-              ))}
+              {transactions &&
+                transactions.map(item => (
+                  <IncomesAndExpensesListItem
+                    key={item._id}
+                    itemProps={item}
+                    modalHandler={modalHandler}
+                    transactionsType={transactionsType}
+                    operationSign={operationSign}
+                  />
+                ))}
             </ul>
           </CustomScroll>
           {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
