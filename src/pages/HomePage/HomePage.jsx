@@ -26,6 +26,7 @@ import { isUserLoggedIn } from '../../redux/selectors'
 const HomePage = () => {
   const isLoggedIn = useSelector(isUserLoggedIn);
   console.log(isLoggedIn);
+  const token = useSelector(state => state.auth.token)
 
   const [socialImg, setSocialImg] = useState('');
   const [socialName, setSocialName] = useState('');
