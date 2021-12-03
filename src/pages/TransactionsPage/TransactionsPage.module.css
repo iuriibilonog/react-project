@@ -1,0 +1,15 @@
+.navBtn {
+    color: var(--font-primary);
+    background-color: var(--bg-tabs);
+    font-weight:700;
+    font-size:12px;
+    line-height: 1.16;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    background-color: transparent;
+    border:none;
+    padding: 20px;
+}
+.navBtn:active{
+    color:red
+}

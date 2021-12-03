@@ -55,7 +55,7 @@ const Report = () => {
 
     });
     console.log('запустил')
-    dispatch(setIncomesByCategories(incomesByCategory));
+    dispatch(setIncomesByCategories({name: category, 'Сумма': totalIncomes}));
     return totalIncomes;
   };
 

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { token } from '../services/api';
 
 export const addIncomeTransaction = createAsyncThunk(
   'transactions/addIncome',
@@ -15,16 +16,23 @@ export const addIncomeTransaction = createAsyncThunk(
   },
 );
 
-export const getIncomeTransactions = createAsyncThunk('transactions/getIncomes', async () => {
-  try {
-    const { data } = await axios.get('/transaction/income');
-    // we receive incomes and monthly stats - I use only incomes so far
+export const getIncomeTransactions = createAsyncThunk(
+  'transactions/getIncomes',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    token.set(state.auth.token);
+    try {
+      const { data } = await axios.get('/transaction/income');
+      // we receive incomes and monthly stats - I use only incomes so far
 
-    return data;
-  } catch (error) {
-    console.log(error.message);
-  }
-});
+
+      return data;
+    } catch (error) {
+      alert(error.message);
+    }
+  },
+);
+
 
 export const addExpenseTransaction = createAsyncThunk(
   'transactions/addExpense',
@@ -64,7 +72,9 @@ export const deleteTransaction = createAsyncThunk(
 
 export const getIncomesCategories = createAsyncThunk(
   'transactions/getIncomesCategories',
-  async () => {
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    token.set(state.auth.token);
     try {
       const { data } = await axios.get('/transaction/income-categories');
       // we receive incomes and monthly stats - I use only incomes so far
@@ -78,7 +88,9 @@ export const getIncomesCategories = createAsyncThunk(
 
 export const getExpensesCategories = createAsyncThunk(
   'transactions/getExpensesCategories',
-  async () => {
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    token.set(state.auth.token);
     try {
       const { data } = await axios.get('/transaction/expense-categories');
       // we receive incomes and monthly stats - I use only incomes so far
