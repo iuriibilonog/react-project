@@ -20,7 +20,7 @@ import { format } from 'date-fns';
 import DatePicker from '@mui/lab/DatePicker';
 import expenceJson from '../../data/expenselcon.json';
 import incomesJson from '../../data/incomeIcon.json';
-import NavigationBetweenCategories from './NavigationBetweenCategoryes/NavigationBetweenCategoryes';
+// import NavigationBetweenCategories from './NavigationBetweenCategoryes/NavigationBetweenCategoryes';
 import { useLocation, useRouteMatch } from 'react-router';
 import { addExpenseTransaction, addIncomeTransaction } from '../../redux/transactions-operations';
 import { useDispatch } from 'react-redux';
@@ -34,7 +34,11 @@ const month = new Date().toLocaleString('ru', {
 // const date = new Date().getDate();
 // console.log(`${date}-${month2}-${year}`);
 
-const FormAddCategory = () => {
+const FormAddCategory = ({isExpenses}) => {
+
+  
+  
+  
   const [value, setValue] = React.useState(new Date());
   const [category, setCategory] = React.useState('');
   const [description, setDescription] = React.useState('');
@@ -59,9 +63,9 @@ const FormAddCategory = () => {
         setAmount(parseInt(event.target.value));
   };
 
-  let isSpend = '';
-  const { pathname } = useLocation();
-  pathname === '/spend' ? (isSpend = true) : (isSpend = false);
+  // let isSpend = '';
+  // const { pathname } = useLocation();
+  // pathname === '/spend' ? (isSpend = true) : (isSpend = false);
   console.log(
     'Date ' + date,
     'description ' + description,
@@ -71,7 +75,7 @@ const FormAddCategory = () => {
   const handleFormSubmit = e => {
     e.preventDefault();
     newDate();
-    isSpend
+    isExpenses==="expenses"
       ? dispatch(addExpenseTransaction({ date, description, category, amount }))
       : dispatch(addIncomeTransaction({ date, description, category, amount }));
   };
@@ -91,15 +95,22 @@ const FormAddCategory = () => {
   let data = '';
   let categoryName = '';
   let textInputName = '';
-  isSpend ? (data = expenceJson) : (data = incomesJson);
-  isSpend ? (categoryName = 'Категория товара') : (categoryName = 'Категория дохода');
-  isSpend ? (textInputName = 'Описание товара') : (textInputName = 'Описание дохода');
+
+
+  data = isExpenses === "expenses" ? expenceJson: incomesJson;
+  categoryName = isExpenses === "expenses"? 'Категория товара' : 'Категория дохода';
+  textInputName = isExpenses === "expenses" ? 'Описание товара' :  'Описание дохода';
+  
+  
+  console.log(isExpenses, categoryName)
+
   const reset = () => {
     setValue(new Date());
     setCategory('');
     setDescription('');
     setAmount('');
   };
+
   const classes = useStyles();
   return (
     <>

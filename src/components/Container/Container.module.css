@@ -12,14 +12,12 @@
     padding-left: 50px;
     padding-right: 50px;
     width: 90%;
-    height: 1240px;
   }
 }
 
 @media screen and (min-width: 1280px) {
   .container {
     width: 1260px;
-    height: 850px;
     padding-left: 100px;
     padding-right: 100px;
   }

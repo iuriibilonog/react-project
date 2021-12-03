@@ -1,17 +1,26 @@
-@media screen and (max-width: 768px) {
-  .summarySection {
-    display: none;
+ .summarySection {
+   display: none;
+ }
+   @media screen and (min-width: 768px) {
+      .summarySection {
+        display: block
+ 
   }
 }
 @media screen and (min-width: 768px) {
   .summarySection {
     width: 230px;
-    /* height: 278px; */
+    height: fit-content;
     background-color: #f5f6fb;
-
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    
+  }
+}
+@media screen and (min-width: 1280px) {
+  .summarySection {
+    margin-left: auto;
   }
 }
 

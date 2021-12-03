@@ -9,7 +9,7 @@ const GoHome = () => {
     <>
       {/* {width > 768 ? ( */}
         <button className={s.btn}>
-          <NavLink exact to="/income">
+          <NavLink exact to="/">
             <svg className={s.svgBtn} width="18" height="12">
               <use href={sprite + '#icon-toHome'}></use>
             </svg>
@@ -20,7 +20,7 @@ const GoHome = () => {
         </button>
       {/* ) : (
         <button>
-          <NavLink exact to="/income">
+          <NavLink exact to="/">
             <svg width="18" height="12">
               <use href={sprite + '#icon-toHome'}></use>
             </svg>
