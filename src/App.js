@@ -38,11 +38,14 @@ function App() {
 
   return (
     <div className="App">
+
       {/*       <Chart />
       <SwitchTheme />
  */}{' '}
       <header className="App-header"></header>
+
       <NavBar />
+    {/* <IncomesPage/> */}
       <Suspense fallback={<h1>LOADING...</h1>} />
       <Switch>
         <PublicRoute exact path="/authorization" restricted>
@@ -50,6 +53,7 @@ function App() {
         </PublicRoute>
         <PrivateRoute exact path="/">
           <TransactionsPage />
+      <ReportsPage/>
         </PrivateRoute>
         <PrivateRoute exact path="/reports">
           <ReportsPage />

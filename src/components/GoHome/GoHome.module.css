@@ -2,12 +2,12 @@
 
 
 .btn {
-  width: 174px;
-  height: 24px;
+  
 
   font-weight: 400;
   font-size: 12px;
   line-height: 1.17;
+  background-color: var(--bg-secondary);
   color: rgba(82, 85, 95, 0.7);
   border: none;
   background-color: transparent;
@@ -17,14 +17,32 @@
   color: var(--accent-bright);
 
 }
-.svgBtn {
-  margin-right: 15px;
-}
 
 .text {
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 1.17;
-  color: rgba(82, 85, 95, 0.7);
-  border: none;
+  display: none;
 }
+@media screen and (mix-width: 768px) {
+  .text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.17;
+    color: rgba(82, 85, 95, 0.7);
+    border: none;
+  }
+  .btn {
+    width: 174px;
+    height: 24px;
+  
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.17;
+    background-color: var(--bg-secondary);
+    color: rgba(82, 85, 95, 0.7);
+    border: none;
+  }
+  .svgBtn {
+    margin-right: 15px;
+  }
+}
+
+
