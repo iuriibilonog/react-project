@@ -13,7 +13,6 @@ import s from './App.module.css';
 
 import { useLocation } from 'react-router';
 
-
 // new
 import { Switch, Redirect } from 'react-router';
 import { Suspense } from 'react';
@@ -21,7 +20,6 @@ import { Suspense } from 'react';
 import PublicRoute from './components/Routes/PublicRoute';
 import PrivateRoute from './components/Routes/PrivateRoute';
 // new
-
 
 function App() {
   const dispatch = useDispatch();
@@ -58,9 +56,9 @@ function App() {
           <PrivateRoute exact path="/income" redirectTo="/">
             <IncomesPage />
           </PrivateRoute>
-          {/* <PrivateRoute>
-            <ReportsPage />
-          </PrivateRoute> */}
+          <PrivateRoute>
+            <ReportsPage path="/report" />
+          </PrivateRoute>
         </Switch>
       </Suspense>
     </div>

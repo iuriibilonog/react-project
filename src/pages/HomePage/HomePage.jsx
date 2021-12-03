@@ -8,8 +8,8 @@ import { useEffect, useState } from 'react';
 
 import FormAddCategory from '../../components/FormAddCategory';
 
-import { isUserLoggedIn } from '../../redux/selectors';
-import { useSelector } from 'react-redux';
+
+
 import IncomesPage from '../IncomesPage';
 import NavigationBetweenCategories from '../../components/FormAddCategory/NavigationBetweenCategoryes/NavigationBetweenCategoryes';
 
