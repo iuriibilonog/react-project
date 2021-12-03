@@ -20,6 +20,8 @@ import { Suspense } from 'react';
 import PublicRoute from './components/Routes/PublicRoute';
 import PrivateRoute from './components/Routes/PrivateRoute';
 // new
+import TransactionsPage from './pages/TransactionsPage';
+import { Home } from '@mui/icons-material';
 
 function App() {
   const dispatch = useDispatch();
@@ -44,12 +46,28 @@ function App() {
       <header className="App-header"></header>
       {/* {isSpend && <ExpensesPage />}
       {!isSpend && <IncomesPage />} */}
+
+      {/* <HomePage />
+      <TransactionsPage /> */}
+
       <NavBar />
-      <Suspense fallback={<h1>LOADING...</h1>}>
+      <Suspense fallback={<h1>LOADING...</h1>} />
+      <Switch>
+        <PublicRoute exact path="/authorization" restricted>
+          <HomePage />
+        </PublicRoute>
+        <PrivateRoute exact path="/">
+          <HomePage />
+          <TransactionsPage />
+        </PrivateRoute>
+      </Switch>
+
+      {/* <Suspense fallback={<h1>LOADING...</h1>}>
         <Switch>
           <PublicRoute exact path="/" redirectTo="/spend">
             <HomePage />
           </PublicRoute>
+          <TransactionsPage/>
           <PrivateRoute exact path="/spend" redirectTo="/">
             <ExpensesPage />
           </PrivateRoute>
@@ -60,7 +78,7 @@ function App() {
             <ReportsPage path="/report" />
           </PrivateRoute>
         </Switch>
-      </Suspense>
+      </Suspense> */}
     </div>
   );
 }

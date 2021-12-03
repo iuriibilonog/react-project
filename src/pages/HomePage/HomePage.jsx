@@ -63,7 +63,7 @@ const HomePage = () => {
             <h1 className={s.fontText}>SMART FINANCE</h1>
           </div>
         </div>
-        {isLoggedIn && <NavigationBetweenCategories />}
+        {/* {isLoggedIn && <NavigationBetweenCategories />} */}
         <div className={s.secondarySection}>
           {!isLoggedIn && (
             <Authorization getDataFromSocial={getDataFromSocial} getTypeOfAuth={getTypeOfAuth} />
