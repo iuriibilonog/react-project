@@ -7,7 +7,7 @@ const GoHome = () => {
 
   return (
     <>
-      {width > 768 ? (
+      {/* {width > 768 ? ( */}
         <button className={s.btn}>
           <NavLink exact to="/income">
             <svg className={s.svgBtn} width="18" height="12">
@@ -18,7 +18,7 @@ const GoHome = () => {
             Вернуться на главную
           </NavLink>
         </button>
-      ) : (
+      {/* ) : (
         <button>
           <NavLink exact to="/income">
             <svg width="18" height="12">
@@ -26,7 +26,7 @@ const GoHome = () => {
             </svg>
           </NavLink>
         </button>
-      )}
+      )} */}
     </>
   );
 };

@@ -41,16 +41,16 @@ function App() {
 
   return (
     <div className="App">
-      <Chart />
-      <SwitchTheme />
+      {/* <Chart />
+      <SwitchTheme /> */}
       <header className="App-header"></header>
       {/* {isSpend && <ExpensesPage />}
       {!isSpend && <IncomesPage />} */}
 
       {/* <HomePage />
       <TransactionsPage /> */}
-
       <NavBar />
+    {/* <IncomesPage/> */}
       <Suspense fallback={<h1>LOADING...</h1>} />
       <Switch>
         <PublicRoute exact path="/authorization" restricted>
@@ -59,6 +59,7 @@ function App() {
         <PrivateRoute exact path="/">
           <HomePage />
           <TransactionsPage />
+      <ReportsPage/>
         </PrivateRoute>
       </Switch>
 
