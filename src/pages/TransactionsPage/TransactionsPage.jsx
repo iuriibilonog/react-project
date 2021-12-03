@@ -52,7 +52,7 @@ const TransactionsPage = () => {
           >
             РАСХОД
           </button>
-//         </div>
+{/* //         </div>
 //         <div className={s.incomesContainer}>
 //           <Balance />
 //           <FormAddCategory isExpenses={isExpenses ? 'expenses' : 'incomes'} />;
@@ -63,7 +63,7 @@ const TransactionsPage = () => {
 //               operationSign={isExpenses ? '-' : ''}
 //             />
 //             <Summary />
-//           </div>
+//           </div> */}
 
           </div>
         <div className={s.elementsWrapper}>

@@ -6,7 +6,7 @@ import Container from '../Container';
 import sprite from '../../img/icon.svg';
 import s from './Report.module.css';
 import { setIncomesByCategories } from '../../redux/actions';
-
+import Chart from '../Chart';
 import ReportAmount from './ReportAmount';
 import { useDispatch, useSelector } from 'react-redux';
 import { getExpenses, getIncomes } from '../../redux/transactions-selectors';
@@ -143,6 +143,7 @@ const Report = () => {
           )}
         </div>
       </div>
+      <Chart chartTypeRender={reportTypeRender}/>
     </Container>
   );
 };

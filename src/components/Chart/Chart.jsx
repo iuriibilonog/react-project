@@ -54,17 +54,22 @@ const data = [
   }
 ];
 
-const Chart = () => {
-  const ourData = useSelector(state => state.transactions.transactions.incomesByCategory);
-  console.log(ourData)
+const Chart = ({chartTypeRender}) => {
+  const incomesData = useSelector(state => state.transactions.transactions.incomesByCategory);
+  const expencesData = useSelector(state => state.transactions.transactions.expensesByCategory);
+  let chartData;
+
+  
+  chartTypeRender === 'incomes' ? chartData = incomesData : chartData = expencesData;
   
 
-
   return (
+    <> 
+      <p>{chartTypeRender}</p>
    <BarChart
-      width={500}
-      height={300}
-      data={ourData}
+      width={800}
+      height={500}
+      data={chartData}
       margin={{
         top: 5,
         right: 30,
@@ -79,7 +84,8 @@ const Chart = () => {
       <Legend />
       <Bar dataKey="Сумма" fill="#8884d8" />
       {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
-    </BarChart>
+      </BarChart>
+      </>
   );
 }
 
