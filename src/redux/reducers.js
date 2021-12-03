@@ -16,6 +16,7 @@ import {
   addExpenseTransaction,
   getExpensesCategories,
   getIncomesCategories,
+  getDataMonth,
 } from './transactions-operations';
 // new
 import { combineReducers } from 'redux';
@@ -30,6 +31,7 @@ const expensesReducer = createReducer([], {
   [addExpenseTransaction.fulfilled]: (state, action) => [...state, action.payload.transaction],
   [deleteTransaction.fulfilled]: (state, action) =>
     [...state].filter(item => item._id !== action.payload),
+  // [getDataMonth.fulfilled]: (_, action) => action?.payload?.expenses,
 });
 
 const incomesReducer = createReducer([], {
@@ -37,6 +39,7 @@ const incomesReducer = createReducer([], {
   [addIncomeTransaction.fulfilled]: (state, action) => [...state, action.payload.transaction],
   [deleteTransaction.fulfilled]: (state, action) =>
     [...state].filter(item => item._id !== action.payload),
+  // [getDataMonth.fulfilled]: (_, action) => action?.payload?.incomes,
 });
 
 const getMonthReducer = createReducer([], {
@@ -65,6 +68,10 @@ const setExpensesByCategory = createReducer([], {
   [setExpensesByCategories]: (state, action) => [...state, action.payload],
 });
 
+const getDataMonthReducer = createReducer([], {
+  [getDataMonth.fulfilled]: (_, action) => action.payload,
+});
+
 const transactionsReducer = combineReducers({
   incomes: incomesReducer,
   expenses: expensesReducer,
@@ -74,6 +81,7 @@ const transactionsReducer = combineReducers({
   expenseCategories: getExpenseCategories,
   expensesByCategory: setExpensesByCategory,
   incomesByCategory: setIncomesByCategory,
+  dataMonth: getDataMonthReducer,
 });
 
 export const isSystemStartedReducer = createReducer(false, {
