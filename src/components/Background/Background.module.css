@@ -14,11 +14,8 @@
 
 @media screen and (min-width: 768px) {
   .backgroundImage {
-    background-color: var(--bg-secondary);
     background-repeat: no-repeat;
-    /* background-image: url('../../img/bcgImageBottom.svg');
-     -webkit-mask-image: url('../../img/kapusta-mob.svg');
-    mask-image: url('../../img/kapusta-mob.svg'); */
+    background-image: url('../../img/bcgImageBottom.svg');
     background-position: right 10% bottom;
   }
   .backgroundContainer {
@@ -27,11 +24,8 @@
 }
 @media screen and (min-width: 1280px) {
   .backgroundImage {
-    background-color: var(--bg-secondary);
     background-size: contain;
-    /* background-image: url('../../img/bcgImage.svg');
-     -webkit-mask-image: url('../../img/bcgImage.svg');
-    mask-image: url('../../img/bcgImage.svg'); */
+    background-image: url('../../img/bcgImage.svg');
     background-position: right bottom;
   }
 }

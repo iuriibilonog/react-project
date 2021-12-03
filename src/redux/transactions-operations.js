@@ -38,7 +38,7 @@ export const addExpenseTransaction = createAsyncThunk(
     try {
       const { data } = await axios.post('/transaction/expense', transaction);
       // returns newBalance and new transaction
-      console.log("Its balance" , data)
+      console.log('Its balance', data);
       return data;
     } catch (error) {
       console.log(error.message);
@@ -51,6 +51,7 @@ export const getExpensesTransactions = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     token.set(state.auth.token);
+    console.log('token', state.auth.token);
     try {
       const { data } = await axios.get('/transaction/expense');
       // we receive expenses and monthly stats - I use only incomes so far
@@ -65,8 +66,9 @@ export const deleteTransaction = createAsyncThunk(
   'transactions/deleteTransaction',
   async transactionId => {
     try {
-      axios.delete(`/transaction/${transactionId}`);
-      return transactionId;
+      const { data } = await axios.delete(`/transaction/${transactionId}`);
+      console.log({ data, transactionId });
+      return { data, transactionId };
     } catch (error) {
       console.log(error.message);
     }
@@ -105,15 +107,20 @@ export const getExpensesCategories = createAsyncThunk(
   },
 );
 
-export const updateBalance = createAsyncThunk('transactions/updateBalance', async balance => {
-  try {
-    const { data } = await axios.patch('/user/balance', balance);
-    console.log('!!!!!!!!!!!!!', data);
-    return data.newBalance;
-  } catch (error) {
-    alert(error.message);
-  }
-});
+export const updateBalance = createAsyncThunk(
+  'transactions/updateBalance',
+  async (balance, thunkAPI) => {
+    const state = thunkAPI.getState();
+    token.set(state.auth.token);
+    try {
+      const { data } = await axios.patch('/user/balance', balance);
+      console.log('!!!!!!!!!!!!!', data);
+      return data.newBalance;
+    } catch (error) {
+      alert(error.message);
+    }
+  },
+);
 
 export const getDataMonth = createAsyncThunk('transactions/getDataMonth', async credentials => {
   console.log(credentials);
