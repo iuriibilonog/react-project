@@ -38,6 +38,7 @@ export const addExpenseTransaction = createAsyncThunk(
     try {
       const { data } = await axios.post('/transaction/expense', transaction);
       // returns newBalance and new transaction
+      console.log('Its balance', data);
       return data;
     } catch (error) {
       console.log(error.message);
@@ -52,7 +53,6 @@ export const getExpensesTransactions = createAsyncThunk(
     token.set(state.auth.token);
     try {
       const { data } = await axios.get('/transaction/expense');
-
       // we receive expenses and monthly stats - I use only incomes so far
       return data;
     } catch (error) {
