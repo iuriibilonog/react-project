@@ -1,7 +1,16 @@
+import { useDispatch } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
+import { getIncomesCategories, getExpensesCategories, getIncomeTransactions } from '../../../redux/transactions-operations';
+
 import s from './NavigationBetweenCategories.module.css';
 
 const NavigationBetweenCategories = () => {
+  
+  
+    
+    
+  
+
   const location = useLocation();
   return (
     <ul className={s.navList}>

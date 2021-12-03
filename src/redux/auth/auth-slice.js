@@ -50,7 +50,8 @@ const authSlice = createSlice({
       state.user.sid = action?.payload?.newSid;
       state.sid = action?.payload?.newSid;
       state.token = action?.payload?.newAccessToken;
-      state.user.token = action?.payload?.newAccessToken;
+      state.user.accessToken = action?.payload?.newAccessToken;
+      state.user.refreshToken = action?.payload?.newRefreshToken;
     },
     [checkCurrentUser.rejected](state) {
       state.isCheckingUser = false;
