@@ -88,6 +88,7 @@ const NavBar = ({socialName, socialImg, isAuthFromSocial }) => {
                     color: '#52555F',
                     fontFamily: 'Roboto',
                     fontSize: '12px',
+                    cursor: 'pointer',
                   }}
                   className={s.visibility}
                   

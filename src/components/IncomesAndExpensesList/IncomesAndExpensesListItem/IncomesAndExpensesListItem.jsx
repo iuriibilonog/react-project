@@ -3,7 +3,9 @@ import sprite from '../../../img/sprite.svg';
 
 const IncomesAndExpensesListItem = ({
   itemProps: { date, description, category, amount, _id },
-  modalHandler, transactionsType, operationSign
+  modalHandler,
+  transactionsType,
+  operationSign,
 }) => {
   const showModal = id => {
     modalHandler(id);
@@ -18,7 +20,10 @@ const IncomesAndExpensesListItem = ({
         </div>
         <span className={s.category}>{category}</span>
         <div className={s.flex}>
-          <span className={transactionsType}>{operationSign}{parseFloat(amount).toFixed(2)}</span>
+          <span className={transactionsType}>
+            {operationSign}
+            {parseFloat(amount).toFixed(2)}
+          </span>
           <span>
             <button type="button" className={s.delete} onClick={() => showModal(_id)}>
               <svg className={s.deleteIcon}>
@@ -33,7 +38,6 @@ const IncomesAndExpensesListItem = ({
 };
 
 export default IncomesAndExpensesListItem;
-
 
 /* вопросы */
 /* 1) динамический класс с модулем? */
