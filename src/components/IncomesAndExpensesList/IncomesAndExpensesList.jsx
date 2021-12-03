@@ -1,8 +1,10 @@
 import s from './IncomesAndExpensesList.module.css';
 import './customScroll.css';
+
 import CustomScroll from 'react-custom-scroll';
 import IncomesAndExpensesListItem from './IncomesAndExpensesListItem';
 import UnifiedModal from '../../shared/UnifiedModal';
+
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteTransaction } from '../../redux/transactions-operations';
@@ -26,7 +28,7 @@ const IncomesAndExpensesList = ({ transactions, transactionsType, operationSign 
     }
     setItemId(null);
   };
-  
+
   return (
     <>
       {transactions.length > 0 && (

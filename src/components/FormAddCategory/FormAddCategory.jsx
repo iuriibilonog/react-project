@@ -20,7 +20,7 @@ import { format } from 'date-fns';
 import DatePicker from '@mui/lab/DatePicker';
 import expenceJson from '../../data/expenselcon.json';
 import incomesJson from '../../data/incomeIcon.json';
-import NavigationBetweenCategories from './NavigationBetweenCategoryes/NavigationBetweenCategoryes';
+// import NavigationBetweenCategories from './NavigationBetweenCategoryes/NavigationBetweenCategoryes';
 import { useLocation, useRouteMatch } from 'react-router';
 import { addExpenseTransaction, addIncomeTransaction } from '../../redux/transactions-operations';
 import { useDispatch } from 'react-redux';

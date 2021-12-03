@@ -1,28 +1,24 @@
+import './App.css';
+import s from './App.module.css';
+
 import { checkCurrentUser } from './redux/auth/auth-operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import './App.css';
-import HomePage from './pages/HomePage';
-import ExpensesPage from './pages/ExpensesPage';
-import IncomesPage from './pages/IncomesPage';
-import ReportsPage from './pages/ReportsPage';
-import NavBar from './components/NavBar/NavBar';
-import SwitchTheme from './shared/SwitchTheme/SwitchTheme';
-import Chart from './components/Chart';
-import s from './App.module.css';
-
 import { useLocation } from 'react-router';
-
-// new
 import { Switch, Redirect } from 'react-router';
 import { Suspense } from 'react';
+import { Home } from '@mui/icons-material';
+
+import SwitchTheme from './shared/SwitchTheme/SwitchTheme';
+import NavBar from './components/NavBar/NavBar';
+import HomePage from './pages/HomePage';
+import TransactionsPage from './pages/TransactionsPage';
+import ReportsPage from './pages/ReportsPage';
+import Chart from './components/Chart';
 
 import PublicRoute from './components/Routes/PublicRoute';
 import PrivateRoute from './components/Routes/PrivateRoute';
-// new
-import TransactionsPage from './pages/TransactionsPage';
-import { Home } from '@mui/icons-material';
-import Container from './components/Container'
+
 
 function App() {
   const dispatch = useDispatch();
@@ -36,9 +32,9 @@ function App() {
     return;
   }, []);
 
-  const { pathname } = useLocation();
-  let isSpend = '';
-  pathname === '/spend' ? (isSpend = true) : (isSpend = false);
+  // const { pathname } = useLocation();
+  // let isSpend = '';
+  // pathname === '/spend' ? (isSpend = true) : (isSpend = false);
 
   return (
     <div className="App">
@@ -53,7 +49,6 @@ function App() {
           <HomePage />
         </PublicRoute>
         <PrivateRoute exact path="/">
-          {/* <HomePage /> */}
           <TransactionsPage />
         </PrivateRoute>
         <PrivateRoute exact path="/reports">

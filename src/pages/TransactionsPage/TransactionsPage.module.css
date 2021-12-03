@@ -1,10 +1,5 @@
 @import '../../utils/variables.css';
 
-/* --width-mobile:320px;
---width-tablet:768px;
---width-desktop:1280px; */
-
-
 .buttonsHolder {
   display: flex;
 }
@@ -37,18 +32,14 @@
   width: 320px;
   margin-left: auto;
   margin-right: auto;
-  /* background-color: bisque; */
-
 }
 
 .elementsWrapper {
   border-top-right-radius: 20px;
-  background-color: var(--bg-primary);
-  /* background-color: tomato; */
+  background-color: transparent;
   width: 320px;
   display: flex;
-  flex-wrap:wrap;
-
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 768px) {
@@ -62,22 +53,13 @@
 
   .elementsWrapper {
     width: 665px;
-    /* width: 605px; */
-    /* padding-top: 30px;
-    padding-bottom: 50px;
-    padding-left: 30px;
-    padding-right: 30px; */
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    padding-left:20px;
-    padding-right:20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: var(--bg-primary);
   }
-  .tableWrapper {
-      width: 605px;
-      display: flex;
-      flex-direction: column;
-      background-color: olive;
-  }
+
   .navBtn {
     width: 138px;
     height: 40px;
@@ -98,18 +80,6 @@
     width: 1060px;
   }
   .elementsWrapper {
-    /* width: 760px; */
-     width: 1060px;
+    width: 1060px;
   }
-  .tableWrapper {
-      flex-direction: row;
-  }
-}
-
-
-
-
-h1 {
-  width: 100%;
-  background-color: slategray;
 }
