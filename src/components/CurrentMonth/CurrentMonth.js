@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import sprite from '../../img/sprite.svg';
+import { format } from 'date-fns';
 import s from './CurrentMonth.module.css';
 
 const CurrentMonth = () => {
@@ -23,7 +24,6 @@ const CurrentMonth = () => {
     } else {
       setCurMon(curMonth => (curMonth -= 1));
     }
-    console.log(curMonth);
   };
   const handleNextMonth = () => {
     if (curMonth === 12) {
@@ -32,8 +32,10 @@ const CurrentMonth = () => {
     } else {
       setCurMon(curMonth => (curMonth += 1));
     }
-    console.log(curMonth);
   };
+
+  // const mothLit = format(curMonth, 'mmmm');
+  // console.log(mothLit);
 
   return (
     <div className={s.currentMonthBlock}>

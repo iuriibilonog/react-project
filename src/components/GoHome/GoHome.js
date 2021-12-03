@@ -9,7 +9,7 @@ const GoHome = () => {
     <>
       {width > 768 ? (
         <button className={s.btn}>
-          <Link to="/">
+          <Link to="/income">
             <svg className={s.svgBtn} width="18" height="12">
               <use href={sprite + '#icon-toHome'}></use>
             </svg>
@@ -20,7 +20,7 @@ const GoHome = () => {
         </button>
       ) : (
         <button>
-          <Link to="/">
+          <Link to="/income">
             <svg width="18" height="12">
               <use href={sprite + '#icon-toHome'}></use>
             </svg>
