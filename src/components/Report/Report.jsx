@@ -3,6 +3,8 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 import s from './Report.module.css';
 
+import { setIncomesByCategories } from '../../redux/actions';
+import Chart from '../Chart';
 
 import ReportAmount from './ReportAmount';
 import {  useSelector } from 'react-redux';
@@ -116,7 +118,12 @@ const Report = () => {
           )}
         </div>
       </div>
+
+      <Chart chartTypeRender={reportTypeRender}/>
+    </Container>
+
     </>
+
   );
 };
 export default Report;

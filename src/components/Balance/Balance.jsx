@@ -29,7 +29,7 @@ const Balance = () => {
 
   useEffect(() => {
     console.log(bal);
-    setBalance(bal);
+    setBalance(Math.round(bal));
   }, [bal]);
 
   const zeroReminding = () => {
