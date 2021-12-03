@@ -15,6 +15,7 @@ const initialState = {
   isLoggedIn: false,
   isCheckingUser: false,
   socialAuth: false,
+  userBalance: null,
 };
 
 const authSlice = createSlice({
@@ -32,6 +33,9 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.sid = action.payload.data.sid;
       state.socialAuth = action.payload.socialAuth;
+      console.log(action.payload);
+      console.log(action.payload.data.userData.balance);
+      state.userBalance = action.payload.data.userData.balance;
     },
 
     [logOut.fulfilled](state, _) {

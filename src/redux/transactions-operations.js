@@ -89,3 +89,13 @@ export const getExpensesCategories = createAsyncThunk(
     }
   },
 );
+
+export const updateBalance = createAsyncThunk('transactions/updateBalance', async balance => {
+  try {
+    const { data } = await axios.patch('/user/balance', balance);
+    console.log('!!!!!!!!!!!!!', data);
+    return data.newBalance;
+  } catch (error) {
+    alert(error.message);
+  }
+});
