@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIncomes } from '../../redux/transactions-selectors';
 import { getIncomeTransactions, addIncomeTransaction } from '../../redux/transactions-operations';
-
+import FormAddCategory from '../../components/FormAddCategory';
+import Balance from '../../components/Balance/Balance';
+import NavigationBetweenCategories from '../../components/FormAddCategory/NavigationBetweenCategoryes/NavigationBetweenCategoryes';
 const IncomesPage = () => {
   const dispatch = useDispatch();
   //  будет работать при рерауте
@@ -11,7 +13,6 @@ const IncomesPage = () => {
   // useEffect(() => {
   //   dispatch(getIncomeTransactions());
   // }, [dispatch]);
-
 
   let incomes = useSelector(getIncomes);
   console.log('incomes', incomes);
@@ -26,6 +27,8 @@ const IncomesPage = () => {
 
   return (
     <>
+      <NavigationBetweenCategories />
+      <Balance />
       <button
         type="button"
         onClick={() => {
@@ -42,7 +45,7 @@ const IncomesPage = () => {
       >
         ADD INCOME TRANSACTION
       </button>
-
+      <FormAddCategory />;
       <IncomesAndExpensesList props={incomes} transactionsType={'incomes'} />
     </>
   );

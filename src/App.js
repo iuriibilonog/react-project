@@ -44,18 +44,23 @@ function App() {
       <Chart />
       <SwitchTheme />
       <header className="App-header"></header>
+      {/* {isSpend && <ExpensesPage />}
+      {!isSpend && <IncomesPage />} */}
+      <NavBar />
       <Suspense fallback={<h1>LOADING...</h1>}>
         <Switch>
-          <PublicRoute path="/authorization" restricted exact>
-            <HomePage/>
-          </PublicRoute>
-
-          <PrivateRoute path="/home">
+          <PublicRoute exact path="/" redirectTo="/spend">
             <HomePage />
-            {/* {isSpend && <ExpensesPage />}
-          {!isSpend && <IncomesPage />} */}
-            <ReportsPage />
+          </PublicRoute>
+          <PrivateRoute exact path="/spend" redirectTo="/">
+            <ExpensesPage />
           </PrivateRoute>
+          <PrivateRoute exact path="/income" redirectTo="/">
+            <IncomesPage />
+          </PrivateRoute>
+          {/* <PrivateRoute>
+            <ReportsPage />
+          </PrivateRoute> */}
         </Switch>
       </Suspense>
     </div>

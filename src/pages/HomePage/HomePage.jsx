@@ -8,6 +8,12 @@ import { useEffect, useState } from 'react';
 
 import FormAddCategory from '../../components/FormAddCategory';
 
+import { isUserLoggedIn } from '../../redux/selectors';
+import { useSelector } from 'react-redux';
+import IncomesPage from '../IncomesPage';
+import NavigationBetweenCategories from '../../components/FormAddCategory/NavigationBetweenCategoryes/NavigationBetweenCategoryes';
+
+
 import { useDispatch, useSelector } from 'react-redux';
 import { getIncomesCategories } from '../../redux/transactions-operations';
 import { getExpensesCategories } from '../../redux/transactions-operations';
@@ -18,10 +24,8 @@ import { isUserLoggedIn } from '../../redux/selectors'
 
 
 const HomePage = () => {
-
-
-  const isLoggedIn = useSelector(isUserLoggedIn)
-  console.log(isLoggedIn)
+  const isLoggedIn = useSelector(isUserLoggedIn);
+  console.log(isLoggedIn);
 
   const [socialImg, setSocialImg] = useState('');
   const [socialName, setSocialName] = useState('');
@@ -43,40 +47,35 @@ const HomePage = () => {
    console.log('ok2')
   }, [isLoggedIn])
 
-  
-  const getDataFromSocial = ({ img, name}) => {
+  const getDataFromSocial = ({ img, name }) => {
     setSocialImg(img);
     setSocialName(name);
-  }
+  };
 
-  const getTypeOfAuth = (bool) => {
-    setIsAuthFromSocial(bool)
-  }
-
-  
-
+  const getTypeOfAuth = bool => {
+    setIsAuthFromSocial(bool);
+  };
 
   return (
     <>
-
-      <NavBar socialName={socialName} socialImg={socialImg} isAuthFromSocial={isAuthFromSocial}/>
+      {/* <NavBar socialName={socialName} socialImg={socialImg} isAuthFromSocial={isAuthFromSocial} /> */}
 
       <div className={s.container}>
         <div className={s.mainSection}>
           <div className={s.bcgImage}></div>
           <div className={s.text}>
-          
             <img className={s.imgText} src={imgTitle} alt="Kapusta" />
             <h1 className={s.fontText}>SMART FINANSE</h1>
           </div>
         </div>
+        {isLoggedIn && <NavigationBetweenCategories />}
         <div className={s.secondarySection}>
-          {!isLoggedIn && <Authorization getDataFromSocial={getDataFromSocial} getTypeOfAuth={getTypeOfAuth} />}
-            <div className={s.bcgImageBottom}>
-            </div>
-          </div>
-
-         
+          {!isLoggedIn && (
+            <Authorization getDataFromSocial={getDataFromSocial} getTypeOfAuth={getTypeOfAuth} />
+          )}
+          {/* <IncomesPage /> */}
+          <div className={s.bcgImageBottom}></div>
+        </div>
       </div>
     </>
   );
