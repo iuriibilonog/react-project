@@ -8,6 +8,8 @@ import {
   getExpensesTransactions,
   addExpenseTransaction,
 } from '../../redux/transactions-operations';
+import FormAddCategory from '../../components/FormAddCategory';
+import NavigationBetweenCategories from '../../components/FormAddCategory/NavigationBetweenCategoryes/NavigationBetweenCategoryes';
 
 const ExpensesPage = () => {
   const dispatch = useDispatch();
@@ -27,6 +29,10 @@ const ExpensesPage = () => {
   // болванка, удалить в процессе
   return (
     <>
+      <NavigationBetweenCategories />
+      <Balance />
+
+      <FormAddCategory />
       <button
         type="button"
         onClick={() => {

@@ -32,7 +32,6 @@ const IncomesAndExpensesList = ({ props, transactionsType, operationSign = '' })
   console.log(operationSign);
   return (
     <>
-      <FormAddCategory />
       {props.length > 0 && (
         <div className={s.list}>
           <header className={s.header}>
