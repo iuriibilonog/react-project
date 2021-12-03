@@ -29,6 +29,8 @@ import { createReducer } from '@reduxjs/toolkit';
 const balanceReducer = createReducer(0, {
   [setBalance]: (_, action) => action.payload,
   [updateBalance.fulfilled]: (_, action) => action.payload,
+  [addIncomeTransaction.fulfilled]: (state, action) => action.payload.newBalance,
+  [addExpenseTransaction.fulfilled]: (state, action) =>action.payload.newBalance,
 });
 
 const expensesReducer = createReducer([], {

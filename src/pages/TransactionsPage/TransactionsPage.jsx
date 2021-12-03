@@ -52,7 +52,7 @@ const TransactionsPage = () => {
           </div>
         <div className={s.incomesContainer}>
           <Balance />
-          <FormAddCategory />;
+          <FormAddCategory isExpenses={isExpenses ? "expenses" : "incomes"}/>;
           <div className={s.tableWrapper}>
           <IncomesAndExpensesList
             transactions={isExpenses ? expenses : incomes}
