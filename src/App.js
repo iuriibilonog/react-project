@@ -39,9 +39,9 @@ function App() {
   return (
     <div className="App">
 
-      {/*       <Chart />
-      <SwitchTheme />
- */}{' '}
+      {/* <Chart /> */}
+      {/* <SwitchTheme /> */}
+
       <header className="App-header"></header>
 
       <NavBar />
@@ -53,9 +53,10 @@ function App() {
         </PublicRoute>
         <PrivateRoute exact path="/">
           <TransactionsPage />
-      <ReportsPage/>
+
         </PrivateRoute>
         <PrivateRoute exact path="/reports">
+
           <ReportsPage />
         </PrivateRoute>
       </Switch>
