@@ -1,5 +1,10 @@
 @import '../../utils/variables.css';
 
+/* --width-mobile:320px;
+--width-tablet:768px;
+--width-desktop:1280px; */
+
+
 .buttonsHolder {
   display: flex;
 }
@@ -29,14 +34,20 @@
 .incomesWrapper {
   display: flex;
   flex-direction: column-reverse;
-  max-width: 320px;
+  width: 320px;
   margin-left: auto;
   margin-right: auto;
+  /* background-color: bisque; */
 
 }
 
-.incomesContainer {
+.elementsWrapper {
   border-top-right-radius: 20px;
+  background-color: var(--bg-primary);
+  /* background-color: tomato; */
+  width: 320px;
+  display: flex;
+  flex-wrap:wrap;
 
 }
 
@@ -45,21 +56,27 @@
 
 @media screen and (min-width: 768px) {
   .incomesWrapper {
-    max-width: 665px;
     flex-direction: column;
+    width: 665px;
   }
 
-  .incomesContainer {
-    padding-top: 30px;
+  .elementsWrapper {
+    width: 665px;
+    /* width: 605px; */
+    /* padding-top: 30px;
     padding-bottom: 50px;
     padding-left: 30px;
-    padding-right: 30px;
+    padding-right: 30px; */
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
+    padding-left:20px;
+    padding-right:20px;
   }
   .tableWrapper {
+      width: 605px;
       display: flex;
       flex-direction: column;
+      background-color: olive;
   }
   .navBtn {
     width: 138px;
@@ -78,9 +95,21 @@
 
 @media screen and (min-width: 1280px) {
   .incomesWrapper {
-    max-width: 1060px;
+    width: 1060px;
+  }
+  .elementsWrapper {
+    /* width: 760px; */
+     width: 1060px;
   }
   .tableWrapper {
       flex-direction: row;
   }
+}
+
+
+
+
+h1 {
+  width: 100%;
+  background-color: slategray;
 }

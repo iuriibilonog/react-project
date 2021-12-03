@@ -22,6 +22,7 @@ import PrivateRoute from './components/Routes/PrivateRoute';
 // new
 import TransactionsPage from './pages/TransactionsPage';
 import { Home } from '@mui/icons-material';
+import Container from './components/Container'
 
 function App() {
   const dispatch = useDispatch();
