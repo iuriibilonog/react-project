@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import s from './NavigationBetweenCategoryes.module.css';
+import s from './NavigationBetweenCategories.module.css';
 
-const NavigationBetweenCategoryes = () => {
+const NavigationBetweenCategories = () => {
   const location = useLocation();
   return (
     <ul className={s.navList}>
@@ -30,4 +30,4 @@ const NavigationBetweenCategoryes = () => {
   );
 };
 
-export default NavigationBetweenCategoryes;
+export default NavigationBetweenCategories;

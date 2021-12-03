@@ -8,6 +8,7 @@ import IncomesPage from './pages/IncomesPage';
 import ReportsPage from './pages/ReportsPage';
 import NavBar from './components/NavBar/NavBar';
 import SwitchTheme from './shared/SwitchTheme/SwitchTheme';
+import Chart from './components/Chart';
 import s from './App.module.css';
 
 import { useLocation } from 'react-router';
@@ -38,19 +39,25 @@ function App() {
 
   return (
     <div className="App">
+      <Chart />
       <SwitchTheme />
       <header className="App-header"></header>
+      {/* {isSpend && <ExpensesPage />}
+      {!isSpend && <IncomesPage />} */}
+      <NavBar />
       <Suspense fallback={<h1>LOADING...</h1>}>
         <Switch>
-          <PublicRoute path="/authorization" restricted exact>
-            <HomePage/>
-          </PublicRoute>
-
-          <PrivateRoute path="/home">
+          <PublicRoute exact path="/" redirectTo="/spend">
             <HomePage />
-            {/* {isSpend && <ExpensesPage />}
-          {!isSpend && <IncomesPage />} */}
-            <ReportsPage />
+          </PublicRoute>
+          <PrivateRoute exact path="/spend" redirectTo="/">
+            <ExpensesPage />
+          </PrivateRoute>
+          <PrivateRoute exact path="/income" redirectTo="/">
+            <IncomesPage />
+          </PrivateRoute>
+          <PrivateRoute>
+            <ReportsPage path="/report" />
           </PrivateRoute>
         </Switch>
       </Suspense>

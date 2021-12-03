@@ -4,6 +4,8 @@ import {
   setIncomes,
   setBalance,
   setIsSystemStarted,
+  setIncomesByCategories,
+  setExpensesByCategories,
 } from '../redux/actions';
 // new
 import {
@@ -12,6 +14,8 @@ import {
   deleteTransaction,
   getExpensesTransactions,
   addExpenseTransaction,
+  getExpensesCategories,
+  getIncomesCategories,
 } from './transactions-operations';
 // new
 import { combineReducers } from 'redux';
@@ -29,7 +33,7 @@ const expensesReducer = createReducer([], {
 });
 
 const incomesReducer = createReducer([], {
-  [getIncomeTransactions.fulfilled]: (_, action) => action.payload.incomes,
+  [getIncomeTransactions.fulfilled]: (_, action) => action?.payload?.incomes,
   [addIncomeTransaction.fulfilled]: (state, action) => [...state, action.payload.transaction],
   [deleteTransaction.fulfilled]: (state, action) =>
     [...state].filter(item => item._id !== action.payload),
@@ -45,11 +49,31 @@ const getNewBalanceReducer = createReducer([], {
   [addExpenseTransaction.fulfilled]: (_, action) => action.payload.newBalance,
 });
 
+const getIncomeCategories = createReducer([], {
+  [getIncomesCategories.fulfilled]: (_, action) => action.payload,
+});
+
+const getExpenseCategories = createReducer([], {
+  [getExpensesCategories.fulfilled]: (_, action) => action.payload,
+});
+
+const setIncomesByCategory = createReducer([], {
+  [setIncomesByCategories]: (state, action) => [...state, action.payload],
+});
+
+const setExpensesByCategory = createReducer([], {
+  [setExpensesByCategories]: (state, action) => [...state, action.payload],
+});
+
 const transactionsReducer = combineReducers({
   incomes: incomesReducer,
   expenses: expensesReducer,
   getMonth: getMonthReducer,
-  newBalance: getNewBalanceReducer,
+  // newBalance: getNewBalanceReducer,
+  incomeCategories: getIncomeCategories,
+  expenseCategories: getExpenseCategories,
+  expensesByCategory: setExpensesByCategory,
+  incomesByCategory: setIncomesByCategory,
 });
 
 export const isSystemStartedReducer = createReducer(false, {

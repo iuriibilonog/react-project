@@ -5,16 +5,19 @@ import incomeIconCategories from '../../data/incomeIcon.json';
 import Container from '../Container';
 import sprite from '../../img/icon.svg';
 import s from './Report.module.css';
-
+import { setIncomesByCategories } from '../../redux/actions';
 
 import ReportAmount from './ReportAmount';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getExpenses, getIncomes } from '../../redux/transactions-selectors';
 import { useState } from 'react';
+
+
 
 const Report = () => {
   const [category, setCategory] = useState('');
   const [reportTypeRender, setReportTypeRender] = useState('incomes');
+  const dispatch = useDispatch();
   const transactionExpenses = useSelector(getExpenses);
   const transactionIncomes = useSelector(getIncomes);
   const [type, setType] = useState('expenses');
@@ -40,10 +43,19 @@ const Report = () => {
   const findTotalSumByCategoryIncomes = category => {
     let totalIncomes = 0;
     // Для Юры и Сережи
-    const incomesByCategory = transactionIncomes.filter(item => item.category === category);
-    console.log(`incomesByCategory`, incomesByCategory);
-    incomesByCategory.map(item => (totalIncomes += item.amount));
+    const incomesByCategory = transactionIncomes.filter(item => item.category === category).map(item => {
+      totalIncomes += item.amount;
+      const incomesInfo = {
+        amount: item.amount,
+        description: item.description,
+        category,
+      }
+      console.log(incomesInfo)
+      return incomesInfo;
 
+    });
+    console.log('запустил')
+    dispatch(setIncomesByCategories(incomesByCategory));
     return totalIncomes;
   };
 
