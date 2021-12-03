@@ -15,6 +15,7 @@ const initialState = {
   isLoggedIn: false,
   isCheckingUser: false,
   socialAuth: false,
+  userBalance: null,
 };
 
 const authSlice = createSlice({
@@ -23,15 +24,19 @@ const authSlice = createSlice({
   extraReducers: {
     [register.fulfilled](state, action) {
       state.user = action.payload.data;
-      state.isLoggedIn = true;
+      // state.isLoggedIn = true;
       state.socialAuth = action.payload.socialAuth;
     },
     [login.fulfilled](state, action) {
+      console.log(action.payload);
       state.user = action.payload.data;
       state.token = action.payload.data.accessToken;
       state.isLoggedIn = true;
       state.sid = action.payload.data.sid;
       state.socialAuth = action.payload.socialAuth;
+      console.log(action.payload);
+      console.log(action.payload.data.userData.balance);
+      state.userBalance = action.payload.data.userData.balance;
     },
 
     [logOut.fulfilled](state, _) {
@@ -52,6 +57,7 @@ const authSlice = createSlice({
       state.token = action?.payload?.newAccessToken;
       state.user.accessToken = action?.payload?.newAccessToken;
       state.user.refreshToken = action?.payload?.newRefreshToken;
+      state.userBalance = state.user.userData.balance;
     },
     [checkCurrentUser.rejected](state) {
       state.isCheckingUser = false;

@@ -7,9 +7,9 @@ const GoHome = () => {
 
   return (
     <>
-      {width > 768 ? (
+      {/* {width > 768 ? ( */}
         <button className={s.btn}>
-          <NavLink exact to="/income">
+          <NavLink exact to="/">
             <svg className={s.svgBtn} width="18" height="12">
               <use href={sprite + '#icon-toHome'}></use>
             </svg>
@@ -18,15 +18,15 @@ const GoHome = () => {
             Вернуться на главную
           </NavLink>
         </button>
-      ) : (
+      {/* ) : (
         <button>
-          <NavLink exact to="/income">
+          <NavLink exact to="/">
             <svg width="18" height="12">
               <use href={sprite + '#icon-toHome'}></use>
             </svg>
           </NavLink>
         </button>
-      )}
+      )} */}
     </>
   );
 };

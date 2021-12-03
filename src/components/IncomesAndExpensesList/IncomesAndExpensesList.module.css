@@ -1,33 +1,11 @@
 @import '../../utils/variables.css';
 
-
-/* .groupingDiv {
-  background-color: rosybrown;
-}
-
-.date {
-  background-color: yellowgreen;
-}
-
-.description {
-  background-color: aquamarine;
-}
-
-.category {
-  background-color: royalblue;
-}
-
-.amount {
-  background-color: saddlebrown;
-} */
-
 .header {
   display: none;
   visibility: hidden;
 }
 .list {
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .groupingDiv {
@@ -43,7 +21,6 @@
 .transactionsList {
   max-height: 346px;
 }
-
 
 @media screen and (min-width: 768px) {
   .header {
@@ -69,9 +46,13 @@
     width: 33.3%;
   }
   .list {
-    max-width: 760px;
+    width: 100%;
+    margin-bottom: 40px;
   }
 }
 
-
-
+@media screen and (min-width: 1200px) {
+  .list {
+    width: 760px;
+  }
+}
