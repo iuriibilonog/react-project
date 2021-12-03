@@ -25,14 +25,12 @@ export const getIncomeTransactions = createAsyncThunk(
       const { data } = await axios.get('/transaction/income');
       // we receive incomes and monthly stats - I use only incomes so far
 
-
       return data;
     } catch (error) {
       alert(error.message);
     }
   },
 );
-
 
 export const addExpenseTransaction = createAsyncThunk(
   'transactions/addExpense',
@@ -106,7 +104,6 @@ export const getDataMonth = createAsyncThunk('transactions/getDataMonth', async 
   console.log(credentials);
   try {
     const { data } = await axios.get(`/transaction/period-data?date=${credentials}`);
-   
     return data;
   } catch (error) {
     console.log(error.message);

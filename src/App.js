@@ -41,8 +41,8 @@ function App() {
 
   return (
     <div className="App">
-      <Chart />
-      <SwitchTheme />
+      {/* <Chart /> */}
+      {/* <SwitchTheme /> */}
       <header className="App-header"></header>
       {/* {isSpend && <ExpensesPage />}
       {!isSpend && <IncomesPage />} */}
@@ -59,6 +59,7 @@ function App() {
         <PrivateRoute exact path="/">
           <HomePage />
           <TransactionsPage />
+          <ReportsPage />
         </PrivateRoute>
       </Switch>
 

@@ -12,7 +12,13 @@ const CurrentMonth = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDataMonth(`${year}-${curMonth}`));
+    if (curMonth < 10) {
+      const month = `0${curMonth}`;
+      console.log(month);
+      dispatch(getDataMonth(`${year}-${month}`));
+    } else {
+      dispatch(getDataMonth(`${year}-${curMonth}`));
+    }
   }, [dispatch, year, curMonth]);
 
   const handlePrevMonth = () => {
