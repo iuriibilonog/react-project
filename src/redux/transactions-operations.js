@@ -25,14 +25,12 @@ export const getIncomeTransactions = createAsyncThunk(
       const { data } = await axios.get('/transaction/income');
       // we receive incomes and monthly stats - I use only incomes so far
 
-
       return data;
     } catch (error) {
       alert(error.message);
     }
   },
 );
-
 
 export const addExpenseTransaction = createAsyncThunk(
   'transactions/addExpense',
@@ -47,18 +45,21 @@ export const addExpenseTransaction = createAsyncThunk(
   },
 );
 
-export const getExpensesTransactions = createAsyncThunk('transactions/getExpenses', async (_, thunkAPI) => {
-  const state = thunkAPI.getState();
-  token.set(state.auth.token);
-  try {
-    const { data } = await axios.get('/transaction/expense');
+export const getExpensesTransactions = createAsyncThunk(
+  'transactions/getExpenses',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    token.set(state.auth.token);
+    try {
+      const { data } = await axios.get('/transaction/expense');
 
-    // we receive expenses and monthly stats - I use only incomes so far
-    return data;
-  } catch (error) {
-    console.log(error.message);
-  }
-});
+      // we receive expenses and monthly stats - I use only incomes so far
+      return data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+);
 
 export const deleteTransaction = createAsyncThunk(
   'transactions/deleteTransaction',
@@ -104,7 +105,6 @@ export const getExpensesCategories = createAsyncThunk(
   },
 );
 
-
 export const updateBalance = createAsyncThunk('transactions/updateBalance', async balance => {
   try {
     const { data } = await axios.patch('/user/balance', balance);
@@ -112,15 +112,16 @@ export const updateBalance = createAsyncThunk('transactions/updateBalance', asyn
     return data.newBalance;
   } catch (error) {
     alert(error.message);
+  }
+});
 
 export const getDataMonth = createAsyncThunk('transactions/getDataMonth', async credentials => {
   console.log(credentials);
   try {
     const { data } = await axios.get(`/transaction/period-data?date=${credentials}`);
-   
+
     return data;
   } catch (error) {
     console.log(error.message);
-
   }
 });
