@@ -28,6 +28,7 @@ const authSlice = createSlice({
       state.socialAuth = action.payload.socialAuth;
     },
     [login.fulfilled](state, action) {
+      console.log(action.payload);
       state.user = action.payload.data;
       state.token = action.payload.data.accessToken;
       state.isLoggedIn = true;

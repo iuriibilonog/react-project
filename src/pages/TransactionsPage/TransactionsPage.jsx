@@ -25,7 +25,9 @@ const TransactionsPage = () => {
   let expenses = useSelector(getExpenses);
 
   return (
+    <>
     <Container>
+       <Balance />
       <div className={s.incomesWrapper}>
         <div className={s.buttonsHolder}>
           <button
@@ -39,6 +41,7 @@ const TransactionsPage = () => {
             {' '}
             ДОХОД
           </button>
+
           <button
             type="button"
             className={`${s.navBtn} ${s.active}`}
@@ -49,21 +52,37 @@ const TransactionsPage = () => {
           >
             РАСХОД
           </button>
-        </div>
-        <div className={s.incomesContainer}>
-          <Balance />
-          <FormAddCategory isExpenses={isExpenses ? 'expenses' : 'incomes'} />;
-          <div className={s.tableWrapper}>
-            <IncomesAndExpensesList
-              transactions={isExpenses ? expenses : incomes}
-              transactionsType={isExpenses ? 'expenses' : 'incomes'}
-              operationSign={isExpenses ? '-' : ''}
-            />
-            <Summary />
+//         </div>
+//         <div className={s.incomesContainer}>
+//           <Balance />
+//           <FormAddCategory isExpenses={isExpenses ? 'expenses' : 'incomes'} />;
+//           <div className={s.tableWrapper}>
+//             <IncomesAndExpensesList
+//               transactions={isExpenses ? expenses : incomes}
+//               transactionsType={isExpenses ? 'expenses' : 'incomes'}
+//               operationSign={isExpenses ? '-' : ''}
+//             />
+//             <Summary />
+//           </div>
+
           </div>
+        <div className={s.elementsWrapper}>
+          <FormAddCategory isExpenses={isExpenses ? "expenses" : "incomes"}/>
+          {/* <div className={s.tableWrapper}> */}
+          <IncomesAndExpensesList
+            transactions={isExpenses ? expenses : incomes}
+            transactionsType={isExpenses ? 'expenses' : 'incomes'}
+            operationSign={isExpenses ? '-' : ''}
+          />
+            
+          {/* </div> */}
+           <Summary />
+
         </div>
+       
       </div>
-    </Container>
+      </Container>
+      </>
   );
 };
 

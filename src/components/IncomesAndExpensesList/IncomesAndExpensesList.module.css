@@ -26,8 +26,9 @@
   visibility: hidden;
 }
 .list {
-  margin-left: auto;
-  margin-right: auto;
+  /* background:yellow; */
+  width:100%;
+
 
 }
 
@@ -70,9 +71,14 @@
     width: 33.3%;
   }
   .list {
-    max-width: 760px;
+     width: 100%;
+     margin-bottom: 40px;
   }
 }
 
-
+@media screen and (min-width: 1200px) {
+  .list {
+    width: 760px;
+  }
+}
 
