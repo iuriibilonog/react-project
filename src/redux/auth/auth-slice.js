@@ -24,10 +24,11 @@ const authSlice = createSlice({
   extraReducers: {
     [register.fulfilled](state, action) {
       state.user = action.payload.data;
-      state.isLoggedIn = true;
+      // state.isLoggedIn = true;
       state.socialAuth = action.payload.socialAuth;
     },
     [login.fulfilled](state, action) {
+      console.log(action.payload);
       state.user = action.payload.data;
       state.token = action.payload.data.accessToken;
       state.isLoggedIn = true;

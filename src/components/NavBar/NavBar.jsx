@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import { StyledBadge } from './StyledBadge';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../../redux/auth/auth-operations';
+import { login, logOut } from '../../redux/auth/auth-operations';
 
 
 
@@ -21,7 +21,16 @@ import { logOut } from '../../redux/auth/auth-operations';
 const NavBar = ({socialName, socialImg, isAuthFromSocial }) => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const socialAuth = useSelector(state => state.auth.socialAuth);
+  const loginName = useSelector(state => state.auth.user?.userData?.email)
+
+  console.log(loginName.length)
   const dispatch = useDispatch();
+
+  const loginFromEmail = () => {
+    for (let i = 0; i <= loginName.length; i++) {
+      
+    }
+  }
   return (
     <>
       <AppBar position="static" sx={{ background: 'white', boxShadow: 'none' }}>
@@ -56,7 +65,7 @@ const NavBar = ({socialName, socialImg, isAuthFromSocial }) => {
                   }}
                   className={s.visibility}
                 >
-                  {isAuthFromSocial && socialAuth ? socialName : 'UserName'}
+                  {isAuthFromSocial && socialAuth ? socialName : loginName}
                 </Typography>
                 <Divider
                   orientation="vertical"
