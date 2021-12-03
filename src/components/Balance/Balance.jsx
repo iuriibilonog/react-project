@@ -307,20 +307,23 @@ const Balance = () => {
 
   return (
     <div className={s.wrapper}>
-      <span className={s.title}>Баланс:</span>
-      <form onSubmit={submitBalanceHandler}>
-        <div>
-          {balanceState === 'set' ? inputMarkup(false) : inputMarkup(true)}
-          {balanceState === 'set' ? confirmBtnMarkup(false) : confirmBtnMarkup(true)}
-        </div>
-      </form>
       <GoToReport />
-      {isReminderShown === true && (
+      <div className={s.flex}>
+      <span className={s.title}>Баланс:</span>
+        {isReminderShown === true && (
         <div className={s.reminding}>
           <p>Привет! Для начала работы внеси текущий баланс своего счета!</p>
           <p className={s.remindingSubMessage}>Ты не можешь тратить деньги пока их у тебя нет! </p>
         </div>
       )}
+       <form onSubmit={submitBalanceHandler}>
+        <div>
+          {balanceState === 'set' ? inputMarkup(false) : inputMarkup(true)}
+          {balanceState === 'set' ? confirmBtnMarkup(false) : confirmBtnMarkup(true)}
+        </div>
+      </form>
+      </div>
+      
       {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
     </div>
   );

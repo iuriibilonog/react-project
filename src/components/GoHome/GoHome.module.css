@@ -1,3 +1,6 @@
+@import '../../utils/variables.css';
+
+
 .btn {
   width: 174px;
   height: 24px;
@@ -7,6 +10,12 @@
   line-height: 1.17;
   color: rgba(82, 85, 95, 0.7);
   border: none;
+  background-color: transparent;
+}
+.btn:hover .text,
+.btn:focus .text{
+  color: var(--accent-bright);
+
 }
 .svgBtn {
   margin-right: 15px;

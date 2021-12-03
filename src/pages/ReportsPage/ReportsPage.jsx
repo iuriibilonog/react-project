@@ -8,13 +8,15 @@ import Container from '../../components/Container'
 const ReportsPage = () => {
   
   return (
-    <Container>
+    <>
+      <Container>
       <GoHome />
-      <CurrentMonth />
+        <CurrentMonth />
+        </Container>
       <Report />
       {/* <Chart/> */}
     
-    </Container>
+    </>
   );
 };
 
