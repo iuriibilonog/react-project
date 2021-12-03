@@ -5,6 +5,6 @@ import { isUserLoggedIn } from '../../../redux/selectors';
 const PrivateRoute = ({ children, ...routeProps }) => {
   const isLoggedIn = useSelector(isUserLoggedIn);
   console.log(children);
-  return <Route {...routeProps}>{isLoggedIn ? children : <Redirect to="/" />}</Route>;
+  return <Route {...routeProps}>{isLoggedIn ? children : <Redirect to="/authorization" />}</Route>;
 };
 export default PrivateRoute;

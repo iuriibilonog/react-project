@@ -1,22 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import sprite from '../../img/sprite.svg';
 import { format } from 'date-fns';
+import { getDataMonth } from '../../redux/transactions-operations';
 import s from './CurrentMonth.module.css';
 
 const CurrentMonth = () => {
   const [curMonth, setCurMon] = useState(new Date().getMonth() + 1);
   const [year, setYear] = useState(new Date().getFullYear());
 
-  // console.log(curMonth);
-  // console.log(year);
-  //   const monthLit = curMonth.toLocaleString('ru', {
-  //     month: 'long',
-  //   });
-  //   const yearLit = year.toLocaleString('ru', {
-  //     year: 'numeric',
-  //   });
-  // const date = new Date(this.year, this.month + 1);
-  // this.setState({ date });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDataMonth(`${year}-${curMonth}`));
+  }, [dispatch, year, curMonth]);
+
   const handlePrevMonth = () => {
     if (curMonth === 1) {
       setYear(year => (year -= 1));
