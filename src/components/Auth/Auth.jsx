@@ -76,6 +76,7 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
     if (!isLoginType) {
       setSocialAuth(false)
       dispatch(register({ email, password, socialAuth }))
+      setIsLoginType(true)
       console.log('Сабмит формы Регистрация')
       getTypeOfAuth(false)
       setEmail('');
