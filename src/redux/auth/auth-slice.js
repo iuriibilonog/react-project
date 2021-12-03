@@ -24,7 +24,7 @@ const authSlice = createSlice({
   extraReducers: {
     [register.fulfilled](state, action) {
       state.user = action.payload.data;
-      state.isLoggedIn = true;
+      // state.isLoggedIn = true;
       state.socialAuth = action.payload.socialAuth;
     },
     [login.fulfilled](state, action) {
@@ -56,6 +56,7 @@ const authSlice = createSlice({
       state.token = action?.payload?.newAccessToken;
       state.user.accessToken = action?.payload?.newAccessToken;
       state.user.refreshToken = action?.payload?.newRefreshToken;
+      state.userBalance = state.user.userData.balance;
     },
     [checkCurrentUser.rejected](state) {
       state.isCheckingUser = false;
