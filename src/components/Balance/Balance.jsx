@@ -9,10 +9,8 @@ import { getIncomes, getExpenses } from '../../redux/transactions-selectors';
 import GoToReport from '../GoToReport';
 import { updateBalance } from '../../redux/transactions-operations';
 const Balance = () => {
-  //const strangeConst = 15.777777699999433;
   const initbalance = useSelector(getBalance);
   const userBalanceFromAuth = useSelector(getUserBalance);
-  //const userBalance = useSelector(state => state.auth.user.userData.balance);
   const isSystemStarted = useSelector(getIsSystemInitialised);
 
   const expenses = useSelector(getExpenses).length;
@@ -51,6 +49,7 @@ const Balance = () => {
 
   useEffect(() => {
     if (isSystemStarted || expenses || incomes) {
+      console.log('userBalanceFromAuth', userBalanceFromAuth);
       pushBalanceToState(userBalanceFromAuth); //  - to state only
       setInitBalance(userBalanceFromAuth);
       setBalanceState('set');
