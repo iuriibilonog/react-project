@@ -47,7 +47,9 @@ export const addExpenseTransaction = createAsyncThunk(
   },
 );
 
-export const getExpensesTransactions = createAsyncThunk('transactions/getExpenses', async () => {
+export const getExpensesTransactions = createAsyncThunk('transactions/getExpenses', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  token.set(state.auth.token);
   try {
     const { data } = await axios.get('/transaction/expense');
 
