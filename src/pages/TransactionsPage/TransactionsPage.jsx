@@ -1,4 +1,4 @@
-import s from './TransactionsPage.module.css'
+import s from './TransactionsPage.module.css';
 import IncomesAndExpensesList from '../../components/IncomesAndExpensesList';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,8 +7,10 @@ import {
   getIncomeTransactions,
   getExpensesTransactions,
 } from '../../redux/transactions-operations';
+import Container from '../../components/Container'
 import FormAddCategory from '../../components/FormAddCategory';
 import Balance from '../../components/Balance/Balance';
+import Summary from '../../components/Summary/Summary';
 
 const TransactionsPage = () => {
   const [isExpenses, setIsExpenses] = useState(true);
@@ -23,36 +25,45 @@ const TransactionsPage = () => {
   let expenses = useSelector(getExpenses);
 
   return (
-    <>
-      <button
-              type="button"
-              className={s.navBtn}
-        onClick={() => {
-          dispatch(getIncomeTransactions());
-          setIsExpenses(false);
-        }}
-      >
-        {' '}
-        Доход
-      </button>
-      <button
-              type="button"
-              className={s.navBtn}
-        onClick={() => {
-          dispatch(getExpensesTransactions());
+    <Container>
+      <div className={s.incomesWrapper}>
+        <div className={s.buttonsHolder}>
+        <button
+          type="button"
+          className={s.navBtn}
+          onClick={() => {
+            dispatch(getIncomeTransactions());
+            setIsExpenses(false);
+          }}
+        >
+          {' '}
+         ДОХОД
+        </button>
+        <button
+          type="button"
+          className={`${s.navBtn} ${s.active}`}
+          onClick={() => {
+            dispatch(getExpensesTransactions());
             setIsExpenses(true);
-        }}
-      >
-        Расход
-      </button>
-      <Balance />
-      <FormAddCategory />;
-      <IncomesAndExpensesList
-        transactions={isExpenses ? expenses : incomes}
-        transactionsType={isExpenses ? 'expenses' : 'incomes'}
-        operationSign={isExpenses ? '-' : ''}
-      />
-    </>
+          }}
+        >
+         РАСХОД
+          </button>
+          </div>
+        <div className={s.incomesContainer}>
+          <Balance />
+          <FormAddCategory />;
+          <div className={s.tableWrapper}>
+          <IncomesAndExpensesList
+            transactions={isExpenses ? expenses : incomes}
+            transactionsType={isExpenses ? 'expenses' : 'incomes'}
+            operationSign={isExpenses ? '-' : ''}
+          />
+            <Summary />
+            </div>
+        </div>
+      </div>
+    </Container>
   );
 };
 

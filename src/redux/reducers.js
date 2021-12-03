@@ -32,10 +32,10 @@ const balanceReducer = createReducer(0, {
 });
 
 const expensesReducer = createReducer([], {
-  [getExpensesTransactions.fulfilled]: (_, action) => action.payload.expenses,
-  [addExpenseTransaction.fulfilled]: (state, action) => [...state, action.payload.transaction],
+  [getExpensesTransactions.fulfilled]: (_, action) => action?.payload?.expenses,
+  [addExpenseTransaction.fulfilled]: (state, action) => [...state, action?.payload?.transaction],
   [deleteTransaction.fulfilled]: (state, action) =>
-    [...state].filter(item => item._id !== action.payload),
+    [...state].filter(item => item._id !== action?.payload),
   // [getDataMonth.fulfilled]: (_, action) => action?.payload?.expenses,
 });
 
