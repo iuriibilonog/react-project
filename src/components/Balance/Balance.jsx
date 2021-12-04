@@ -40,18 +40,6 @@ const Balance = () => {
     setTimerId(timerId);
   };
 
-  const confirmBtnMarkup = isEnabled => {
-    return isEnabled ? (
-      <button type="submit" className={s.confirmBtn}>
-        Подтвердить
-      </button>
-    ) : (
-      <button type="submit" className={s.confirmBtn_disabled} disabled>
-        Подтвердить
-      </button>
-    );
-  };
-
   useEffect(() => {
     if (userBalanceFromAuth || isSystemStarted || expenses || incomes) {
       pushBalanceToState(userBalanceFromAuth); //  - to state only
@@ -139,6 +127,18 @@ const Balance = () => {
     setBalance(event.target.value.trim());
   };
 
+  const confirmBtnMarkup = isEnabled => {
+    return isEnabled ? (
+      <button type="submit" className={s.confirmBtn}>
+        Подтвердить
+      </button>
+    ) : (
+      <button type="submit" className={s.confirmBtn_disabled} disabled>
+        Подтвердить
+      </button>
+    );
+  };
+
   const inputMarkup = isEnabled => {
     return isEnabled ? (
       <input
@@ -178,7 +178,7 @@ const Balance = () => {
           </div>
         )}
         <form onSubmit={submitBalanceHandler}>
-          <div>
+          <div className={s.formWrapper}>
             {balanceState === 'set' ? inputMarkup(false) : inputMarkup(true)}
             {balanceState === 'set' ? confirmBtnMarkup(false) : confirmBtnMarkup(true)}
           </div>

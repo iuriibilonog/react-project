@@ -20,7 +20,6 @@ import PublicRoute from './components/Routes/PublicRoute';
 import PrivateRoute from './components/Routes/PrivateRoute';
 import Loader from './components/Loader';
 
-
 function App() {
   const dispatch = useDispatch();
   const sid = useSelector(state => state.auth.sid);
@@ -39,13 +38,13 @@ function App() {
 
   return (
     <div className="App">
-
       {/* <Chart /> */}
-      {/* <SwitchTheme /> */}
+      <SwitchTheme />
 
       <header className="App-header"></header>
 
       <NavBar />
+
     {/* <IncomesPage/> */}
       <Suspense fallback={<Loader />} />
       <Switch>
@@ -54,10 +53,8 @@ function App() {
         </PublicRoute>
         <PrivateRoute exact path="/">
           <TransactionsPage />
-
         </PrivateRoute>
         <PrivateRoute exact path="/reports">
-
           <ReportsPage />
         </PrivateRoute>
       </Switch>

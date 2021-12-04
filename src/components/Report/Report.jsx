@@ -5,7 +5,7 @@ import s from './Report.module.css';
 
 import { setIncomesByCategories } from '../../redux/actions';
 import Chart from '../Chart';
-import Container from '../Container';
+
 import ReportAmount from './ReportAmount';
 import { useSelector } from 'react-redux';
 import {
@@ -16,10 +16,11 @@ import {
   getTotalExpensesByCategory,
   getTotalIncomesByCategory,
 } from '../../redux/transactions-selectors';
+
 import { useState } from 'react';
 import ReportIncomesList from './ReportIncomesList/ReportIncomesList';
 import ReportExpensesList from './ReportExpensesList/ReportExpensesList';
-import GoHome from '../GoHome/GoHome';
+import GoHome from '../GoHome/';
 import CurrentMonth from '../CurrentMonth/CurrentMonth';
 import Balance from '../Balance';
 
@@ -37,19 +38,17 @@ const Report = () => {
     else setReportTypeRender('incomes');
   };
 
-  const getCategory = e => {
-    setCategory(console.log(e.target.attributes.title.nodeValue));
-  };
-
-  const getTotalIncomesByCategories = useSelector(getTotalIncomesByCategory);
-
-  console.log(`getTotalIncomesByCategories`, getTotalIncomesByCategories);
 
   const getInomesCategory = useSelector(getInomesCategories);
   console.log(`getInomesCategory`, getInomesCategory);
 
+  const getTotalIncomesByCategories = useSelector(getTotalIncomesByCategory);
+  const zp = getInomesCategory[0];
+
+  // console.log(`getTotalIncomesByCategories`, getTotalIncomesByCategories[zp]);
+
   const newIncomes = getInomesCategory.map(item => {
-    console.log(`item`, item);
+
     if (getTotalIncomesByCategories[item]) {
       return {
         sum: getTotalIncomesByCategories[item].total,
@@ -59,6 +58,7 @@ const Report = () => {
     }
     return false;
   });
+
 
   const getTotalExpensesByCategories = useSelector(getTotalExpensesByCategory);
   console.log(`getTotalIncomesByCategories`, getTotalExpensesByCategories);
@@ -77,6 +77,13 @@ const Report = () => {
     }
     return false;
   });
+
+  const [dataForChartSubCategories, setDataForChartSubCategories] = useState(null);
+  const chartDataHandler = data => {
+    setDataForChartSubCategories(data);
+    console.log(dataForChartSubCategories);
+  };
+
 
   return (
     <>
@@ -112,7 +119,11 @@ const Report = () => {
                   <p>Доходы</p>
                 ) : (
                   newIncomes.map(item => (
-                    <ReportIncomesList category={item.category} sum={item.sum} />
+                    <ReportIncomesList
+                      category={item.category}
+                      sum={item.sum}
+                      chartDataHandler={chartDataHandler}
+                    />
                   ))
                 )}
               </ul>
@@ -123,7 +134,12 @@ const Report = () => {
                   <p>Расходы</p>
                 ) : (
                   newExensescomes.map(item => (
-                    <ReportExpensesList category={item.category} sum={item.sum} />
+                    <ReportExpensesList
+                      category={item.category}
+                      sum={item.sum}
+                      type={reportTypeRender}
+                      chartDataHandler={chartDataHandler}
+                    />
                   ))
                 )}
               </ul>
@@ -131,11 +147,22 @@ const Report = () => {
           </div>
         </div>
 
-        <Chart
+        {dataForChartSubCategories && (
+          <Chart
+            chartTypeRender={reportTypeRender}
+            data={dataForChartSubCategories}
+            /* newExensescomes={newExensescomes} */
+          />
+        )}
+        {/*  <Chart
+
           chartTypeRender={reportTypeRender}
           newIncomes={newIncomes}
           newExensescomes={newExensescomes}
         />
+
+ */}{' '}
+
       </Container>
     </>
   );
