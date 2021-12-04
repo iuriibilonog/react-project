@@ -5,7 +5,7 @@ import s from './Report.module.css';
 
 import { setIncomesByCategories } from '../../redux/actions';
 import Chart from '../Chart';
-
+import Container from '../Container';
 import ReportAmount from './ReportAmount';
 import {  useSelector } from 'react-redux';
 import { getExpenses, getExpensesCategories, getIncomes, getInomesCategories, getTotalExpensesByCategory, getTotalIncomesByCategory } from '../../redux/transactions-selectors';
@@ -29,7 +29,7 @@ const Report = () => {
     if (reportTypeRender === 'incomes') setReportTypeRender('expenses');
     else setReportTypeRender('incomes');
   };
-
+  
 
   const getCategory = e => {
     setCategory(console.log(e.target.attributes.title.nodeValue));
@@ -41,7 +41,7 @@ const Report = () => {
  const getInomesCategory = useSelector(getInomesCategories);
  console.log(`getInomesCategory`, getInomesCategory)
 
- const newIncomes = getInomesCategory ? getInomesCategory.map((item) => {
+ const newIncomes = getInomesCategory.map((item) => {
    console.log(`item`, item)
    if(getTotalIncomesByCategories[item]){
     return {
@@ -51,15 +51,17 @@ const Report = () => {
     };
    }
    return false;
- }) : false;
+ });
 
 
   const getTotalExpensesByCategories = useSelector(getTotalExpensesByCategory);
   console.log(`getTotalIncomesByCategories`, getTotalExpensesByCategories)
+  const fullDataAboutExpenses = Object.entries(getTotalExpensesByCategories);
+  console.log(fullDataAboutExpenses)
 
  const getExpensesCategory = useSelector(getExpensesCategories);
  console.log(`getInomesCategory`, getExpensesCategory)
- const newExensescomes = getExpensesCategory ? getExpensesCategory.map((item) => {
+ const newExensescomes = getExpensesCategory.map((item) => {
    console.log(`item`, item)
    if(getTotalExpensesByCategories[item]){
     return {
@@ -69,10 +71,11 @@ const Report = () => {
     };
    }
    return false;
- }) : false;
+ });
 
   return (
     <>
+      <Container>
       <div className={s.reportContainer}>
       <ReportAmount />
         <div className={`${s.navigation} ${s.section}`}>
@@ -119,7 +122,7 @@ const Report = () => {
         </div>
       </div>
 
-      <Chart chartTypeRender={reportTypeRender}/>
+        <Chart chartTypeRender={reportTypeRender} newIncomes={newIncomes} newExensescomes={newExensescomes}/>
     </Container>
 
     </>
@@ -127,3 +130,4 @@ const Report = () => {
   );
 };
 export default Report;
+

@@ -54,10 +54,29 @@ const data = [
   }
 ];
 
-const Chart = ({chartTypeRender}) => {
-  const incomesData = useSelector(state => state.transactions.transactions.incomesByCategory);
-  const expencesData = useSelector(state => state.transactions.transactions.expensesByCategory);
+const Chart = ({chartTypeRender, newIncomes, newExensescomes}) => {
+  // const incomesData = useSelector(state => state.transactions.transactions.incomesByCategory);
+  // const expencesData = useSelector(state => state.transactions.transactions.expensesByCategory);
+  
   let chartData;
+  const incomesData = newIncomes.filter(item => item !== false).map(item => {
+    return {
+       name: item.category,
+      'Сумма': item.sum
+    }
+  })
+
+  const expencesData = newExensescomes.filter(item => item !== false).map(item => {
+    console.log(item)
+    return {
+      
+      name: item.category,
+      'Сумма': item.sum
+    }
+  })
+
+  console.log(incomesData)
+  console.log(expencesData)
 
   
   chartTypeRender === 'incomes' ? chartData = incomesData : chartData = expencesData;
