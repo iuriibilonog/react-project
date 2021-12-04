@@ -23,7 +23,6 @@ import ReportExpensesList from './ReportExpensesList/ReportExpensesList';
 import GoHome from '../GoHome/';
 import CurrentMonth from '../CurrentMonth/CurrentMonth';
 import Balance from '../Balance';
-import Container from '../Container';
 
 const Report = () => {
   const [category, setCategory] = useState('');
@@ -39,6 +38,7 @@ const Report = () => {
     else setReportTypeRender('incomes');
   };
 
+
   const getInomesCategory = useSelector(getInomesCategories);
   console.log(`getInomesCategory`, getInomesCategory);
 
@@ -48,6 +48,7 @@ const Report = () => {
   // console.log(`getTotalIncomesByCategories`, getTotalIncomesByCategories[zp]);
 
   const newIncomes = getInomesCategory.map(item => {
+
     if (getTotalIncomesByCategories[item]) {
       return {
         sum: getTotalIncomesByCategories[item].total,
@@ -58,52 +59,12 @@ const Report = () => {
     return false;
   });
 
-  //----------
-
-  // const newIncomesForChart = getInomesCategory.map(item => {
-  //   if (getTotalIncomesByCategories[item]) {
-  //     return Object.entries(getTotalIncomesByCategories[item]);
-  //   } else return false;
-  // });
-
-  // const newSubCategForChart = newIncomesForChart.map(subArr => {
-  //   const result = subArr.map(item => {
-  //     if (item[0] !== 'total') return item;
-  //     else return false;
-  //   });
-  //   return result;
-  // });
-
-  // const resultForChart = newSubCategForChart.map((element, index) => {
-  //   const lastResult = element.filter(subElement => subElement !== false);
-  //   console.log(index, '-', element);
-  //   return lastResult;
-  // });
-  // console.log(resultForChart);
-
-  // const newSubCategForChart = newIncomesForChart.map(([subCategoryName, subCategoryValue]) => {
-
-  //   if (subCategoryName !== 'total') {
-  //     dataForChartSubCategories = {
-  //       [sumForChart]: subCategoryValue,
-  //       [subCategoryForChart]: subCategoryName,
-  //     };
-  //     console.log(dataForChartSubCategories);
-  //     return dataForChartSubCategories;
-  //   }
-  //   return false;
-  // });
-  // console.log(getTotalIncomesByCategories);
-  // console.log('newIncomesForChart', newIncomesForChart);
-  // console.log('newSubCategForChart', newSubCategForChart);
-
-  // console.log('SELECTOR', useSelector(getMonthStatsIncomes));
-  //------------------
 
   const getTotalExpensesByCategories = useSelector(getTotalExpensesByCategory);
   console.log(`getTotalIncomesByCategories`, getTotalExpensesByCategories);
   const fullDataAboutExpenses = Object.entries(getTotalExpensesByCategories);
   console.log(fullDataAboutExpenses);
+
   const getExpensesCategory = useSelector(getExpensesCategories);
   console.log(`getInomesCategory`, getExpensesCategory);
   const newExensescomes = getExpensesCategory.map(item => {
@@ -116,11 +77,13 @@ const Report = () => {
     }
     return false;
   });
+
   const [dataForChartSubCategories, setDataForChartSubCategories] = useState(null);
   const chartDataHandler = data => {
     setDataForChartSubCategories(data);
     console.log(dataForChartSubCategories);
   };
+
 
   return (
     <>
@@ -183,6 +146,7 @@ const Report = () => {
             )}
           </div>
         </div>
+
         {dataForChartSubCategories && (
           <Chart
             chartTypeRender={reportTypeRender}
@@ -190,12 +154,15 @@ const Report = () => {
             /* newExensescomes={newExensescomes} */
           />
         )}
-        {/*         <Chart
+        {/*  <Chart
+
           chartTypeRender={reportTypeRender}
           newIncomes={newIncomes}
           newExensescomes={newExensescomes}
         />
+
  */}{' '}
+
       </Container>
     </>
   );

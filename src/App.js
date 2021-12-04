@@ -18,6 +18,7 @@ import Chart from './components/Chart';
 
 import PublicRoute from './components/Routes/PublicRoute';
 import PrivateRoute from './components/Routes/PrivateRoute';
+import Loader from './components/Loader';
 
 function App() {
   const dispatch = useDispatch();
@@ -43,8 +44,9 @@ function App() {
       <header className="App-header"></header>
 
       <NavBar />
-      {/* <IncomesPage/> */}
-      <Suspense fallback={<h1>LOADING...</h1>} />
+
+    {/* <IncomesPage/> */}
+      <Suspense fallback={<Loader />} />
       <Switch>
         <PublicRoute exact path="/authorization" restricted>
           <HomePage />
