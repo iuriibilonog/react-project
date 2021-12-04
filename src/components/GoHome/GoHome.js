@@ -7,26 +7,12 @@ const GoHome = () => {
 
   return (
     <>
-      {/* {width > 768 ? ( */}
-        <button className={s.btn}>
-          <NavLink exact to="/">
-            <svg className={s.svgBtn} width="18" height="12">
-              <use href={sprite + '#icon-toHome'}></use>
-            </svg>
-          </NavLink>
-          <NavLink className={s.text} to="/">
-            Вернуться на главную
-          </NavLink>
-        </button>
-      {/* ) : (
-        <button>
-          <NavLink exact to="/">
-            <svg width="18" height="12">
-              <use href={sprite + '#icon-toHome'}></use>
-            </svg>
-          </NavLink>
-        </button>
-      )} */}
+      <NavLink className={s.btn} exact to="/">
+        <svg className={s.svgBtn} width="18" height="12">
+          <use href={sprite + '#icon-toHome'}></use>
+        </svg>
+        <span className={s.text}> Вернуться на главную</span>
+      </NavLink>
     </>
   );
 };
