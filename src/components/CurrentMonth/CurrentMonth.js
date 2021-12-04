@@ -1,43 +1,45 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import sprite from '../../img/sprite.svg';
+import { format } from 'date-fns';
+import { getDataMonth } from '../../redux/transactions-operations';
 import s from './CurrentMonth.module.css';
 
 const CurrentMonth = () => {
   const [curMonth, setCurMon] = useState(new Date().getMonth() + 1);
   const [year, setYear] = useState(new Date().getFullYear());
 
-  // console.log(curMonth);
-  // console.log(year);
-  //   const monthLit = curMonth.toLocaleString('ru', {
-  //     month: 'long',
-  //   });
-  //   const yearLit = year.toLocaleString('ru', {
-  //     year: 'numeric',
-  //   });
-  // const date = new Date(this.year, this.month + 1);
-  // this.setState({ date });
-  const handlePrevMonth = () => {
-    setCurMon(curMonth => {
-      if (curMonth === 1) {
-        console.log(year);
-        setYear(year => (year -= 1));
+  const dispatch = useDispatch();
 
-        setCurMon(12);
-      }
-      return (curMonth -= 1);
-    });
-    console.log(curMonth);
+  useEffect(() => {
+    if (curMonth < 10) {
+      const month = `0${curMonth}`;
+      console.log(month);
+      dispatch(getDataMonth(`${year}-${month}`));
+    } else {
+      dispatch(getDataMonth(`${year}-${curMonth}`));
+    }
+  }, [dispatch, year, curMonth]);
+
+  const handlePrevMonth = () => {
+    if (curMonth === 1) {
+      setYear(year => (year -= 1));
+      setCurMon(12);
+    } else {
+      setCurMon(curMonth => (curMonth -= 1));
+    }
   };
   const handleNextMonth = () => {
-    setCurMon(curMonth => {
-      if (curMonth === 12) {
-        setYear(year => (year += 1));
-        setCurMon(1);
-      }
-      return (curMonth += 1);
-    });
-    console.log(curMonth);
+    if (curMonth === 12) {
+      setYear(year => (year += 1));
+      setCurMon(1);
+    } else {
+      setCurMon(curMonth => (curMonth += 1));
+    }
   };
+
+  // const mothLit = format(curMonth, 'mmmm');
+  // console.log(mothLit);
 
   return (
     <div className={s.currentMonthBlock}>

@@ -1,19 +1,5 @@
 @import '../../../utils/variables.css';
 
-/* .changeFlow {background-color: rosybrown;}
-.date {
-    background-color: yellowgreen;
-}
-.description {
-    background-color: aquamarine;
-}
-.category {
-    background-color: royalblue;
-}
-.flex {
-    background-color: saddlebrown;
-} */
-
 .listItem {
   display: flex;
 
@@ -59,13 +45,12 @@
 }
 
 .expenses {
-  /* flex-grow: 1; */
   font-weight: bold;
   color: var(--font-expenses);
 }
 .incomes {
   font-weight: bold;
-  color:var(--font-incomes);
+  color: var(--font-incomes);
 }
 
 .delete {
@@ -95,7 +80,7 @@
 }
 @media screen and (max-width: 250px) {
   .category {
-    display: none; 
+    display: none;
     visibility: none;
   }
 }
@@ -108,11 +93,8 @@
   .flex {
     margin-left: auto;
   }
-
-  /* .amount {
-    flex-grow: 1;
-  } */
 }
+
 @media screen and (min-width: 768px) {
   .changeFlow {
     margin-right: 0;

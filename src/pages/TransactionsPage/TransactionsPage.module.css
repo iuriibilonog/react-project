@@ -1,0 +1,85 @@
+@import '../../utils/variables.css';
+
+.buttonsHolder {
+  display: flex;
+}
+.navBtn {
+  color: var(--font-primary);
+  border: var(--bg-secondary) 1px solid;
+  width: 50%;
+  height: 53px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.16;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-width: 1px;
+}
+
+.navBt.active {
+  background-color: var(--accent-bright);
+  font: var(--bg-primary);
+  border-color: var(--accent-bright);
+}
+
+.incomesWrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.elementsWrapper {
+  border-top-right-radius: 20px;
+  background-color: transparent;
+  width: 320px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (min-width: 768px) {
+  .incomesWrapper {
+    flex-direction: column;
+    width: 665px;
+  }
+
+  .elementsWrapper {
+    width: 665px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: var(--bg-primary);
+  }
+
+  .navBtn {
+    width: 138px;
+    height: 40px;
+    padding: 20px;
+    background-color: var(--bg-tabs);
+    border-radius: 20px 20px 0 0;
+    border-color: transparent;
+  }
+  .navBtn.active {
+    background-color: var(--bg-primary);
+    background: #fefefe;
+    color: var(--accent-bright);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .incomesWrapper {
+    width: 1060px;
+  }
+  .elementsWrapper {
+    width: 1060px;
+  }
+}

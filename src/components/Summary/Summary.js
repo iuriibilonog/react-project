@@ -7,19 +7,21 @@ const Summary = () => {
 
   return (
     <>
-      <div className={s.summarySection}>
-        <h3 className={s.title}>Сводка</h3>
-        <ul>
-          {Object.entries(summary)
-            .filter(([key, value]) => value !== 'N/A')
-            .map(([key, value]) => (
-              <li className={s.item} key={key}>
-                <span className={s.itemMonthSum}>{key}</span>
-                <span className={s.itemMonthSum}>{value}</span>
-              </li>
-            ))}
-        </ul>
-      </div>
+      {summary && (
+        <div className={s.summarySection}>
+          <h3 className={s.title}>Сводка</h3>
+          <ul>
+            {Object.entries(summary)
+              .filter(([key, value]) => value !== 'N/A')
+              .map(([key, value]) => (
+                <li className={s.item} key={key}>
+                  <span className={s.itemMonthSum}>{key}</span>
+                  <span className={s.itemMonthSum}>{value}</span>
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
     </>
   );
 };

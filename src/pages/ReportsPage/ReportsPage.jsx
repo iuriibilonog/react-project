@@ -2,15 +2,30 @@ import Report from '../../components/Report';
 import CurrentMonth from '../../components/CurrentMonth/CurrentMonth';
 import GoHome from '../../components/GoHome/GoHome';
 
-const ReportPage = () => {
+
+import s from './ReportsPage.module.css';
+
+import Chart from '../../components/Chart';
+
+import Container from '../../components/Container'
+
+
+
+const ReportsPage = () => {
   
   return (
+
     <>
+      <Container>
       <GoHome />
-      <CurrentMonth />
-      <Report  />
+        <CurrentMonth />
+        </Container>
+      <Report />
+      {/* <Chart/> */}
+    
     </>
+
   );
 };
 
-export default ReportPage;
+export default ReportsPage;

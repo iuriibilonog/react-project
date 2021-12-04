@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import sprite from '../../img/sprite.svg';
 import s from './GoHome.module.css';
 
@@ -7,26 +7,26 @@ const GoHome = () => {
 
   return (
     <>
-      {width > 768 ? (
+      {/* {width > 768 ? ( */}
         <button className={s.btn}>
-          <Link to="/">
+          <NavLink exact to="/">
             <svg className={s.svgBtn} width="18" height="12">
               <use href={sprite + '#icon-toHome'}></use>
             </svg>
-          </Link>
-          <Link className={s.text} to="/">
+          </NavLink>
+          <NavLink className={s.text} to="/">
             Вернуться на главную
-          </Link>
+          </NavLink>
         </button>
-      ) : (
+      {/* ) : (
         <button>
-          <Link to="/">
+          <NavLink exact to="/">
             <svg width="18" height="12">
               <use href={sprite + '#icon-toHome'}></use>
             </svg>
-          </Link>
+          </NavLink>
         </button>
-      )}
+      )} */}
     </>
   );
 };
