@@ -5,7 +5,9 @@
 
   --bg-primary: white;
   --bg-secondary: #f2f5fc; /* #f5f6fb */
-  --bg-tabs:#FAFBFD;
+  --bg-tab:#FAFBFD;
+  --bg-tab-active: #FEFEFE;
+  
 
   --font-primary: black;
   --font-secondary: #52555f;

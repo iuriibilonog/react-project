@@ -8,7 +8,7 @@ import {
   getExpensesTransactions,
   getIncomesCategories,
   getExpensesCategories,
-  getDataMonth
+  getDataMonth,
 } from '../../redux/transactions-operations';
 
 import Container from '../../components/Container';
@@ -22,7 +22,14 @@ const TransactionsPage = () => {
   const [isExpenses, setIsExpenses] = useState(true);
   const [curMonth, setCurMon] = useState(new Date().getMonth() + 1);
   const [year, setYear] = useState(new Date().getFullYear());
+
   const loader = useSelector(getLoader);
+
+  const [isExpensesTabActive, setExpensesTabActive] = useState(true);
+  const [isIncomesTabActive, setIsIncomesTabActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false)
+
+
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -32,39 +39,48 @@ const TransactionsPage = () => {
   let incomes = useSelector(getIncomes);
   let expenses = useSelector(getExpenses);
 
+  const handleToggle = () => {
+    setIsIncomesTabActive(!isIncomesTabActive);
+    setExpensesTabActive(!isExpensesTabActive);
+  };
+
   return (
     <>
-    <Container>
-    {loader && <Loader />}
-       <Balance />
-      <div className={s.incomesWrapper}>
-        <div className={s.buttonsHolder}>
-          <button
-            type="button"
-            className={s.navBtn}
-            onClick={() => {
-              dispatch(getIncomesCategories());
-              dispatch(getIncomeTransactions());
-              dispatch(getDataMonth(`${year}-${curMonth}`));
-              setIsExpenses(false);
-            }}
-          >
-            {' '}
-            ДОХОД
-          </button>
 
-          <button
-            type="button"
-            className={`${s.navBtn} ${s.active}`}
-            onClick={() => {
-              dispatch(getExpensesTransactions());
-              dispatch(getExpensesCategories());
-              setIsExpenses(true);
-            }}
-          >
-            РАСХОД
-          </button>
-{/* //         </div>
+      <Container>
+             {loader && <Loader />}
+        <Balance />
+        <div className={s.mainWrapper}>
+          <div className={s.buttonsHolder}>
+            <button
+              type="button"
+              className={`navBtn ${isIncomesTabActive ? 'navBtnActive' : null}`}
+              onClick={() => {
+                dispatch(getIncomesCategories());
+                dispatch(getIncomeTransactions());
+                dispatch(getDataMonth(`${year}-${curMonth}`));
+                setIsExpenses(false);
+                handleToggle();
+              }}
+            >
+              {' '}
+              ДОХОД
+            </button>
+
+
+            <button
+              type="button"
+              className={`navBtn ${isExpensesTabActive ? 'navBtnActive' : null}`}
+              onClick={() => {
+                dispatch(getExpensesTransactions());
+                dispatch(getExpensesCategories());
+                setIsExpenses(true);
+                handleToggle();
+              }}
+            >
+              РАСХОД
+            </button>
+            {/* //         </div>
 //         <div className={s.incomesContainer}>
 //           <Balance />
 //           <FormAddCategory isExpenses={isExpenses ? 'expenses' : 'incomes'} />;
@@ -76,21 +92,25 @@ const TransactionsPage = () => {
 //             />
 //             <Summary />
 //           </div> */}
-
           </div>
-        <div className={s.elementsWrapper}>
-          <FormAddCategory isExpenses={isExpenses ? "expenses" : "incomes"}/>
-          <IncomesAndExpensesList
-            transactions={isExpenses ? expenses : incomes}
-            transactionsType={isExpenses ? 'expenses' : 'incomes'}
-            operationSign={isExpenses ? '-' : ''}
-          />
-           <Summary />
-
+          <div className={s.shadowBigScreen}>
+            <div className={s.form}>
+              <FormAddCategory isExpenses={isExpenses ? 'expenses' : 'incomes'} />
+            </div>
+            <div className={s.shadowSmallScreen}>
+              <IncomesAndExpensesList
+                transactions={isExpenses ? expenses : incomes}
+                transactionsType={isExpenses ? 'expenses' : 'incomes'}
+                operationSign={isExpenses ? '-' : ''}
+              />
+            </div>
+            <div className={s.summaryHolder}>
+              <Summary className={s.summary} />
+            </div>
+          </div>
         </div>
-      </div>
       </Container>
-      </>
+    </>
   );
 };
 
