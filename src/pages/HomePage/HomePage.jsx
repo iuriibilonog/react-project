@@ -8,20 +8,14 @@ import { useEffect, useState } from 'react';
 
 import FormAddCategory from '../../components/FormAddCategory';
 
-import { isUserLoggedIn } from '../../redux/selectors';
-import { useSelector } from 'react-redux';
 import IncomesPage from '../IncomesPage';
 import NavigationBetweenCategories from '../../components/FormAddCategory/NavigationBetweenCategoryes/NavigationBetweenCategoryes';
-
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getIncomesCategories } from '../../redux/transactions-operations';
 import { getExpensesCategories } from '../../redux/transactions-operations';
-import { getIncomeTransactions} from '../../redux/transactions-operations';
-import { isUserLoggedIn } from '../../redux/selectors'
-
-
-
+import { getIncomeTransactions } from '../../redux/transactions-operations';
+import { isUserLoggedIn } from '../../redux/selectors';
 
 const HomePage = () => {
   const isLoggedIn = useSelector(isUserLoggedIn);
@@ -30,22 +24,22 @@ const HomePage = () => {
   const [socialImg, setSocialImg] = useState('');
   const [socialName, setSocialName] = useState('');
   const [isAuthFromSocial, setIsAuthFromSocial] = useState(false);
-  
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('ok')
+    console.log('ok');
     console.log('before-->', isLoggedIn);
     if (isLoggedIn) {
-      dispatch(getIncomesCategories())
-      dispatch(getExpensesCategories())
-       dispatch(getIncomeTransactions());
+      dispatch(getIncomesCategories());
+      dispatch(getExpensesCategories());
+      dispatch(getIncomeTransactions());
     }
-    
+
     console.log('after-->', isLoggedIn);
-   
-   console.log('ok2')
-  }, [isLoggedIn])
+
+    console.log('ok2');
+  }, [isLoggedIn]);
 
   const getDataFromSocial = ({ img, name }) => {
     setSocialImg(img);

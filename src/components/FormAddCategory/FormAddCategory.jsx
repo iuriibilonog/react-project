@@ -163,7 +163,6 @@ const FormAddCategory = () => {
     <>
       {/* <NavigationBetweenCategories /> */}
       <form onSubmit={handleFormSubmit} className={s.formContainer}>
-        {/* <div className={s.allInputsWrapper}> */}
         <div className={s.calendarWrapper}>
           <div className={s.calendarHelper}></div>
           <LocalizationProvider
@@ -335,7 +334,6 @@ const FormAddCategory = () => {
         {/* <Stack spacing={2} direction="row"> */}
         {/* <button type="submit">Button</button>
         <CustomButton>Disabled</CustomButton> */}
-        {/* </div> */}
         <div className={s.buttonWrapper}>
           <button className={s.authBtn + ' ' + s.authBtnActive} type="submit">
             ввод
