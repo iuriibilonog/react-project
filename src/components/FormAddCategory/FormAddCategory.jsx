@@ -48,14 +48,15 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   },
   '& .MuiInputBase-input': {
     // borderRadius: 20,
-
     // height: 29,
     borderTop: '2px solid #F5F6FB',
     borderBottom: '2px solid #F5F6FB',
     pading: 0,
     width: 156,
     fontSize: 12,
-    // padding: '10px 26px 10px 12px',
+    background: 'white',
+
+    // padding: '10p  x 26px 10px 12px',
     // transition: theme.transitions.create(['border-color', 'box-shadow']),
     // Use the system font instead of the default Roboto font.
     // fontFamily: [
@@ -76,20 +77,19 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const FormAddCategory = ({isExpenses}) => {
-
-  
-  
-  
+const FormAddCategory = ({ isExpenses }) => {
   const [value, setValue] = React.useState(new Date());
   const [category, setCategory] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [amount, setAmount] = React.useState('');
 
   const handleInputChange = event => {
+    console.log(event.target.value);
     setCategory(event.target.value);
   };
-
+  React.useEffect(() => {
+    reset();
+  }, [isExpenses]);
   const newDate = () => {
     const newDateValue = format(value, 'yyyy-MM-dd');
     return newDateValue;
@@ -106,11 +106,10 @@ const FormAddCategory = ({isExpenses}) => {
         setAmount(parseInt(event.target.value));
   };
 
-
   const handleFormSubmit = e => {
     e.preventDefault();
     newDate();
-    isExpenses==="expenses"
+    isExpenses === 'expenses'
       ? dispatch(addExpenseTransaction({ date, description, category, amount }))
       : dispatch(addIncomeTransaction({ date, description, category, amount }));
   };
@@ -126,18 +125,24 @@ const FormAddCategory = ({isExpenses}) => {
       outlineColor: 'black',
     },
   }));
+  const handleDateChange = newValue => {
+    // console.log(newValue);
+    // if (newValue.getFullYear() > 2016 && newValue.getMonth() > 0 && newValue.getMonth() < 12) {
+    //   console.log('new', newValue);
+    setValue(newValue);
+    // }
+    // console.log(value);
+  };
   const css = useStyles();
   let data = '';
   let categoryName = '';
   let textInputName = '';
 
+  data = isExpenses === 'expenses' ? expenceJson : incomesJson;
+  categoryName = isExpenses === 'expenses' ? 'Категория товара' : 'Категория дохода';
+  textInputName = isExpenses === 'expenses' ? 'Описание товара' : 'Описание дохода';
 
-  data = isExpenses === "expenses" ? expenceJson: incomesJson;
-  categoryName = isExpenses === "expenses"? 'Категория товара' : 'Категория дохода';
-  textInputName = isExpenses === "expenses" ? 'Описание товара' :  'Описание дохода';
-  
-  
-  console.log(isExpenses, categoryName)
+  console.log(isExpenses, categoryName);
 
   const reset = () => {
     setValue(new Date());
@@ -145,7 +150,6 @@ const FormAddCategory = ({isExpenses}) => {
     setDescription('');
     setAmount('');
   };
-
 
   // const useStyles = makeStyles(() => ({
   //   noBorder: {
@@ -166,7 +170,6 @@ const FormAddCategory = ({isExpenses}) => {
     },
   }));
   const calendar = useCalendar();
-
 
   const classes = useStyles();
   return (
@@ -189,7 +192,7 @@ const FormAddCategory = ({isExpenses}) => {
               // className={css.textInpt}
               size="small"
               value={value}
-              onChange={newValue => setValue(newValue)}
+              onChange={handleDateChange}
               renderInput={params => (
                 <TextField
                   {...params}
@@ -222,14 +225,22 @@ const FormAddCategory = ({isExpenses}) => {
         </div>
         <div className={s.InputsWrapper}>
           <CustomInput
-            style={{ outerHeight: '40px' }}
             // className={s.tmp}
             value={description}
-            label={textInputName}
+            placeholder={textInputName}
             name="textInput"
             onChange={handleTextChange}
+            required
           />
-
+          {/* <input
+            type="text"
+            value={description}
+            placeholder={textInputName}
+            name="textInput"
+            onChange={handleTextChange}
+            required
+            className={s.textInput}
+          /> */}
           <div className={s.containerForm}>
             {/* {UnstyledInput()} */}
             {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -258,16 +269,26 @@ const FormAddCategory = ({isExpenses}) => {
           </LocalizationProvider> */}
             {/* <div> */}
             {/* <FormControl sx={{ m: 0 }} variant="standard"> */}
-            {/* <InputLabel id="demo-customized-select-label">Age</InputLabel> */}
-            <Select
+            {/* <FormControl>
+              <InputLabel
+                // shrink
+                disableAnimation="true"
+                margin="dense"
+                variant="standard"
+                htmlFor="demo-customized-select"
+              >
+                Age
+              </InputLabel> */}
+
+            {/* <Select
               labelId="demo-customized-select-label"
               id="demo-customized-select"
               value={category}
-              label={categoryName}
               onChange={handleInputChange}
-              // value={age}
-              // onChange={handleChange}
+              required
+              placeholder={categoryName}
               input={<BootstrapInput />}
+              sx={{ outerHeight: '40px', xs: { background: 'red' } }}
             >
               {data.map(item => {
                 return (
@@ -276,7 +297,28 @@ const FormAddCategory = ({isExpenses}) => {
                   </MenuItem>
                 );
               })}
-            </Select>
+            </Select> */}
+            <div className={s.selectWrappedtmp}>
+              <select
+                className={s.select}
+                value={category}
+                onChange={handleInputChange}
+                placeholder={categoryName}
+                required
+              >
+                <option value="" disabled selected hidden>
+                  {categoryName}
+                </option>
+                {data.map(item => {
+                  return (
+                    <option style={{ color: 'red' }} id="option" key={item.id} value={item.label}>
+                      {item.label}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            {/* </FormControl> */}
             {/* </FormControl> */}
             {/* </div> */}
             {/* <TextField
