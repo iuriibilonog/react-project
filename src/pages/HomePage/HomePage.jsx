@@ -7,10 +7,10 @@ import Authorization from '../../components/Auth/Auth';
 import { useEffect, useState } from 'react';
 
 
-import FormAddCategory from '../../components/FormAddCategory';
+// import FormAddCategory from '../../components/FormAddCategory';
 
-import IncomesPage from '../IncomesPage';
-import NavigationBetweenCategories from '../../components/FormAddCategory/NavigationBetweenCategoryes/NavigationBetweenCategoryes';
+// import IncomesPage from '../IncomesPage';
+// import NavigationBetweenCategories from '../../components/FormAddCategory/NavigationBetweenCategoryes/NavigationBetweenCategoryes';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getIncomesCategories } from '../../redux/transactions-operations';
@@ -21,7 +21,8 @@ import { isUserLoggedIn } from '../../redux/selectors';
 const HomePage = () => {
   const isLoggedIn = useSelector(isUserLoggedIn);
   console.log(isLoggedIn);
-  const token = useSelector(state => state.auth.token);
+  const token = useSelector
+  (state => state.auth.token);
 
   const [socialImg, setSocialImg] = useState('');
   const [socialName, setSocialName] = useState('');

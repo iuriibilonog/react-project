@@ -3,83 +3,119 @@
 .buttonsHolder {
   display: flex;
 }
-.navBtn {
-  color: var(--font-primary);
-  border: var(--bg-secondary) 1px solid;
-  width: 50%;
-  height: 53px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 1.16;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  border-width: 1px;
-}
-
-.navBt.active {
-  background-color: var(--accent-bright);
-  font: var(--bg-primary);
-  border-color: var(--accent-bright);
-}
-
-.incomesWrapper {
+.mainWrapper {
   display: flex;
   flex-direction: column-reverse;
+
   width: 320px;
+
   margin-left: auto;
   margin-right: auto;
+
+  /* background-color: peru; */
 }
 
-.elementsWrapper {
-  border-top-right-radius: 20px;
-  background-color: transparent;
-  width: 320px;
+.shadowBigScreen {
   display: flex;
   flex-wrap: wrap;
-}
+  flex-direction: column;
 
-@media screen and (max-width: 768px) {
+  width: 100%;
+
+  border-top-right-radius: 20px;
+
+  background-color: transparent;
+  
+  
+  /* background-color: orangered !important; */
+  
+}
+.shadowSmallScreen {
+   display: flex;
+/*    
+  background-color: yellow; */
+}
+ 
+.summary {
+  width: fit-content;
 }
 
 @media screen and (min-width: 768px) {
-  .incomesWrapper {
+  .mainWrapper {
     flex-direction: column;
     width: 665px;
+
+    align-items: flex-start;
   }
 
-  .elementsWrapper {
+  .shadowBigScreen {
+    flex-direction: column;
+    align-items: flex-start;
+ 
+    background-color: var(--bg-primary);
+  }
+  .shadowSmallScreen {
+    flex-direction: column;
+    align-items: flex-start;
+
     width: 665px;
+
+    margin-bottom: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    background-color: var(--bg-primary);
-  }
 
-  .navBtn {
-    width: 138px;
-    height: 40px;
-    padding: 20px;
-    background-color: var(--bg-tabs);
-    border-radius: 20px 20px 0 0;
-    border-color: transparent;
+    box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
+    
   }
-  .navBtn.active {
-    background-color: var(--bg-primary);
-    background: #fefefe;
-    color: var(--accent-bright);
+  .summaryHolder {
+    padding-left: 30px;
   }
 }
 
 @media screen and (min-width: 1280px) {
-  .incomesWrapper {
+  .mainWrapper {
     width: 1060px;
   }
-  .elementsWrapper {
-    width: 1060px;
+  .shadowBigScreen {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 60px;
+ 
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+    box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
+    
   }
+  .shadowSmallScreen {
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-bottom: 0;
+    padding: 0;
+
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+ 
+    box-shadow: none;
+  }
+  .summaryHolder {
+    padding-left: 0;
+  }
+}
+
+
+
+/* to be deleted later */
+.form {
+  /* background-color: blue; */
+  width: 100%;
 }
