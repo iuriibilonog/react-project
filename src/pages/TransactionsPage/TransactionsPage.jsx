@@ -2,7 +2,7 @@ import s from './TransactionsPage.module.css';
 import IncomesAndExpensesList from '../../components/IncomesAndExpensesList';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getIncomes, getExpenses } from '../../redux/transactions-selectors';
+import { getIncomes, getExpenses, getLoader } from '../../redux/transactions-selectors';
 import {
   getIncomeTransactions,
   getExpensesTransactions,
@@ -15,14 +15,20 @@ import Container from '../../components/Container';
 import FormAddCategory from '../../components/FormAddCategory';
 import Balance from '../../components/Balance/Balance';
 import Summary from '../../components/Summary/Summary';
+import Loader from '../../components/Loader'
+import { FourGPlusMobiledataOutlined } from '@mui/icons-material';
 
 const TransactionsPage = () => {
   const [isExpenses, setIsExpenses] = useState(true);
   const [curMonth, setCurMon] = useState(new Date().getMonth() + 1);
   const [year, setYear] = useState(new Date().getFullYear());
+
+  const loader = useSelector(getLoader);
+
   const [isExpensesTabActive, setExpensesTabActive] = useState(true);
   const [isIncomesTabActive, setIsIncomesTabActive] = useState(false);
   // const [isActive, setIsActive] = useState(false)
+
 
   const dispatch = useDispatch();
 
@@ -40,7 +46,9 @@ const TransactionsPage = () => {
 
   return (
     <>
+
       <Container>
+             {loader && <Loader />}
         <Balance />
         <div className={s.mainWrapper}>
           <div className={s.buttonsHolder}>
@@ -58,6 +66,7 @@ const TransactionsPage = () => {
               {' '}
               ДОХОД
             </button>
+
 
             <button
               type="button"
