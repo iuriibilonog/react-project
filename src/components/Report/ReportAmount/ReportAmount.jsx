@@ -13,17 +13,7 @@ const ReportAmount = () => {
   const transactionIncomes = useSelector(getInomesCategoriesMonsts);
   
   
-  // const findTotalSumExpenses = () => {
-  //   let totalSumExpenses = 0;
-  //   transactionExpenses.map(item => (totalSumExpenses += item.amount));
-  //   return totalSumExpenses;
-  // }
-
-  // const findTotalSumIncomes = () => {
-  //   let totalSumIncomes = 0;
-  //   transactionIncomes.map(item => (totalSumIncomes += item.amount));
-  //   return totalSumIncomes;
-  // }
+ 
 
 
   return (

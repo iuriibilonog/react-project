@@ -15,6 +15,10 @@ const StyledInputCalc = styled('input')`
   color: #20262d;
   margine: 0;
   position: relative;
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    border-radius: 16px;
+  }
+
   &:hover {
   }
 

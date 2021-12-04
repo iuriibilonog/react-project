@@ -34,52 +34,6 @@
   }
 }
 
-.yesBtn,
-.noBtn {
-  width: 125px;
-  height: 44px;
-  border: 2px solid var(--bg-secondary);
-  background-color: var(--bg-primary);
-  border-radius: 16px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--font-secondary);
-}
-
-.yesBtn:hover,
-.yesBtn:focus,
-.noBtn:hover,
-.noBtn:focus {
-  border-color: var(--accent-bright);
-}
-
-.yesBtn:active,
-.noBtn:active {
-  border-color: var(--accent-bright);
-  background-color: var(--accent-bright);
-  color: var(--bg-primary);
-}
-
-.btnItem:nth-child(1) {
-  margin-right: 15px;
-}
-
-.closeBtn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  border: none;
-  background-color: transparent;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.btnsBlock {
-  display: flex;
-  justify-content: center;
-}
-
 .title {
   margin-bottom: 20px;
   font-size: 14px;

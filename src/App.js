@@ -18,7 +18,7 @@ import Chart from './components/Chart';
 
 import PublicRoute from './components/Routes/PublicRoute';
 import PrivateRoute from './components/Routes/PrivateRoute';
-
+import Loader from './components/Loader';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,25 +38,23 @@ function App() {
 
   return (
     <div className="App">
-
       {/* <Chart /> */}
-      {/* <SwitchTheme /> */}
+      <SwitchTheme />
 
       <header className="App-header"></header>
 
       <NavBar />
+
     {/* <IncomesPage/> */}
-      <Suspense fallback={<h1>LOADING...</h1>} />
+      <Suspense fallback={<Loader />} />
       <Switch>
         <PublicRoute exact path="/authorization" restricted>
           <HomePage />
         </PublicRoute>
         <PrivateRoute exact path="/">
           <TransactionsPage />
-
         </PrivateRoute>
         <PrivateRoute exact path="/reports">
-
           <ReportsPage />
         </PrivateRoute>
       </Switch>

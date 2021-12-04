@@ -9,3 +9,4 @@ export const getInomesCategoriesMonsts = state => state?.transactions?.transacti
 
 export const getTotalIncomesByCategory = state => state?.transactions?.transactions?.dataMonth?.incomes?.incomesData;
 export const getTotalExpensesByCategory = state => state?.transactions?.transactions?.dataMonth?.expenses?.expensesData;
+export const getLoader = state => state?.transactions?.isloading;

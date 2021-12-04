@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Parser from 'html-react-parser';
+import UnifiedModal from '../../shared/UnifiedModal';
 import { register, login, loginFromGoogle, getUser } from '../../redux/auth/auth-operations';
 import { FacebookAuth } from './SocialAuth';
 import s from './Auth.module.css';
+import RegisterModal from '../RegisterModal/';
 import { useLocation } from 'react-router';
 import google from '../../img/google.svg';
+
 
 
 
@@ -20,24 +22,46 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
   const refreshToken = urlParams.get('refreshToken');
   const sid = urlParams.get('sid');
   
-
-  useEffect(() => {
-    if (!location?.search) return
-      
-    dispatch(getUser({ accessToken, refreshToken, sid }))
-    
-    
-    
-  }, [])
-
   const dispatch = useDispatch();
-
+  
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginType, setIsLoginType] = useState(true);
   const [socialAuth, setSocialAuth] = useState(false)
+  const [isModalShown, setIsModalShown] = useState(false);
+ 
+ 
+  
+  useEffect(() => {
+    if (!location?.search) return
+    
+    dispatch(getUser({ accessToken, refreshToken, sid }))
+    
+    
+    
+  }, [])
+  
+  
 
+  
+  
+  
+  const responseHandling = response => {
+    setIsModalShown(false);
+    
+    if (response) {
+      // dispatch(login({ email, password, socialAuth }))
+      //  setEmail('');
+      // setPassword('');
+      
+      // POSITIVE ACTION;
+    }
+    return response;
+  };
+
+  
+/***/
   
   
 
@@ -69,6 +93,15 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
      
   }
 
+  const handleOnTimer = (count) => {
+    if (count === true) {
+      dispatch(login({ email, password, socialAuth }))
+      setIsModalShown(false)
+      setEmail('');
+      setPassword('');
+    }
+  }
+
 
 
   const handleOnSubmit = e => {
@@ -79,9 +112,13 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
       dispatch(register({ email, password, socialAuth }))
       setIsLoginType(true)
       getTypeOfAuth(false)
-      if(isRegisterFullField) dispatch(login({email, password, socialAuth }))
-      setEmail('');
-      setPassword('');
+      setIsModalShown(true)
+      // if (isRegisterFullField === 'true') {
+        
+      //   setIsModalShown(true)
+      // }
+      // setEmail('');
+      // setPassword('');
       
       
     }
@@ -119,13 +156,15 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
     getTypeOfAuth(true)
   }
 
-
-
-
-
+  console.log(isModalShown)
+  
+  
+  
   return (
-
+    
     <div className={s.auth}>
+     
+      {isModalShown && <RegisterModal handleOnTimer={handleOnTimer}/>}
       <div className={s.authWrapper}>
         <p className={s.authText}>Вы можете авторизоваться с помощью Google Account:</p>
         <div className={s.socialBtnsWrapper}>
@@ -189,7 +228,6 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
         </form>
         
       </div>
-      
     </div>
   );
 };

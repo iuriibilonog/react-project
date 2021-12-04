@@ -4,18 +4,29 @@ import './customScroll.css';
 import { useSelector } from 'react-redux';
 import { getMonthStats } from '../../redux/selectors';
 
+import { getLoader } from '../../redux/transactions-selectors';
+import Loader from '../Loader';
+
+
+
 import CustomScroll from 'react-custom-scroll';
+
 
 const Summary = () => {
   const summary = useSelector(getMonthStats);
+  const loader = useSelector(getLoader);
 
   return (
     <>
       {summary && (
+
         <div className="scrollWrapper">
+
           <div className={s.summarySection}>
+            {loader && <Loader/>}
             <h3 className={s.title}>Сводка</h3>
             <CustomScroll className="rcs-inner-handle">
+
               <ul className={s.list}>
                 {Object.entries(summary)
                   .filter(([key, value]) => value !== 'N/A')
@@ -26,8 +37,10 @@ const Summary = () => {
                     </li>
                   ))}
               </ul>
+
             </CustomScroll>
           </div>
+
         </div>
       )}
     </>
