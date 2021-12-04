@@ -1,3 +1,4 @@
+import { StarRate } from '@mui/icons-material';
 import { createSlice } from '@reduxjs/toolkit';
 import {
   register,
@@ -16,6 +17,7 @@ const initialState = {
   isCheckingUser: false,
   socialAuth: false,
   userBalance: null,
+  isLoading: false,
   isRegisterFullField: false,
 };
 
@@ -23,8 +25,12 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: {
+    [register.pending](state) {
+      state.isLoading = true;
+    },
     [register.fulfilled](state, action) {
       state.user = action.payload.data;
+      state.isLoading = false;
       // state.isLoggedIn = true;
       // state.isRegisterFullField = true;
       state.socialAuth = action.payload.socialAuth;
@@ -34,6 +40,7 @@ const authSlice = createSlice({
       state.user = action.payload.data;
       state.token = action.payload.data.accessToken;
       state.isLoggedIn = true;
+      state.isLoading = false;
       state.sid = action.payload.data.sid;
       state.socialAuth = action.payload.socialAuth;
       console.log(action.payload);
@@ -44,11 +51,13 @@ const authSlice = createSlice({
     [logOut.fulfilled](state, _) {
       state.user = { name: '', email: '', password: '' };
       state.token = '';
+      state.isLoading = false;
       state.isLoggedIn = false;
     },
 
     [checkCurrentUser.pending](state) {
       state.isCheckingUser = true;
+      state.isLoading = true;
     },
 
     [checkCurrentUser.fulfilled](state, action) {

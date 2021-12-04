@@ -1,14 +1,18 @@
 import { useSelector } from 'react-redux';
 import { getMonthStats } from '../../redux/selectors';
+import { getLoader } from '../../redux/transactions-selectors';
+import Loader from '../Loader';
 import s from './Summary.module.css';
 
 const Summary = () => {
   const summary = useSelector(getMonthStats);
+  const loader = useSelector(getLoader);
 
   return (
     <>
       {summary && (
         <div className={s.summarySection}>
+          {loader && <Loader/>}
           <h3 className={s.title}>Сводка</h3>
           <ul>
             {Object.entries(summary)
