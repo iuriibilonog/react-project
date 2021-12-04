@@ -52,10 +52,10 @@ const getMonthReducer = createReducer([], {
   [getExpensesTransactions.fulfilled]: (_, action) => action.payload.monthsStats,
 });
 
-const getNewBalanceReducer = createReducer([], {
-  [addIncomeTransaction.fulfilled]: (_, action) => action.payload.newBalance,
-  [addExpenseTransaction.fulfilled]: (_, action) => action.payload.newBalance,
-});
+// const getNewBalanceReducer = createReducer([], {
+//   [addIncomeTransaction.fulfilled]: (_, action) => action.payload.newBalance,
+//   [addExpenseTransaction.fulfilled]: (_, action) => action.payload.newBalance,
+// });
 
 const getIncomeCategories = createReducer([], {
   [getIncomesCategories.fulfilled]: (_, action) => action.payload,
@@ -77,6 +77,42 @@ const getDataMonthReducer = createReducer([], {
   [getDataMonth.fulfilled]: (_, action) => action.payload,
 });
 
+const loader = createReducer(false, {
+  [getIncomeTransactions.pending]: () => true,
+  [getIncomeTransactions.fulfilled]: () => false,
+  [getIncomeTransactions.rejected]: () => false,
+  [addIncomeTransaction.pending]: () => true,
+  [addIncomeTransaction.fulfilled]: () => false,
+  [addIncomeTransaction.rejected]: () => false,
+  [addExpenseTransaction.pending]: () => true,
+  [addExpenseTransaction.fulfilled]: () => false,
+  [addExpenseTransaction.rejected]: () => false,
+  [deleteTransaction.pending]: () => true,
+  [deleteTransaction.fulfilled]: () => false,
+  [deleteTransaction.rejected]: () => false,
+  [getExpensesTransactions.pending]: () => true,
+  [getExpensesTransactions.fulfilled]: () => false,
+  [getExpensesTransactions.rejected]: () => false,
+  [getIncomesCategories.pending]: () => true,
+  [getIncomesCategories.fulfilled]: () => false,
+  [getIncomesCategories.rejected]: () => false,
+  [getExpensesCategories.pending]: () => true,
+  [getExpensesCategories.fulfilled]: () => false,
+  [getExpensesCategories.rejected]: () => false,
+  [setIncomesByCategories.pending]: () => true,
+  [setIncomesByCategories.fulfilled]: () => false,
+  [setIncomesByCategories.rejected]: () => false,
+  [setExpensesByCategories.pending]: () => true,
+  [setExpensesByCategories.fulfilled]: () => false,
+  [setExpensesByCategories.rejected]: () => false,
+  [getDataMonth.pending]: () => true,
+  [getDataMonth.fulfilled]: () => false,
+  [getDataMonth.rejected]: () => false,
+  [setIsSystemStarted.pending]: () => true,
+  [setIsSystemStarted.fulfilled]: () => false,
+  [setIsSystemStarted.rejected]: () => false,
+})
+
 const transactionsReducer = combineReducers({
   incomes: incomesReducer,
   expenses: expensesReducer,
@@ -87,6 +123,7 @@ const transactionsReducer = combineReducers({
   expensesByCategory: setExpensesByCategory,
   incomesByCategory: setIncomesByCategory,
   dataMonth: getDataMonthReducer,
+  
 });
 
 export const isSystemStartedReducer = createReducer(false, {
@@ -96,4 +133,5 @@ export const isSystemStartedReducer = createReducer(false, {
 export const combinedTransactionsReducer = combineReducers({
   balance: balanceReducer,
   transactions: transactionsReducer,
+  isloading: loader,
 });

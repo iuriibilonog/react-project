@@ -1,8 +1,12 @@
 @import '../../utils/variables.css';
 
-
 .btn {
-  
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-wrap: nowrap;
+  justify-content: start;
+  align-items: center;
 
   font-weight: 400;
   font-size: 12px;
@@ -13,16 +17,16 @@
   background-color: transparent;
 }
 .btn:hover .text,
-.btn:focus .text{
+.btn:focus .text {
   color: var(--accent-bright);
-
 }
 
 .text {
   display: none;
 }
-@media screen and (mix-width: 768px) {
+@media screen and (min-width: 768px) {
   .text {
+    display: block;
     font-weight: 400;
     font-size: 12px;
     line-height: 1.17;
@@ -30,9 +34,9 @@
     border: none;
   }
   .btn {
-    width: 174px;
+    /*     width: 174px; */
     height: 24px;
-  
+
     font-weight: 400;
     font-size: 12px;
     line-height: 1.17;
@@ -44,5 +48,3 @@
     margin-right: 15px;
   }
 }
-
-

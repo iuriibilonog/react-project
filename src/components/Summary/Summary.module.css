@@ -1,6 +1,9 @@
  .summarySection {
    display: none;
  }
+ .list {
+   max-height: 346px;
+ }
    @media screen and (min-width: 768px) {
       .summarySection {
         display: block
@@ -11,10 +14,9 @@
   .summarySection {
     width: 230px;
     height: fit-content;
-    background-color: #f5f6fb;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+   
     
   }
 }
@@ -25,19 +27,22 @@
 }
 
 .title {
-  height: 38px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  letter-spacing: 0.02;
   font-size: 12px;
   font-weight: 700;
   line-height: 1.17;
   text-align: center;
   text-transform: uppercase;
   color: #000000;
-  padding: 10px;
   border-bottom: 2px solid #fff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 .item {
-  height: 38px;
+  height: 38.5px;
   display: flex;
   justify-content: space-between;
   align-items: center;

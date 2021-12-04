@@ -18,6 +18,7 @@ import Chart from './components/Chart';
 
 import PublicRoute from './components/Routes/PublicRoute';
 import PrivateRoute from './components/Routes/PrivateRoute';
+import Loader from './components/Loader';
 
 
 function App() {
@@ -46,7 +47,7 @@ function App() {
 
       <NavBar />
     {/* <IncomesPage/> */}
-      <Suspense fallback={<h1>LOADING...</h1>} />
+      <Suspense fallback={<Loader />} />
       <Switch>
         <PublicRoute exact path="/authorization" restricted>
           <HomePage />
