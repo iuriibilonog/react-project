@@ -22,7 +22,6 @@ import ReportExpensesList from './ReportExpensesList/ReportExpensesList';
 import GoHome from '../GoHome/GoHome';
 import CurrentMonth from '../CurrentMonth/CurrentMonth';
 import Balance from '../Balance';
-import Container from '../Container';
 
 const Report = () => {
   const [category, setCategory] = useState('');
@@ -38,61 +37,55 @@ const Report = () => {
     else setReportTypeRender('incomes');
   };
 
-
   const getCategory = e => {
     setCategory(console.log(e.target.attributes.title.nodeValue));
   };
 
   const getTotalIncomesByCategories = useSelector(getTotalIncomesByCategory);
 
-  console.log(`getTotalIncomesByCategories`, getTotalIncomesByCategories)
+  console.log(`getTotalIncomesByCategories`, getTotalIncomesByCategories);
 
- const getInomesCategory = useSelector(getInomesCategories);
- console.log(`getInomesCategory`, getInomesCategory)
+  const getInomesCategory = useSelector(getInomesCategories);
+  console.log(`getInomesCategory`, getInomesCategory);
 
- const newIncomes = getInomesCategory.map((item) => {
-   console.log(`item`, item)
-   if(getTotalIncomesByCategories[item]){
-    return {
-      sum: getTotalIncomesByCategories[item].total,
-      category : item,
-    //  [item] : getTotalExpensesByCategories[item].total,
-    };
-   }
-   return false;
- });
-
+  const newIncomes = getInomesCategory.map(item => {
+    console.log(`item`, item);
+    if (getTotalIncomesByCategories[item]) {
+      return {
+        sum: getTotalIncomesByCategories[item].total,
+        category: item,
+        //  [item] : getTotalExpensesByCategories[item].total,
+      };
+    }
+    return false;
+  });
 
   const getTotalExpensesByCategories = useSelector(getTotalExpensesByCategory);
-  console.log(`getTotalIncomesByCategories`, getTotalExpensesByCategories)
+  console.log(`getTotalIncomesByCategories`, getTotalExpensesByCategories);
   const fullDataAboutExpenses = Object.entries(getTotalExpensesByCategories);
-  console.log(fullDataAboutExpenses)
+  console.log(fullDataAboutExpenses);
 
- const getExpensesCategory = useSelector(getExpensesCategories);
- console.log(`getInomesCategory`, getExpensesCategory)
- const newExensescomes = getExpensesCategory.map((item) => {
-   console.log(`item`, item)
-   if(getTotalExpensesByCategories[item]){
-    return {
-      sum: getTotalExpensesByCategories[item].total,
-      category : item,
-    
-    };
-   }
-   return false;
- });
-
+  const getExpensesCategory = useSelector(getExpensesCategories);
+  console.log(`getInomesCategory`, getExpensesCategory);
+  const newExensescomes = getExpensesCategory.map(item => {
+    console.log(`item`, item);
+    if (getTotalExpensesByCategories[item]) {
+      return {
+        sum: getTotalExpensesByCategories[item].total,
+        category: item,
+      };
+    }
+    return false;
+  });
 
   return (
     <>
       <Container>
-
         <div className={s.reportContainer}>
           <ReportAmount />
           <div className={`${s.navigation} ${s.section}`}>
             <div className={s.navigationWrapper}></div>
           </div>
-
 
           <div className={`${s.reportWrapper} ${s.section}`}>
             <div className={`${s.transactionWrapper} ${s.sectionReportTitle}`}>
@@ -138,15 +131,13 @@ const Report = () => {
           </div>
         </div>
 
-     
-
-        <Chart chartTypeRender={reportTypeRender} newIncomes={newIncomes} newExensescomes={newExensescomes}/>
-    </Container>
-
-
-        
+        <Chart
+          chartTypeRender={reportTypeRender}
+          newIncomes={newIncomes}
+          newExensescomes={newExensescomes}
+        />
+      </Container>
     </>
   );
 };
 export default Report;
-
