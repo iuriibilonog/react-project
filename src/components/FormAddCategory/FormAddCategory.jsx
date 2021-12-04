@@ -110,7 +110,9 @@ const FormAddCategory = ({ isExpenses }) => {
               value={value}
               onChange={handleDateChange}
               renderInput={params => (
+
                 <TextField {...params} size="small" margin="dense" variant="standard" id={s.tmp} />
+
               )}
               format="YYYY-MM-DD"
             />

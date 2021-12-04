@@ -24,6 +24,7 @@ import GoHome from '../GoHome/';
 import CurrentMonth from '../CurrentMonth/CurrentMonth';
 import Balance from '../Balance';
 
+
 const Report = () => {
   const [category, setCategory] = useState('');
   const [reportTypeRender, setReportTypeRender] = useState('incomes');

@@ -53,6 +53,7 @@ const authSlice = createSlice({
       state.token = '';
       state.isLoading = false;
       state.isLoggedIn = false;
+      state.isRegisterFullField = false;
     },
 
     [checkCurrentUser.pending](state) {

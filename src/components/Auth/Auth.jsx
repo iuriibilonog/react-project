@@ -41,7 +41,15 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
     
     
   }, [])
+
+  useEffect(() => {
+    if (isRegisterFullField) dispatch(login({ email, password, socialAuth }))
+    setEmail('');
+      setPassword('');
+
+   }, [isRegisterFullField])
   
+
   
 
   
@@ -93,14 +101,14 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
      
   }
 
-  const handleOnTimer = (count) => {
-    if (count === true) {
-      dispatch(login({ email, password, socialAuth }))
-      setIsModalShown(false)
-      setEmail('');
-      setPassword('');
-    }
-  }
+  // const handleOnTimer = (count) => {
+  //   if (count === true) {
+  //     dispatch(login({ email, password, socialAuth }))
+  //     setIsModalShown(false)
+  //     setEmail('');
+  //     setPassword('');
+  //   }
+  // }
 
 
 
@@ -164,7 +172,7 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
     
     <div className={s.auth}>
      
-      {isModalShown && <RegisterModal handleOnTimer={handleOnTimer}/>}
+      {/* {isModalShown && <RegisterModal handleOnTimer={handleOnTimer}/>} */}
       <div className={s.authWrapper}>
         <p className={s.authText}>Вы можете авторизоваться с помощью Google Account:</p>
         <div className={s.socialBtnsWrapper}>
