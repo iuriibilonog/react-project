@@ -31,7 +31,7 @@ const IncomesAndExpensesList = ({ transactions, transactionsType, operationSign 
 
   return (
     <>
-      {transactions.length > 0 && (
+       {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
         <div className={s.list}>
           <header className={s.header}>
             <div className={s.groupingDiv}>
@@ -41,23 +41,23 @@ const IncomesAndExpensesList = ({ transactions, transactionsType, operationSign 
             <span className={s.category}>Категория</span>
             <span className={s.amount}>Сумма</span>
           </header>
-          <CustomScroll className="rcs-inner-handle">
-            <ul className={s.transactionsList}>
-              {transactions &&
-                transactions.map(item => (
-                  <IncomesAndExpensesListItem
-                    key={item._id}
-                    itemProps={item}
-                    modalHandler={modalHandler}
-                    transactionsType={transactionsType}
-                    operationSign={operationSign}
-                  />
-                ))}
-            </ul>
-          </CustomScroll>
-          {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
+        {transactions.length > 0 ? (<CustomScroll className="rcs-inner-handle">
+          <ul className={s.transactionsList}>
+            {transactions &&
+              transactions.map(item => (
+                <IncomesAndExpensesListItem
+                  key={item._id}
+                  itemProps={item}
+                  modalHandler={modalHandler}
+                  transactionsType={transactionsType}
+                  operationSign={operationSign}
+                />
+              ))}
+          </ul>
+        </CustomScroll>) : (<ul className={s.ulPlaceholder}></ul>)}
+        
         </div>
-      )}
+      
     </>
   );
 };

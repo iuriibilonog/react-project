@@ -21,10 +21,12 @@ const Summary = () => {
       {summary && (
 
         <div className="scrollWrapper">
-          <CustomScroll className="rcs-inner-handle">
-            <div className={s.summarySection}>
-              {loader && <Loader/>}
-              <h3 className={s.title}>Сводка</h3>
+
+          <div className={s.summarySection}>
+            {loader && <Loader/>}
+            <h3 className={s.title}>Сводка</h3>
+            <CustomScroll className="rcs-inner-handle">
+
               <ul className={s.list}>
                 {Object.entries(summary)
                   .filter(([key, value]) => value !== 'N/A')
@@ -35,8 +37,9 @@ const Summary = () => {
                     </li>
                   ))}
               </ul>
-            </div>
-          </CustomScroll>
+
+            </CustomScroll>
+          </div>
 
         </div>
       )}

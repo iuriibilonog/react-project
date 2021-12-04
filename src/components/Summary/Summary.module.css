@@ -1,8 +1,12 @@
+ @import '../../utils/variables.css';
  .summarySection {
    display: none;
+   
  }
- .list {
-   max-height: 346px;
+ .title {
+   background: var(--bg-table);
+   border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
  }
    @media screen and (min-width: 768px) {
       .summarySection {
@@ -16,8 +20,10 @@
     height: fit-content;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-   
-    
+  }
+  .list {
+    height: 240px;
+    background: var(--bg-table);
   }
 }
 @media screen and (min-width: 1280px) {
@@ -36,7 +42,7 @@
   text-align: center;
   text-transform: uppercase;
   color: #000000;
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid var(--bg-primary);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
@@ -46,7 +52,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid var(--bg-primary);
 }
 
 .itemMonthSum {
@@ -55,7 +61,7 @@
   line-height: 1.17;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #52555f;
+  color: var(--font-secondary);
 
   padding-left: 20px;
   padding-right: 20px;

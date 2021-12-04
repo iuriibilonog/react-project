@@ -156,10 +156,14 @@ const Report = () => {
         )}
         {/*  <Chart
 
+
+        {/* <Chart chartTypeRender={reportTypeRender} newIncomes={newIncomes} newExensescomes={newExensescomes}/> */}
+
           chartTypeRender={reportTypeRender}
           newIncomes={newIncomes}
           newExensescomes={newExensescomes}
         />
+
 
  */}{' '}
 
