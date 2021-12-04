@@ -1,9 +1,10 @@
 .goToReport {
   display: flex;
-  width: 154px;
+  width: 150px;
   height: 24px;
+  justify-content: right;
   align-items: center;
-  margin: 0 auto;
+  margin-left: auto;
 }
 .title {
   font-size: 12px;
@@ -18,13 +19,13 @@
   color: #52555f;
   cursor: pointer;
 }
-.link:hover{
+.link:hover {
   color: var(--accent-bright);
 }
-.link:hover .icon{
+.link:hover .icon {
   fill: var(--accent-bright);
 }
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) {
   .goToReport {
     margin-left: 90px;
   }
@@ -34,3 +35,4 @@
     margin-left: 205px;
   }
 }
+ */
