@@ -6,7 +6,11 @@ import { getIncomes, getExpenses } from '../../redux/transactions-selectors';
 import {
   getIncomeTransactions,
   getExpensesTransactions,
+  getIncomesCategories,
+  getExpensesCategories,
+  getDataMonth
 } from '../../redux/transactions-operations';
+
 import Container from '../../components/Container';
 import FormAddCategory from '../../components/FormAddCategory';
 import Balance from '../../components/Balance/Balance';
@@ -14,6 +18,8 @@ import Summary from '../../components/Summary/Summary';
 
 const TransactionsPage = () => {
   const [isExpenses, setIsExpenses] = useState(true);
+  const [curMonth, setCurMon] = useState(new Date().getMonth() + 1);
+  const [year, setYear] = useState(new Date().getFullYear());
 
   const dispatch = useDispatch();
 
@@ -34,7 +40,9 @@ const TransactionsPage = () => {
             type="button"
             className={s.navBtn}
             onClick={() => {
+              dispatch(getIncomesCategories());
               dispatch(getIncomeTransactions());
+              dispatch(getDataMonth(`${year}-${curMonth}`));
               setIsExpenses(false);
             }}
           >
@@ -47,6 +55,7 @@ const TransactionsPage = () => {
             className={`${s.navBtn} ${s.active}`}
             onClick={() => {
               dispatch(getExpensesTransactions());
+              dispatch(getExpensesCategories());
               setIsExpenses(true);
             }}
           >

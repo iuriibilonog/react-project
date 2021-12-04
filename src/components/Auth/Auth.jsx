@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Parser from 'html-react-parser';
 import { register, login, loginFromGoogle, getUser } from '../../redux/auth/auth-operations';
 import { FacebookAuth } from './SocialAuth';
@@ -11,6 +11,7 @@ import google from '../../img/google.svg';
 
 
 const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
+  const isRegisterFullField = useSelector(state => state.auth.isRegisterFullField)
   
   const location = useLocation();
   
@@ -77,8 +78,8 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
       setSocialAuth(false)
       dispatch(register({ email, password, socialAuth }))
       setIsLoginType(true)
-      console.log('Сабмит формы Регистрация')
       getTypeOfAuth(false)
+      if(isRegisterFullField) dispatch(login({email, password, socialAuth }))
       setEmail('');
       setPassword('');
       
