@@ -163,10 +163,11 @@ const Balance = () => {
   };
 
   return (
-    <div className={s.wrapper}>
-      <section className={s.goHomeSection}>
-        <GoHome />
-      </section>
+    <>
+    {/* <div className={s.wrapper}> */}
+      {/* <section className={s.goHomeSection}> */}
+        {/* <GoHome /> */}
+      {/* </section> */}
       <section className={s.balanceSection}>
         <span className={s.title}>Баланс:</span>
         {isReminderShown === true && (
@@ -184,11 +185,12 @@ const Balance = () => {
           </div>
         </form>
       </section>
-      <section className={s.goToReportSection}>
-        <GoToReport />
+      {/* <section className={s.goToReportSection}> */}
+        {/* <GoToReport /> */}
         {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
-      </section>
-    </div>
+      {/* </section> */}
+      {/* </div> */}
+      </>
   );
 };
 

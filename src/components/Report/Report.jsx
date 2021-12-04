@@ -5,7 +5,6 @@ import s from './Report.module.css';
 
 import { setIncomesByCategories } from '../../redux/actions';
 import Chart from '../Chart';
-import Container from '../Container';
 import ReportAmount from './ReportAmount';
 import { useSelector } from 'react-redux';
 import {
@@ -140,7 +139,7 @@ const Report = () => {
 
      
 
-        <Chart chartTypeRender={reportTypeRender} newIncomes={newIncomes} newExensescomes={newExensescomes}/>
+        {/* <Chart chartTypeRender={reportTypeRender} newIncomes={newIncomes} newExensescomes={newExensescomes}/> */}
     </Container>
 
 

@@ -7,9 +7,10 @@
   background-color: var(--bg-secondary);
   padding-left: 5px;
   padding-right: 5px;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   flex-direction: column-reverse !important;
+  background-color: goldenrod;
 }
 
 .title {
@@ -82,18 +83,19 @@
 
 .balanceSection {
   text-align: center;
+  /* background-color: red; */
 }
 
 .goHomeSection {
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   justify-content: left;
   align-items: center;
 }
 
 @media screen and (min-width: 768px) {
   .wrapper {
-    width: 665px;
+    /* width: 665px; */
     flex-direction: row;
   }
 

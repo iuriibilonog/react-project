@@ -19,8 +19,7 @@
   text-align: center;
 }
 .transactionsList {
-  max-height: 346px;
-  border-bottom: 2px solid var(--bg-secondary);
+  
   /* background-color: none; */
 }
 
@@ -56,9 +55,20 @@
   .list {
     width: 100%;
     margin-bottom: 40px;
+    box-shadow: 2px 2px 60px rgba(219, 221, 226, 0.2);
   }
   .transactionsList {
 background-color: var(--bg-primary);
+height: 346px;
+border-bottom: 2px solid var(--bg-secondary);
+ border-left: 2px solid var(--bg-table);
+ border-right: 2px solid var(--bg-table);
+  }
+  .ulPlaceholder {
+    height: 346px;
+    border-left: 2px solid var(--bg-table);
+    border-right: 2px solid var(--bg-table);
+    border-bottom: 2px solid var(--bg-table);
   }
 }
 

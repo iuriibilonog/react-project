@@ -1,6 +1,7 @@
 import Report from '../../components/Report';
 import CurrentMonth from '../../components/CurrentMonth/CurrentMonth';
 import GoHome from '../../components/GoHome/GoHome';
+import Balance from '../../components/Balance';
 
 
 import s from './ReportsPage.module.css';
@@ -16,9 +17,14 @@ const ReportsPage = () => {
   return (
 
     <>
-      <Container>
-      <GoHome />
-        <CurrentMonth />
+      <Container >
+       <div className={s.section}>
+        <GoHome />
+          <div className={s.flex}>
+          <CurrentMonth />
+          <Balance/>
+          </div>
+        </div>
         </Container>
       <Report />
       {/* <Chart/> */}

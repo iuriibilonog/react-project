@@ -13,7 +13,9 @@ import {
 
 import Container from '../../components/Container';
 import FormAddCategory from '../../components/FormAddCategory';
+import GoHome from '../../components/GoHome/GoHome';
 import Balance from '../../components/Balance/Balance';
+import GoToReport from '../../components/GoToReport';
 import Summary from '../../components/Summary/Summary';
 
 const TransactionsPage = () => {
@@ -41,7 +43,15 @@ const TransactionsPage = () => {
   return (
     <>
       <Container>
-        <Balance />
+        <div className={s.section}>
+          {/* <GoHome/> */}
+          <div className={s.goToReport}>
+          <GoToReport />
+          </div>
+          <Balance />
+          
+        </div>
+       
         <div className={s.mainWrapper}>
           <div className={s.buttonsHolder}>
             <button

@@ -12,7 +12,7 @@
   padding-left: 20px;
   padding-right: 20px;
 
-  border-bottom: 1px solid var(--bg-secondary);
+  border-bottom: 1px solid var(--bg-table);
 }
 
 .changeFlow {
@@ -68,7 +68,7 @@
 
 .delete:hover,
 .delete:focus {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-table);
 }
 .delete:hover {
   cursor: pointer;
@@ -127,10 +127,6 @@
   }
 
   .listItem {
-    border-left: 2px solid var(--bg-secondary);
-    border-right: 2px solid var(--bg-secondary);
-    border-bottom: 2px solid var(--bg-secondary);
-
     padding-left: 20px;
     padding-right: 20px;
   }
