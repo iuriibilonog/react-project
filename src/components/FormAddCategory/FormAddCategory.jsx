@@ -25,7 +25,16 @@ import { useLocation, useRouteMatch } from 'react-router';
 import { addExpenseTransaction, addIncomeTransaction } from '../../redux/transactions-operations';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import InputBase from '@mui/material/InputBase';
+import { styled } from '@mui/material/styles';
+
 import '../../utils/variables.css';
+import UnstyledInput from './StyledInputElement/StyledInputElement';
+import CustomInput from './StyledInputElement/StyledInputElement';
+import SelectCustome from './Select/Select';
+import StyledInputCalc from './Select/StyledCalculator/StyledCalculator';
+import TextInput from './StyledInputElement/Calendar/Calendar';
+import iconCalendar from '../../img/calendar.svg';
 const month2 = new Date().getMonth() + 1;
 const month = new Date().toLocaleString('ru', {
   month: 'long',
@@ -33,6 +42,39 @@ const month = new Date().toLocaleString('ru', {
 // const year = new Date().getFullYear();
 // const date = new Date().getDate();
 // console.log(`${date}-${month2}-${year}`);
+const BootstrapInput = styled(InputBase)(({ theme }) => ({
+  'label + &': {
+    marginTop: theme.spacing(3),
+  },
+  '& .MuiInputBase-input': {
+    // borderRadius: 20,
+
+    // height: 29,
+    borderTop: '2px solid #F5F6FB',
+    borderBottom: '2px solid #F5F6FB',
+    pading: 0,
+    width: 156,
+    fontSize: 12,
+    // padding: '10px 26px 10px 12px',
+    // transition: theme.transitions.create(['border-color', 'box-shadow']),
+    // Use the system font instead of the default Roboto font.
+    // fontFamily: [
+    //   '-apple-system',
+    //   'BlinkMacSystemFont',
+    //   '"Segoe UI"',
+    //   'Roboto',
+    //   '"Helvetica Neue"',
+    //   'Arial',
+    //   'sans-serif',
+    //   '"Apple Color Emoji"',
+    //   '"Segoe UI Emoji"',
+    //   '"Segoe UI Symbol"',
+    // ].join(','),
+    // '&:focus': {
+    //   // borderColor: '#80bdff',
+    // },
+  },
+}));
 
 const FormAddCategory = () => {
   const [value, setValue] = React.useState(new Date());
@@ -43,6 +85,7 @@ const FormAddCategory = () => {
   const handleInputChange = event => {
     setCategory(event.target.value);
   };
+
   const newDate = () => {
     const newDateValue = format(value, 'yyyy-MM-dd');
     return newDateValue;
@@ -62,12 +105,7 @@ const FormAddCategory = () => {
   let isSpend = '';
   const { pathname } = useLocation();
   pathname === '/spend' ? (isSpend = true) : (isSpend = false);
-  console.log(
-    'Date ' + date,
-    'description ' + description,
-    'category ' + category,
-    'amount ' + amount,
-  );
+
   const handleFormSubmit = e => {
     e.preventDefault();
     newDate();
@@ -100,13 +138,92 @@ const FormAddCategory = () => {
     setDescription('');
     setAmount('');
   };
+
+  // const useStyles = makeStyles(() => ({
+  //   noBorder: {
+  //     border: 'none',
+  //   },
+  // }));
+  const useCalendar = makeStyles(() => ({
+    // noBorder: {
+    //   border: 'none',
+    // },
+    underline: {
+      '&&&:before': {
+        borderBottom: 'none',
+      },
+      '&&:after': {
+        borderBottom: 'none',
+      },
+    },
+  }));
+  const calendar = useCalendar();
   const classes = useStyles();
   return (
     <>
       {/* <NavigationBetweenCategories /> */}
       <form onSubmit={handleFormSubmit} className={s.formContainer}>
-        <div className={s.containerForm}>
-          {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
+        {/* <div className={s.allInputsWrapper}> */}
+        <div className={s.calendarWrapper}>
+          <div className={s.calendarHelper}></div>
+          <LocalizationProvider
+            dateAdapter={AdapterDateFns}
+            locale={ruLocale}
+            className={css.textInpt}
+            id={s.inputStyle}
+            // sx={{ width: 289 + 'px', height: 50 + 'px', padding: 0, borderRadius: 10 + 'px' }}
+          >
+            {/* <TextInput /> */}
+            <DatePicker
+              id={s.calendarStyle}
+              // fullWidth
+              // className={css.textInpt}
+              size="small"
+              value={value}
+              onChange={newValue => setValue(newValue)}
+              renderInput={params => (
+                <TextField
+                  {...params}
+                  size="small"
+                  // sx={{ disableUnderline: 'true' }}
+                  // disableUnderline={true}
+                  // classes={{ notchedOutline: calendar.input }}
+                  className={calendar.textField}
+                  // classes={{ notchedOutline: calendar.underline }}
+                  // InputProps={{
+                  //   startAdornment: (
+                  //     <InputAdornment position="start">{<img src={calculator} />}</InputAdornment>
+                  //   ),
+                  //   // classes: { calendar },
+                  //   // disableUnderline: true,
+                  // }}
+                  // label={ '<Un-labeled>'}
+                  // InputLabelProps={{ shrink: true }} // stop from animating.
+                  // inputProps={{ className: classes.fieldInput }}
+                  // className={classes.field}
+                  margin="dense"
+                  variant="standard"
+                  id={s.tmp}
+                />
+              )}
+              format="YYYY-MM-DD"
+            />
+          </LocalizationProvider>
+          <img className={s.calendarIconStyle} src={iconCalendar} />
+        </div>
+        <div className={s.InputsWrapper}>
+          <CustomInput
+            style={{ outerHeight: '40px' }}
+            // className={s.tmp}
+            value={description}
+            label={textInputName}
+            name="textInput"
+            onChange={handleTextChange}
+          />
+
+          <div className={s.containerForm}>
+            {/* {UnstyledInput()} */}
+            {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
               label="Custom input"
               sx={{
@@ -130,44 +247,48 @@ const FormAddCategory = () => {
               )}
             />
           </LocalizationProvider> */}
-          <LocalizationProvider
-            dateAdapter={AdapterDateFns}
-            locale={ruLocale}
-            // className={css.textInpt}
-            // id={s.inputStyle}
-            // sx={{ width: 289 + 'px', height: 50 + 'px', padding: 0, borderRadius: 10 + 'px' }}
-          >
-            <DatePicker
-              fullWidth
-              className={css.textInpt}
-              size="small"
-              value={value}
-              onChange={newValue => setValue(newValue)}
-              renderInput={params => <TextField {...params} size="small" />}
-              format="YYYY-MM-DD"
-            />
-          </LocalizationProvider>
-          <TextField
+            {/* <div> */}
+            {/* <FormControl sx={{ m: 0 }} variant="standard"> */}
+            {/* <InputLabel id="demo-customized-select-label">Age</InputLabel> */}
+            <Select
+              labelId="demo-customized-select-label"
+              id="demo-customized-select"
+              value={category}
+              label={categoryName}
+              onChange={handleInputChange}
+              // value={age}
+              // onChange={handleChange}
+              input={<BootstrapInput />}
+            >
+              {data.map(item => {
+                return (
+                  <MenuItem key={item.id} value={item.label}>
+                    {item.label}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+            {/* </FormControl> */}
+            {/* </div> */}
+            {/* <TextField
             // style={{ color: var(--font-tertiary) }}
             className={css.textInpt}
             id="outlined"
             fullWidth
             required
-            value={description}
-            //   id={s.inputStyle}
-            label={textInputName}
-            name="textInput" //пусте поле не допускати
-            // variant="standard"
-            onChange={handleTextChange}
+            // value={description}
+            // label={textInputName}
+            // name="textInput"
+            // onChange={handleTextChange}
             size="small"
 
             // sx={{ width: 289 + 'px', height: 50 + 'px', padding: 0, borderRadius: 10 + 'px' }}
-          />
-
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">{categoryName}</InputLabel>
-              <Select
+          /> */}
+            {/* <SelectCustome value={category} label={categoryName} onChange={handleInputChange} /> */}
+            {/* <Box sx={{ minWidth: 120 }}> */}
+            {/* <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">{categoryName}</InputLabel> */}
+            {/* <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={category}
@@ -184,17 +305,21 @@ const FormAddCategory = () => {
                     </MenuItem>
                   );
                 })}
-              </Select>
-            </FormControl>
-          </Box>
-          <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-            <TextField
-              size="small"
-              id="outlined-adornment-weight"
-              value={amount}
-              onChange={handleChange}
-              placeholder="0"
-              required
+              </Select> */}
+            {/* </FormControl> */}
+            {/* </Box> */}
+            <div className={s.inpuImgWrapper}>
+              <StyledInputCalc value={amount} onChange={handleChange} placeholder="0" required />
+              <img className={s.calculatorImg} src={calculator} />
+            </div>
+            {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined"> */}
+            {/* <OutlinedInput
+              // size="small"
+              // id="outlined-adornment-weight"
+              // value={amount}
+              // onChange={handleChange}
+              // placeholder="0"
+              // required
               // min="0"
               // type="number" //0 не можна
               endAdornment={
@@ -203,19 +328,22 @@ const FormAddCategory = () => {
                 </InputAdornment>
               }
               // inputProps={{ pattern: '^[1-9][0-9]{0,6}$' }}
-            />
-          </FormControl>
+            /> */}
+            {/* </FormControl> */}
+          </div>
         </div>
-
         {/* <Stack spacing={2} direction="row"> */}
         {/* <button type="submit">Button</button>
         <CustomButton>Disabled</CustomButton> */}
-        <button className={s.authBtn + ' ' + s.authBtnActive} type="submit">
-          ввод
-        </button>
-        <button className={s.authBtn} type="button" onClick={reset}>
-          Очистить
-        </button>
+        {/* </div> */}
+        <div className={s.buttonWrapper}>
+          <button className={s.authBtn + ' ' + s.authBtnActive} type="submit">
+            ввод
+          </button>
+          <button className={s.authBtn} type="button" onClick={reset}>
+            Очистить
+          </button>
+        </div>
         {/* </Stack> */}
       </form>
     </>
