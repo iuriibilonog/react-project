@@ -6,4 +6,23 @@ export const getIsSystemInitialised = state => state.isSystemStarted;
 
 export const isUserLoggedIn = state => state.auth.isLoggedIn;
 
-export const getMonthStats = state => state.transactions.transactions.getMonth;
+export const getMonthStats = state => state?.transactions?.transactions?.getMonth;
+export const getMonthData = state => state?.transactions?.transactions?.dataMonth;
+
+export const getMonthStatsIncomes = state => {
+  const monthIncomesData = getMonthData(state)?.incomes?.incomesData;
+  return Object.keys(monthIncomesData)?.length
+    ? Object.entries(monthIncomesData).map(item => ({
+        [item[0]]: Object.entries(item[1]).filter(element => element[0] !== 'total'),
+      }))
+    : [];
+};
+
+export const getMonthStatsExpenses = state => {
+  const monthExpensesData = getMonthData(state)?.expenses?.expensesData;
+  return Object.keys(monthExpensesData)?.length
+    ? Object.entries(monthExpensesData).map(item => ({
+        [item[0]]: Object.entries(item[1]).filter(element => element[0] !== 'total'),
+      }))
+    : [];
+};

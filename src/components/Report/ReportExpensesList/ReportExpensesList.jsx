@@ -12,8 +12,9 @@ import {
   getTotalExpensesByCategory,
 } from '../../../redux/transactions-selectors';
 import { setExpensesByCategories, setIncomesByCategories } from '../../../redux/actions';
+import { getMonthStatsExpenses } from '../../../redux/selectors';
 
-const ReportExpensesList = ({ category, sum }) => {
+const ReportExpensesList = ({ category, sum, chartDataHandler }) => {
   // const transactionExpenses  = useSelector(getExpenses);
   // const dispatch = useDispatch();
   // const [sum, setSum] = useState(null);
@@ -58,12 +59,19 @@ const ReportExpensesList = ({ category, sum }) => {
   //  });
 
   //  console.log(`newExensescomes`, newExensescomes)
+  const expensesMonthData = useSelector(getMonthStatsExpenses);
+  const categoryHandler = e => {
+    const result = expensesMonthData.filter(obj => Object.keys(obj)[0] === category);
+    console.log(result);
+    chartDataHandler(result);
+  };
+
   return (
     <>
       {category && (
         <li className={s.reportCard}>
           <p>{`${sum}.00`}</p>
-          <svg className={s.iconSvg} title={category}>
+          <svg className={s.iconSvg} title={category} onClick={categoryHandler}>
             <use xlinkHref={`${sprite}#${category}`} title={category} />
           </svg>
           <p className={s.reportCardTitle}>{category}</p>

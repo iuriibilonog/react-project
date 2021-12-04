@@ -10,8 +10,9 @@ import {
   getTotalIncomesByCategory,
 } from '../../../redux/transactions-selectors';
 import { setIncomesByCategories } from '../../../redux/actions';
+import { getMonthStatsIncomes } from '../../../redux/selectors';
 
-const ReportIncomesList = ({ category, sum }) => {
+const ReportIncomesList = ({ category, sum, chartDataHandler, type }) => {
   //   const [incomes, setIncomes] = useState()
   //   const getTotalIncomesByCategories = useSelector(getTotalIncomesByCategory);
   //   console.log(`getTotalIncomesByCategories`, getTotalIncomesByCategories)
@@ -101,12 +102,19 @@ const ReportIncomesList = ({ category, sum }) => {
   // }, [])
 
   // console.log(`sum`, sum)
+
+  const incomesMonthData = useSelector(getMonthStatsIncomes);
+  const categoryHandler = e => {
+    const result = incomesMonthData.filter(obj => Object.keys(obj)[0] === category);
+    console.log(result);
+    chartDataHandler(result);
+  };
   return (
     <>
       {category && (
         <li className={s.reportCard}>
           <p>{sum}.00</p>
-          <svg className={s.iconSvg} title={category}>
+          <svg className={s.iconSvg} title={category} onClick={categoryHandler}>
             <use xlinkHref={`${sprite}#${category}`} title={category} />
           </svg>
           <p className={s.reportCardTitle}>{category}</p>

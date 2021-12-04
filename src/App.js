@@ -19,7 +19,6 @@ import Chart from './components/Chart';
 import PublicRoute from './components/Routes/PublicRoute';
 import PrivateRoute from './components/Routes/PrivateRoute';
 
-
 function App() {
   const dispatch = useDispatch();
   const sid = useSelector(state => state.auth.sid);
@@ -38,14 +37,13 @@ function App() {
 
   return (
     <div className="App">
-
       {/* <Chart /> */}
-      {/* <SwitchTheme /> */}
+      <SwitchTheme />
 
       <header className="App-header"></header>
 
       <NavBar />
-    {/* <IncomesPage/> */}
+      {/* <IncomesPage/> */}
       <Suspense fallback={<h1>LOADING...</h1>} />
       <Switch>
         <PublicRoute exact path="/authorization" restricted>
@@ -53,10 +51,8 @@ function App() {
         </PublicRoute>
         <PrivateRoute exact path="/">
           <TransactionsPage />
-
         </PrivateRoute>
         <PrivateRoute exact path="/reports">
-
           <ReportsPage />
         </PrivateRoute>
       </Switch>
