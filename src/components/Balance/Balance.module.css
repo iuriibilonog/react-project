@@ -1,23 +1,17 @@
 @import '../../utils/variables.css';
 
 .wrapper {
-  padding: 5px;
   display: flex;
-  position: relative;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  flex-wrap: nowrap;
+
   background-color: var(--bg-secondary);
-  margin-left:auto;
-  margin-right:auto;
-  width: 320px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column-reverse !important;
 }
-.flex{
-  display: flex;
-  flex-direction:column;
-  align-items: center;
-}
+
 .title {
   display: block;
   font-weight: 500;
@@ -58,6 +52,7 @@
   border-top-left-radius: 0px;
 
   font-size: 12px;
+  font-weight: 400;
   font-family: Roboto, sans-serif;
   cursor: pointer;
 }
@@ -85,17 +80,29 @@
   cursor: initial;
 }
 
+.balanceSection {
+  text-align: center;
+}
+
+.goHomeSection {
+  display: flex;
+  width: 100%;
+  justify-content: left;
+  align-items: center;
+}
+
 @media screen and (min-width: 768px) {
-  .wrapper{
-     width: 665px;
-      display: flex;
-      flex-direction: row-reverse !important;
-    
+  .wrapper {
+    width: 665px;
+    flex-direction: row;
   }
-  .flex{
-      display: flex;
-      flex-direction: row;
+
+  .balanceSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+
   .balance {
     margin-right: 15px;
     border-radius: 16px;
@@ -109,7 +116,7 @@
   }
 
   .wrapper {
-    flex-direction: row;
+    /*     flex-direction: row; */
   }
 
   .reminding {
@@ -141,8 +148,21 @@
   font-size: 12px;
 }
 
-@media screen and (min-width: 1280px){
-.wrapper{
-  width: 100%;
+@media screen and (min-width: 1280px) {
+  .wrapper {
+    margin-top: 40px;
+    margin-bottom: 30px;
+
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    width: 100%;
+  }
 }
+
+/* .goHomeSection,
+.balanceSection,
+.goToReportSection {
+  display: block;
+  width: 33%;
 }
+ */
