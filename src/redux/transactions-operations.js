@@ -4,7 +4,9 @@ import { token } from '../services/api';
 
 export const addIncomeTransaction = createAsyncThunk(
   'transactions/addIncome',
-  async transaction => {
+  async (transaction, thunkAPI) => {
+    const state = thunkAPI.getState();
+    token.set(state.auth.token);
     try {
       const { data } = await axios.post('/transaction/income', transaction);
       // returns newBalance and new transaction
@@ -34,7 +36,10 @@ export const getIncomeTransactions = createAsyncThunk(
 
 export const addExpenseTransaction = createAsyncThunk(
   'transactions/addExpense',
-  async transaction => {
+  async (transaction, thunkAPI) => {
+    const state = thunkAPI.getState();
+    token.set(state.auth.token);
+    console.log(transaction);
     try {
       const { data } = await axios.post('/transaction/expense', transaction);
       // returns newBalance and new transaction
