@@ -197,6 +197,7 @@ const FormAddCategory = ({ isExpenses }) => {
                 <TextField
                   {...params}
                   size="small"
+                  disabled
                   // sx={{ disableUnderline: 'true' }}
                   // disableUnderline={true}
                   // classes={{ notchedOutline: calendar.input }}
@@ -206,8 +207,8 @@ const FormAddCategory = ({ isExpenses }) => {
                   //   startAdornment: (
                   //     <InputAdornment position="start">{<img src={calculator} />}</InputAdornment>
                   //   ),
-                  //   // classes: { calendar },
-                  //   // disableUnderline: true,
+                  //   classes: { calendar },
+                  //   disableUnderline: true,
                   // }}
                   // label={ '<Un-labeled>'}
                   // InputLabelProps={{ shrink: true }} // stop from animating.
@@ -311,7 +312,7 @@ const FormAddCategory = ({ isExpenses }) => {
                 </option>
                 {data.map(item => {
                   return (
-                    <option style={{ color: 'red' }} id="option" key={item.id} value={item.label}>
+                    <option id="option" key={item.id} value={item.label}>
                       {item.label}
                     </option>
                   );
