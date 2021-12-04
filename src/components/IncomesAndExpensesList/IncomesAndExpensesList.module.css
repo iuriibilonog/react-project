@@ -20,7 +20,11 @@
 }
 .transactionsList {
   max-height: 346px;
+  border-bottom: 2px solid var(--bg-secondary);
+  /* background-color: none; */
 }
+
+
 
 @media screen and (min-width: 768px) {
   .header {
@@ -40,6 +44,10 @@
 
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+
+    letter-spacing: 0.02;
+    font-size:12px;
+    line-height: 1.17;
   }
   .header > div,
   .header > span {
@@ -49,9 +57,12 @@
     width: 100%;
     margin-bottom: 40px;
   }
+  .transactionsList {
+background-color: var(--bg-primary);
+  }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   .list {
     width: 760px;
   }
