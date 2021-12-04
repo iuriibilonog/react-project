@@ -1,6 +1,6 @@
 import s from './UnifiedModal.module.css';
 
-const UnifiedModal = ({ title = 'Вы уверены?', response }) => {
+const UnifiedModal = ({ title = 'Вы уверены?', response, }) => {
   const btnHandler = e => {
     e.target.name === 'yes' ? response(true) : response(false);
   };
@@ -14,6 +14,7 @@ const UnifiedModal = ({ title = 'Вы уверены?', response }) => {
       <div className={s.wrapper}>
         <span className={s.title}> {title} </span>
         <ul className={s.btnsBlock}>
+        
           <li className={s.btnItem}>
             <button type="button" className={s.yesBtn} name="yes" onClick={btnHandler}>
               ДА

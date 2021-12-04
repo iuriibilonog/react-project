@@ -32,7 +32,7 @@ const authSlice = createSlice({
       state.user = action.payload.data;
       state.isLoading = false;
       // state.isLoggedIn = true;
-      // state.isRegisterFullField = true;
+      state.isRegisterFullField = true;
       state.socialAuth = action.payload.socialAuth;
     },
     [login.fulfilled](state, action) {
