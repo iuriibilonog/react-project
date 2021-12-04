@@ -16,6 +16,7 @@ const initialState = {
   isCheckingUser: false,
   socialAuth: false,
   userBalance: null,
+  isRegisterFullField: false,
 };
 
 const authSlice = createSlice({
@@ -25,6 +26,7 @@ const authSlice = createSlice({
     [register.fulfilled](state, action) {
       state.user = action.payload.data;
       // state.isLoggedIn = true;
+      // state.isRegisterFullField = true;
       state.socialAuth = action.payload.socialAuth;
     },
     [login.fulfilled](state, action) {

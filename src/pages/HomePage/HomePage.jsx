@@ -5,6 +5,13 @@ import imgTitle from '../../img/title.svg';
 import Authorization from '../../components/Auth/Auth';
 
 import { useEffect, useState } from 'react';
+
+
+import FormAddCategory from '../../components/FormAddCategory';
+
+import IncomesPage from '../IncomesPage';
+import NavigationBetweenCategories from '../../components/FormAddCategory/NavigationBetweenCategoryes/NavigationBetweenCategoryes';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { getIncomesCategories } from '../../redux/transactions-operations';
 import { getExpensesCategories } from '../../redux/transactions-operations';
