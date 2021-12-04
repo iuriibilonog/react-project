@@ -6,14 +6,7 @@ import Authorization from '../../components/Auth/Auth';
 
 import { useEffect, useState } from 'react';
 
-
 import FormAddCategory from '../../components/FormAddCategory';
-
-
-
-
-
-
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getIncomesCategories } from '../../redux/transactions-operations';

@@ -58,7 +58,8 @@
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
   .buttonWrapper {
-    margin-top: 30px;
+    margin-top: 83px;
+    margin-bottom: 10px;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -132,6 +133,7 @@
 .selectWrappedtmp > select {
   color: rgb(117, 117, 117);
   padding-left: 5px;
+  outline: none;
 }
 .selectWrappedtmp > select > option {
   /* border-radius: 10px; */
@@ -139,16 +141,23 @@
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   #tmp {
-    width: 1px;
+    /* width: 90px; */
     border-color: burlywood;
     border-radius: 10px;
     outline: none;
     margin-right: 0px;
+    margin-left: 30px;
   }
   .buttonWrapper {
+    display: flex;
+    justify-content: center;
     margin-top: 30px;
     width: 100%;
     justify-content: center;
+    margin-bottom: 48px;
+  }
+  .formContainer {
+    /* margin-bottom: 48px; */
   }
 }
 @media screen and (min-width: 1280px) {
@@ -158,6 +167,9 @@
     margin-left: 27px;
     margin-top: 0;
     /* margin-top: 30px; */
+  }
+  .formContainer {
+    /* margin-bottom: 60px; */
   }
 }
 

@@ -3,10 +3,11 @@
 .btn {
   display: flex;
   height: 100%;
-  width: 100%;
+  width: fit-content;
   flex-wrap: nowrap;
   justify-content: start;
   align-items: center;
+  background-color: transparent;
 
   font-weight: 400;
   font-size: 12px;

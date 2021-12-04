@@ -1,4 +1,9 @@
 @import '../../utils/variables.css';
+button,
+input {
+  margin: 0;
+  padding: 0;
+}
 
 .wrapper {
   display: flex;
@@ -7,18 +12,25 @@
   background-color: var(--bg-secondary);
   padding-left: 5px;
   padding-right: 5px;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   flex-direction: column-reverse !important;
+  background-color: goldenrod;
 }
 
 .title {
+  margin-bottom: 6px;
   display: block;
   font-weight: 500;
   color: var(--font-secondary);
   font-family: Roboto, sans-serif;
 }
 
+.formWrapper {
+  margin-bottom: auto;
+  margin-top: 0;
+  padding: 1px;
+}
 .balance {
   display: inline-block;
   height: 44px;
@@ -82,18 +94,19 @@
 
 .balanceSection {
   text-align: center;
+  /* background-color: red; */
 }
 
 .goHomeSection {
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   justify-content: left;
   align-items: center;
 }
 
 @media screen and (min-width: 768px) {
   .wrapper {
-    width: 665px;
+    /* width: 665px; */
     flex-direction: row;
   }
 

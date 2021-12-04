@@ -48,7 +48,9 @@
 }
 
 .yesBtn:hover,
-.noBtn:hover {
+.yesBtn:focus,
+.noBtn:hover,
+.noBtn:focus {
   border-color: var(--accent-bright);
 }
 
