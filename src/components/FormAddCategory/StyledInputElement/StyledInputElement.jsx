@@ -33,6 +33,7 @@ const StyledInputElement = styled('input')`
   }
 
   &:hover {
+    background: inherit;
   }
 
   &:focus {
