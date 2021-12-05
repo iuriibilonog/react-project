@@ -13,6 +13,9 @@ import {
 
 import Container from '../../components/Container';
 import FormAddCategory from '../../components/FormAddCategory';
+// import { getIncomesCategories } from '../../redux/transactions-operations';
+// import { getExpensesCategories } from '../../redux/transactions-operations';
+// import { getIncomeTransactions } from '../../redux/transactions-operations';
 import GoHome from '../../components/GoHome/GoHome';
 import Balance from '../../components/Balance/Balance';
 import GoToReport from '../../components/GoToReport';
@@ -33,6 +36,18 @@ const TransactionsPage = () => {
 
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+   
+    
+      dispatch(getIncomesCategories());
+      dispatch(getExpensesCategories());
+    dispatch(getIncomeTransactions());
+    dispatch(getExpensesTransactions());
+    dispatch(getExpensesCategories());
+    dispatch(getDataMonth(`${year}-${curMonth}`));
+    
+  }, []);
 
   // useEffect(() => {
   //   dispatch(getExpensesTransactions());
@@ -68,9 +83,7 @@ const TransactionsPage = () => {
               type="button"
               className={`navBtn ${isIncomesTabActive ? 'navBtnActive' : null}`}
               onClick={() => {
-                dispatch(getIncomesCategories());
-                dispatch(getIncomeTransactions());
-                dispatch(getDataMonth(`${year}-${curMonth}`));
+                
                 setIsExpenses(false);
                 handleToggle();
               }}
@@ -84,8 +97,6 @@ const TransactionsPage = () => {
               type="button"
               className={`navBtn ${isExpensesTabActive ? 'navBtnActive' : null}`}
               onClick={() => {
-                dispatch(getExpensesTransactions());
-                dispatch(getExpensesCategories());
                 setIsExpenses(true);
                 handleToggle();
               }}
