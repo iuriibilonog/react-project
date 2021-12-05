@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import RingLoader from 'react-spinners/RingLoader';
-
+/* import Img from '../../img/dollar.gif'; */
 
 const override = css`
   display: block;
@@ -14,6 +14,7 @@ const override = css`
 
 function Loader() {
   return <RingLoader css={override} size={150} color="#ff751d" />;
+  /* return <img src={Img} alt="d" />; */
 }
 
 export default Loader;

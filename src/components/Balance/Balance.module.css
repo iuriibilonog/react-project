@@ -15,7 +15,6 @@ input {
   /* margin-left: auto;
   margin-right: auto; */
   flex-direction: column-reverse !important;
-  background-color: goldenrod;
 }
 
 .title {
@@ -144,7 +143,7 @@ input {
   max-height: 152px;
   padding: 30px;
   position: absolute;
-  top: 100%;
+  top: 90px;
   border: 1px var(--accent-bright);
   color: white;
   font-size: 14px;
