@@ -12,24 +12,19 @@ import Divider from '@mui/material/Divider';
 import { StyledBadge } from './StyledBadge';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logOut } from '../../redux/auth/auth-operations';
+import { setBalance, setIsSystemStarted } from '../../redux/actions';
 
-
-
-
-
-
-const NavBar = ({socialName, socialImg, isAuthFromSocial }) => {
+const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const socialAuth = useSelector(state => state.auth.socialAuth);
-  const loginNameForm = useSelector(state => state.auth.user?.userData?.email)
-  const loginNamefromGoogle = useSelector(state => state.auth.user?.email)
-  const loginName = loginNameForm || loginNamefromGoogle;
+  const loginName = useSelector(state => state.auth.user?.userData?.email);
+
   // console.log(loginName.length)
   const dispatch = useDispatch();
 
   // const loginFromEmail = () => {
   //   for (let i = 0; i <= loginName.length; i++) {
-      
+
   //   }
   // }
   return (
@@ -53,7 +48,12 @@ const NavBar = ({socialName, socialImg, isAuthFromSocial }) => {
                     variant="dot"
                     sx={{ mr: 2 }}
                   >
-                    <Avatar alt="Remy Sharp" src={isAuthFromSocial && socialAuth ? socialImg: "/static/images/avatar/1.jpg"} />
+                    <Avatar
+                      alt="Remy Sharp"
+                      src={
+                        isAuthFromSocial && socialAuth ? socialImg : '/static/images/avatar/1.jpg'
+                      }
+                    />
                   </StyledBadge>
                 </Stack>
                 <Typography
@@ -80,29 +80,33 @@ const NavBar = ({socialName, socialImg, isAuthFromSocial }) => {
                   }}
                   className={s.visibility}
                 />
-                <div onClick={() => dispatch(logOut())}>
-                <Typography
-                  variant="text"
-                  sx={{
-                    color: 'white',
-                    textDecoration: 'underline',
-                    textTransform: 'capitalize',
-                    color: '#52555F',
-                    fontFamily: 'Roboto',
-                    padding: '10px',
-                    fontSize: '12px',
-                    cursor: 'pointer',
-                    '&:hover,&:focus': {
-                      color: "#ff751d"
-                    }
-
+                <div
+                  onClick={() => {
+                    dispatch(setIsSystemStarted(null));
+                    dispatch(setBalance(null));
+                    dispatch(logOut());
                   }}
-                  className={s.visibility}
-                  
                 >
-                  Выйти
-                </Typography>
-                <img className={s.logoutIcon} src={logout} />
+                  <Typography
+                    variant="text"
+                    sx={{
+                      color: 'white',
+                      textDecoration: 'underline',
+                      textTransform: 'capitalize',
+                      color: '#52555F',
+                      fontFamily: 'Roboto',
+                      padding: '10px',
+                      fontSize: '12px',
+                      cursor: 'pointer',
+                      '&:hover,&:focus': {
+                        color: '#ff751d',
+                      },
+                    }}
+                    className={s.visibility}
+                  >
+                    Выйти
+                  </Typography>
+                  <img className={s.logoutIcon} src={logout} />
                 </div>
               </div>
             )}
