@@ -7,7 +7,7 @@ const PublicRoute = ({ children, restricted = false, ...routeProps }) => {
   const shouldRedirect = isLoggedIn && restricted;
   console.log('shouldRedirect', shouldRedirect);
   console.log(children);
-  return <Route {...routeProps}>{shouldRedirect ? <Redirect to="/" /> : children}</Route>;
+  return <Route {...routeProps}>{shouldRedirect ? <Redirect to="/transactions" /> : children}</Route>;
 };
 
 export default PublicRoute;

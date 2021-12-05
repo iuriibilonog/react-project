@@ -82,6 +82,7 @@ const authSlice = createSlice({
       state.sid = action?.payload?.sid;
       state.user.refreshToken = action?.payload?.refreshToken;
       state.token = action.payload.accessToken;
+      state.userBalance = action.payload?.data?.balance;
     },
   },
 });
