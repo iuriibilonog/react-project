@@ -38,14 +38,13 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Chart /> */}
-      <SwitchTheme />
+      {/* <SwitchTheme /> */}
 
       <header className="App-header"></header>
 
       <NavBar />
 
-    {/* <IncomesPage/> */}
+      {/* <IncomesPage/> */}
       <Suspense fallback={<Loader />} />
       <Switch>
         <PublicRoute exact path="/authorization" restricted>
