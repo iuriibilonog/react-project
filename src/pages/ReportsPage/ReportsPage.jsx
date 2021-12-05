@@ -30,8 +30,8 @@ const ReportsPage = () => {
           </div>
         </div>
 
-        </Container>
       <Report />
+        </Container>
       {/* <Chart/> */}
     
     </>

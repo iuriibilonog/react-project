@@ -81,15 +81,7 @@ ArrowBackIosIcon {
   max-height: 56px;
   margin-top: 5px;
   margin-bottom: 5px;
-  background-image: radial-gradient(
-    75% 60% at 50% 50%,
-    #f5f6fb 15%,
-    #f5f6fb 15%,
-    #f5f6fb 40%,
-    #f5f6fb 40%,
-    #f5f6fb 65%,
-    #fff 65%
-  );
+  
 }
 .iconSvg:hover {
   fill: var(--accent-bright);
@@ -100,7 +92,7 @@ ArrowBackIosIcon {
     #ffdac0 40%,
     #ffdac0 40%,
     #ffdac0 65%,
-    #fff 65%
+    #0000 65%
   );
   transform: scale(1.1);
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -115,7 +107,7 @@ ArrowBackIosIcon {
     #ffdac0 40%,
     #ffdac0 40%,
     #ffdac0 65%,
-    #fff 65%
+    #0000 65%
   );
   transform: scale(1.25);
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -134,6 +126,50 @@ ArrowBackIosIcon {
 
   .navigation {
     display: flex;
+  }
+  .iconSvg {
+    max-width: 56px;
+    max-height: 56px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-image: radial-gradient(
+      75% 60% at 50% 50%,
+      #f5f6fb 15%,
+      #f5f6fb 15%,
+      #f5f6fb 40%,
+      #f5f6fb 40%,
+      #f5f6fb 65%,
+      #0000 65%
+    );
+  }
+  .iconSvg:hover {
+    fill: var(--accent-bright);
+    background-image: radial-gradient(
+      75% 60% at 50% 50%,
+      #ffdac0 15%,
+      #ffdac0 15%,
+      #ffdac0 40%,
+      #ffdac0 40%,
+      #ffdac0 65%,
+      #fff 65%
+    );
+    transform: scale(1.1);
+    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .iconSvg:focus {
+    fill: var(--accent-bright);
+    background-image: radial-gradient(
+      75% 60% at 50% 50%,
+      #ffdac0 15%,
+      #ffdac0 15%,
+      #ffdac0 40%,
+      #ffdac0 40%,
+      #ffdac0 65%,
+      #0000 65%
+    );
+    transform: scale(1.25);
+    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .componentContainer {
     display: flex;
