@@ -22,16 +22,11 @@ const Balance = () => {
   const pushIsSystemStartedMarkerToState = marker => dispatch(actions.setIsSystemStarted(marker));
   const pushBalanceToState = newBalance => dispatch(actions.setBalance(newBalance)); //if it`s beginning
 
-  const bal = useSelector(getBalance);
+  const bal = useSelector(getBalance); //transactions.balance
 
   const isSystemStarted = useSelector(getIsSystemInitialised);
   const expenses = useSelector(getExpenses).length;
   const incomes = useSelector(getIncomes).length;
-
-  useEffect(() => {
-    console.log(bal);
-    setBalance(Math.round(bal) + ' UAH');
-  }, [bal]);
 
   const zeroReminding = () => {
     const timerId = setTimeout(() => {
@@ -41,15 +36,34 @@ const Balance = () => {
   };
 
   useEffect(() => {
+    console.log('first time');
+    console.log('bal', bal);
+    console.log('userBalanceFromAuth', userBalanceFromAuth);
+
+    if (userBalanceFromAuth === null && !expenses && !incomes) {
+      console.log('empty');
+    }
+
+    if (userBalanceFromAuth !== null && !expenses && !incomes) {
+      console.log('empty + Balance');
+    }
+
     if (userBalanceFromAuth || isSystemStarted || expenses || incomes) {
-      pushBalanceToState(userBalanceFromAuth); //  - to state only
-      setBalance(userBalanceFromAuth + ' UAH');
+      bal === null ? pushBalanceToState(userBalanceFromAuth) : pushBalanceToState(bal); //  - to state only
+      bal === null ? setBalance(userBalanceFromAuth + ' UAH') : setBalance(bal + ' UAH');
+      pushIsSystemStartedMarkerToState(true);
       setBalanceState('set');
     } else if (balanceState === 'unset') {
       zeroReminding();
     }
+    console.log('bal-after', bal);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    console.log(bal);
+    setBalance(Math.round(bal) + ' UAH');
+  }, [bal]);
 
   useEffect(() => {
     if (balanceState === 'set') {
@@ -57,15 +71,6 @@ const Balance = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [balanceState]);
-
-  // useEffect(() => {
-  //   setBalance(initBalance); // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [initBalance]);
-
-  useEffect(() => {
-    setBalance(userBalanceFromAuth);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userBalanceFromAuth]);
 
   const responseHandling = response => {
     setIsModalShown(false);

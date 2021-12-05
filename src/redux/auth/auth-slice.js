@@ -82,7 +82,7 @@ const authSlice = createSlice({
       state.token = action?.payload?.newAccessToken;
       state.user.accessToken = action?.payload?.newAccessToken;
       state.user.refreshToken = action?.payload?.newRefreshToken;
-      state.userBalance = state.user.userData.balance;
+      state.userBalance = state.user?.userData?.balance;
     },
     [checkCurrentUser.rejected](state) {
       state.isCheckingUser = false;
@@ -98,10 +98,14 @@ const authSlice = createSlice({
       state.sid = action?.payload?.sid;
       state.user.refreshToken = action?.payload?.refreshToken;
       state.token = action.payload.accessToken;
+
       state.isLoading = false;
     },
     [getUser.rejected](state){
       state.isLoading = false;
+
+      state.userBalance = action.payload?.data?.balance;
+
     },
   },
 });

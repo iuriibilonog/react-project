@@ -16,6 +16,9 @@ import '../../utils/variables.css';
 import CustomInput from './StyledInputElement/StyledInputElement';
 import StyledInputCalc from './Select/StyledCalculator/StyledCalculator';
 import iconCalendar from '../../img/calendar.svg';
+import Box from '@mui/material/Box';
+import { IconButton, InputAdornment } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const FormAddCategory = ({ isExpenses }) => {
   const [value, setValue] = React.useState(new Date());
@@ -68,12 +71,27 @@ const FormAddCategory = ({ isExpenses }) => {
     setDescription(event.target.value);
   };
   const useStyles = makeStyles(theme => ({
-    textInpt: {
-      borderRadius: '30px',
-      width: '289px',
-      outlineColor: 'black',
+    // textInpt: {
+    //   borderRadius: '30px',
+    //   width: '289px',
+    //   outlineColor: 'black',
+    // },
+    input: {
+      '&:before': {
+        // normal
+        borderBottom: '1px solid orange',
+      },
+      '&:after': {
+        // focused
+        borderBottom: `3px solid green`,
+      },
+      '&:hover:not(.Mui-disabled):not(.Mui-focused):not(.Mui-error):before': {
+        // hover
+        borderBottom: `2px solid purple`,
+      },
     },
   }));
+  const classes = useStyles();
   const handleDateChange = newValue => {
     setValue(newValue);
   };
@@ -92,6 +110,40 @@ const FormAddCategory = ({ isExpenses }) => {
     setDescription('');
     setAmount('');
   };
+  const theme = createTheme({
+    components: {
+      // Name of the component
+      MuiIconButton: {
+        styleOverrides: {
+          // Name of the slot
+          edgeEnd: {
+            // Some CSS
+            paddingLeft: '20px',
+            position: 'absolute',
+            top: '-4px',
+            left: '10px',
+          },
+        },
+      },
+      MuiInput: {
+        styleOverrides: {
+          underline: {
+            position: 'relative',
+            paddingLeft: '40px',
+          },
+        },
+      },
+      MuiSvgIcon: {
+        styleOverrides: {
+          root: {
+            width: '30px',
+            fill: 'none',
+            background: 'none',
+          },
+        },
+      },
+    },
+  });
 
   return (
     <>
@@ -104,18 +156,36 @@ const FormAddCategory = ({ isExpenses }) => {
             className={css.textInpt}
             id={s.inputStyle}
           >
-            <DatePicker
-              id={s.calendarStyle}
-              size="small"
-              value={value}
-              onChange={handleDateChange}
-              renderInput={params => (
-
-                <TextField {...params} size="small" margin="dense" variant="standard" id={s.tmp} />
-
-              )}
-              format="YYYY-MM-DD"
-            />
+            <ThemeProvider theme={theme}>
+              <DatePicker
+                keyboard={true}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment
+                      position="start"
+                      sx={{ marginRight: { sm: '-20px', lg: '5px' }, paddingBottom: '3px' }}
+                    >
+                      <img src={iconCalendar} />
+                    </InputAdornment>
+                  ),
+                }}
+                className={classes.input}
+                id={s.calendarStyle}
+                size="small"
+                value={value}
+                onChange={handleDateChange}
+                renderInput={params => (
+                  <TextField
+                    {...params}
+                    size="small"
+                    margin="dense"
+                    variant="standard"
+                    id={s.tmp}
+                  />
+                )}
+                format="YYYY-MM-DD"
+              />
+            </ThemeProvider>
           </LocalizationProvider>
 
           <img className={s.calendarIconStyle} src={iconCalendar} />
@@ -126,6 +196,7 @@ const FormAddCategory = ({ isExpenses }) => {
             placeholder={textInputName}
             name="textInput"
             onChange={handleTextChange}
+            autoComplete="off"
             required
           />
           <div className={s.containerForm}>
