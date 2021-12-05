@@ -17,7 +17,10 @@ import { setBalance, setIsSystemStarted } from '../../redux/actions';
 const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const socialAuth = useSelector(state => state.auth.socialAuth);
-  const loginName = useSelector(state => state.auth.user?.userData?.email);
+  const loginForm = useSelector(state => state.auth.user?.userData?.email);
+  const loginNameFromGoogle = useSelector(state => state.auth?.user?.email)
+
+  const loginName = loginForm || loginNameFromGoogle;
 
   // console.log(loginName.length)
   const dispatch = useDispatch();
