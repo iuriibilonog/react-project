@@ -83,7 +83,7 @@
   .imgText {
     width: 307px;
     height: 78px;
-    margin-left: 171px;
+    margin-left: 195px;
   }
   .mainSection {
     height: 506px;
@@ -113,7 +113,7 @@
   }
   .bcgImageBottom {
     position: absolute;
-    z-index: 99;
+    z-index: 101;
     width: 183px;
     height: 142px;
     top: 56%;
