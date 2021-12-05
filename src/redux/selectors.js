@@ -26,3 +26,5 @@ export const getMonthStatsExpenses = state => {
       }))
     : [];
 };
+
+export const getLoader = state => state.auth.isLoader;

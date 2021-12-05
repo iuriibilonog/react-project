@@ -19,6 +19,7 @@ import Chart from './components/Chart';
 import PublicRoute from './components/Routes/PublicRoute';
 import PrivateRoute from './components/Routes/PrivateRoute';
 import Loader from './components/Loader';
+import Team from './components/Team/Team';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,7 +42,6 @@ function App() {
       {/* <SwitchTheme /> */}
 
       <header className="App-header"></header>
-
       <NavBar />
 
       {/* <IncomesPage/> */}
@@ -50,7 +50,14 @@ function App() {
         <PublicRoute exact path="/" restricted>
           <HomePage />
         </PublicRoute>
+
+        <PublicRoute exact path="/team" redirectTo="/">
+          <Team/> 
+        </PublicRoute>
+        <PrivateRoute exact path="/">
+
         <PrivateRoute exact path="/transactions">
+
           <TransactionsPage />
         </PrivateRoute>
         <PrivateRoute exact path="/reports">
