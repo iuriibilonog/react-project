@@ -26,19 +26,19 @@ const HomePage = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log('ok');
-    console.log('before-->', isLoggedIn);
-    if (isLoggedIn) {
-      dispatch(getIncomesCategories());
-      dispatch(getExpensesCategories());
-      dispatch(getIncomeTransactions());
-    }
+  // useEffect(() => {
+  //   console.log('ok');
+  //   console.log('before-->', isLoggedIn);
+  //   if (isLoggedIn) {
+  //     dispatch(getIncomesCategories());
+  //     dispatch(getExpensesCategories());
+  //     dispatch(getIncomeTransactions());
+  //   }
 
-    console.log('after-->', isLoggedIn);
+  //   console.log('after-->', isLoggedIn);
 
-    console.log('ok2');
-  }, [isLoggedIn]);
+  //   console.log('ok2');
+  // }, [isLoggedIn]);
 
   const getDataFromSocial = ({ img, name }) => {
     setSocialImg(img);
