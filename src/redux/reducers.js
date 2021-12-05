@@ -33,7 +33,7 @@ const balanceReducer = createReducer(0, {
 
 const expensesReducer = createReducer([], {
   [getExpensesTransactions.fulfilled]: (_, action) => action?.payload?.expenses,
-  [addExpenseTransaction.fulfilled]: (state, action) => [...state, action?.payload?.transaction],
+  [addExpenseTransaction.fulfilled]: (state, action) => [action?.payload?.transaction, ...state],
   [deleteTransaction.fulfilled]: (state, action) =>
     [...state].filter(item => item._id !== action?.payload.transactionId),
   // [getDataMonth.fulfilled]: (_, action) => action?.payload?.expenses,
@@ -111,7 +111,7 @@ const loader = createReducer(false, {
   [setIsSystemStarted.pending]: () => true,
   [setIsSystemStarted.fulfilled]: () => false,
   [setIsSystemStarted.rejected]: () => false,
-})
+});
 
 const transactionsReducer = combineReducers({
   incomes: incomesReducer,
@@ -123,7 +123,6 @@ const transactionsReducer = combineReducers({
   expensesByCategory: setExpensesByCategory,
   incomesByCategory: setIncomesByCategory,
   dataMonth: getDataMonthReducer,
-  
 });
 
 export const isSystemStartedReducer = createReducer(false, {
