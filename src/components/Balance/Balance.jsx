@@ -164,9 +164,9 @@ const Balance = () => {
 
   return (
     <>
-    {/* <div className={s.wrapper}> */}
+      {/* <div className={s.wrapper}> */}
       {/* <section className={s.goHomeSection}> */}
-        {/* <GoHome /> */}
+      {/* <GoHome /> */}
       {/* </section> */}
       <section className={s.balanceSection}>
         <span className={s.title}>Баланс:</span>
@@ -186,11 +186,11 @@ const Balance = () => {
         </form>
       </section>
       {/* <section className={s.goToReportSection}> */}
-        {/* <GoToReport /> */}
-        {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
+      {/* <GoToReport /> */}
+      {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
       {/* </section> */}
       {/* </div> */}
-      </>
+    </>
   );
 };
 
