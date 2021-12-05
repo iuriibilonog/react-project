@@ -23,7 +23,7 @@ import {
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 
-const balanceReducer = createReducer(0, {
+const balanceReducer = createReducer(null, {
   [setBalance]: (_, action) => action.payload,
   [updateBalance.fulfilled]: (_, action) => action.payload,
   [addIncomeTransaction.fulfilled]: (_, action) => action.payload.newBalance,
