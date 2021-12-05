@@ -23,7 +23,7 @@ import {
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 
-const balanceReducer = createReducer(0, {
+const balanceReducer = createReducer(null, {
   [setBalance]: (_, action) => action.payload,
   [updateBalance.fulfilled]: (_, action) => action.payload,
   [addIncomeTransaction.fulfilled]: (_, action) => action.payload.newBalance,
@@ -111,7 +111,7 @@ const loader = createReducer(false, {
   [setIsSystemStarted.pending]: () => true,
   [setIsSystemStarted.fulfilled]: () => false,
   [setIsSystemStarted.rejected]: () => false,
-})
+});
 
 const transactionsReducer = combineReducers({
   incomes: incomesReducer,
@@ -123,7 +123,6 @@ const transactionsReducer = combineReducers({
   expensesByCategory: setExpensesByCategory,
   incomesByCategory: setIncomesByCategory,
   dataMonth: getDataMonthReducer,
-  
 });
 
 export const isSystemStartedReducer = createReducer(false, {
