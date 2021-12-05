@@ -47,10 +47,10 @@ function App() {
       {/* <IncomesPage/> */}
       <Suspense fallback={<Loader />} />
       <Switch>
-        <PublicRoute exact path="/authorization" restricted>
+        <PublicRoute exact path="/" restricted>
           <HomePage />
         </PublicRoute>
-        <PrivateRoute exact path="/">
+        <PrivateRoute exact path="/transactions">
           <TransactionsPage />
         </PrivateRoute>
         <PrivateRoute exact path="/reports">
