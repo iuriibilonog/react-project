@@ -118,10 +118,18 @@ const FormAddCategory = ({ isExpenses }) => {
           // Name of the slot
           edgeEnd: {
             // Some CSS
-            paddingLeft: '20px',
+            // paddingLeft: '20px',
+            marginLeft: '16px',
             position: 'absolute',
-            top: '-4px',
+            top: '-3px',
             left: '10px',
+            '&:hover, :focus': {
+              background: 'transparent',
+            },
+            ['@media (min-width:980px)']: {
+              // eslint-disable-line no-useless-computed-key
+              marginLeft: '30px',
+            },
           },
         },
       },
