@@ -12,14 +12,21 @@ import Divider from '@mui/material/Divider';
 import { StyledBadge } from './StyledBadge';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logOut } from '../../redux/auth/auth-operations';
+
 import iconUser from '../../img/iconUser.svg';
+
+import { setBalance, setIsSystemStarted } from '../../redux/actions';
+
 
 const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const socialAuth = useSelector(state => state.auth.socialAuth);
-  const loginNameForm = useSelector(state => state.auth.user?.userData?.email);
-  const loginNamefromGoogle = useSelector(state => state.auth.user?.email);
-  const loginName = loginNameForm || loginNamefromGoogle;
+
+  const loginForm = useSelector(state => state.auth.user?.userData?.email);
+  const loginNameFromGoogle = useSelector(state => state.auth?.user?.email)
+
+  const loginName = loginForm || loginNameFromGoogle;
+
   // console.log(loginName.length)
   const dispatch = useDispatch();
 
@@ -81,7 +88,15 @@ const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
                   }}
                   className={s.visibility}
                 />
-                <div onClick={() => dispatch(logOut())}>
+
+                <div
+                  onClick={() => {
+                    dispatch(setIsSystemStarted(null));
+                    dispatch(setBalance(null));
+                    dispatch(logOut());
+                  }}
+                >
+
                   <Typography
                     variant="text"
                     sx={{
