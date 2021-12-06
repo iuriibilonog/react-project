@@ -43,7 +43,6 @@ function App() {
     
     if (token !== '') {
       dispatch(checkCurrentUser());
-      console.log('REFRESH');
     }
     return;
   }, []);

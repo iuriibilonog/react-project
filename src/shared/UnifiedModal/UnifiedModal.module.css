@@ -9,7 +9,7 @@
   /*   background-color: rgba(82, 85, 95, 0.1); */
 }
 .wrapper {
-  z-index: 100;
+  z-index: 300;
   overflow: hidden;
   position: absolute;
   display: flex;
@@ -19,6 +19,8 @@
   left: 50%;
   top: 40%;
   transform: translateX(-150px);
+
+
 
   /* transform: translateY(-97px); */
   width: 300px;
