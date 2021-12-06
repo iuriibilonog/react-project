@@ -27,6 +27,7 @@ import InputBase from '@mui/material/InputBase';
 import { styled } from '@mui/material/styles';
 import InputLabel from '@mui/material/InputLabel';
 import SelectCustome from './Select/Select';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const FormAddCategory = ({ isExpenses }) => {
   const [value, setValue] = React.useState(new Date());
@@ -44,13 +45,13 @@ const FormAddCategory = ({ isExpenses }) => {
   const newDate = () => {
     try {
       if (value > new Date()) {
-        alert('Ця дата поки не доступна! Виберіть дату, яка вже настала!');
+        Notify.failure('Ця дата поки не доступна! Виберіть дату, яка вже настала!');
         return;
       }
       const newDateValue = format(value, 'yyyy-MM-dd');
       return newDateValue;
     } catch (error) {
-      alert('Введите правильную дату!');
+      Notify.failure('Введите правильную дату!');
       return false;
     }
   };
@@ -70,7 +71,7 @@ const FormAddCategory = ({ isExpenses }) => {
   const handleFormSubmit = e => {
     e.preventDefault();
     if (description.length <= 3 || description.length >= 20 || !isNaN(description)) {
-      alert('Описание должно бить не менше 3 и не больше 20 символов');
+      Notify.failure('Описание должно бить не менше 3 и не больше 20 символов');
       return;
     }
     try {
@@ -81,7 +82,7 @@ const FormAddCategory = ({ isExpenses }) => {
         reset();
       }
     } catch (error) {
-      alert('Введите правильную дату!');
+      Notify.failure('Введите правильную дату!');
     }
   };
   const handleTextChange = event => {
@@ -216,7 +217,10 @@ const FormAddCategory = ({ isExpenses }) => {
                   startAdornment: (
                     <InputAdornment
                       position="start"
-                      sx={{ marginRight: { sm: '-20px', lg: '5px' }, paddingBottom: '3px' }}
+                      sx={{
+                        marginRight: { sm: '-20px', lg: '5px' },
+                        paddingBottom: '3px',
+                      }}
                     >
                       <img src={iconCalendar} />
                     </InputAdornment>
