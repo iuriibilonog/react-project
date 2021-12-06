@@ -1,8 +1,9 @@
 /* ---- selectors for mapStateToProps only ! ---- */
 
-export const getBalance = state => state.transactions.balance;
-export const getUserBalance = state => state.auth.userBalance;
+export const getBalance = state => state?.transactions?.balance;
+export const getUserBalance = state => state?.auth?.userBalance;
 export const getIsSystemInitialised = state => state.isSystemStarted;
+export const isGetUserFulfilledAfterRefresh = state => state.isGetUserFulfilledAfterRefresh;
 
 export const isUserLoggedIn = state => state.auth.isLoggedIn;
 

@@ -19,6 +19,8 @@ const initialState = {
   userBalance: null,
   isLoading: false,
   isRegisterFullField: false,
+  isRefreshFullFilled: false,
+  isGetUserFulfilledAfterRefresh: false,
 };
 
 const authSlice = createSlice({
@@ -83,7 +85,9 @@ const authSlice = createSlice({
       state.user.accessToken = action?.payload?.newAccessToken;
       state.user.refreshToken = action?.payload?.newRefreshToken;
       state.userBalance = state.user?.userData?.balance;
+      state.isRefreshFullFilled = true;
     },
+
     [checkCurrentUser.rejected](state) {
       state.isCheckingUser = false;
       state.isLoading = false;
@@ -101,10 +105,13 @@ const authSlice = createSlice({
 
       state.isLoading = false;
     },
-    [getUser.rejected](state){
+    [getUser.rejected](state, action){
       state.isLoading = false;
 
       state.userBalance = action.payload?.data?.balance;
+
+      state.isGetUserFulfilledAfterRefresh = true;
+
 
     },
   },
