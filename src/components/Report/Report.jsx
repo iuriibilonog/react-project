@@ -14,16 +14,17 @@ import {
   getTotalExpensesByCategory,
   getTotalIncomesByCategory,
 } from '../../redux/transactions-selectors';
-
-import { useState } from 'react';
+import { getMonthData } from '../../redux/selectors';
+import { useEffect, useState } from 'react';
 import ReportIncomesList from './ReportIncomesList/ReportIncomesList';
 import ReportExpensesList from './ReportExpensesList/ReportExpensesList';
-
 
 const Report = () => {
   const [category, setCategory] = useState('');
   const [reportTypeRender, setReportTypeRender] = useState('incomes');
   const [type, setType] = useState('expenses');
+  const [dataForChartSubCategories, setDataForChartSubCategories] = useState(null);
+
   const transactionExpenses = useSelector(getExpenses);
   const transactionIncomes = useSelector(getIncomes);
   const getIncomesCategoties = useSelector(getInomesCategories);
@@ -32,7 +33,16 @@ const Report = () => {
   const onHandleChangeType = () => {
     if (reportTypeRender === 'incomes') setReportTypeRender('expenses');
     else setReportTypeRender('incomes');
+    setDataForChartSubCategories(null);
   };
+  const dataMonth = useSelector(getMonthData);
+
+
+  useEffect(() => {
+    setDataForChartSubCategories(null);
+    console.log(dataForChartSubCategories);
+  }, [dataMonth]);
+
 
   const getInomesCategory = useSelector(getInomesCategories);
   console.log(`getInomesCategory`, getInomesCategory);
@@ -70,11 +80,11 @@ const Report = () => {
     return false;
   });
 
-  const [dataForChartSubCategories, setDataForChartSubCategories] = useState(null);
   const chartDataHandler = data => {
     setDataForChartSubCategories(data);
     console.log(dataForChartSubCategories);
   };
+
 
   return (
     <>
@@ -137,15 +147,18 @@ const Report = () => {
             </ul>
           )}
         </div>
-      </div>
 
-      {dataForChartSubCategories && (
-        <Chart
-          chartTypeRender={reportTypeRender}
-          data={dataForChartSubCategories}
-          /* newExensescomes={newExensescomes} */
-        />
-      )}
+
+        {dataForChartSubCategories && (
+          <div className={s.chart}>
+            <Chart
+              chartTypeRender={reportTypeRender}
+              data={dataForChartSubCategories}
+              /* newExensescomes={newExensescomes} */
+            />
+          </div>
+        )}
+
     </>
   );
 };
