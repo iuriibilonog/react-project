@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import * as yup from 'yup'
+import YupPassword from 'yup-password'
+
 import UnifiedModal from '../../shared/UnifiedModal';
 import { register, login, loginFromGoogle, getUser } from '../../redux/auth/auth-operations';
 import { FacebookAuth } from './SocialAuth';
@@ -9,7 +12,7 @@ import s from './Auth.module.css';
 import RegisterModal from '../RegisterModal/';
 import { useLocation } from 'react-router';
 import google from '../../img/google.svg';
-
+YupPassword(yup) // extend yup
 
 
 
@@ -29,16 +32,21 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [emailDirty, setEmailDirty] = useState(false);
-  const [emailError, setEmailError] = useState('Введите данные в формате: somemail@email.com / somemail@email.com.vn');
+  const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordDirty, setPasswordDirty] = useState(false);
-  const [passwordError, setPasswordError] = useState('Пароль должен состоять из цифр и латинских букв');
+  const [passwordError, setPasswordError] = useState('');
   const [isLoginType, setIsLoginType] = useState(true);
   const [socialAuth, setSocialAuth] = useState(false)
   const [isModalShown, setIsModalShown] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
  
- 
+ const schemaEmail = yup.string().email().min(6).required()
+    
+
+  
+  const schemaPassword = yup.string().password().min(3).required()
+  
   
   useEffect(() => {
     if (!location?.search) return
@@ -58,41 +66,54 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
   
 
   
-  const blurHandler = e => {
-    switch (e.target.name) {
-      case 'email':
-        setEmailDirty(true)
-        break;
-      case 'password':
-        setPasswordDirty(true)
-        break;
-    }
-  }
+  // const blurHandler = e => {
+  //   switch (e.target.name) {
+  //     case 'email':
+  //       setEmailDirty(true)
+  //       break;
+  //     case 'password':
+  //       setPasswordDirty(true)
+  //       break;
+  //   }
+  // }
 
   const handleOnChange = e => {
     const { name, value } = e.target;
 
+     
+
     switch (name) {
      
       case 'email':
-        return setEmail(value);
-      
-        // const re = "^([a-zA-Z0-9_\-\.]{2,})@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
-        // if (!re.test(String(value).toLowerCase())) {
-        //   setEmailError('Не корректный почта')
-        // } else {
-        //   setEmailError('')
-        // }
+        console.log(value)
+        setEmail(value)
+        schemaEmail
+        .isValid(value)
+        .then(function (valid) {
+          if (valid) {
+            setEmailError('')
+         }
+         else {
+           setEmailError('Введите данные в формате: somemail@email.com')
+        } 
+           
+        });
+        return
         
-        case 'password':
-        return  setPassword(value);
-      //   const re = "/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{3,16}/g"
-      //   if (!re.test(String(value).toLowerCase())) {
-      //     setPasswordError('Не корректный gfhjkm')
-      //   } else {
-      //     setPasswordError('')
-      //   }
-      //   break;
+      case 'password':
+        setPassword(value)
+         schemaPassword
+          .isValid(value)
+       .then(function (valid) {
+         if (valid) {
+           setPasswordError('')
+         }
+         else {
+           setPasswordError('Пароль должен содержать буквы в верхнем и нижнем регистре и спец. симолы')
+        } 
+           
+        });
+        
       default:
         return;
     }
@@ -193,6 +214,7 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
               {' '}
               Электронная почта:
             </label>
+            {/* <form className={s.passwordWrapper}> */}
             <input
               className={s.authInput}
               type="email"
@@ -202,13 +224,15 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
               minLength="10"
               maxLength="63"
               placeholder="your@email.com"
-              title="Введите данные в формате: somemail@email.com / somemail@email.com.vn"
-              pattern="^([a-zA-Z0-9_\-\.]{2,})@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+              title="Введите данные в формате: somemail@email.com"
               required
               // onBlur={blurHandler}
               onChange={handleOnChange}
             />
-            {(emailDirty && emailError) && <div style={{color: 'red'}}>{emailError}</div>}
+            {/* {setEmailError && <div style={{color: 'red', position: "absolute",
+  top: "55px",
+  right: "0"}}>{emailError}</div>} */}
+            {/* </form> */}
             <label htmlFor="authPassword" className={s.inputTitle}>
               {' '}
               Пароль:
@@ -223,13 +247,14 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
                
               // minLength='2'
               // maxLength='16'
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title='Пароль должен состоять из цифр и латинских букв'
+              title='Пароль должен состоять из цифр, латинских букв и спец. символов'
                 required
               // onBlur={blurHandler}
               onChange={handleOnChange}
               />
-              {(passwordDirty && passwordError) && <div style={{color: 'red'}}>{passwordError}</div>}
+              {/* {passwordError && <div className={s.error} style={{color: 'red', position: "absolute",
+  top: "55px",
+  right: "0"}}>{passwordError}</div>} */}
             {isPasswordVisible ? <VisibilityIcon className={s.password} onClick={togglePasswordVisability} />
               : <VisibilityOffIcon className={s.password} onClick={togglePasswordVisability} />}
           </form>

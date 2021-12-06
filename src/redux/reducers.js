@@ -18,6 +18,7 @@ import {
   getIncomesCategories,
   updateBalance,
   getDataMonth,
+  getDataCompareMonth,
 } from './transactions-operations';
 // new
 import { combineReducers } from 'redux';
@@ -33,7 +34,10 @@ const balanceReducer = createReducer(null, {
 
 const expensesReducer = createReducer([], {
   [getExpensesTransactions.fulfilled]: (state, action) => [...state, ...action?.payload?.expenses],
-  [addExpenseTransaction.fulfilled]: (state, action) => [action?.payload?.data?.transaction, ...state],
+  [addExpenseTransaction.fulfilled]: (state, action) => [
+    action?.payload?.data?.transaction,
+    ...state,
+  ],
   [deleteTransaction.fulfilled]: (state, action) =>
     [...state].filter(item => item._id !== action?.payload.itemId),
   // [getDataMonth.fulfilled]: (_, action) => action?.payload?.expenses,
@@ -41,7 +45,10 @@ const expensesReducer = createReducer([], {
 
 const incomesReducer = createReducer([], {
   [getIncomeTransactions.fulfilled]: (state, action) => [...state, ...action?.payload?.incomes],
-  [addIncomeTransaction.fulfilled]: (state, action) => [action?.payload?.data?.transaction,...state,],
+  [addIncomeTransaction.fulfilled]: (state, action) => [
+    action?.payload?.data?.transaction,
+    ...state,
+  ],
   [deleteTransaction.fulfilled]: (state, action) =>
     [...state].filter(item => item._id !== action?.payload?.itemId),
   // [getDataMonth.fulfilled]: (_, action) => action?.payload?.incomes,
@@ -82,6 +89,10 @@ const setExpensesByCategory = createReducer([], {
 
 const getDataMonthReducer = createReducer([], {
   [getDataMonth.fulfilled]: (_, action) => action.payload,
+});
+
+const getDataCompareMonthReducer = createReducer([], {
+  [getDataCompareMonth.fulfilled]: (_, action) => action.payload,
 });
 
 const loader = createReducer(false, {
@@ -135,6 +146,7 @@ const transactionsReducer = combineReducers({
   expensesByCategory: setExpensesByCategory,
   incomesByCategory: setIncomesByCategory,
   dataMonth: getDataMonthReducer,
+  dataCompareMonth: getDataCompareMonthReducer,
 });
 
 export const isSystemStartedReducer = createReducer(false, {
