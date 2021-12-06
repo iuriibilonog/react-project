@@ -1,49 +1,53 @@
-import img1 from './Historical_stylization_—_Slavic_of_the_12-13th_centuries,_Karoling_Club_Ruza.jpeg.jpg';
-
+import ania from './img/Ania.jpg'
+import katia from './img/Katia.jpg'
+import sasha from './img/Sasha.jpg'
+import elena from './img/Elena.jpg'
+import sergei from './img/Sergei.jpg'
+import yurii from './img/Yurii.jpg'
 const teams = [
   {
     id: 1,
     fullName: 'Юрий Билоног',
     position: 'Team Lead',
-    photo: `./${img1}`,
-    gitHub: '#',
+    photo: `./${yurii}`,
+    gitHub: 'https://github.com/iuriibilonog',
   },
   {
     id: 2,
     fullName: 'Сергей Лукавенко',
     position: 'Scrum Macter',
-    photo: `./${img1}`,
-    gitHub: '#',
+    photo: `./${sergei}`,
+    gitHub: 'https://github.com/Artowod',
   },
   {
     id: 3,
     fullName: 'Екатерина Коломиец',
     position: 'Developer',
-    photo: `./${img1}`,
+    photo: `./${katia}`,
 
-    gitHub: '#',
+    gitHub: 'https://github.com/KaterynaKolomiiets',
   },
   {
     id: 4,
     fullName: 'Аня Андрейкив',
     position: 'Developer',
-    photo: `./${img1}`,
+    photo: `./${ania}`,
 
-    gitHub: '#',
+    gitHub: 'https://github.com/anjtka333',
   },
   {
     id: 5,
     fullName: 'Александр Кулик',
     position: 'Developer',
-    photo: `./${img1}`,
-    gitHub: '#',
+    photo: `./${sasha}`,
+    gitHub: 'https://github.com/Sashok1605',
   },
   {
     id: 6,
     fullName: 'Елена Молостова',
     position: 'Developer',
-    photo: `./${img1}`,
-    gitHub: '#',
+    photo: `./${elena}`,
+    gitHub: 'https://github.com/E-Molostova',
   },
 ];
 

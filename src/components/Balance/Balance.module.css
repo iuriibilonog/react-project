@@ -26,6 +26,7 @@ input {
   display: block;
   font-size: 12px;
   font-weight: 500;
+  font-size: 12px;
   color: var(--font-secondary);
   font-family: Roboto, sans-serif;
 }
@@ -99,6 +100,7 @@ input {
 
 .balanceSection {
   text-align: center;
+  margin-top: 30px;
   /* background-color: red; */
 }
 
@@ -109,14 +111,33 @@ input {
   align-items: center;
 }
 
-/* .remindingWrapper {
-  position: absolute;
-  display: block;
-  max-width: 282px;
-  max-height: 152px;
-  padding: 30px;
-  border: 1px red solid;
-} */
+
+@media screen and (min-width: 768px) {
+  .wrapper {
+    /* width: 665px; */
+    flex-direction: row;
+  }
+
+  .balanceSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+  }
+
+  .balance {
+    margin-right: 15px;
+    border-radius: 16px;
+    border: 2px var(--bg-primary) solid;
+  }
+  .title {
+    margin-right: 21px;
+    margin-bottom: 0;
+  }
+  .confirmBtn {
+    border-radius: 16px;
+  }
+
 
 .triangle {
   position: absolute;
