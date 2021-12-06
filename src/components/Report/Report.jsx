@@ -3,9 +3,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 import s from './Report.module.css';
 
-import { setIncomesByCategories } from '../../redux/actions';
 import Chart from '../Chart';
-import Container from '../Container';
 import ReportAmount from './ReportAmount';
 import { useSelector } from 'react-redux';
 import {
@@ -20,9 +18,6 @@ import { getMonthData } from '../../redux/selectors';
 import { useEffect, useState } from 'react';
 import ReportIncomesList from './ReportIncomesList/ReportIncomesList';
 import ReportExpensesList from './ReportExpensesList/ReportExpensesList';
-import GoHome from '../GoHome/';
-import CurrentMonth from '../CurrentMonth/CurrentMonth';
-import Balance from '../Balance';
 
 const Report = () => {
   const [category, setCategory] = useState('');
@@ -42,18 +37,19 @@ const Report = () => {
   };
   const dataMonth = useSelector(getMonthData);
 
+
   useEffect(() => {
     setDataForChartSubCategories(null);
     console.log(dataForChartSubCategories);
   }, [dataMonth]);
 
+
   const getInomesCategory = useSelector(getInomesCategories);
   console.log(`getInomesCategory`, getInomesCategory);
 
   const getTotalIncomesByCategories = useSelector(getTotalIncomesByCategory);
-  const zp = getInomesCategory[0];
+ 
 
-  // console.log(`getTotalIncomesByCategories`, getTotalIncomesByCategories[zp]);
 
   const newIncomes = getInomesCategory.map(item => {
     if (getTotalIncomesByCategories[item]) {
@@ -88,69 +84,70 @@ const Report = () => {
     setDataForChartSubCategories(data);
     console.log(dataForChartSubCategories);
   };
-  console.log(dataForChartSubCategories);
+
 
   return (
     <>
-      <Container>
-        <div className={s.reportContainer}>
-          <ReportAmount />
-          <div className={`${s.navigation} ${s.section}`}>
-            <div className={s.navigationWrapper}></div>
-          </div>
-
-          <div className={`${s.reportWrapper} ${s.section}`}>
-            <div className={`${s.transactionWrapper} ${s.sectionReportTitle}`}>
-              <ArrowBackIosIcon
-                style={{ color: '#FF751D', cursor: 'pointer' }}
-                fontSize="small"
-                onClick={onHandleChangeType}
-              />
-
-              {type === reportTypeRender ? (
-                <h1 className={s.reportTitle}>расходы</h1>
-              ) : (
-                <h1 className={s.reportTitle}>доходы</h1>
-              )}
-              <ArrowForwardIosIcon
-                style={{ color: '#FF751D', cursor: 'pointer' }}
-                fontSize="small"
-                onClick={onHandleChangeType}
-              />
-            </div>
-            {reportTypeRender === 'incomes' && (
-              <ul className={s.reportList}>
-                {transactionIncomes.length === 0 ? (
-                  <p>Доходы</p>
-                ) : (
-                  newIncomes.map(item => (
-                    <ReportIncomesList
-                      category={item.category}
-                      sum={item.sum}
-                      chartDataHandler={chartDataHandler}
-                    />
-                  ))
-                )}
-              </ul>
-            )}
-            {reportTypeRender === 'expenses' && (
-              <ul className={s.reportList}>
-                {transactionExpenses.length === 0 ? (
-                  <p>Расходы</p>
-                ) : (
-                  newExensescomes.map(item => (
-                    <ReportExpensesList
-                      category={item.category}
-                      sum={item.sum}
-                      type={reportTypeRender}
-                      chartDataHandler={chartDataHandler}
-                    />
-                  ))
-                )}
-              </ul>
-            )}
-          </div>
+      <div className={s.reportContainer}>
+        <ReportAmount />
+        <div className={`${s.navigation} ${s.section}`}>
+          <div className={s.navigationWrapper}></div>
         </div>
+
+        <div className={`${s.reportWrapper} ${s.section}`}>
+          <div className={`${s.transactionWrapper} ${s.sectionReportTitle}`}>
+            <ArrowBackIosIcon
+              style={{ color: '#FF751D', cursor: 'pointer' }}
+              fontSize="small"
+              onClick={onHandleChangeType}
+              className={s.btnFocus}
+            />
+
+            {type === reportTypeRender ? (
+              <h1 className={s.reportTitle}>расходы</h1>
+            ) : (
+              <h1 className={s.reportTitle}>доходы</h1>
+            )}
+            <ArrowForwardIosIcon
+              style={{ color: '#FF751D', cursor: 'pointer' }}
+              fontSize="small"
+              onClick={onHandleChangeType}
+              className={s.btnFocus}
+            />
+          </div>
+          {reportTypeRender === 'incomes' && (
+            <ul className={s.reportList}>
+              {transactionIncomes.length === 0 ? (
+                <p>Доходы</p>
+              ) : (
+                newIncomes.map(item => (
+                  <ReportIncomesList
+                    category={item.category}
+                    sum={item.sum}
+                    chartDataHandler={chartDataHandler}
+                  />
+                ))
+              )}
+            </ul>
+          )}
+          {reportTypeRender === 'expenses' && (
+            <ul className={s.reportList}>
+              {transactionExpenses.length === 0 ? (
+                <p>Расходы</p>
+              ) : (
+                newExensescomes.map(item => (
+                  <ReportExpensesList
+                    category={item.category}
+                    sum={item.sum}
+                    type={reportTypeRender}
+                    chartDataHandler={chartDataHandler}
+                  />
+                ))
+              )}
+            </ul>
+          )}
+        </div>
+
 
         {dataForChartSubCategories && (
           <div className={s.chart}>
@@ -161,7 +158,7 @@ const Report = () => {
             />
           </div>
         )}
-      </Container>
+
     </>
   );
 };

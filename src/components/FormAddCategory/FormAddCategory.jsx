@@ -16,6 +16,17 @@ import '../../utils/variables.css';
 import CustomInput from './StyledInputElement/StyledInputElement';
 import StyledInputCalc from './Select/StyledCalculator/StyledCalculator';
 import iconCalendar from '../../img/calendar.svg';
+import Box from '@mui/material/Box';
+import { IconButton, InputAdornment } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import UnstyledInput from './StyledInputElement/StyledInputElement';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import InputBase from '@mui/material/InputBase';
+import { styled } from '@mui/material/styles';
+import InputLabel from '@mui/material/InputLabel';
+import SelectCustome from './Select/Select';
 
 const FormAddCategory = ({ isExpenses }) => {
   const [value, setValue] = React.useState(new Date());
@@ -32,6 +43,10 @@ const FormAddCategory = ({ isExpenses }) => {
 
   const newDate = () => {
     try {
+      if (value > new Date()) {
+        alert('Ця дата поки не доступна! Виберіть дату, яка вже настала!');
+        return;
+      }
       const newDateValue = format(value, 'yyyy-MM-dd');
       return newDateValue;
     } catch (error) {
@@ -54,6 +69,10 @@ const FormAddCategory = ({ isExpenses }) => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
+    if (description.length <= 3 || description.length >= 20) {
+      alert('Описание должно бить не менше 3 и не больше 20 символов');
+      return;
+    }
     try {
       if (newDate()) {
         isExpenses === 'expenses'
@@ -68,12 +87,79 @@ const FormAddCategory = ({ isExpenses }) => {
     setDescription(event.target.value);
   };
   const useStyles = makeStyles(theme => ({
-    textInpt: {
-      borderRadius: '30px',
-      width: '289px',
-      outlineColor: 'black',
+    // textInpt: {
+    //   borderRadius: '30px',
+    //   width: '289px',
+    //   outlineColor: 'black',
+    // },
+    input: {
+      '&:before': {
+        // normal
+        borderBottom: '1px solid orange',
+      },
+      '&:after': {
+        // focused
+        borderBottom: `3px solid green`,
+      },
+      '&:hover:not(.Mui-disabled):not(.Mui-focused):not(.Mui-error):before': {
+        // hover
+        borderBottom: `2px solid purple`,
+      },
     },
   }));
+  const BootstrapInput = styled(InputBase)(({ theme }) => ({
+    'label + &': {
+      marginTop: '0px',
+    },
+    // '.css-1p7v46j-MuiFormLabel-root-MuiInputLabel-root': {
+    //   color: 'red',
+    //   '&.focused': {
+    //     color: 'red',
+    //   },
+    //   '&.shrink': {
+    //     backgroundColor: 'grey',
+    //   },
+    // },//noet working
+
+    '.MuiInputLabel-root': { color: 'red' },
+    '.MuiSelect-select': { paddingLeft: '8px' },
+    '& .MuiInputBase-input': {
+      // borderRadius: 20,
+      // height: 29,
+      borderTop: '2px solid #F5F6FB',
+      borderBottom: '2px solid #F5F6FB',
+      padingLight: '5px',
+      width: 142,
+      fontSize: 12,
+      background: 'white',
+      ['@media (max-width:767px)']: {
+        // eslint-disable-line no-useless-computed-key
+        width: '240px',
+        borderBottomLeftRadius: '16px',
+        border: '2px solid white',
+        background: 'transparent',
+      },
+      // padding: '10p  x 26px 10px 12px',
+      // transition: theme.transitions.create(['border-color', 'box-shadow']),
+      // Use the system font instead of the default Roboto font.
+      // fontFamily: [
+      //   '-apple-system',
+      //   'BlinkMacSystemFont',
+      //   '"Segoe UI"',
+      //   'Roboto',
+      //   '"Helvetica Neue"',
+      //   'Arial',
+      //   'sans-serif',
+      //   '"Apple Color Emoji"',
+      //   '"Segoe UI Emoji"',
+      //   '"Segoe UI Symbol"',
+      // ].join(','),
+      // '&:focus': {
+      //   // borderColor: '#80bdff',
+      // },
+    },
+  }));
+  const classes = useStyles();
   const handleDateChange = newValue => {
     setValue(newValue);
   };
@@ -92,6 +178,59 @@ const FormAddCategory = ({ isExpenses }) => {
     setDescription('');
     setAmount('');
   };
+  const theme = createTheme({
+    components: {
+      // Name of the component
+      MuiIconButton: {
+        styleOverrides: {
+          // Name of the slot
+          edgeEnd: {
+            // Some CSS
+            // paddingLeft: '20px',
+            marginLeft: '16px',
+            position: 'absolute',
+            top: '-3px',
+            left: '10px',
+            '&:hover, :focus': {
+              background: 'transparent',
+            },
+            ['@media (min-width:980px)']: {
+              // eslint-disable-line no-useless-computed-key
+              marginLeft: '30px',
+            },
+          },
+        },
+      },
+      MuiInput: {
+        styleOverrides: {
+          underline: {
+            position: 'relative',
+            paddingLeft: '40px',
+            border: 'none',
+            '&:before': {
+              // normal
+              borderBottom: 'none',
+              outline: 'none',
+              display: 'none',
+            },
+            '&:before:hover': {
+              // normal
+              border: 'none',
+            },
+          },
+        },
+      },
+      MuiSvgIcon: {
+        styleOverrides: {
+          root: {
+            width: '30px',
+            fill: 'none',
+            background: 'none',
+          },
+        },
+      },
+    },
+  });
 
   return (
     <>
@@ -104,18 +243,37 @@ const FormAddCategory = ({ isExpenses }) => {
             className={css.textInpt}
             id={s.inputStyle}
           >
-            <DatePicker
-              id={s.calendarStyle}
-              size="small"
-              value={value}
-              onChange={handleDateChange}
-              renderInput={params => (
-
-                <TextField {...params} size="small" margin="dense" variant="standard" id={s.tmp} />
-
-              )}
-              format="YYYY-MM-DD"
-            />
+            <ThemeProvider theme={theme}>
+              <DatePicker
+                maxDate={new Date()}
+                keyboard={true}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment
+                      position="start"
+                      sx={{ marginRight: { sm: '-20px', lg: '5px' }, paddingBottom: '3px' }}
+                    >
+                      <img src={iconCalendar} />
+                    </InputAdornment>
+                  ),
+                }}
+                className={classes.input}
+                id={s.calendarStyle}
+                size="small"
+                value={value}
+                onChange={handleDateChange}
+                renderInput={params => (
+                  <TextField
+                    {...params}
+                    size="small"
+                    margin="dense"
+                    variant="standard"
+                    id={s.tmp}
+                  />
+                )}
+                format="YYYY-MM-DD"
+              />
+            </ThemeProvider>
           </LocalizationProvider>
 
           <img className={s.calendarIconStyle} src={iconCalendar} />
@@ -126,28 +284,43 @@ const FormAddCategory = ({ isExpenses }) => {
             placeholder={textInputName}
             name="textInput"
             onChange={handleTextChange}
+            autoComplete="off"
             required
           />
           <div className={s.containerForm}>
             <div className={s.selectWrappedtmp}>
-              <select
-                className={s.select}
-                value={category}
-                onChange={handleInputChange}
-                placeholder={categoryName}
-                required
-              >
-                <option value="" disabled>
-                  {categoryName}
-                </option>
-                {data.map(item => {
-                  return (
-                    <option id="option" key={item.id} value={item.label}>
-                      {item.label}
-                    </option>
-                  );
-                })}
-              </select>
+              <FormControl sx={{}}>
+                <Select
+                  labelId="demo-simple-select-helper-label"
+                  id="demo-customized-select"
+                  value={category}
+                  onChange={handleInputChange}
+                  required
+                  label={categoryName}
+                  displayEmpty
+                  input={<BootstrapInput />}
+                  inputProps={{ 'aria-label': 'Without label' }}
+                >
+                  <MenuItem disabled value="">
+                    <p style={{ color: 'rgb(117, 117, 117)' }}>{categoryName}</p>
+                  </MenuItem>
+                  {data.map(item => {
+                    return (
+                      <MenuItem
+                        sx={{
+                          paddingRight: '20px',
+                          color: '#C7CCDC',
+                          ':hover, :focus': { color: '#52555F', background: '#F5F6FB' },
+                        }}
+                        key={item.id}
+                        value={item.label}
+                      >
+                        {item.label}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
             </div>
             <div className={s.inpuImgWrapper}>
               <StyledInputCalc value={amount} onChange={handleChange} placeholder="0" required />
