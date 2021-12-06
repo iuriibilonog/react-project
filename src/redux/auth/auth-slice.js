@@ -38,7 +38,7 @@ const authSlice = createSlice({
     [register.rejected](state) {
       state.isLoading = false;
     },
-    [login.pending](state){
+    [login.pending](state) {
       state.isLoading = true;
     },
     [login.fulfilled](state, action) {
@@ -53,10 +53,10 @@ const authSlice = createSlice({
       console.log(action.payload.data.userData.balance);
       state.userBalance = action.payload.data.userData.balance;
     },
-    [login.rejected](state){
+    [login.rejected](state) {
       state.isLoading = false;
     },
-    [logOut.pending](state){
+    [logOut.pending](state) {
       state.isLoading = true;
     },
     [logOut.fulfilled](state, _) {
@@ -66,7 +66,7 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.isRegisterFullField = false;
     },
-    [logOut.rejected](state){
+    [logOut.rejected](state) {
       state.isLoading = false;
     },
     [checkCurrentUser.pending](state) {
@@ -88,7 +88,7 @@ const authSlice = createSlice({
       state.isCheckingUser = false;
       state.isLoading = false;
     },
-    [getUser.pending](state){
+    [getUser.pending](state) {
       state.isLoading = true;
     },
     [getUser.fulfilled](state, action) {
@@ -101,11 +101,10 @@ const authSlice = createSlice({
 
       state.isLoading = false;
     },
-    [getUser.rejected](state){
+    [getUser.rejected](state, action) {
       state.isLoading = false;
 
       state.userBalance = action.payload?.data?.balance;
-
     },
   },
 });
