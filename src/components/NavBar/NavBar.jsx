@@ -9,10 +9,13 @@ import logout from '../../img/logout.svg';
 import s from './NavBar.module.css';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
+import UnifiedModal from '../../shared/UnifiedModal';
 import { StyledBadge } from './StyledBadge';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import { login, logOut } from '../../redux/auth/auth-operations';
 import { setBalance, setIsSystemStarted } from '../../redux/actions';
+import { NavLink } from 'react-router-dom';
 
 const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
@@ -20,7 +23,21 @@ const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
   const loginForm = useSelector(state => state.auth.user?.userData?.email);
   const loginNameFromGoogle = useSelector(state => state.auth?.user?.email)
 
+   const [isModalShown, setIsModalShown] = useState(false);
+
+  
+
   const loginName = loginForm || loginNameFromGoogle;
+
+  const responseHandling = response => {
+    setIsModalShown(false);
+    console.log(response);
+    if (response) {
+      dispatch(setIsSystemStarted(null));
+      dispatch(setBalance(null));
+      dispatch(logOut());
+    }
+  }
 
   // console.log(loginName.length)
   const dispatch = useDispatch();
@@ -32,9 +49,11 @@ const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
   // }
   return (
     <>
+      {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
       <AppBar position="static" sx={{ background: 'white', boxShadow: 'none' }}>
         <Container maxWidth="axl">
           <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <NavLink to="/" >
             <Avatar
               alt="Logo"
               src={logo}
@@ -42,6 +61,7 @@ const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
               variant="square"
               style={{ width: 90 + 'px' }}
             />
+            </NavLink>
             {isLoggedIn && (
               <div className={s.wrapper}>
                 <Stack direction="row" spacing={2}>
@@ -52,11 +72,11 @@ const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
                     sx={{ mr: 2 }}
                   >
                     <Avatar
-                      alt="Remy Sharp"
-                      src={
-                        isAuthFromSocial && socialAuth ? socialImg : '/static/images/avatar/1.jpg'
-                      }
-                    />
+                      alt="user avatar"
+                      // src={
+                      //   isAuthFromSocial && socialAuth ? socialImg : '/static/images/avatar/1.jpg'
+                      // }
+                    >{loginName[0]}</Avatar>
                   </StyledBadge>
                 </Stack>
                 <Typography
@@ -85,9 +105,11 @@ const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
                 />
                 <div
                   onClick={() => {
-                    dispatch(setIsSystemStarted(null));
-                    dispatch(setBalance(null));
-                    dispatch(logOut());
+                    setIsModalShown(true);
+                    
+                      
+                    
+                    
                   }}
                 >
                   <Typography

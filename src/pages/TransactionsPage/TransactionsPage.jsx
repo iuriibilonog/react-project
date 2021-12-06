@@ -79,18 +79,7 @@ const TransactionsPage = () => {
 
         <div className={s.mainWrapper}>
           <div className={s.buttonsHolder}>
-            <button
-              type="button"
-              className={`navBtn ${isIncomesTabActive ? 'navBtnActive' : null}`}
-              onClick={() => {
-                
-                setIsExpenses(false);
-                handleToggle();
-              }}
-            >
-              {' '}
-              ДОХОД
-            </button>
+            
 
 
             <button
@@ -102,6 +91,18 @@ const TransactionsPage = () => {
               }}
             >
               РАСХОД
+            </button>
+            <button
+              type="button"
+              className={`navBtn ${isIncomesTabActive ? 'navBtnActive' : null}`}
+              onClick={() => {
+                
+                setIsExpenses(false);
+                handleToggle();
+              }}
+            >
+              {' '}
+              ДОХОД
             </button>
             {/* //         </div>
 //         <div className={s.incomesContainer}>
@@ -128,7 +129,7 @@ const TransactionsPage = () => {
               />
             </div>
             <div className={s.summaryHolder}>
-              <Summary className={s.summary} />
+              <Summary isExpenses={isExpenses ? 'expenses' : 'incomes'} className={s.summary} />
             </div>
           </div>
         </div>

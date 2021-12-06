@@ -108,6 +108,7 @@ const Report = () => {
               ) : (
                 <h1 className={s.reportTitle}>доходы</h1>
               )}
+
               <ArrowForwardIosIcon
                 style={{ color: '#FF751D', cursor: 'pointer' }}
                 fontSize="small"

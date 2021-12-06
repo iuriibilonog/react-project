@@ -45,7 +45,7 @@ const CurrentMonth = () => {
     <div className={s.currentMonthBlock}>
       <span className={s.currentMonth}>Текущий период</span>
       <div className={s.monthBlock}>
-        <svg onClick={handlePrevMonth} width="10" height="10">
+        <svg viewBox="0 0 10 10" onClick={handlePrevMonth} width="10" height="10" fill="red">
           <use href={sprite + '#icon-arrowLeft'}></use>
         </svg>
         <span className={s.currentMonthText}>
