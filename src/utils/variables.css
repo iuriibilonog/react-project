@@ -5,10 +5,12 @@
 
   --bg-primary: white;
   --bg-secondary: #f2f5fc; /* #f5f6fb */
-  --bg-tab:#FAFBFD;
-  --bg-tab-active: #FEFEFE;
-  --bg-table:#f5f6fb;
-  
+  --bg-tab: #fafbfd;
+  --bg-tab-active: #fefefe;
+  --bg-table: #f5f6fb;
+
+  --bg-svg: #ffdac0;
+
 
   --font-primary: black;
   --font-secondary: #52555f;
@@ -16,9 +18,10 @@
   --font-incomes: #407946;
 
   --accent-bright: #ff751d;
-  --accent-bleak: #ffdac0;
+  --accent-bleak: var(--bg-svg);
   --accent-bleak-logo: rgba(251, 124, 47, 0.2);
   --modal-color-first: #1d346a;
+  --modal-color-arrow: #172d5d;
   --modal-color-second: #031634;
 
   --dropdown-text: #c7ccdc;

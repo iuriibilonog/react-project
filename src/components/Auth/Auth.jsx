@@ -183,7 +183,7 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
             Google</a>
         {/* <FacebookAuth onSubmit={handleAuthFromSocial}/> */}
         </div>
-          <p className={s.authText}>
+          <p className={`${s.authText} ${s.text}`} >
           Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись:
         </p>
         <form className={s.authForm} onSubmit={handleOnSubmit}>
