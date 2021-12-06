@@ -205,7 +205,7 @@ const Report = () => {
             />
           </div>
       )}
-      <CompareMonth/>
+      {/* <CompareMonth/> */}
       </div>
     
   );
