@@ -4,6 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
+import SwitchTheme from '../../shared/SwitchTheme/SwitchTheme';
 import logo from '../../img/logo.svg';
 import logout from '../../img/logout.svg';
 import s from './NavBar.module.css';
@@ -58,6 +59,8 @@ const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
       <AppBar position="static" sx={{ background: 'white', boxShadow: 'none' }}>
         <Container maxWidth="axl">
           <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{display: "flex"}}>
+          <SwitchTheme />
             <NavLink to="/" >
             <Avatar
               alt="Logo"
@@ -65,8 +68,10 @@ const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
               id={s.logo}
               variant="square"
               style={{ width: 90 + 'px' }}
-            />
+              />
             </NavLink>
+            </div>
+
             {isLoggedIn && (
               <div className={s.wrapper}>
                 <Stack direction="row" spacing={2}>
