@@ -16,10 +16,11 @@
   letter-spacing: 0.02em;
   color: #000000;
   cursor: pointer;
+  justify-content: space-around;
 }
 
-.fbIcon {
-  margin-right: 15px;
-}
+/* .fbIcon {
+  margin-right: 10px;
+} */
 
 /* #4267b2 */
