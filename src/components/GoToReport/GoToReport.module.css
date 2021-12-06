@@ -17,6 +17,11 @@
     margin: 0;
   }
 }
+@media screen and (max-width: 768px) {
+  .goToReport {
+    margin: 15px 0;
+  }
+}
 
 .title {
   font-size: 12px;
