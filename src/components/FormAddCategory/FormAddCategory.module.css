@@ -35,6 +35,9 @@
   align-items: center;
   flex-direction: row;
 }
+label #demo-simple-select-helper-label {
+  display: none !important;
+}
 #inputStyle {
   width: 289px;
   padding-left: 10px;
