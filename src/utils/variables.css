@@ -5,10 +5,9 @@
 
   --bg-primary: white;
   --bg-secondary: #f2f5fc; /* #f5f6fb */
-  --bg-tab:#FAFBFD;
-  --bg-tab-active: #FEFEFE;
-  --bg-table:#f5f6fb;
-  
+  --bg-tab: #fafbfd;
+  --bg-tab-active: #fefefe;
+  --bg-table: #f5f6fb;
 
   --font-primary: black;
   --font-secondary: #52555f;
@@ -19,6 +18,7 @@
   --accent-bleak: #ffdac0;
   --accent-bleak-logo: rgba(251, 124, 47, 0.2);
   --modal-color-first: #1d346a;
+  --modal-color-arrow: #172d5d;
   --modal-color-second: #031634;
 
   --dropdown-text: #c7ccdc;
