@@ -29,6 +29,7 @@ const StyledInputElement = styled('input')`
     width: 282px;
     background: #f5f6fb;
     border: 2px solid #ffffff;
+    border-bottom: none;
     border-radius: 16px 16px 0 0;
   }
 
