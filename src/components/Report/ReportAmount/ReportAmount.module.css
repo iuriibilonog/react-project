@@ -24,6 +24,7 @@
 }
 
 .amountSection {
+  height: 85px;
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: #fff;
@@ -62,6 +63,7 @@
   .amountSection {
     padding-top: 15px;
     padding-bottom: 15px;
+    height: 50px;
   }
   .amountTitle {
     margin-right: 15px;

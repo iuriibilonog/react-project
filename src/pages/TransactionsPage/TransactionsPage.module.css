@@ -59,7 +59,7 @@
   .shadowSmallScreen {
     flex-direction: column;
     align-items: flex-start;
-    min-height: 626px;
+    /* min-height: 626px; */
 
     width: 665px;
 
@@ -92,7 +92,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
+margin-bottom: 83px;
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 60px;
@@ -107,7 +107,7 @@
   .shadowSmallScreen {
     flex-direction: row;
     justify-content: space-between;
-    min-height: 579px;
+    /* min-height: 579px; */
 
     width: 760px;
 

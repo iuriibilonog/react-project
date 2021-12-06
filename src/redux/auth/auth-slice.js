@@ -75,7 +75,7 @@ const authSlice = createSlice({
     },
 
     [checkCurrentUser.fulfilled](state, action) {
-      state.isLoggedIn = true;
+      state.isLoggedIn = false;
       state.isCheckingUser = false;
       state.user.sid = action?.payload?.newSid;
       state.sid = action?.payload?.newSid;
@@ -98,13 +98,12 @@ const authSlice = createSlice({
       state.sid = action?.payload?.sid;
       state.user.refreshToken = action?.payload?.refreshToken;
       state.token = action.payload.accessToken;
+      state.userBalance = action.payload?.data?.balance;
 
       state.isLoading = false;
     },
-    [getUser.rejected](state){
+    [getUser.rejected](state, action){
       state.isLoading = false;
-
-      state.userBalance = action.payload?.data?.balance;
 
     },
   },

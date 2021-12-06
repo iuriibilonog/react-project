@@ -15,18 +15,22 @@ import HomePage from './pages/HomePage';
 import TransactionsPage from './pages/TransactionsPage';
 import ReportsPage from './pages/ReportsPage';
 import Chart from './components/Chart';
-
+import Loader from './components/Loader';
 import PublicRoute from './components/Routes/PublicRoute';
 import PrivateRoute from './components/Routes/PrivateRoute';
-import Loader from './components/Loader';
+// import Loader from './components/Loader';
 import Team from './components/Team/Team';
+import { isCurrentUser } from './redux/selectors';
 
 function App() {
   const dispatch = useDispatch();
   const sid = useSelector(state => state.auth.sid);
   const token = useSelector(state => state.auth.token);
+  const isCheckCurrentUser = useSelector(isCurrentUser);
 
+  
   useEffect(() => {
+    
     if (token !== '') {
       dispatch(checkCurrentUser());
     }
@@ -40,30 +44,34 @@ function App() {
   return (
     <div className="App">
       {/* <SwitchTheme /> */}
+      {isCheckCurrentUser ? (
+        <Loader />
+      ) : (
+        <>
+          <header className="App-header"></header>
+          <NavBar />
 
-      <header className="App-header"></header>
-      <NavBar />
+          {/* <IncomesPage/> */}
+          <Suspense fallback={<Loader />} />
+          <Switch>
+            <PublicRoute exact path="/" restricted>
+              <HomePage />
+            </PublicRoute>
 
-      {/* <IncomesPage/> */}
-      <Suspense fallback={<Loader />} />
-      <Switch>
-        <PublicRoute exact path="/" restricted>
-          <HomePage />
-        </PublicRoute>
+            <PublicRoute exact path="/team" redirectTo="/">
+              <Team />
+            </PublicRoute>
+            <PrivateRoute exact path="/" />
 
-        <PublicRoute exact path="/team" redirectTo="/">
-          <Team/> 
-        </PublicRoute>
-        <PrivateRoute exact path="/">
-
-        <PrivateRoute exact path="/transactions">
-
-          <TransactionsPage />
-        </PrivateRoute>
-        <PrivateRoute exact path="/reports">
-          <ReportsPage />
-        </PrivateRoute>
-      </Switch>
+            <PrivateRoute exact path="/transactions">
+              <TransactionsPage />
+            </PrivateRoute>
+            <PrivateRoute exact path="/reports">
+              <ReportsPage />
+            </PrivateRoute>
+          </Switch>
+        </>
+      )}
     </div>
   );
 }
