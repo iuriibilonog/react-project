@@ -94,19 +94,64 @@ const Report = () => {
           <div className={s.navigationWrapper}></div>
         </div>
 
-        <div className={`${s.reportWrapper} ${s.section}`}>
-          <div className={`${s.transactionWrapper} ${s.sectionReportTitle}`}>
-            <ArrowBackIosIcon
-              style={{ color: '#FF751D', cursor: 'pointer' }}
-              fontSize="small"
-              onClick={onHandleChangeType}
-              className={s.btnFocus}
-            />
 
-            {type === reportTypeRender ? (
-              <h1 className={s.reportTitle}>расходы</h1>
-            ) : (
-              <h1 className={s.reportTitle}>доходы</h1>
+              {type === reportTypeRender ? (
+                <h1 className={s.reportTitle}>расходы</h1>
+              ) : (
+                <h1 className={s.reportTitle}>доходы</h1>
+              )}
+
+              <ArrowForwardIosIcon
+                style={{ color: '#FF751D', cursor: 'pointer' }}
+                fontSize="small"
+                onClick={onHandleChangeType}
+              />
+            </div>
+            {reportTypeRender === 'incomes' && (
+              <ul className={s.reportList}>
+                {transactionIncomes.length === 0 ? (
+                  <p>Доходы</p>
+                ) : (
+                  newIncomes.map(item => (
+                    <ReportIncomesList
+                      category={item.category}
+                      sum={item.sum}
+                      chartDataHandler={chartDataHandler}
+                    />
+                  ))
+                )}
+              </ul>
+            )}
+            {reportTypeRender === 'expenses' && (
+              <ul className={s.reportList}>
+                {transactionExpenses.length === 0 ? (
+                  <p>Расходы</p>
+                ) : (
+                  newExensescomes.map(item => (
+                    <ReportExpensesList
+                      category={item.category}
+                      sum={item.sum}
+                      type={reportTypeRender}
+                      chartDataHandler={chartDataHandler}
+                    />
+                  ))
+                )}
+              </ul>
+
+//         <div className={`${s.reportWrapper} ${s.section}`}>
+//           <div className={`${s.transactionWrapper} ${s.sectionReportTitle}`}>
+//             <ArrowBackIosIcon
+//               style={{ color: '#FF751D', cursor: 'pointer' }}
+//               fontSize="small"
+//               onClick={onHandleChangeType}
+//               className={s.btnFocus}
+//             />
+
+//             {type === reportTypeRender ? (
+//               <h1 className={s.reportTitle}>расходы</h1>
+//             ) : (
+//               <h1 className={s.reportTitle}>доходы</h1>
+
             )}
             <ArrowForwardIosIcon
               style={{ color: '#FF751D', cursor: 'pointer' }}

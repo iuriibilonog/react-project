@@ -2,7 +2,7 @@ import s from './Summary.module.css';
 import './customScroll.css';
 
 import { useSelector } from 'react-redux';
-import { getMonthStats } from '../../redux/selectors';
+import { getExpensesMonth, getIncomesMonth } from '../../redux/selectors';
 
 import { getLoader } from '../../redux/transactions-selectors';
 import Loader from '../Loader';
@@ -12,13 +12,18 @@ import Loader from '../Loader';
 import CustomScroll from 'react-custom-scroll';
 
 
-const Summary = () => {
-  const summary = useSelector(getMonthStats);
+const Summary = ({ isExpenses }) => {
+  let summary = null;
+  const incomesSummary = useSelector(getIncomesMonth);
+  const expensesSummary = useSelector(getExpensesMonth);
+
+  summary = isExpenses === "expenses"? expensesSummary : incomesSummary
+
   const loader = useSelector(getLoader);
 
   return (
     <>
-      {summary && (
+     
 
         <div className="scrollWrapper">
 
@@ -42,7 +47,7 @@ const Summary = () => {
           </div>
 
         </div>
-      )}
+      
     </>
   );
 };

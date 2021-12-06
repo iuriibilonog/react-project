@@ -7,7 +7,9 @@ export const isGetUserFulfilledAfterRefresh = state => state.isGetUserFulfilledA
 
 export const isUserLoggedIn = state => state.auth.isLoggedIn;
 
-export const getMonthStats = state => state?.transactions?.transactions?.getMonth;
+export const getIncomesMonth = state => state?.transactions?.transactions?.getMonth?.getIncomesMonth;
+export const getExpensesMonth = state => state?.transactions?.transactions?.getMonth?.getExpensesMonth;
+
 export const getMonthData = state => state?.transactions?.transactions?.dataMonth;
 
 export const getMonthStatsIncomes = state => {
