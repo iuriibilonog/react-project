@@ -1,6 +1,6 @@
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-
+import CompareMonth from '../CompareMonth/CompareMonth';
 import s from './Report.module.css';
 
 import Chart from '../Chart';
@@ -13,6 +13,8 @@ import {
   getInomesCategories,
   getTotalExpensesByCategory,
   getTotalIncomesByCategory,
+  getTotalCompareIncomesByCategory,
+  getTotalCompareExpensesByCategory
 } from '../../redux/transactions-selectors';
 import { getMonthData } from '../../redux/selectors';
 import { useEffect, useState } from 'react';
@@ -202,7 +204,8 @@ const Report = () => {
               /* newExensescomes={newExensescomes} */
             />
           </div>
-        )}
+      )}
+      <CompareMonth/>
       </div>
     
   );

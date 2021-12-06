@@ -18,6 +18,7 @@ import {
   getIncomesCategories,
   updateBalance,
   getDataMonth,
+  getDataCompareMonth,
 } from './transactions-operations';
 
 import { logOut, getUser } from './auth/auth-operations';
@@ -95,6 +96,10 @@ const getDataMonthReducer = createReducer([], {
   [getDataMonth.fulfilled]: (_, action) => action.payload,
 });
 
+const getDataCompareMonthReducer = createReducer([], {
+  [getDataCompareMonth.fulfilled]: (_, action) => action.payload,
+});
+
 const loader = createReducer(false, {
   [getIncomeTransactions.pending]: () => true,
   [getIncomeTransactions.fulfilled]: () => false,
@@ -146,6 +151,7 @@ const transactionsReducer = combineReducers({
   expensesByCategory: setExpensesByCategory,
   incomesByCategory: setIncomesByCategory,
   dataMonth: getDataMonthReducer,
+  dataCompareMonth: getDataCompareMonthReducer,
 });
 
 export const isSystemStartedReducer = createReducer(false, {
