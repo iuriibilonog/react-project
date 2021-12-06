@@ -111,11 +111,17 @@ const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
 
                 <div
                   onClick={() => {
+
+                    dispatch(logOut());
+                    dispatch(setIsSystemStarted(null));
+                    dispatch(setBalance(null));
+
                     setIsModalShown(true);
                     
                       
                     
                     
+
                   }}
                 >
 
