@@ -59,7 +59,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* <SwitchTheme /> */}
+      <SwitchTheme />
 
       <header className="App-header"></header>
       <NavBar />

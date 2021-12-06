@@ -5,6 +5,12 @@ input {
   padding: 0;
 }
 
+.inputsWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 1px;
+}
+
 /* .wrapper {
   display: flex;
   justify-content: center;
@@ -31,7 +37,7 @@ input {
   padding: 1px;
 }
 .balance {
-  display: inline-block;
+  display: block;
   height: 44px;
   width: 125px;
   padding: 6px 12px;

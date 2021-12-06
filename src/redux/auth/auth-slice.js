@@ -67,6 +67,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.isLoggedIn = false;
       state.isRegisterFullField = false;
+      state.isGetUserFulfilledAfterRefresh = false;
     },
     [logOut.rejected](state) {
       state.isLoading = false;
@@ -102,19 +103,13 @@ const authSlice = createSlice({
       state.sid = action?.payload?.sid;
       state.user.refreshToken = action?.payload?.refreshToken;
       state.token = action.payload.accessToken;
-
+      state.userBalance = action.payload?.data?.balance;
+      state.isGetUserFulfilledAfterRefresh = true;
       state.isLoading = false;
     },
 
-    [getUser.rejected](state, action){
+    [getUser.rejected](state, action) {
       state.isLoading = false;
-
-      state.userBalance = action.payload?.data?.balance;
-
-      state.isGetUserFulfilledAfterRefresh = true;
-
-
-
     },
   },
 });
