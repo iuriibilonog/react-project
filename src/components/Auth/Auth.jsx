@@ -103,7 +103,7 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
   const toggleIsLoginType = (e) => {
   
       isLoginType ? setIsLoginType(false) : setIsLoginType(true)
-      console.log('LoginTypeAfterClick -->', isLoginType)
+
     
      
   }
@@ -146,9 +146,6 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
     const email = authEmailFromSocial;
     const name = authNameFromSocial;
     const password = authPasswordFromSocial;
-    console.log(img);
-    console.log(email);
-    console.log(password);
     
     if (!isLoginType) {
       setSocialAuth(true)
@@ -164,7 +161,6 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
     getTypeOfAuth(true)
   }
 
-  console.log(isModalShown)
 
   
   

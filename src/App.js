@@ -42,7 +42,6 @@ function App() {
   useEffect(() => {
     if (token !== '') {
       dispatch(checkCurrentUser());
-      console.log('REFRESH');
     }
     return;
   }, []);
