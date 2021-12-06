@@ -2,7 +2,7 @@ import Report from '../../components/Report';
 import CurrentMonth from '../../components/CurrentMonth/CurrentMonth';
 import GoHome from '../../components/GoHome/GoHome';
 import Balance from '../../components/Balance';
-
+import Footer from '../../components/Footer';
 
 import s from './ReportsPage.module.css';
 
@@ -30,10 +30,11 @@ const ReportsPage = () => {
           </div>
         </div>
 
-        </Container>
       <Report />
+
+        </Container>
       {/* <Chart/> */}
-    
+    <Footer/>
     </>
 
   );

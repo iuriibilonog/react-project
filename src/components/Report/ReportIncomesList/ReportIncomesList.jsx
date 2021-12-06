@@ -1,17 +1,8 @@
-import sprite from '../../../img/icon.svg';
-import s from '../Report.module.css';
-//import { setIncomesByCategories } from '../../redux/actions';
-import { useDispatch, useSelector } from 'react-redux';
-//import { getIncomes } from '../../redux/transactions-selectors';
-import { useState, useEffect } from 'react';
-import {
-  getIncomes,
-  getInomesCategories,
-  getTotalIncomesByCategory,
-} from '../../../redux/transactions-selectors';
-import { setIncomesByCategories } from '../../../redux/actions';
+import { useSelector } from 'react-redux';
 import { getMonthStatsIncomes } from '../../../redux/selectors';
 
+import sprite from '../../../img/icon.svg';
+import s from '../Report.module.css';
 
 const ReportIncomesList = ({ category, sum, chartDataHandler, type }) => {
 

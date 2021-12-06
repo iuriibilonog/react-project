@@ -13,6 +13,7 @@ import { getIncomesCategories } from '../../redux/transactions-operations';
 import { getExpensesCategories } from '../../redux/transactions-operations';
 import { getIncomeTransactions } from '../../redux/transactions-operations';
 import { isUserLoggedIn } from '../../redux/selectors';
+import Footer from '../../components/Footer/Footer';
 
 const HomePage = () => {
   const isLoggedIn = useSelector(isUserLoggedIn);
@@ -65,6 +66,7 @@ const HomePage = () => {
           )}
           <div className={s.bcgImageBottom}></div>
         </div>
+        <Footer/>
       </div>
     </>
   );

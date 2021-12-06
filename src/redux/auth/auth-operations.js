@@ -89,7 +89,7 @@ export const getUser = createAsyncThunk(
     try {
       token.set(accessToken);
       const { data } = await GetUserAfterRefresh();
-      console.log(data);
+      console.log('DataAfterRefresh-GetUser', data);
       return { data, refreshToken, sid, accessToken };
     } catch (error) {
       alert(error.message);

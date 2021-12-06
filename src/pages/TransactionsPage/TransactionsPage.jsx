@@ -22,6 +22,7 @@ import GoToReport from '../../components/GoToReport';
 import Summary from '../../components/Summary/Summary';
 import Loader from '../../components/Loader'
 import { FourGPlusMobiledataOutlined } from '@mui/icons-material';
+import Footer from '../../components/Footer';
 
 const TransactionsPage = () => {
   const [isExpenses, setIsExpenses] = useState(true);
@@ -133,6 +134,7 @@ const TransactionsPage = () => {
             </div>
           </div>
         </div>
+        <Footer/>
       </Container>
     </>
   );
