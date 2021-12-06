@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import sprite from '../../img/sprite.svg';
 import { format } from 'date-fns';
-import { getDataMonth } from '../../redux/transactions-operations';
-import s from './CurrentMonth.module.css';
+import { getDataCompareMonth } from '../../redux/transactions-operations';
+import s from './CompareMonth.module.css';
 
-const CurrentMonth = () => {
+const CompareMonth = () => {
   const [curMonth, setCurMon] = useState(new Date().getMonth() + 1);
   const [year, setYear] = useState(new Date().getFullYear());
 
@@ -15,9 +15,9 @@ const CurrentMonth = () => {
     if (curMonth < 10) {
       const month = `0${curMonth}`;
       console.log(month);
-      dispatch(getDataMonth(`${year}-${month}`));
+      dispatch(getDataCompareMonth(`${year}-${month}`));
     } else {
-      dispatch(getDataMonth(`${year}-${curMonth}`));
+      dispatch(getDataCompareMonth(`${year}-${curMonth}`));
     }
   }, [dispatch, year, curMonth]);
 
@@ -43,7 +43,7 @@ const CurrentMonth = () => {
 
   return (
     <div className={s.currentMonthBlock}>
-      <span className={s.currentMonth}>Текущий период</span>
+      <span className={s.currentMonth}>Период для сравнения</span>
       <div className={s.monthBlock}>
         <svg viewBox="0 0 10 10" onClick={handlePrevMonth} width="10" height="10" fill="red">
           <use href={sprite + '#icon-arrowLeft'}></use>
@@ -59,4 +59,4 @@ const CurrentMonth = () => {
   );
 };
 
-export default CurrentMonth;
+export default CompareMonth;

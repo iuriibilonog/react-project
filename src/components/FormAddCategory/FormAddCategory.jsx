@@ -19,6 +19,15 @@ import iconCalendar from '../../img/calendar.svg';
 import Box from '@mui/material/Box';
 import { IconButton, InputAdornment } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import UnstyledInput from './StyledInputElement/StyledInputElement';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import InputBase from '@mui/material/InputBase';
+import { styled } from '@mui/material/styles';
+import InputLabel from '@mui/material/InputLabel';
+import SelectCustome from './Select/Select';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const FormAddCategory = ({ isExpenses }) => {
   const [value, setValue] = React.useState(new Date());
@@ -35,10 +44,14 @@ const FormAddCategory = ({ isExpenses }) => {
 
   const newDate = () => {
     try {
+      if (value > new Date()) {
+        Notify.failure('Ця дата поки не доступна! Виберіть дату, яка вже настала!');
+        return;
+      }
       const newDateValue = format(value, 'yyyy-MM-dd');
       return newDateValue;
     } catch (error) {
-      alert('Введите правильную дату!');
+      Notify.failure('Введите правильную дату!');
       return false;
     }
   };
@@ -57,25 +70,25 @@ const FormAddCategory = ({ isExpenses }) => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
+    if (description.length <= 3 || description.length >= 20 || !isNaN(description)) {
+      Notify.failure('Описание должно бить не менше 3 и не больше 20 символов');
+      return;
+    }
     try {
       if (newDate()) {
         isExpenses === 'expenses'
           ? dispatch(addExpenseTransaction({ date, description, category, amount }))
           : dispatch(addIncomeTransaction({ date, description, category, amount }));
+        reset();
       }
     } catch (error) {
-      alert('Введите правильную дату!');
+      Notify.failure('Введите правильную дату!');
     }
   };
   const handleTextChange = event => {
     setDescription(event.target.value);
   };
   const useStyles = makeStyles(theme => ({
-    // textInpt: {
-    //   borderRadius: '30px',
-    //   width: '289px',
-    //   outlineColor: 'black',
-    // },
     input: {
       '&:before': {
         // normal
@@ -88,6 +101,27 @@ const FormAddCategory = ({ isExpenses }) => {
       '&:hover:not(.Mui-disabled):not(.Mui-focused):not(.Mui-error):before': {
         // hover
         borderBottom: `2px solid purple`,
+      },
+    },
+  }));
+  const BootstrapInput = styled(InputBase)(({ theme }) => ({
+    'label + &': {
+      marginTop: '0px',
+    },
+    '.MuiInputLabel-root': { color: 'red' },
+    '.MuiSelect-select': { paddingLeft: '8px' },
+    '& .MuiInputBase-input': {
+      borderTop: '2px solid #F5F6FB',
+      borderBottom: '2px solid #F5F6FB',
+      padingLight: '5px',
+      width: 142,
+      fontSize: 12,
+      background: 'white',
+      ['@media (max-width:767px)']: {
+        width: '240px',
+        borderBottomLeftRadius: '16px',
+        border: '2px solid white',
+        background: 'transparent',
       },
     },
   }));
@@ -118,10 +152,18 @@ const FormAddCategory = ({ isExpenses }) => {
           // Name of the slot
           edgeEnd: {
             // Some CSS
-            paddingLeft: '20px',
+            // paddingLeft: '20px',
+            marginLeft: '16px',
             position: 'absolute',
-            top: '-4px',
+            top: '-3px',
             left: '10px',
+            '&:hover, :focus': {
+              background: 'transparent',
+            },
+            ['@media (min-width:980px)']: {
+              // eslint-disable-line no-useless-computed-key
+              marginLeft: '30px',
+            },
           },
         },
       },
@@ -130,6 +172,17 @@ const FormAddCategory = ({ isExpenses }) => {
           underline: {
             position: 'relative',
             paddingLeft: '40px',
+            border: 'none',
+            '&:before': {
+              // normal
+              borderBottom: 'none',
+              outline: 'none',
+              display: 'none',
+            },
+            '&:before:hover': {
+              // normal
+              border: 'none',
+            },
           },
         },
       },
@@ -158,12 +211,16 @@ const FormAddCategory = ({ isExpenses }) => {
           >
             <ThemeProvider theme={theme}>
               <DatePicker
+                maxDate={new Date()}
                 keyboard={true}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment
                       position="start"
-                      sx={{ marginRight: { sm: '-20px', lg: '5px' }, paddingBottom: '3px' }}
+                      sx={{
+                        marginRight: { sm: '-20px', lg: '5px' },
+                        paddingBottom: '3px',
+                      }}
                     >
                       <img src={iconCalendar} />
                     </InputAdornment>
@@ -201,24 +258,38 @@ const FormAddCategory = ({ isExpenses }) => {
           />
           <div className={s.containerForm}>
             <div className={s.selectWrappedtmp}>
-              <select
-                className={s.select}
-                value={category}
-                onChange={handleInputChange}
-                placeholder={categoryName}
-                required
-              >
-                <option value="" disabled>
-                  {categoryName}
-                </option>
-                {data.map(item => {
-                  return (
-                    <option id="option" key={item.id} value={item.label}>
-                      {item.label}
-                    </option>
-                  );
-                })}
-              </select>
+              <FormControl sx={{}}>
+                <Select
+                  labelId="demo-simple-select-helper-label"
+                  id="demo-customized-select"
+                  value={category}
+                  onChange={handleInputChange}
+                  required
+                  label={categoryName}
+                  displayEmpty
+                  input={<BootstrapInput />}
+                  inputProps={{ 'aria-label': 'Without label' }}
+                >
+                  <MenuItem disabled value="">
+                    <p style={{ color: 'rgb(117, 117, 117)' }}>{categoryName}</p>
+                  </MenuItem>
+                  {data.map(item => {
+                    return (
+                      <MenuItem
+                        sx={{
+                          paddingRight: '20px',
+                          color: '#C7CCDC',
+                          ':hover, :focus': { color: '#52555F', background: '#F5F6FB' },
+                        }}
+                        key={item.id}
+                        value={item.label}
+                      >
+                        {item.label}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
             </div>
             <div className={s.inpuImgWrapper}>
               <StyledInputCalc value={amount} onChange={handleChange} placeholder="0" required />

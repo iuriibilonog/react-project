@@ -35,6 +35,9 @@
   align-items: center;
   flex-direction: row;
 }
+label #demo-simple-select-helper-label {
+  display: none !important;
+}
 #inputStyle {
   width: 289px;
   padding-left: 10px;
@@ -59,7 +62,7 @@
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
   .buttonWrapper {
-    margin-top: 83px;
+    margin-top: 15px;
     margin-bottom: 10px;
     width: 100%;
     justify-content: center;
@@ -131,23 +134,12 @@
     background: blue;
   }
   .inpuImgWrapper {
-    margin-top: 30px;
+    margin-top: 15px;
   }
-}
-
-.selectWrappedtmp > select {
-  color: rgb(117, 117, 117);
-  padding-left: 5px;
-  outline: none;
-}
-.selectWrappedtmp > select > option {
-  /* border-radius: 10px; */
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   #tmp {
-    /* width: 90px; */
-    /* border-color: burlywood; */
     border-radius: 10px;
     outline: none;
     margin-right: 0px;

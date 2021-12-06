@@ -8,8 +8,10 @@
   --bg-tab: #fafbfd;
   --bg-tab-active: #fefefe;
   --bg-table: #f5f6fb;
-  --bg-svg: #ffdac0;
 
+  --bg-svg: #ffdac0;
+  --ss: #fcfbf2;
+  --font-tertiary: #52555f;
   --font-primary: black;
   --font-secondary: #52555f;
   --font-expenses: #e7192e;
@@ -19,6 +21,7 @@
   --accent-bleak: var(--bg-svg);
   --accent-bleak-logo: rgba(251, 124, 47, 0.2);
   --modal-color-first: #1d346a;
+  --modal-color-arrow: #172d5d;
   --modal-color-second: #031634;
 
   --dropdown-text: #c7ccdc;

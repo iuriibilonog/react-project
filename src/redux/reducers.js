@@ -18,7 +18,10 @@ import {
   getIncomesCategories,
   updateBalance,
   getDataMonth,
+  getDataCompareMonth,
 } from './transactions-operations';
+
+import { logOut, getUser } from './auth/auth-operations';
 // new
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
@@ -26,30 +29,46 @@ import { createReducer } from '@reduxjs/toolkit';
 const balanceReducer = createReducer(null, {
   [setBalance]: (_, action) => action.payload,
   [updateBalance.fulfilled]: (_, action) => action.payload,
-  [addIncomeTransaction.fulfilled]: (_, action) => action.payload.newBalance,
-  [addExpenseTransaction.fulfilled]: (_, action) => action.payload.newBalance,
-  [deleteTransaction.fulfilled]: (_, action) => action.payload.data.newBalance,
+  [addIncomeTransaction.fulfilled]: (_, action) => action.payload.data.newBalance,
+  [addExpenseTransaction.fulfilled]: (_, action) => action.payload.data.newBalance,
+  [deleteTransaction.fulfilled]: (_, action) => action.payload?.data?.newBalance,
+  [getUser.fulfilled]: (state, action) => action.payload?.data?.balance,
 });
 
 const expensesReducer = createReducer([], {
-  [getExpensesTransactions.fulfilled]: (_, action) => action?.payload?.expenses,
-  [addExpenseTransaction.fulfilled]: (state, action) => [action?.payload?.transaction, ...state],
+  [getExpensesTransactions.fulfilled]: (state, action) => [...state, ...action?.payload?.expenses],
+  [addExpenseTransaction.fulfilled]: (state, action) => [
+    action?.payload?.data?.transaction,
+    ...state,
+  ],
   [deleteTransaction.fulfilled]: (state, action) =>
-    [...state].filter(item => item._id !== action?.payload.transactionId),
+    [...state].filter(item => item._id !== action?.payload.itemId),
+  [logOut.fulfilled]: () => [],
   // [getDataMonth.fulfilled]: (_, action) => action?.payload?.expenses,
 });
 
 const incomesReducer = createReducer([], {
-  [getIncomeTransactions.fulfilled]: (_, action) => action?.payload?.incomes,
-  [addIncomeTransaction.fulfilled]: (state, action) => [action?.payload?.transaction, ...state],
+  [getIncomeTransactions.fulfilled]: (state, action) => [...state, ...action?.payload?.incomes],
+  [addIncomeTransaction.fulfilled]: (state, action) => [
+    action?.payload?.data?.transaction,
+    ...state,
+  ],
   [deleteTransaction.fulfilled]: (state, action) =>
-    [...state].filter(item => item._id !== action?.payload.transactionId),
+    [...state].filter(item => item._id !== action?.payload?.itemId),
   // [getDataMonth.fulfilled]: (_, action) => action?.payload?.incomes,
+  [logOut.fulfilled]: () => [],
 });
 
-const getMonthReducer = createReducer([], {
+const getIncomesMonthReducer = createReducer([], {
   [getIncomeTransactions.fulfilled]: (_, action) => action.payload.monthsStats,
+  [addIncomeTransaction.fulfilled]: (_, action) => action.payload.monthsStats,
+  [deleteTransaction.fulfilled]: (_, action) => action.payload?.updStats?.monthsStats,
+});
+
+const getExpensesMonthReducer = createReducer([], {
   [getExpensesTransactions.fulfilled]: (_, action) => action.payload.monthsStats,
+  [addExpenseTransaction.fulfilled]: (_, action) => action.payload.monthsStats,
+  [deleteTransaction.fulfilled]: (_, action) => action.payload?.updStats?.monthsStats,
 });
 
 // const getNewBalanceReducer = createReducer([], {
@@ -75,6 +94,10 @@ const setExpensesByCategory = createReducer([], {
 
 const getDataMonthReducer = createReducer([], {
   [getDataMonth.fulfilled]: (_, action) => action.payload,
+});
+
+const getDataCompareMonthReducer = createReducer([], {
+  [getDataCompareMonth.fulfilled]: (_, action) => action.payload,
 });
 
 const loader = createReducer(false, {
@@ -113,6 +136,11 @@ const loader = createReducer(false, {
   [setIsSystemStarted.rejected]: () => false,
 });
 
+const getMonthReducer = combineReducers({
+  getIncomesMonth: getIncomesMonthReducer,
+  getExpensesMonth: getExpensesMonthReducer,
+});
+
 const transactionsReducer = combineReducers({
   incomes: incomesReducer,
   expenses: expensesReducer,
@@ -123,6 +151,7 @@ const transactionsReducer = combineReducers({
   expensesByCategory: setExpensesByCategory,
   incomesByCategory: setIncomesByCategory,
   dataMonth: getDataMonthReducer,
+  dataCompareMonth: getDataCompareMonthReducer,
 });
 
 export const isSystemStartedReducer = createReducer(false, {

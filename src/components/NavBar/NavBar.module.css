@@ -3,13 +3,13 @@
 }
 .team {
   font-family: 'Akronim', cursive;
-    font-size: 24px;
-    text-decoration: none;
-    vertical-align: middle;
-    outline: none;
-    color: #ff7300;
-     -webkit-animation: Blazing 2s linear infinite alternate;
-      animation: Blazing 2s linear infinite alternate;
+  font-size: 24px;
+  text-decoration: none;
+  vertical-align: middle;
+  outline: none;
+  color: #ff7300;
+  -webkit-animation: Blazing 2s linear infinite alternate;
+  animation: Blazing 2s linear infinite alternate;
 }
 .wrapper {
   display: flex;
@@ -27,7 +27,8 @@
     display: none;
   }
 }
-@media only screen and (min-width: 768px) {
+
+@media only screen and (min-width: 767px) {
   .logoutIcon {
     display: none;
   }

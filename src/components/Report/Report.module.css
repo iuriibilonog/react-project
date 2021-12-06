@@ -267,3 +267,10 @@ ArrowBackIosIcon {
     width: 69%;
   }
 }
+
+.chart {
+  display: flex;
+  justify-content: center;
+  /* padding-left: auto;
+  padding-right: auto; */
+}

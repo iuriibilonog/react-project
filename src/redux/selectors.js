@@ -1,12 +1,19 @@
 /* ---- selectors for mapStateToProps only ! ---- */
 
-export const getBalance = state => state.transactions.balance;
-export const getUserBalance = state => state.auth.userBalance;
+export const getBalance = state => state?.transactions?.balance;
+export const getUserBalance = state => state?.auth?.userBalance;
 export const getIsSystemInitialised = state => state.isSystemStarted;
+
 export const isCurrentUser = state => state.auth.isCheckingUser;
+
+export const isGetUserFulfilledAfterRefresh = state => state.isGetUserFulfilledAfterRefresh;
+
+
 export const isUserLoggedIn = state => state.auth.isLoggedIn;
 
-export const getMonthStats = state => state?.transactions?.transactions?.getMonth;
+export const getIncomesMonth = state => state?.transactions?.transactions?.getMonth?.getIncomesMonth;
+export const getExpensesMonth = state => state?.transactions?.transactions?.getMonth?.getExpensesMonth;
+
 export const getMonthData = state => state?.transactions?.transactions?.dataMonth;
 
 export const getMonthStatsIncomes = state => {

@@ -1,6 +1,6 @@
 .team {
- height: auto;
- 
+  height: auto;
+  margin-bottom: 34px;
 }
 .team a {
   width: 100%;
@@ -9,8 +9,6 @@
   text-align: center;
   display: inline-block;
   color: var(--accent-bright);
-  text-shadow:
-    1px 1px 1px var(--bg-svg),
-    -1px 1px 1px var(--bg-svg);
-    transition: all .5s;
+  text-shadow: 1px 1px 1px var(--bg-svg), -1px 1px 1px var(--bg-svg);
+  transition: all 0.5s;
 }

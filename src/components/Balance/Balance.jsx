@@ -4,11 +4,16 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
 import UnifiedModal from '../../shared/UnifiedModal';
-import { getBalance, getUserBalance, getIsSystemInitialised } from '../../redux/selectors';
+import {
+  getBalance,
+  getUserBalance,
+  getIsSystemInitialised,
+  isGetUserFulfilledAfterRefresh,
+} from '../../redux/selectors';
 import { getIncomes, getExpenses } from '../../redux/transactions-selectors';
-import GoToReport from '../GoToReport';
 import { updateBalance } from '../../redux/transactions-operations';
-import GoHome from '../GoHome/GoHome';
+import Notiflix from 'notiflix';
+
 const Balance = () => {
   const [balanceState, setBalanceState] = useState('unset');
   const [timerId, setTimerId] = useState(null);
@@ -22,7 +27,7 @@ const Balance = () => {
   const pushIsSystemStartedMarkerToState = marker => dispatch(actions.setIsSystemStarted(marker));
   const pushBalanceToState = newBalance => dispatch(actions.setBalance(newBalance)); //if it`s beginning
 
-  const bal = useSelector(getBalance); //transactions.balance
+  const balanceInTransactionState = useSelector(getBalance); //transactions.balance
 
   const isSystemStarted = useSelector(getIsSystemInitialised);
   const expenses = useSelector(getExpenses).length;
@@ -37,33 +42,45 @@ const Balance = () => {
 
   useEffect(() => {
     console.log('first time');
-    console.log('bal', bal);
+    console.log('balanceInTransactionState', balanceInTransactionState);
     console.log('userBalanceFromAuth', userBalanceFromAuth);
 
-    if (userBalanceFromAuth === null && !expenses && !incomes) {
-      console.log('empty');
-    }
-
-    if (userBalanceFromAuth !== null && !expenses && !incomes) {
-      console.log('empty + Balance');
-    }
-
     if (userBalanceFromAuth || isSystemStarted || expenses || incomes) {
-      bal === null ? pushBalanceToState(userBalanceFromAuth) : pushBalanceToState(bal); //  - to state only
-      bal === null ? setBalance(userBalanceFromAuth + ' UAH') : setBalance(bal + ' UAH');
+      balanceInTransactionState === null && pushBalanceToState(userBalanceFromAuth);
+
+      // balanceInTransactionState === null
+      //   ? pushBalanceToState(userBalanceFromAuth)
+      //   : pushBalanceToState(balanceInTransactionState); //  - to state only
+      balanceInTransactionState === null
+        ? setBalance(userBalanceFromAuth + ' UAH')
+        : setBalance(balanceInTransactionState + ' UAH');
+
       pushIsSystemStartedMarkerToState(true);
       setBalanceState('set');
     } else if (balanceState === 'unset') {
       zeroReminding();
     }
-    console.log('bal-after', bal);
+    console.log('INIT');
+    console.log('userBalanceFromAuth', userBalanceFromAuth);
+    console.log('balanceInTransactionState', balanceInTransactionState);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // useEffect(() => {
+  //   console.log('UseEFFECT-isGetUserFulfilledAfterRefresh');
+  //   if (isGetUserFulfilledAfterRefresh) {
+  //     setTimeout(console.log('5 SEC!!!!'), 15000);
+  //     pushBalanceToState(userBalanceFromAuth);
+  //   }
+  //   console.log('userBalanceFromAuth', userBalanceFromAuth);
+  //   console.log('balanceInTransactionState', balanceInTransactionState);
+  // }, [isGetUserFulfilledAfterRefresh]);
+
   useEffect(() => {
-    console.log(bal);
-    setBalance(Math.round(bal) + ' UAH');
-  }, [bal]);
+    console.log(balanceInTransactionState);
+    setBalance(Math.round(balanceInTransactionState) + ' UAH');
+  }, [balanceInTransactionState]);
 
   useEffect(() => {
     if (balanceState === 'set') {
@@ -83,11 +100,12 @@ const Balance = () => {
 
   const prepareDataForBackend = () => {
     const balanceDigit = balance.slice(0, balance.length - 4).trim();
-    if (Number(balanceDigit)) {
+    if (Number(balanceDigit) && Number(balanceDigit) > 0) {
       console.log('Output Balance :', balanceDigit);
       finalInitializing();
       sendDataToState(Number(balanceDigit));
     } else {
+      Notiflix.Notify.warning('Неверные данные! Повторите ввод.');
       console.log('Wrong balance!');
       setBalance('0 UAH');
     }
@@ -175,26 +193,25 @@ const Balance = () => {
       {/* </section> */}
       <section className={s.balanceSection}>
         <span className={s.title}>Баланс:</span>
-        {isReminderShown === true && (
-          <div className={s.reminding}>
-            <p>Привет! Для начала работы внеси текущий баланс своего счета!</p>
-            <p className={s.remindingSubMessage}>
-              Ты не можешь тратить деньги пока их у тебя нет!{' '}
-            </p>
-          </div>
-        )}
         <form onSubmit={submitBalanceHandler}>
           <div className={s.formWrapper}>
-            {balanceState === 'set' ? inputMarkup(false) : inputMarkup(true)}
-            {balanceState === 'set' ? confirmBtnMarkup(false) : confirmBtnMarkup(true)}
+            <div className={s.inputsWrapper}>
+              {balanceState === 'set' ? inputMarkup(false) : inputMarkup(true)}
+              {balanceState === 'set' ? confirmBtnMarkup(false) : confirmBtnMarkup(true)}
+            </div>
+            {isReminderShown === true && (
+              <div className={s.reminding}>
+                <div className={s.triangle} />
+                <p>Привет! Для начала работы внеси текущий баланс своего счета!</p>
+                <p className={s.remindingSubMessage}>
+                  Ты не можешь тратить деньги пока их у тебя нет!{' '}
+                </p>
+              </div>
+            )}
           </div>
         </form>
       </section>
-      {/* <section className={s.goToReportSection}> */}
-      {/* <GoToReport /> */}
       {isModalShown && <UnifiedModal title={'Вы уверены?'} response={responseHandling} />}
-      {/* </section> */}
-      {/* </div> */}
     </>
   );
 };

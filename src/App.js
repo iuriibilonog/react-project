@@ -1,7 +1,7 @@
 import './App.css';
 import s from './App.module.css';
 
-import { checkCurrentUser } from './redux/auth/auth-operations';
+import { checkCurrentUser, getUser } from './redux/auth/auth-operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
@@ -26,16 +26,33 @@ function App() {
   const dispatch = useDispatch();
   const sid = useSelector(state => state.auth.sid);
   const token = useSelector(state => state.auth.token);
+
   const isCheckCurrentUser = useSelector(isCurrentUser);
+
+  const isRefreshFulfilled = useSelector(state => state.auth.isRefreshFullFilled);
+
+  
+
+  const sidUser = useSelector(state => state.auth.user.sid);
+  const accessToken = useSelector(state => state.auth.user.accessToken);
+  const refreshToken = useSelector(state => state.auth.user.refreshToken);
+
 
   
   useEffect(() => {
     
     if (token !== '') {
       dispatch(checkCurrentUser());
+      console.log('REFRESH');
     }
     return;
   }, []);
+
+  useEffect(() => {
+    if (isRefreshFulfilled) {
+      dispatch(getUser({ accessToken, refreshToken, sidUser }));
+    }
+  }, [isRefreshFulfilled]);
 
   // const { pathname } = useLocation();
   // let isSpend = '';
@@ -43,6 +60,7 @@ function App() {
 
   return (
     <div className="App">
+
       {/* <SwitchTheme /> */}
       {isCheckCurrentUser ? (
         <Loader />
@@ -72,6 +90,8 @@ function App() {
           </Switch>
         </>
       )}
+
+   
     </div>
   );
 }
