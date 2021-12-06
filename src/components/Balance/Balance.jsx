@@ -44,46 +44,17 @@ const Balance = () => {
     console.log('first time');
     console.log('balanceInTransactionState', balanceInTransactionState);
     console.log('userBalanceFromAuth', userBalanceFromAuth);
-    if (userBalanceFromAuth === null && !expenses && !incomes) {
-      console.log('empty');
-    }
-    if (userBalanceFromAuth !== null && !expenses && !incomes) {
-      console.log('empty + Balance');
-    }
-
-    // if (
-    //   userBalanceFromAuth === 0 &&
-    //   balanceInTransactionState === null &&
-    //   !isSystemStarted &&
-    //   !expenses &&
-    //   !incomes
-    // ) {
-    //   console.log('вводим данные');
-    //   //надо вводить баланс вручную
-    //   zeroReminding();
-    // } else {
-    //   console.log('Баланс ДО', balance);
-    //   console.log('выводим в Рендеринг');
-    //   //выводим баланс в рендеринге
-    //   if (balanceInTransactionState !== null) {
-    //     console.log('В рендеринг из ТранзакшнСтейта');
-    //     setBalance(balanceInTransactionState + ' UAH');
-    //   } else {
-    //     console.log('В рендеринг из Юзера');
-    //     console.log('userBalanceFromAuth', userBalanceFromAuth);
-    //     setBalance('2345');
-    //     console.log('Баланс После', balance);
-    //   }
-    //   setBalanceState('set');
-    // }
 
     if (userBalanceFromAuth || isSystemStarted || expenses || incomes) {
-      balanceInTransactionState === null
-        ? pushBalanceToState(userBalanceFromAuth)
-        : pushBalanceToState(balanceInTransactionState); //  - to state only
+      balanceInTransactionState === null && pushBalanceToState(userBalanceFromAuth);
+
+      // balanceInTransactionState === null
+      //   ? pushBalanceToState(userBalanceFromAuth)
+      //   : pushBalanceToState(balanceInTransactionState); //  - to state only
       balanceInTransactionState === null
         ? setBalance(userBalanceFromAuth + ' UAH')
         : setBalance(balanceInTransactionState + ' UAH');
+
       pushIsSystemStartedMarkerToState(true);
       setBalanceState('set');
     } else if (balanceState === 'unset') {
@@ -96,15 +67,15 @@ const Balance = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    console.log('UseEFFECT-isGetUserFulfilledAfterRefresh');
-    if (isGetUserFulfilledAfterRefresh) {
-      setTimeout(console.log('5 SEC!!!!'), 15000);
-      //;pushBalanceToState(userBalanceFromAuth) }
-    }
-    console.log('userBalanceFromAuth', userBalanceFromAuth);
-    console.log('balanceInTransactionState', balanceInTransactionState);
-  }, [isGetUserFulfilledAfterRefresh]);
+  // useEffect(() => {
+  //   console.log('UseEFFECT-isGetUserFulfilledAfterRefresh');
+  //   if (isGetUserFulfilledAfterRefresh) {
+  //     setTimeout(console.log('5 SEC!!!!'), 15000);
+  //     pushBalanceToState(userBalanceFromAuth);
+  //   }
+  //   console.log('userBalanceFromAuth', userBalanceFromAuth);
+  //   console.log('balanceInTransactionState', balanceInTransactionState);
+  // }, [isGetUserFulfilledAfterRefresh]);
 
   useEffect(() => {
     console.log(balanceInTransactionState);
@@ -224,8 +195,10 @@ const Balance = () => {
         <span className={s.title}>Баланс:</span>
         <form onSubmit={submitBalanceHandler}>
           <div className={s.formWrapper}>
-            {balanceState === 'set' ? inputMarkup(false) : inputMarkup(true)}
-            {balanceState === 'set' ? confirmBtnMarkup(false) : confirmBtnMarkup(true)}
+            <div className={s.inputsWrapper}>
+              {balanceState === 'set' ? inputMarkup(false) : inputMarkup(true)}
+              {balanceState === 'set' ? confirmBtnMarkup(false) : confirmBtnMarkup(true)}
+            </div>
             {isReminderShown === true && (
               <div className={s.reminding}>
                 <div className={s.triangle} />

@@ -19,6 +19,8 @@ import {
   updateBalance,
   getDataMonth,
 } from './transactions-operations';
+
+import { logOut, getUser } from './auth/auth-operations';
 // new
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
@@ -29,22 +31,31 @@ const balanceReducer = createReducer(null, {
   [addIncomeTransaction.fulfilled]: (_, action) => action.payload.data.newBalance,
   [addExpenseTransaction.fulfilled]: (_, action) => action.payload.data.newBalance,
   [deleteTransaction.fulfilled]: (_, action) => action.payload?.data?.newBalance,
+  [getUser.fulfilled]: (state, action) => action.payload?.data?.balance,
 });
 
 const expensesReducer = createReducer([], {
   [getExpensesTransactions.fulfilled]: (state, action) => [...state, ...action?.payload?.expenses],
-  [addExpenseTransaction.fulfilled]: (state, action) => [action?.payload?.data?.transaction, ...state],
+  [addExpenseTransaction.fulfilled]: (state, action) => [
+    action?.payload?.data?.transaction,
+    ...state,
+  ],
   [deleteTransaction.fulfilled]: (state, action) =>
     [...state].filter(item => item._id !== action?.payload.itemId),
+  [logOut.fulfilled]: () => [],
   // [getDataMonth.fulfilled]: (_, action) => action?.payload?.expenses,
 });
 
 const incomesReducer = createReducer([], {
   [getIncomeTransactions.fulfilled]: (state, action) => [...state, ...action?.payload?.incomes],
-  [addIncomeTransaction.fulfilled]: (state, action) => [action?.payload?.data?.transaction,...state,],
+  [addIncomeTransaction.fulfilled]: (state, action) => [
+    action?.payload?.data?.transaction,
+    ...state,
+  ],
   [deleteTransaction.fulfilled]: (state, action) =>
     [...state].filter(item => item._id !== action?.payload?.itemId),
   // [getDataMonth.fulfilled]: (_, action) => action?.payload?.incomes,
+  [logOut.fulfilled]: () => [],
 });
 
 const getIncomesMonthReducer = createReducer([], {

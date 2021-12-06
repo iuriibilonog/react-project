@@ -13,7 +13,7 @@ function greenTheme() {
 
   document.body.style.setProperty('--font-primary', 'black');
   document.body.style.setProperty('--font-secondary', '#525f54');
-  // document.body.style.setProperty('--font-tertiary', '');
+  document.body.style.setProperty('--font-tertiary', '#499034');
 
   document.body.style.setProperty('--accent-bright', '#499034');
   document.body.style.setProperty('--accent-bleak', '#c2ffc0');
@@ -36,7 +36,7 @@ function orangeTheme() {
 
   document.body.style.setProperty('--font-primary', 'black');
   document.body.style.setProperty('--font-secondary', '#52555f');
-  // document.body.style.setProperty('--font-tertiary', '');
+  document.body.style.setProperty('--font-tertiary', '#ff751d');
 
   document.body.style.setProperty('--accent-bright', '#ff751d');
   document.body.style.setProperty('--accent-bleak', '#ffdac0');
