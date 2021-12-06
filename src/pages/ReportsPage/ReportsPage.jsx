@@ -34,7 +34,7 @@ const ReportsPage = () => {
 
         </Container>
       {/* <Chart/> */}
-    <Footer/>
+    {/* <Footer/> */}
     </>
 
   );

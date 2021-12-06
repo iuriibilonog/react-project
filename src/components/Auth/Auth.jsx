@@ -198,7 +198,7 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
           <a className={s.googleBtn} href="https://kapusta-backend.goit.global/auth/google">
             <img className={s.googleIcon} src={google} alt="Google" />
             Google</a>
-        {/* <FacebookAuth onSubmit={handleAuthFromSocial}/> */}
+        <FacebookAuth onSubmit={handleAuthFromSocial}/>
         </div>
           <p className={`${s.authText} ${s.text}`} >
           Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись:
