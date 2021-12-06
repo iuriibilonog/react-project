@@ -20,6 +20,7 @@
     "date-fns": "^2.13.0",
     "html-react-parser": "^1.4.1",
     "modern-normalize": "^1.1.0",
+    "notiflix": "^3.2.2",
     "react": "^17.0.2",
     "react-animations": "^1.0.0",
     "react-custom-scroll": "^4.3.0",

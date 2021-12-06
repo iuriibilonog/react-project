@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import UnifiedModal from '../../shared/UnifiedModal';
 import { register, login, loginFromGoogle, getUser } from '../../redux/auth/auth-operations';
 import { FacebookAuth } from './SocialAuth';
@@ -26,10 +28,15 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
   
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [emailDirty, setEmailDirty] = useState(false);
+  const [emailError, setEmailError] = useState('Введите данные в формате: somemail@email.com / somemail@email.com.vn');
   const [password, setPassword] = useState('');
+  const [passwordDirty, setPasswordDirty] = useState(false);
+  const [passwordError, setPasswordError] = useState('Пароль должен состоять из цифр и латинских букв');
   const [isLoginType, setIsLoginType] = useState(true);
   const [socialAuth, setSocialAuth] = useState(false)
   const [isModalShown, setIsModalShown] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
  
  
   
@@ -51,41 +58,41 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
   
 
   
-
-  
-  
-  
-  const responseHandling = response => {
-    setIsModalShown(false);
-    
-    if (response) {
-      // dispatch(login({ email, password, socialAuth }))
-      //  setEmail('');
-      // setPassword('');
-      
-      // POSITIVE ACTION;
+  const blurHandler = e => {
+    switch (e.target.name) {
+      case 'email':
+        setEmailDirty(true)
+        break;
+      case 'password':
+        setPasswordDirty(true)
+        break;
     }
-    return response;
-  };
-
-  
-/***/
-  
-  
-
-
-  
-
+  }
 
   const handleOnChange = e => {
     const { name, value } = e.target;
 
     switch (name) {
-      case 'name': return setName(value);
+     
       case 'email':
         return setEmail(value);
-      case 'password':
-        return setPassword(value);
+      
+        // const re = "^([a-zA-Z0-9_\-\.]{2,})@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+        // if (!re.test(String(value).toLowerCase())) {
+        //   setEmailError('Не корректный почта')
+        // } else {
+        //   setEmailError('')
+        // }
+        
+        case 'password':
+        return  setPassword(value);
+      //   const re = "/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{3,16}/g"
+      //   if (!re.test(String(value).toLowerCase())) {
+      //     setPasswordError('Не корректный gfhjkm')
+      //   } else {
+      //     setPasswordError('')
+      //   }
+      //   break;
       default:
         return;
     }
@@ -101,14 +108,12 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
      
   }
 
-  // const handleOnTimer = (count) => {
-  //   if (count === true) {
-  //     dispatch(login({ email, password, socialAuth }))
-  //     setIsModalShown(false)
-  //     setEmail('');
-  //     setPassword('');
-  //   }
-  // }
+
+  const togglePasswordVisability = (e) => {
+    isPasswordVisible ? setIsPasswordVisible(false) : setIsPasswordVisible(true)
+  }
+
+  
 
 
 
@@ -121,12 +126,7 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
       setIsLoginType(true)
       getTypeOfAuth(false)
       setIsModalShown(true)
-      // if (isRegisterFullField === 'true') {
-        
-      //   setIsModalShown(true)
-      // }
-      // setEmail('');
-      // setPassword('');
+    
       
       
     }
@@ -165,6 +165,8 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
   }
 
   console.log(isModalShown)
+
+  
   
   
   
@@ -172,7 +174,7 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
     
     <div className={s.auth}>
      
-      {/* {isModalShown && <RegisterModal handleOnTimer={handleOnTimer}/>} */}
+     
       <div className={s.authWrapper}>
         <p className={s.authText}>Вы можете авторизоваться с помощью Google Account:</p>
         <div className={s.socialBtnsWrapper}>
@@ -203,24 +205,34 @@ const Authorization = ({ getDataFromSocial, getTypeOfAuth }) => {
               title="Введите данные в формате: somemail@email.com / somemail@email.com.vn"
               pattern="^([a-zA-Z0-9_\-\.]{2,})@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
               required
+              // onBlur={blurHandler}
               onChange={handleOnChange}
             />
+            {(emailDirty && emailError) && <div style={{color: 'red'}}>{emailError}</div>}
             <label htmlFor="authPassword" className={s.inputTitle}>
               {' '}
               Пароль:
             </label>
+            <form className={s.passwordWrapper}>
             <input
               className={s.authInput}
-              type="password"
+              type={isPasswordVisible ? "text" : "password"}
               name="password"
               value={password}
-              id="authPassword"
-              minLength='2'
-              // pattern="/^[a-z0-9]+/"
+                id="authPassword"
+               
+              // minLength='2'
+              // maxLength='16'
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title='Пароль должен состоять из цифр и латинских букв'
-              required
+                required
+              // onBlur={blurHandler}
               onChange={handleOnChange}
-            />
+              />
+              {(passwordDirty && passwordError) && <div style={{color: 'red'}}>{passwordError}</div>}
+            {isPasswordVisible ? <VisibilityIcon className={s.password} onClick={togglePasswordVisability} />
+              : <VisibilityOffIcon className={s.password} onClick={togglePasswordVisability} />}
+          </form>
           </div>
           {isLoginType ? <div className={s.authLoginBtnsWrapper}>
            
