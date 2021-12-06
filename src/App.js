@@ -72,12 +72,11 @@ function App() {
         </PublicRoute>
 
         <PublicRoute exact path="/team" redirectTo="/">
-          <Team/> 
+          <Team />
         </PublicRoute>
-        <PrivateRoute exact path="/">
+        {/* <PrivateRoute exact path="/"> */}
 
         <PrivateRoute exact path="/transactions">
-
           <TransactionsPage />
         </PrivateRoute>
         <PrivateRoute exact path="/reports">

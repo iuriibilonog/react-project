@@ -69,7 +69,7 @@ const FormAddCategory = ({ isExpenses }) => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    if (description.length <= 3 || description.length >= 20) {
+    if (description.length <= 3 || description.length >= 20 || !isNaN(description)) {
       alert('Описание должно бить не менше 3 и не больше 20 символов');
       return;
     }
@@ -78,6 +78,7 @@ const FormAddCategory = ({ isExpenses }) => {
         isExpenses === 'expenses'
           ? dispatch(addExpenseTransaction({ date, description, category, amount }))
           : dispatch(addIncomeTransaction({ date, description, category, amount }));
+        reset();
       }
     } catch (error) {
       alert('Введите правильную дату!');
@@ -87,11 +88,6 @@ const FormAddCategory = ({ isExpenses }) => {
     setDescription(event.target.value);
   };
   const useStyles = makeStyles(theme => ({
-    // textInpt: {
-    //   borderRadius: '30px',
-    //   width: '289px',
-    //   outlineColor: 'black',
-    // },
     input: {
       '&:before': {
         // normal
@@ -111,21 +107,9 @@ const FormAddCategory = ({ isExpenses }) => {
     'label + &': {
       marginTop: '0px',
     },
-    // '.css-1p7v46j-MuiFormLabel-root-MuiInputLabel-root': {
-    //   color: 'red',
-    //   '&.focused': {
-    //     color: 'red',
-    //   },
-    //   '&.shrink': {
-    //     backgroundColor: 'grey',
-    //   },
-    // },//noet working
-
     '.MuiInputLabel-root': { color: 'red' },
     '.MuiSelect-select': { paddingLeft: '8px' },
     '& .MuiInputBase-input': {
-      // borderRadius: 20,
-      // height: 29,
       borderTop: '2px solid #F5F6FB',
       borderBottom: '2px solid #F5F6FB',
       padingLight: '5px',
@@ -133,30 +117,11 @@ const FormAddCategory = ({ isExpenses }) => {
       fontSize: 12,
       background: 'white',
       ['@media (max-width:767px)']: {
-        // eslint-disable-line no-useless-computed-key
         width: '240px',
         borderBottomLeftRadius: '16px',
         border: '2px solid white',
         background: 'transparent',
       },
-      // padding: '10p  x 26px 10px 12px',
-      // transition: theme.transitions.create(['border-color', 'box-shadow']),
-      // Use the system font instead of the default Roboto font.
-      // fontFamily: [
-      //   '-apple-system',
-      //   'BlinkMacSystemFont',
-      //   '"Segoe UI"',
-      //   'Roboto',
-      //   '"Helvetica Neue"',
-      //   'Arial',
-      //   'sans-serif',
-      //   '"Apple Color Emoji"',
-      //   '"Segoe UI Emoji"',
-      //   '"Segoe UI Symbol"',
-      // ].join(','),
-      // '&:focus': {
-      //   // borderColor: '#80bdff',
-      // },
     },
   }));
   const classes = useStyles();
