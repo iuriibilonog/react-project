@@ -87,7 +87,7 @@ const Report = () => {
 
 
   return (
-    <>
+    
       <div className={s.reportContainer}>
         <ReportAmount />
         <div className={`${s.navigation} ${s.section}`}>
@@ -95,7 +95,7 @@ const Report = () => {
         </div>
 
 
-              {type === reportTypeRender ? (
+              {/* {type === reportTypeRender ? (
                 <h1 className={s.reportTitle}>расходы</h1>
               ) : (
                 <h1 className={s.reportTitle}>доходы</h1>
@@ -136,21 +136,21 @@ const Report = () => {
                     />
                   ))
                 )}
-              </ul>
+              </ul> */}
 
-//         <div className={`${s.reportWrapper} ${s.section}`}>
-//           <div className={`${s.transactionWrapper} ${s.sectionReportTitle}`}>
-//             <ArrowBackIosIcon
-//               style={{ color: '#FF751D', cursor: 'pointer' }}
-//               fontSize="small"
-//               onClick={onHandleChangeType}
-//               className={s.btnFocus}
-//             />
+         <div className={`${s.reportWrapper} ${s.section}`}>
+           <div className={`${s.transactionWrapper} ${s.sectionReportTitle}`}>
+             <ArrowBackIosIcon
+               style={{ color: '#FF751D', cursor: 'pointer' }}
+               fontSize="small"
+               onClick={onHandleChangeType}
+               className={s.btnFocus}
+             />
 
-//             {type === reportTypeRender ? (
-//               <h1 className={s.reportTitle}>расходы</h1>
-//             ) : (
-//               <h1 className={s.reportTitle}>доходы</h1>
+             {type === reportTypeRender ? (
+               <h1 className={s.reportTitle}>расходы</h1>
+             ) : (
+               <h1 className={s.reportTitle}>доходы</h1>
 
             )}
             <ArrowForwardIosIcon
@@ -203,8 +203,8 @@ const Report = () => {
             />
           </div>
         )}
-
-    </>
+      </div>
+    
   );
 };
 export default Report;
