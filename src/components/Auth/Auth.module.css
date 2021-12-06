@@ -38,7 +38,7 @@
 .socialBtnsWrapper {
   display: flex;
   justify-content: space-between;
-  margin: 0 39px 0 39px;
+  margin: 0 15px 0 15px;
 }
 
 .googleBtn {
@@ -152,6 +152,7 @@
 }
 
 @media screen and (mix-width: 767px) {
+
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
@@ -183,7 +184,7 @@
   }
 
   .socialBtnsWrapper {
-    margin: 0 29px;
+    margin: 0;
   }
 
   .inputsWrapper input:not(:last-child) {
@@ -204,7 +205,9 @@
     margin: 0 85px 0 85px;
     width: 265px;
   }
-
+  .socialBtnsWrapper {
+    margin: 0;
+  }
   .authText {
     text-align: left;
     margin: 0 0 20px 0;
