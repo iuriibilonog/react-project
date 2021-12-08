@@ -16,18 +16,16 @@ import '../../utils/variables.css';
 import CustomInput from './StyledInputElement/StyledInputElement';
 import StyledInputCalc from './Select/StyledCalculator/StyledCalculator';
 import iconCalendar from '../../img/calendar.svg';
-import Box from '@mui/material/Box';
 import { IconButton, InputAdornment } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import UnstyledInput from './StyledInputElement/StyledInputElement';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import InputBase from '@mui/material/InputBase';
-import { styled } from '@mui/material/styles';
-import InputLabel from '@mui/material/InputLabel';
-import SelectCustome from './Select/Select';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import theme from './CalendarStyles';
+import BootstrapInput from './SelectStyles';
+import { borderBottom } from '@mui/system';
+import MoreTimeIcon from '@mui/icons-material/MoreTime';
 
 const FormAddCategory = ({ isExpenses }) => {
   const [value, setValue] = React.useState(new Date());
@@ -57,7 +55,6 @@ const FormAddCategory = ({ isExpenses }) => {
   };
 
   const date = newDate();
-
   const dispatch = useDispatch();
 
   const handleChange = event => {
@@ -88,48 +85,30 @@ const FormAddCategory = ({ isExpenses }) => {
   const handleTextChange = event => {
     setDescription(event.target.value);
   };
-  const useStyles = makeStyles(theme => ({
-    input: {
-      '&:before': {
-        // normal
-        borderBottom: '1px solid orange',
-      },
-      '&:after': {
-        // focused
-        borderBottom: `3px solid green`,
-      },
-      '&:hover:not(.Mui-disabled):not(.Mui-focused):not(.Mui-error):before': {
-        // hover
-        borderBottom: `2px solid purple`,
-      },
-    },
-  }));
-  const BootstrapInput = styled(InputBase)(({ theme }) => ({
-    'label + &': {
-      marginTop: '0px',
-    },
-    '.MuiInputLabel-root': { color: 'red' },
-    '.MuiSelect-select': { paddingLeft: '8px' },
-    '& .MuiInputBase-input': {
-      borderTop: '2px solid #F5F6FB',
-      borderBottom: '2px solid #F5F6FB',
-      padingLight: '5px',
-      width: 142,
-      fontSize: 12,
-      background: 'white',
-      ['@media (max-width:767px)']: {
-        width: '240px',
-        borderBottomLeftRadius: '16px',
-        border: '2px solid white',
-        background: 'transparent',
-      },
-    },
-  }));
-  const classes = useStyles();
+
+  // const useStyles = makeStyles(theme => ({
+  //   input: {
+  //     '&:before': {
+  //       // normal
+  //       borderBottom: '1px solid orange',
+  //     },
+  //     '&:after': {
+  //       // focused
+  //       borderBottom: `3px solid green`,
+  //     },
+  //     '&:hover:not(.Mui-disabled):not(.Mui-focused):not(.Mui-error):before': {
+  //       // hover
+  //       borderBottom: `2px solid purple`,
+  //     },
+  //   },
+  // }));
+
+  // const classes = useStyles();
   const handleDateChange = newValue => {
     setValue(newValue);
   };
-  const css = useStyles();
+
+  // const css = useStyles();
   let data = '';
   let categoryName = '';
   let textInputName = '';
@@ -144,75 +123,25 @@ const FormAddCategory = ({ isExpenses }) => {
     setDescription('');
     setAmount('');
   };
-  const theme = createTheme({
-    components: {
-      // Name of the component
-      MuiIconButton: {
-        styleOverrides: {
-          // Name of the slot
-          edgeEnd: {
-            // Some CSS
-            // paddingLeft: '20px',
-            marginLeft: '16px',
-            position: 'absolute',
-            top: '-3px',
-            left: '10px',
-            '&:hover, :focus': {
-              background: 'transparent',
-            },
-            ['@media (min-width:980px)']: {
-              // eslint-disable-line no-useless-computed-key
-              marginLeft: '30px',
-            },
-          },
-        },
-      },
-      MuiInput: {
-        styleOverrides: {
-          underline: {
-            position: 'relative',
-            paddingLeft: '40px',
-            border: 'none',
-            '&:before': {
-              // normal
-              borderBottom: 'none',
-              outline: 'none',
-              display: 'none',
-            },
-            '&:before:hover': {
-              // normal
-              border: 'none',
-            },
-          },
-        },
-      },
-      MuiSvgIcon: {
-        styleOverrides: {
-          root: {
-            width: '30px',
-            fill: 'none',
-            background: 'none',
-          },
-        },
-      },
-    },
-  });
 
   return (
     <>
       <form onSubmit={handleFormSubmit} className={s.formContainer}>
         <div className={s.calendarWrapper}>
-          <div className={s.calendarHelper}></div>
+          {/* <div className={s.calendarHelper}></div> */}
           <LocalizationProvider
             dateAdapter={AdapterDateFns}
             locale={ruLocale}
-            className={css.textInpt}
+            // className={css.textInpt}
             id={s.inputStyle}
           >
             <ThemeProvider theme={theme}>
               <DatePicker
                 maxDate={new Date()}
                 keyboard={true}
+                components={{
+                  OpenPickerIcon: MoreTimeIcon,
+                }}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment
@@ -226,8 +155,8 @@ const FormAddCategory = ({ isExpenses }) => {
                     </InputAdornment>
                   ),
                 }}
-                className={classes.input}
-                id={s.calendarStyle}
+                // className={classes.input}
+                // id={s.calendarStyle}
                 size="small"
                 value={value}
                 onChange={handleDateChange}
@@ -238,6 +167,19 @@ const FormAddCategory = ({ isExpenses }) => {
                     margin="dense"
                     variant="standard"
                     id={s.tmp}
+                    sx={{
+                      '.css-1yizycn-MuiInputBase-root-MuiInput-root:after': {
+                        borderBottom: 'none',
+                      },
+
+                      // '.css-3whm0-MuiSvgIcon-root': {
+                      //   width: '30px',
+                      //   fill: 'none',
+                      //   background: 'none',
+                      // },
+                      // svg: { fill: 'none', background: 'none' },
+                      // input: { color },
+                    }}
                   />
                 )}
                 format="YYYY-MM-DD"
