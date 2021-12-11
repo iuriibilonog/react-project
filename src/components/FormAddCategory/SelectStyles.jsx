@@ -14,7 +14,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     width: 142,
     fontSize: 12,
     background: 'white',
-    ['@media (max-width:767px)']: {
+    ['@media (max-width:767.5px)']: {
       width: '240px',
       borderBottomLeftRadius: '16px',
       border: '2px solid white',

@@ -1,10 +1,6 @@
 import * as React from 'react';
 import InputUnstyled from '@mui/base/InputUnstyled';
 import { styled } from '@mui/system';
-import expenceJson from '../../../data/expenselcon.json';
-import incomesJson from '../../../data/expenselcon.json';
-import { MenuItem } from '@mui/material';
-import { useLocation } from 'react-router-dom';
 
 const StyledInputElement = styled('input')`
   max-width: 300px;
@@ -25,7 +21,7 @@ const StyledInputElement = styled('input')`
   margin: 0;
   transition: width 300ms ease;
   position: relative;
-  @media screen and (min-width: 320px) and (max-width: 767px) {
+  @media screen and (min-width: 320px) and (max-width: 767.5px) {
     width: 282px;
     background: #f5f6fb;
     border: 2px solid #ffffff;

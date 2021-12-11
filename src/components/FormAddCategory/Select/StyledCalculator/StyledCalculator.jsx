@@ -15,7 +15,7 @@ const StyledInputCalc = styled('input')`
   color: #20262d;
   margine: 0;
   position: relative;
-  @media screen and (min-width: 320px) and (max-width: 767px) {
+  @media screen and (max-width: 767.5px) {
     border-radius: 16px;
   }
 

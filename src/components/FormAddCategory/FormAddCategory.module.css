@@ -1,44 +1,20 @@
-.containerForm {
+/* .allInputsWrapper {
   display: flex;
-  justify-content: center;
-
   align-items: center;
-
-  /* flex-wrap: wrap; */
+} */
+.inpuImgWrapper {
+  position: relative;
 }
-.formContainer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-top: 30px;
-}
-.select {
-  height: 37px;
-  width: 170px;
-  border-top: 2px solid #f5f6fb;
-  border-bottom: 2px solid #f5f6fb;
-  border-right: none;
-  border-left: none;
-  font-family: Roboto;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.02em;
+.calculatorImg {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
-.allInputsWrapper {
-  display: flex;
-  align-items: center;
-}
-.InputsWrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-}
 label #demo-simple-select-helper-label {
   display: none !important;
 }
-#inputStyle {
+/* #inputStyle {
   width: 289px;
   padding-left: 10px;
   padding-top: 10px;
@@ -47,20 +23,24 @@ label #demo-simple-select-helper-label {
   border-top-left-radius: 16px;
   outline: none;
   background: chocolate;
-}
-#tmp {
-  width: 80px;
-  border-color: burlywood;
-  border-radius: 10px;
-  outline: none;
-  margin-right: 0px;
-}
+} */
 
-.calendarWrapper {
+/* .calendarWrapper {
   display: block;
-}
+} */
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (max-width: 767.5px) {
+  .containerForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .formContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 30px;
+  }
   .buttonWrapper {
     margin-top: 15px;
     margin-bottom: 10px;
@@ -98,53 +78,64 @@ label #demo-simple-select-helper-label {
     flex-direction: column;
     margin-left: -4%;
   }
-  .select {
-    width: 282px;
-    background: #f5f6fb;
-    border: 2px solid #ffffff;
-    border-radius: 0 0 16px 16px;
-    border-top: none;
-    outline: none;
-  }
-
-  option {
-    font-size: 12px;
-    line-height: 14px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.02em;
-    color: #c7ccdc;
-  }
-
-  option:hover {
-    color: #52555f;
-  }
 
   .containerForm {
     flex-direction: column;
     align-items: center;
     align-content: center;
-
-    /* flex-wrap: wrap; */
   }
   .calendarWrapper {
+    display: block;
+    position: relative;
     margin: 0;
+    margin-right: 20px;
   }
-  .calendarWrapper > button .MuiIconButton-root {
+  /* .calendarWrapper > button .MuiIconButton-root {
     background: blue;
-  }
+  } */
   .inpuImgWrapper {
     margin-top: 15px;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
+  .calendarWrapper {
+    display: block;
+    position: relative;
+    margin: 0;
+    margin-right: 20px;
+  }
+  .containerForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .formContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 30px;
+  }
   #tmp {
+    width: 80px;
+    border-color: burlywood;
+    border-radius: 10px;
+    outline: none;
+    margin-right: 0px;
+  }
+  .InputsWrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+  /* #tmp {
     border-radius: 10px;
     outline: none;
     margin-right: 0px;
     margin-left: 30px;
-  }
+  } */
   .buttonWrapper {
     display: flex;
     justify-content: center;
@@ -153,11 +144,43 @@ label #demo-simple-select-helper-label {
     justify-content: center;
     margin-bottom: 48px;
   }
-  .formContainer {
-    /* margin-bottom: 48px; */
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
   }
 }
 @media screen and (min-width: 1280px) {
+  .containerForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #tmp {
+    width: 80px;
+    border-color: burlywood;
+    border-radius: 10px;
+    outline: none;
+    margin-right: 0px;
+  }
+  .InputsWrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+  .formContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 60px;
+  }
+  .calendarWrapper {
+    display: block;
+    position: relative;
+    margin: 0;
+    margin-right: 20px;
+  }
   .buttonWrapper {
     display: flex;
     width: 265px;
@@ -165,23 +188,15 @@ label #demo-simple-select-helper-label {
     margin-top: 0;
     /* margin-top: 30px; */
   }
-  .formContainer {
-    margin-bottom: 60px;
+  form {
+    display: flex;
+    width: 100%;
   }
 }
 
-.inpuImgWrapper {
-  position: relative;
-  /* margin: 0; */
-}
-.calculatorImg {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-.allInputsWrapper {
+/* .allInputsWrapper {
   margin-bottom: 0px;
-}
+} */
 
 .authBtn {
   font-style: normal;
@@ -204,12 +219,12 @@ label #demo-simple-select-helper-label {
 .authBtn:nth-child(1) {
   margin-right: 15px;
 }
-.calendarIconStyle {
+/* .calendarIconStyle {
   position: absolute;
   top: 12px;
   left: 98px;
   z-index: -1;
-}
+} */
 
 .authBtn.authBtnActive {
   color: white;
@@ -217,17 +232,14 @@ label #demo-simple-select-helper-label {
   filter: drop-shadow(1px 3px 5px var(--box-shadow));
 }
 
-.inpuImgWrapper button {
+/* .inpuImgWrapper button {
   background: black;
-}
-#calendarStyle button {
+} */
+/* #calendarStyle button {
   background: red;
-}
-.calendarWrapper {
-  position: relative;
-  margin-right: 30px;
-}
-.calendarHelper {
+} */
+
+/* .calendarHelper {
   width: 152px;
   height: 3px;
   top: 34px;
@@ -235,7 +247,7 @@ label #demo-simple-select-helper-label {
   background: white;
   position: absolute;
   z-index: 1;
-}
+} */
 /* .textInput {
 } */
 /* .calendarHelper:hover {

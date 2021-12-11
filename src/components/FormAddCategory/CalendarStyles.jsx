@@ -25,6 +25,10 @@ const theme = createTheme({
     MuiInput: {
       styleOverrides: {
         underline: {
+          // width: '80px',
+
+          // outline: 'none',
+          // marginRight: '0px',
           fontSize: '14px',
           color: '#52555F',
           lineHeight: ' 14px',

@@ -4,7 +4,6 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import TextField from '@mui/material/TextField';
 import calculator from '../../img/calculator.svg';
 import s from './FormAddCategory.module.css';
-import { makeStyles } from '@material-ui/core/styles';
 import ruLocale from 'date-fns/locale/ru';
 import { format } from 'date-fns';
 import DatePicker from '@mui/lab/DatePicker';
@@ -16,15 +15,14 @@ import '../../utils/variables.css';
 import CustomInput from './StyledInputElement/StyledInputElement';
 import StyledInputCalc from './Select/StyledCalculator/StyledCalculator';
 import iconCalendar from '../../img/calendar.svg';
-import { IconButton, InputAdornment } from '@mui/material';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { InputAdornment } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import theme from './CalendarStyles';
 import BootstrapInput from './SelectStyles';
-import { borderBottom } from '@mui/system';
 import MoreTimeIcon from '@mui/icons-material/MoreTime';
 
 const FormAddCategory = ({ isExpenses }) => {
@@ -33,6 +31,7 @@ const FormAddCategory = ({ isExpenses }) => {
   const [description, setDescription] = React.useState('');
   const [amount, setAmount] = React.useState('');
 
+  const dispatch = useDispatch();
   const handleInputChange = event => {
     setCategory(event.target.value);
   };
@@ -55,7 +54,6 @@ const FormAddCategory = ({ isExpenses }) => {
   };
 
   const date = newDate();
-  const dispatch = useDispatch();
 
   const handleChange = event => {
     event.target.value === '' || event.target.value === '-'
@@ -85,37 +83,16 @@ const FormAddCategory = ({ isExpenses }) => {
   const handleTextChange = event => {
     setDescription(event.target.value);
   };
-
-  // const useStyles = makeStyles(theme => ({
-  //   input: {
-  //     '&:before': {
-  //       // normal
-  //       borderBottom: '1px solid orange',
-  //     },
-  //     '&:after': {
-  //       // focused
-  //       borderBottom: `3px solid green`,
-  //     },
-  //     '&:hover:not(.Mui-disabled):not(.Mui-focused):not(.Mui-error):before': {
-  //       // hover
-  //       borderBottom: `2px solid purple`,
-  //     },
-  //   },
-  // }));
-
-  // const classes = useStyles();
   const handleDateChange = newValue => {
     setValue(newValue);
   };
+  // let data = '';
+  // let categoryName = '';
+  // let textInputName = '';
 
-  // const css = useStyles();
-  let data = '';
-  let categoryName = '';
-  let textInputName = '';
-
-  data = isExpenses === 'expenses' ? expenceJson : incomesJson;
-  categoryName = isExpenses === 'expenses' ? 'Категория товара' : 'Категория дохода';
-  textInputName = isExpenses === 'expenses' ? 'Описание товара' : 'Описание дохода';
+  let data = isExpenses === 'expenses' ? expenceJson : incomesJson;
+  let categoryName = isExpenses === 'expenses' ? 'Категория товара' : 'Категория дохода';
+  let textInputName = isExpenses === 'expenses' ? 'Описание товара' : 'Описание дохода';
 
   const reset = () => {
     setValue(new Date());
@@ -126,80 +103,66 @@ const FormAddCategory = ({ isExpenses }) => {
 
   return (
     <>
-      <form onSubmit={handleFormSubmit} className={s.formContainer}>
-        <div className={s.calendarWrapper}>
-          {/* <div className={s.calendarHelper}></div> */}
-          <LocalizationProvider
-            dateAdapter={AdapterDateFns}
-            locale={ruLocale}
-            // className={css.textInpt}
-            id={s.inputStyle}
-          >
-            <ThemeProvider theme={theme}>
-              <DatePicker
-                maxDate={new Date()}
-                keyboard={true}
-                components={{
-                  OpenPickerIcon: MoreTimeIcon,
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment
-                      position="start"
+      <div className={s.formContainer}>
+        {' '}
+        <form onSubmit={handleFormSubmit}>
+          <div className={s.calendarWrapper}>
+            <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale} id={s.inputStyle}>
+              <ThemeProvider theme={theme}>
+                <DatePicker
+                  maxDate={new Date()}
+                  keyboard={true}
+                  components={{
+                    OpenPickerIcon: MoreTimeIcon,
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment
+                        position="start"
+                        sx={{
+                          marginRight: { sm: '-3px', md: '-4px', lg: '0px', xl: '5px' },
+                          paddingBottom: '5px',
+                        }}
+                      >
+                        <img src={iconCalendar} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  size="small"
+                  value={value}
+                  onChange={handleDateChange}
+                  renderInput={params => (
+                    <TextField
+                      {...params}
+                      size="small"
+                      margin="dense"
+                      variant="standard"
+                      id={s.tmp}
                       sx={{
-                        marginRight: { sm: '-3px', md: '-4px', lg: '0px', xl: '5px' },
-                        paddingBottom: '5px',
+                        '.css-r7ndxa-MuiInputBase-root-MuiInput-root:after': {
+                          borderBottom: 'none',
+                        },
                       }}
-                    >
-                      <img src={iconCalendar} />
-                    </InputAdornment>
-                  ),
-                }}
-                // className={classes.input}
-                // id={s.calendarStyle}
-                size="small"
-                value={value}
-                onChange={handleDateChange}
-                renderInput={params => (
-                  <TextField
-                    {...params}
-                    size="small"
-                    margin="dense"
-                    variant="standard"
-                    id={s.tmp}
-                    sx={{
-                      '.css-1yizycn-MuiInputBase-root-MuiInput-root:after': {
-                        borderBottom: 'none',
-                      },
+                    />
+                  )}
+                  format="YYYY-MM-DD"
+                />
+              </ThemeProvider>
+            </LocalizationProvider>
 
-                      // '.css-3whm0-MuiSvgIcon-root': {
-                      //   width: '30px',
-                      //   fill: 'none',
-                      //   background: 'none',
-                      // },
-                      // svg: { fill: 'none', background: 'none' },
-                      // input: { color },
-                    }}
-                  />
-                )}
-                format="YYYY-MM-DD"
-              />
-            </ThemeProvider>
-          </LocalizationProvider>
-
-          {/* <img className={s.calendarIconStyle} src={iconCalendar} /> */}
-        </div>
-        <div className={s.InputsWrapper}>
-          <CustomInput
-            value={description}
-            placeholder={textInputName}
-            name="textInput"
-            onChange={handleTextChange}
-            autoComplete="off"
-            required
-          />
-          <div className={s.containerForm}>
-            <div className={s.selectWrappedtmp}>
+            {/* <img className={s.calendarIconStyle} src={iconCalendar} /> */}
+          </div>
+          <div className={s.InputsWrapper}>
+            <CustomInput
+              value={description}
+              placeholder={textInputName}
+              name="textInput"
+              onChange={handleTextChange}
+              autoComplete="off"
+              required
+            />
+            <div className={s.containerForm}>
+              {/* <div> */}
               <FormControl sx={{}}>
                 <Select
                   labelId="demo-simple-select-helper-label"
@@ -232,22 +195,23 @@ const FormAddCategory = ({ isExpenses }) => {
                   })}
                 </Select>
               </FormControl>
-            </div>
-            <div className={s.inpuImgWrapper}>
-              <StyledInputCalc value={amount} onChange={handleChange} placeholder="0" required />
-              <img className={s.calculatorImg} src={calculator} />
+              {/* </div> */}
+              <div className={s.inpuImgWrapper}>
+                <StyledInputCalc value={amount} onChange={handleChange} placeholder="0" required />
+                <img className={s.calculatorImg} src={calculator} />
+              </div>
             </div>
           </div>
-        </div>
-        <div className={s.buttonWrapper}>
-          <button className={s.authBtn + ' ' + s.authBtnActive} type="submit">
-            ввод
-          </button>
-          <button className={s.authBtn} type="reset" onClick={reset}>
-            Очистить
-          </button>
-        </div>
-      </form>
+          <div className={s.buttonWrapper}>
+            <button className={s.authBtn + ' ' + s.authBtnActive} type="submit">
+              ввод
+            </button>
+            <button className={s.authBtn} type="reset" onClick={reset}>
+              Очистить
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };
