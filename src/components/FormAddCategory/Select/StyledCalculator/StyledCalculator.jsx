@@ -5,7 +5,7 @@ import { styled } from '@mui/system';
 const StyledInputCalc = styled('input')`
   max-width: 126px;
   height: 37px;
-  font-size: 1rem;
+  font-size: 14px;
   font-family: IBM Plex Sans, sans-serif;
   font-weight: 400;
   line-height: 1.4375em;

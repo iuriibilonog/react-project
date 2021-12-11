@@ -147,8 +147,8 @@ const FormAddCategory = ({ isExpenses }) => {
                     <InputAdornment
                       position="start"
                       sx={{
-                        marginRight: { sm: '-20px', lg: '5px' },
-                        paddingBottom: '3px',
+                        marginRight: { sm: '-3px', md: '-4px', lg: '0px', xl: '5px' },
+                        paddingBottom: '5px',
                       }}
                     >
                       <img src={iconCalendar} />
@@ -187,7 +187,7 @@ const FormAddCategory = ({ isExpenses }) => {
             </ThemeProvider>
           </LocalizationProvider>
 
-          <img className={s.calendarIconStyle} src={iconCalendar} />
+          {/* <img className={s.calendarIconStyle} src={iconCalendar} /> */}
         </div>
         <div className={s.InputsWrapper}>
           <CustomInput
@@ -243,7 +243,7 @@ const FormAddCategory = ({ isExpenses }) => {
           <button className={s.authBtn + ' ' + s.authBtnActive} type="submit">
             ввод
           </button>
-          <button className={s.authBtn} type="button" onClick={reset}>
+          <button className={s.authBtn} type="reset" onClick={reset}>
             Очистить
           </button>
         </div>
