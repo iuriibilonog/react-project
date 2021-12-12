@@ -86,9 +86,6 @@ const FormAddCategory = ({ isExpenses }) => {
   const handleDateChange = newValue => {
     setValue(newValue);
   };
-  // let data = '';
-  // let categoryName = '';
-  // let textInputName = '';
 
   let data = isExpenses === 'expenses' ? expenceJson : incomesJson;
   let categoryName = isExpenses === 'expenses' ? 'Категория товара' : 'Категория дохода';
@@ -104,8 +101,7 @@ const FormAddCategory = ({ isExpenses }) => {
   return (
     <>
       <div className={s.formContainer}>
-        {' '}
-        <form onSubmit={handleFormSubmit}>
+        <form className={s.form} onSubmit={handleFormSubmit}>
           <div className={s.calendarWrapper}>
             <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale} id={s.inputStyle}>
               <ThemeProvider theme={theme}>
@@ -149,8 +145,6 @@ const FormAddCategory = ({ isExpenses }) => {
                 />
               </ThemeProvider>
             </LocalizationProvider>
-
-            {/* <img className={s.calendarIconStyle} src={iconCalendar} /> */}
           </div>
           <div className={s.InputsWrapper}>
             <CustomInput
@@ -162,8 +156,7 @@ const FormAddCategory = ({ isExpenses }) => {
               required
             />
             <div className={s.containerForm}>
-              {/* <div> */}
-              <FormControl sx={{}}>
+              <FormControl>
                 <Select
                   labelId="demo-simple-select-helper-label"
                   id="demo-customized-select"
@@ -195,7 +188,6 @@ const FormAddCategory = ({ isExpenses }) => {
                   })}
                 </Select>
               </FormControl>
-              {/* </div> */}
               <div className={s.inpuImgWrapper}>
                 <StyledInputCalc value={amount} onChange={handleChange} placeholder="0" required />
                 <img className={s.calculatorImg} src={calculator} />

@@ -10,7 +10,6 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     borderTop: '2px solid #F5F6FB',
     borderBottom: '2px solid #F5F6FB',
-    padingLight: '5px',
     width: 142,
     fontSize: 12,
     background: 'white',
@@ -21,8 +20,5 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
       background: 'transparent',
     },
   },
-  //   '.css-1yizycn-MuiInputBase-root-MuiInput-root:after': {
-  //     borderBottom: '2px solid red',
-  //   },
 }));
 export default BootstrapInput;
