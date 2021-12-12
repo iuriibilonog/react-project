@@ -17,7 +17,6 @@ const Chart = ({ chartTypeRender, data /* newIncomes, newExensescomes */ }) => {
 
   const [chartRotate, setChartRotate] = useState(false);
 
-  console.log(data);
   //   [ { z/p:[ [name:pv][name:pv]] } ]
   const incomesDataFromReport = Object.values(data[0]);
   //  [ [name:pv][name:pv] ]
@@ -31,7 +30,6 @@ const Chart = ({ chartTypeRender, data /* newIncomes, newExensescomes */ }) => {
     },
   );
   //  [ {name:pv}{name:pv} ]
-  console.log('1', resultedDataForChart);
 
   resultedDataForChart.sort(
     function (a, b) {
@@ -39,7 +37,6 @@ const Chart = ({ chartTypeRender, data /* newIncomes, newExensescomes */ }) => {
     },
     // (a, b) => parseFloat(a.marker) - parseFloat(b.marker),
   );
-  console.log('2', resultedDataForChart);
 
   // let chartData;
   // const incomesData = newIncomes

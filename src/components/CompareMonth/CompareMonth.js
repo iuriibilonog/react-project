@@ -14,7 +14,6 @@ const CompareMonth = () => {
   useEffect(() => {
     if (curMonth < 10) {
       const month = `0${curMonth}`;
-      console.log(month);
       dispatch(getDataCompareMonth(`${year}-${month}`));
     } else {
       dispatch(getDataCompareMonth(`${year}-${curMonth}`));

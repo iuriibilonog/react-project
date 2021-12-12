@@ -5,12 +5,9 @@ import sprite from '../../../img/icon.svg';
 import s from '../Report.module.css';
 
 const ReportIncomesList = ({ category, sum, chartDataHandler, type }) => {
-
-
   const incomesMonthData = useSelector(getMonthStatsIncomes);
   const categoryHandler = e => {
     const result = incomesMonthData.filter(obj => Object.keys(obj)[0] === category);
-    console.log(result);
     chartDataHandler(result);
   };
 

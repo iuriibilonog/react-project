@@ -44,15 +44,12 @@ const authSlice = createSlice({
       state.isLoading = true;
     },
     [login.fulfilled](state, action) {
-      console.log(action.payload);
       state.user = action.payload.data;
       state.token = action.payload.data.accessToken;
       state.isLoggedIn = true;
       state.isLoading = false;
       state.sid = action.payload.data.sid;
       state.socialAuth = action.payload.socialAuth;
-      console.log(action.payload);
-      console.log(action.payload.data.userData.balance);
       state.userBalance = action.payload.data.userData.balance;
     },
     [login.rejected](state) {
@@ -97,7 +94,6 @@ const authSlice = createSlice({
       state.isLoading = true;
     },
     [getUser.fulfilled](state, action) {
-      console.log(action.payload);
       state.user = action?.payload?.data;
       state.isLoggedIn = true;
       state.sid = action?.payload?.sid;
@@ -111,7 +107,6 @@ const authSlice = createSlice({
 
     [getUser.rejected](state, action) {
       state.isLoading = false;
-
     },
   },
 });

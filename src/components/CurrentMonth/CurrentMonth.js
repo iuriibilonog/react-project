@@ -14,7 +14,6 @@ const CurrentMonth = () => {
   useEffect(() => {
     if (curMonth < 10) {
       const month = `0${curMonth}`;
-      console.log(month);
       dispatch(getDataMonth(`${year}-${month}`));
     } else {
       dispatch(getDataMonth(`${year}-${curMonth}`));

@@ -79,10 +79,9 @@ export const checkCurrentUser = createAsyncThunk(
     const state = thunkAPI.getState();
 
     const currentUserToken = state.auth.token;
-    console.log(currentUserToken);
 
     const userSessionId = state.auth.sid;
-    console.log(userSessionId);
+
     const id = {
       sid: userSessionId,
     };
@@ -93,7 +92,6 @@ export const checkCurrentUser = createAsyncThunk(
 
     try {
       const { data } = await CheckUser(id);
-      console.log(data);
       return data;
     } catch (error) {
       if (error.response.status === 400) {
@@ -114,7 +112,7 @@ export const loginFromGoogle = createAsyncThunk(
   async (handerGoogleAuth, rejectWithValue) => {
     try {
       const { data } = await LoginUserFromGoogle();
-      console.log(data);
+
       handerGoogleAuth(data);
     } catch (error) {
       if (error.response.status === 400) {
@@ -136,7 +134,6 @@ export const getUser = createAsyncThunk(
     try {
       token.set(accessToken);
       const { data } = await GetUserAfterRefresh();
-      console.log('DataAfterRefresh-GetUser', data);
       return { data, refreshToken, sid, accessToken };
     } catch (error) {
       if (error.response.status === 400) {
