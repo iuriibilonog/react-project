@@ -1,66 +1,30 @@
-.containerForm {
-  display: flex;
-  justify-content: center;
-
-  align-items: center;
-
-  /* flex-wrap: wrap; */
+.inpuImgWrapper {
+  position: relative;
 }
-.formContainer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-top: 30px;
-}
-.select {
-  height: 37px;
-  width: 170px;
-  border-top: 2px solid #f5f6fb;
-  border-bottom: 2px solid #f5f6fb;
-  border-right: none;
-  border-left: none;
-  font-family: Roboto;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.02em;
+.calculatorImg {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
-.allInputsWrapper {
-  display: flex;
-  align-items: center;
-}
-.InputsWrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-}
 label #demo-simple-select-helper-label {
   display: none !important;
 }
-#inputStyle {
-  width: 289px;
-  padding-left: 10px;
-  padding-top: 10px;
-  height: 40px;
-  border: 2px solid blue;
-  border-top-left-radius: 16px;
-  outline: none;
-  background: chocolate;
-}
-#tmp {
-  width: 80px;
-  border-color: burlywood;
-  border-radius: 10px;
-  outline: none;
-  margin-right: 0px;
-}
 
-.calendarWrapper {
-  display: block;
-}
-
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (max-width: 767.5px) {
+  .containerForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .formContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 30px;
+    justify-content: center;
+  }
   .buttonWrapper {
     margin-top: 15px;
     margin-bottom: 10px;
@@ -69,7 +33,6 @@ label #demo-simple-select-helper-label {
     align-items: center;
     display: flex;
   }
-
   .calendarWrapper {
     position: absolute;
     width: 1px;
@@ -94,56 +57,47 @@ label #demo-simple-select-helper-label {
     clip: rect(0 0 0 0);
     overflow: hidden;
   }
-  .InputsWrapper {
-    flex-direction: column;
-    margin-left: -4%;
-  }
-  .select {
-    width: 282px;
-    background: #f5f6fb;
-    border: 2px solid #ffffff;
-    border-radius: 0 0 16px 16px;
-    border-top: none;
-    outline: none;
-  }
 
-  option {
-    font-size: 12px;
-    line-height: 14px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.02em;
-    color: #c7ccdc;
-  }
-
-  option:hover {
-    color: #52555f;
-  }
-
-  .containerForm {
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-
-    /* flex-wrap: wrap; */
-  }
-  .calendarWrapper {
-    margin: 0;
-  }
-  .calendarWrapper > button .MuiIconButton-root {
-    background: blue;
-  }
   .inpuImgWrapper {
     margin-top: 15px;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
+  .calendarWrapper {
+    display: block;
+    position: relative;
+    margin: 0;
+    margin-right: 20px;
+  }
+  .containerForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .formContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 30px;
+    justify-content: center;
+  }
   #tmp {
+    width: 80px;
+    border-color: burlywood;
     border-radius: 10px;
     outline: none;
     margin-right: 0px;
-    margin-left: 30px;
+  }
+  .InputsWrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
   }
   .buttonWrapper {
     display: flex;
@@ -153,36 +107,60 @@ label #demo-simple-select-helper-label {
     justify-content: center;
     margin-bottom: 48px;
   }
-  .formContainer {
-    /* margin-bottom: 48px; */
+  .form {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    flex-direction: row;
   }
 }
+
 @media screen and (min-width: 1280px) {
+  .containerForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #tmp {
+    width: 80px;
+    border-color: burlywood;
+    border-radius: 10px;
+    outline: none;
+    margin-right: 0px;
+  }
+  .InputsWrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+  .formContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 60px;
+  }
+  .calendarWrapper {
+    display: block;
+    position: relative;
+    margin: 0;
+    margin-right: 20px;
+  }
   .buttonWrapper {
     display: flex;
     width: 265px;
     margin-left: 27px;
     margin-top: 0;
-    /* margin-top: 30px; */
   }
-  .formContainer {
-    margin-bottom: 60px;
+  .form {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    flex-direction: row;
   }
 }
 
-.inpuImgWrapper {
-  position: relative;
-  /* margin: 0; */
-}
-.calculatorImg {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-.allInputsWrapper {
-  margin-bottom: 0px;
-}
-
+/*Buttons style*/
 .authBtn {
   font-style: normal;
   font-weight: bold;
@@ -204,40 +182,9 @@ label #demo-simple-select-helper-label {
 .authBtn:nth-child(1) {
   margin-right: 15px;
 }
-.calendarIconStyle {
-  position: absolute;
-  top: 12px;
-  left: 98px;
-  z-index: -1;
-}
 
 .authBtn.authBtnActive {
   color: white;
   background-color: var(--accent-bright);
   filter: drop-shadow(1px 3px 5px var(--box-shadow));
 }
-
-.inpuImgWrapper button {
-  background: black;
-}
-#calendarStyle button {
-  background: red;
-}
-.calendarWrapper {
-  position: relative;
-  margin-right: 30px;
-}
-.calendarHelper {
-  width: 152px;
-  height: 3px;
-  top: 34px;
-  left: 0px;
-  background: white;
-  position: absolute;
-  z-index: 1;
-}
-/* .textInput {
-} */
-/* .calendarHelper:hover {
-  background: #f5f5f5;
-} */

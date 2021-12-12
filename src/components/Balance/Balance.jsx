@@ -41,10 +41,6 @@ const Balance = () => {
   };
 
   useEffect(() => {
-    console.log('first time');
-    console.log('balanceInTransactionState', balanceInTransactionState);
-    console.log('userBalanceFromAuth', userBalanceFromAuth);
-
     if (userBalanceFromAuth || isSystemStarted || expenses || incomes) {
       balanceInTransactionState === null && pushBalanceToState(userBalanceFromAuth);
 
@@ -60,9 +56,6 @@ const Balance = () => {
     } else if (balanceState === 'unset') {
       zeroReminding();
     }
-    console.log('INIT');
-    console.log('userBalanceFromAuth', userBalanceFromAuth);
-    console.log('balanceInTransactionState', balanceInTransactionState);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -78,7 +71,6 @@ const Balance = () => {
   // }, [isGetUserFulfilledAfterRefresh]);
 
   useEffect(() => {
-    console.log(balanceInTransactionState);
     setBalance(Math.round(balanceInTransactionState) + ' UAH');
   }, [balanceInTransactionState]);
 
@@ -91,7 +83,6 @@ const Balance = () => {
 
   const responseHandling = response => {
     setIsModalShown(false);
-    console.log(response);
     if (response) {
       prepareDataForBackend();
     }
@@ -101,12 +92,10 @@ const Balance = () => {
   const prepareDataForBackend = () => {
     const balanceDigit = balance.slice(0, balance.length - 4).trim();
     if (Number(balanceDigit) && Number(balanceDigit) > 0) {
-      console.log('Output Balance :', balanceDigit);
       finalInitializing();
       sendDataToState(Number(balanceDigit));
     } else {
       Notiflix.Notify.warning('Неверные данные! Повторите ввод.');
-      console.log('Wrong balance!');
       setBalance('0 UAH');
     }
   };
@@ -129,7 +118,6 @@ const Balance = () => {
 
   const submitBalanceHandler = event => {
     event.preventDefault();
-    console.log(balance);
     setIsModalShown(true);
   };
 

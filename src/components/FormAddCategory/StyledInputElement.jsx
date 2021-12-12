@@ -1,10 +1,4 @@
-import * as React from 'react';
-import InputUnstyled from '@mui/base/InputUnstyled';
 import { styled } from '@mui/system';
-import expenceJson from '../../../data/expenselcon.json';
-import incomesJson from '../../../data/expenselcon.json';
-import { MenuItem } from '@mui/material';
-import { useLocation } from 'react-router-dom';
 
 const StyledInputElement = styled('input')`
   max-width: 300px;
@@ -17,7 +11,6 @@ const StyledInputElement = styled('input')`
   display: flex;
   align-items: center;
   letter-spacing: 0.02em;
-
   border: 2px solid #f5f6fb;
   border-radius: 16px 0px 0px 0px;
   padding: 6px 10px;
@@ -25,8 +18,10 @@ const StyledInputElement = styled('input')`
   margin: 0;
   transition: width 300ms ease;
   position: relative;
-  @media screen and (min-width: 320px) and (max-width: 767px) {
-    width: 282px;
+
+  @media screen and (min-width: 320px) and (max-width: 767.5px) {
+    width: 283px;
+    height: 34px;
     background: #f5f6fb;
     border: 2px solid #ffffff;
     border-bottom: none;
@@ -42,9 +37,4 @@ const StyledInputElement = styled('input')`
   }
 `;
 
-const CustomInput = React.forwardRef(function CustomInput(props, ref) {
-  return (
-    <InputUnstyled components={{ Input: StyledInputElement }} {...props} ref={ref}></InputUnstyled>
-  );
-});
-export default CustomInput;
+export default StyledInputElement;

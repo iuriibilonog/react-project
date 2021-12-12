@@ -4,7 +4,6 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import TextField from '@mui/material/TextField';
 import calculator from '../../img/calculator.svg';
 import s from './FormAddCategory.module.css';
-import { makeStyles } from '@material-ui/core/styles';
 import ruLocale from 'date-fns/locale/ru';
 import { format } from 'date-fns';
 import DatePicker from '@mui/lab/DatePicker';
@@ -12,33 +11,32 @@ import expenceJson from '../../data/expenselcon.json';
 import incomesJson from '../../data/incomeIcon.json';
 import { addExpenseTransaction, addIncomeTransaction } from '../../redux/transactions-operations';
 import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 import '../../utils/variables.css';
-import CustomInput from './StyledInputElement/StyledInputElement';
-import StyledInputCalc from './Select/StyledCalculator/StyledCalculator';
+import CustomInput from './StyledInputElement';
+import StyledInputCalc from './StyledCalculator';
 import iconCalendar from '../../img/calendar.svg';
-import Box from '@mui/material/Box';
-import { IconButton, InputAdornment } from '@mui/material';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import UnstyledInput from './StyledInputElement/StyledInputElement';
+import { InputAdornment } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import InputBase from '@mui/material/InputBase';
-import { styled } from '@mui/material/styles';
-import InputLabel from '@mui/material/InputLabel';
-import SelectCustome from './Select/Select';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import theme from './StyledCalendar';
+import BootstrapInput from './StyledSelect';
+import MoreTimeIcon from '@mui/icons-material/MoreTime';
 
 const FormAddCategory = ({ isExpenses }) => {
-  const [value, setValue] = React.useState(new Date());
-  const [category, setCategory] = React.useState('');
-  const [description, setDescription] = React.useState('');
-  const [amount, setAmount] = React.useState('');
+  const [value, setValue] = useState(new Date());
+  const [category, setCategory] = useState('');
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
 
+  const dispatch = useDispatch();
   const handleInputChange = event => {
     setCategory(event.target.value);
   };
-  React.useEffect(() => {
+  useEffect(() => {
     reset();
   }, [isExpenses]);
 
@@ -57,8 +55,6 @@ const FormAddCategory = ({ isExpenses }) => {
   };
 
   const date = newDate();
-
-  const dispatch = useDispatch();
 
   const handleChange = event => {
     event.target.value === '' || event.target.value === '-'
@@ -85,58 +81,13 @@ const FormAddCategory = ({ isExpenses }) => {
       Notify.failure('Введите правильную дату!');
     }
   };
+
   const handleTextChange = event => {
     setDescription(event.target.value);
   };
-  const useStyles = makeStyles(theme => ({
-    input: {
-      '&:before': {
-        // normal
-        borderBottom: '1px solid orange',
-      },
-      '&:after': {
-        // focused
-        borderBottom: `3px solid green`,
-      },
-      '&:hover:not(.Mui-disabled):not(.Mui-focused):not(.Mui-error):before': {
-        // hover
-        borderBottom: `2px solid purple`,
-      },
-    },
-  }));
-  const BootstrapInput = styled(InputBase)(({ theme }) => ({
-    'label + &': {
-      marginTop: '0px',
-    },
-    '.MuiInputLabel-root': { color: 'red' },
-    '.MuiSelect-select': { paddingLeft: '8px' },
-    '& .MuiInputBase-input': {
-      borderTop: '2px solid #F5F6FB',
-      borderBottom: '2px solid #F5F6FB',
-      padingLight: '5px',
-      width: 142,
-      fontSize: 12,
-      background: 'white',
-      ['@media (max-width:767px)']: {
-        width: '240px',
-        borderBottomLeftRadius: '16px',
-        border: '2px solid white',
-        background: 'transparent',
-      },
-    },
-  }));
-  const classes = useStyles();
   const handleDateChange = newValue => {
     setValue(newValue);
   };
-  const css = useStyles();
-  let data = '';
-  let categoryName = '';
-  let textInputName = '';
-
-  data = isExpenses === 'expenses' ? expenceJson : incomesJson;
-  categoryName = isExpenses === 'expenses' ? 'Категория товара' : 'Категория дохода';
-  textInputName = isExpenses === 'expenses' ? 'Описание товара' : 'Описание дохода';
 
   const reset = () => {
     setValue(new Date());
@@ -144,121 +95,69 @@ const FormAddCategory = ({ isExpenses }) => {
     setDescription('');
     setAmount('');
   };
-  const theme = createTheme({
-    components: {
-      // Name of the component
-      MuiIconButton: {
-        styleOverrides: {
-          // Name of the slot
-          edgeEnd: {
-            // Some CSS
-            // paddingLeft: '20px',
-            marginLeft: '16px',
-            position: 'absolute',
-            top: '-3px',
-            left: '10px',
-            '&:hover, :focus': {
-              background: 'transparent',
-            },
-            ['@media (min-width:980px)']: {
-              // eslint-disable-line no-useless-computed-key
-              marginLeft: '30px',
-            },
-          },
-        },
-      },
-      MuiInput: {
-        styleOverrides: {
-          underline: {
-            position: 'relative',
-            paddingLeft: '40px',
-            border: 'none',
-            '&:before': {
-              // normal
-              borderBottom: 'none',
-              outline: 'none',
-              display: 'none',
-            },
-            '&:before:hover': {
-              // normal
-              border: 'none',
-            },
-          },
-        },
-      },
-      MuiSvgIcon: {
-        styleOverrides: {
-          root: {
-            width: '30px',
-            fill: 'none',
-            background: 'none',
-          },
-        },
-      },
-    },
-  });
 
+  let data = isExpenses === 'expenses' ? expenceJson : incomesJson;
+  let categoryName = isExpenses === 'expenses' ? 'Категория товара' : 'Категория дохода';
+  let textInputName = isExpenses === 'expenses' ? 'Описание товара' : 'Описание дохода';
   return (
     <>
-      <form onSubmit={handleFormSubmit} className={s.formContainer}>
-        <div className={s.calendarWrapper}>
-          <div className={s.calendarHelper}></div>
-          <LocalizationProvider
-            dateAdapter={AdapterDateFns}
-            locale={ruLocale}
-            className={css.textInpt}
-            id={s.inputStyle}
-          >
-            <ThemeProvider theme={theme}>
-              <DatePicker
-                maxDate={new Date()}
-                keyboard={true}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment
-                      position="start"
+      <div className={s.formContainer}>
+        <form className={s.form} onSubmit={handleFormSubmit}>
+          <div className={s.calendarWrapper}>
+            <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale} id={s.inputStyle}>
+              <ThemeProvider theme={theme}>
+                <DatePicker
+                  maxDate={new Date()}
+                  keyboard={true}
+                  components={{
+                    OpenPickerIcon: MoreTimeIcon,
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment
+                        position="start"
+                        sx={{
+                          marginRight: { sm: '-3px', md: '-4px', lg: '0px', xl: '5px' },
+                          paddingBottom: '5px',
+                        }}
+                      >
+                        <img src={iconCalendar} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  size="small"
+                  value={value}
+                  onChange={handleDateChange}
+                  renderInput={params => (
+                    <TextField
+                      {...params}
+                      size="small"
+                      margin="dense"
+                      variant="standard"
+                      id={s.tmp}
                       sx={{
-                        marginRight: { sm: '-20px', lg: '5px' },
-                        paddingBottom: '3px',
+                        '.css-r7ndxa-MuiInputBase-root-MuiInput-root:after': {
+                          borderBottom: 'none',
+                        },
                       }}
-                    >
-                      <img src={iconCalendar} />
-                    </InputAdornment>
-                  ),
-                }}
-                className={classes.input}
-                id={s.calendarStyle}
-                size="small"
-                value={value}
-                onChange={handleDateChange}
-                renderInput={params => (
-                  <TextField
-                    {...params}
-                    size="small"
-                    margin="dense"
-                    variant="standard"
-                    id={s.tmp}
-                  />
-                )}
-                format="YYYY-MM-DD"
-              />
-            </ThemeProvider>
-          </LocalizationProvider>
-
-          <img className={s.calendarIconStyle} src={iconCalendar} />
-        </div>
-        <div className={s.InputsWrapper}>
-          <CustomInput
-            value={description}
-            placeholder={textInputName}
-            name="textInput"
-            onChange={handleTextChange}
-            autoComplete="off"
-            required
-          />
-          <div className={s.containerForm}>
-            <div className={s.selectWrappedtmp}>
-              <FormControl sx={{}}>
+                    />
+                  )}
+                  format="YYYY-MM-DD"
+                />
+              </ThemeProvider>
+            </LocalizationProvider>
+          </div>
+          <div className={s.InputsWrapper}>
+            <CustomInput
+              value={description}
+              placeholder={textInputName}
+              name="textInput"
+              onChange={handleTextChange}
+              autoComplete="off"
+              required
+            />
+            <div className={s.containerForm}>
+              <FormControl>
                 <Select
                   labelId="demo-simple-select-helper-label"
                   id="demo-customized-select"
@@ -290,22 +189,22 @@ const FormAddCategory = ({ isExpenses }) => {
                   })}
                 </Select>
               </FormControl>
-            </div>
-            <div className={s.inpuImgWrapper}>
-              <StyledInputCalc value={amount} onChange={handleChange} placeholder="0" required />
-              <img className={s.calculatorImg} src={calculator} />
+              <div className={s.inpuImgWrapper}>
+                <StyledInputCalc value={amount} onChange={handleChange} placeholder="0" required />
+                <img className={s.calculatorImg} src={calculator} />
+              </div>
             </div>
           </div>
-        </div>
-        <div className={s.buttonWrapper}>
-          <button className={s.authBtn + ' ' + s.authBtnActive} type="submit">
-            ввод
-          </button>
-          <button className={s.authBtn} type="button" onClick={reset}>
-            Очистить
-          </button>
-        </div>
-      </form>
+          <div className={s.buttonWrapper}>
+            <button className={s.authBtn + ' ' + s.authBtnActive} type="submit">
+              Ввод
+            </button>
+            <button className={s.authBtn} type="reset" onClick={reset}>
+              Очистить
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };

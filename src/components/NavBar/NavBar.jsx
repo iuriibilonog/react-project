@@ -21,29 +21,25 @@ import iconUser from '../../img/iconUser.svg';
 import { setBalance, setIsSystemStarted } from '../../redux/actions';
 import { NavLink } from 'react-router-dom';
 
-
 const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const socialAuth = useSelector(state => state.auth.socialAuth);
 
   const loginForm = useSelector(state => state.auth.user?.userData?.email);
-  const loginNameFromGoogle = useSelector(state => state.auth?.user?.email)
+  const loginNameFromGoogle = useSelector(state => state.auth?.user?.email);
 
-   const [isModalShown, setIsModalShown] = useState(false);
-
-  
+  const [isModalShown, setIsModalShown] = useState(false);
 
   const loginName = loginForm || loginNameFromGoogle;
 
   const responseHandling = response => {
     setIsModalShown(false);
-    console.log(response);
     if (response) {
       dispatch(setIsSystemStarted(null));
       dispatch(setBalance(null));
       dispatch(logOut());
     }
-  }
+  };
 
   // console.log(loginName.length)
   const dispatch = useDispatch();
@@ -59,17 +55,17 @@ const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
       <AppBar position="static" sx={{ background: 'white', boxShadow: 'none' }}>
         <Container maxWidth="axl">
           <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div style={{display: "flex"}}>
-          <SwitchTheme />
-            <NavLink to="/" >
-            <Avatar
-              alt="Logo"
-              src={logo}
-              id={s.logo}
-              variant="square"
-              style={{ width: 90 + 'px' }}
-              />
-            </NavLink>
+            <div style={{ display: 'flex' }}>
+              <SwitchTheme />
+              <NavLink to="/">
+                <Avatar
+                  alt="Logo"
+                  src={logo}
+                  id={s.logo}
+                  variant="square"
+                  style={{ width: 90 + 'px' }}
+                />
+              </NavLink>
             </div>
 
             {isLoggedIn && (
@@ -86,7 +82,9 @@ const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
                       // src={
                       //   isAuthFromSocial && socialAuth ? socialImg : '/static/images/avatar/1.jpg'
                       // }
-                    >{loginName[0]}</Avatar>
+                    >
+                      {loginName[0]}
+                    </Avatar>
                   </StyledBadge>
                 </Stack>
                 <Typography
@@ -116,20 +114,13 @@ const NavBar = ({ socialName, socialImg, isAuthFromSocial }) => {
 
                 <div
                   onClick={() => {
-
                     // dispatch(logOut());
                     // dispatch(setIsSystemStarted(null));
                     // dispatch(setBalance(null));
 
                     setIsModalShown(true);
-                    
-                      
-                    
-                    
-
                   }}
                 >
-
                   <Typography
                     variant="text"
                     sx={{
