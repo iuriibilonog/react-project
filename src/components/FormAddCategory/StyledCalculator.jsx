@@ -1,5 +1,3 @@
-import * as React from 'react';
-import InputUnstyled from '@mui/base/InputUnstyled';
 import { styled } from '@mui/system';
 
 const StyledInputCalc = styled('input')`
@@ -18,18 +16,10 @@ const StyledInputCalc = styled('input')`
   @media screen and (max-width: 767.5px) {
     border-radius: 16px;
   }
-
   &:hover {
   }
-
   &:focus {
     outline: none;
   }
 `;
-
-const CustomInput = React.forwardRef(function CustomInput(props, ref) {
-  return (
-    <InputUnstyled components={{ Input: StyledInputCalc }} {...props} ref={ref}></InputUnstyled>
-  );
-});
 export default StyledInputCalc;

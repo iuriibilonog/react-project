@@ -1,5 +1,3 @@
-import * as React from 'react';
-import InputUnstyled from '@mui/base/InputUnstyled';
 import { styled } from '@mui/system';
 
 const StyledInputElement = styled('input')`
@@ -39,9 +37,4 @@ const StyledInputElement = styled('input')`
   }
 `;
 
-const CustomInput = React.forwardRef(function CustomInput(props, ref) {
-  return (
-    <InputUnstyled components={{ Input: StyledInputElement }} {...props} ref={ref}></InputUnstyled>
-  );
-});
-export default CustomInput;
+export default StyledInputElement;

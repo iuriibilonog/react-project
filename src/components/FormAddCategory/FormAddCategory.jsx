@@ -11,9 +11,10 @@ import expenceJson from '../../data/expenselcon.json';
 import incomesJson from '../../data/incomeIcon.json';
 import { addExpenseTransaction, addIncomeTransaction } from '../../redux/transactions-operations';
 import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 import '../../utils/variables.css';
-import CustomInput from './StyledInputElement/StyledInputElement';
-import StyledInputCalc from './Select/StyledCalculator/StyledCalculator';
+import CustomInput from './StyledInputElement';
+import StyledInputCalc from './StyledCalculator';
 import iconCalendar from '../../img/calendar.svg';
 import { InputAdornment } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
@@ -21,21 +22,21 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import theme from './CalendarStyles';
-import BootstrapInput from './SelectStyles';
+import theme from './StyledCalendar';
+import BootstrapInput from './StyledSelect';
 import MoreTimeIcon from '@mui/icons-material/MoreTime';
 
 const FormAddCategory = ({ isExpenses }) => {
-  const [value, setValue] = React.useState(new Date());
-  const [category, setCategory] = React.useState('');
-  const [description, setDescription] = React.useState('');
-  const [amount, setAmount] = React.useState('');
+  const [value, setValue] = useState(new Date());
+  const [category, setCategory] = useState('');
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
 
   const dispatch = useDispatch();
   const handleInputChange = event => {
     setCategory(event.target.value);
   };
-  React.useEffect(() => {
+  useEffect(() => {
     reset();
   }, [isExpenses]);
 
@@ -80,16 +81,13 @@ const FormAddCategory = ({ isExpenses }) => {
       Notify.failure('Введите правильную дату!');
     }
   };
+
   const handleTextChange = event => {
     setDescription(event.target.value);
   };
   const handleDateChange = newValue => {
     setValue(newValue);
   };
-
-  let data = isExpenses === 'expenses' ? expenceJson : incomesJson;
-  let categoryName = isExpenses === 'expenses' ? 'Категория товара' : 'Категория дохода';
-  let textInputName = isExpenses === 'expenses' ? 'Описание товара' : 'Описание дохода';
 
   const reset = () => {
     setValue(new Date());
@@ -98,6 +96,9 @@ const FormAddCategory = ({ isExpenses }) => {
     setAmount('');
   };
 
+  let data = isExpenses === 'expenses' ? expenceJson : incomesJson;
+  let categoryName = isExpenses === 'expenses' ? 'Категория товара' : 'Категория дохода';
+  let textInputName = isExpenses === 'expenses' ? 'Описание товара' : 'Описание дохода';
   return (
     <>
       <div className={s.formContainer}>
@@ -196,7 +197,7 @@ const FormAddCategory = ({ isExpenses }) => {
           </div>
           <div className={s.buttonWrapper}>
             <button className={s.authBtn + ' ' + s.authBtnActive} type="submit">
-              ввод
+              Ввод
             </button>
             <button className={s.authBtn} type="reset" onClick={reset}>
               Очистить
