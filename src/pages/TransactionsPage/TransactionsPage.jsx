@@ -20,7 +20,7 @@ import GoHome from '../../components/GoHome/GoHome';
 import Balance from '../../components/Balance/Balance';
 import GoToReport from '../../components/GoToReport';
 import Summary from '../../components/Summary/Summary';
-import Loader from '../../components/Loader'
+import Loader from '../../components/Loader';
 import { FourGPlusMobiledataOutlined } from '@mui/icons-material';
 import Footer from '../../components/Footer';
 
@@ -35,19 +35,16 @@ const TransactionsPage = () => {
   const [isIncomesTabActive, setIsIncomesTabActive] = useState(false);
   // const [isActive, setIsActive] = useState(false)
 
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-   
-    
-      dispatch(getIncomesCategories());
-      dispatch(getExpensesCategories());
+    dispatch(getIncomesCategories());
     dispatch(getIncomeTransactions());
-    dispatch(getExpensesTransactions());
+
     dispatch(getExpensesCategories());
+    dispatch(getExpensesTransactions());
+
     dispatch(getDataMonth(`${year}-${curMonth}`));
-    
   }, []);
 
   // useEffect(() => {
@@ -64,25 +61,18 @@ const TransactionsPage = () => {
 
   return (
     <>
-
       <Container>
-
         <div className={s.section}>
           {/* <GoHome/> */}
           <div className={s.goToReport}>
-          <GoToReport />
+            <GoToReport />
           </div>
-            {loader && <Loader />}
+          {loader && <Loader />}
           <Balance />
-          
         </div>
-       
 
         <div className={s.mainWrapper}>
           <div className={s.buttonsHolder}>
-            
-
-
             <button
               type="button"
               className={`navBtn ${isExpensesTabActive ? 'navBtnActive' : null}`}
@@ -97,7 +87,6 @@ const TransactionsPage = () => {
               type="button"
               className={`navBtn ${isIncomesTabActive ? 'navBtnActive' : null}`}
               onClick={() => {
-                
                 setIsExpenses(false);
                 handleToggle();
               }}
@@ -134,7 +123,7 @@ const TransactionsPage = () => {
             </div>
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </Container>
     </>
   );
